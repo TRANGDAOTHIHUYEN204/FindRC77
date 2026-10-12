@@ -3,9 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CircleDifferentData", menuName = "Scriptable Objects/CircleDifferentData")]
 public class CircleDifferentData : ScriptableObject
 {
-    [SerializeField] private float radius;
     [SerializeField] private float lineWidth;
     [SerializeField] private Color colorLine;
-    [SerializeField] private int segments;
+    [SerializeField, Min(3f)] private int segments;
     
+    public float LineWidth =>  lineWidth;
+    public Color ColorLine => colorLine;
+    public int Segments => segments;
+
 }

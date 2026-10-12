@@ -3,13 +3,12 @@ using UnityEngine;
 public class CircleDifferentBehaviour
 {
     private readonly LineRenderer _lineRenderer;
-
     public CircleDifferentBehaviour(LineRenderer lineRenderer)
     {
         _lineRenderer = lineRenderer;
     }
 
-    public void DrawCircle(Vector2 center, float radius, float lineWidth, Color color, int segments = 40)
+    public void DrawCircle(Vector2 center, float radius, float lineWidth, Color color, int segments)
     {
         if (_lineRenderer == null) return;
 
