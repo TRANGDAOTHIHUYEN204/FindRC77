@@ -6,8 +6,8 @@ public class MarkCircleBehaviour : IDrawShape
     private readonly LineRenderer _lineRenderer;
     private LineRenderer _outline;
 
-    private const float Padding = 1.15f;       // vòng to hơn vật thể một chút
-    private const float OutlineThickness = 0.02f; // độ dày viền trắng mỗi bên
+    private const float Padding = 1.15f;       
+    private const float OutlineThickness = 0.02f; 
 
     public MarkCircleBehaviour(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
 

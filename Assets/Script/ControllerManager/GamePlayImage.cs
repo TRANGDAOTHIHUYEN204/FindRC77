@@ -1,167 +1,66 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GamePlayImage : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private LevelImageView levelImageView;
+    [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
+    [SerializeField] private DifferentClickHandler clickHandler;
     [SerializeField] private FactoryManager factoryManager;
-    [SerializeField] private Image rawImage;
-    [SerializeField] private Image errorImage;
-    [SerializeField] private Camera cam;
-
-    [Serializable]  private struct LevelRoots
-    {
-        public GameObject rootA;   
-        public GameObject rootB; 
-    }
-    
-    [SerializeField] private LevelRoots[] levelRoots; 
-    private struct Entry
-    {
-        public DifferentPair Pair;
-        public MarkData Mark;
-    }
-
-    private readonly List<Entry> _remaining = new();   
-    private readonly List<DifferentPoint> _listA = new();
-    private readonly List<DifferentPoint> _listB = new();
-    private readonly List<Entry> _found = new(); 
-    private int _totalCount;
-    private int _foundCount;
-    private bool _listening;
 
     public event Action<DifferentPair, MarkData> OnPairFound;
     public event Action OnAllFound;
 
-    private void OnEnable() => levelManager.OnLevelLoaded += Build;
+    private void OnEnable()
+    {
+        levelManager.OnLevelLoaded += Build;
+
+        clickHandler.OnPairFound += HandlePairFound;
+        clickHandler.OnAllFound += HandleAllFound;
+    }
 
     private void OnDisable()
     {
         levelManager.OnLevelLoaded -= Build;
-        StopListening();
+
+        clickHandler.OnPairFound -= HandlePairFound;
+        clickHandler.OnAllFound -= HandleAllFound;
+
+        clickHandler.StopListening();
     }
 
     private void Build(LevelData level)
     {
+        clickHandler.StopListening();
         factoryManager.ReleaseAll();
 
-        _remaining.Clear();
-        _found.Clear();        
-        _foundCount = 0;
+        int currentIndex = levelManager.CurrentIndex;
 
-        rawImage.sprite = level.RawSprite;
-        errorImage.sprite = level.ErrorSprite;
-        
-        int cur = levelManager.CurrentIndex;
-        for (int i = 0; i < levelRoots.Length; i++)
-        {
-            bool on = i == cur;
-            levelRoots[i].rootA.SetActive(on);
-            levelRoots[i].rootB.SetActive(on);
-        }
+        levelImageView.ShowLevel(level, currentIndex);
 
-        var roots = levelRoots[cur];
-        roots.rootA.GetComponentsInChildren(true, _listA);
-        roots.rootB.GetComponentsInChildren(true, _listB);
-
-        int count = Mathf.Min(_listA.Count, _listB.Count);
-        int markLast = level.MarkData.Length - 1;
-
-        for (int i = 0; i < count; i++)
-        {
-            _listA[i].gameObject.SetActive(true);
-            _listB[i].gameObject.SetActive(true);
-            _listA[i].ResetPoint();
-            _listB[i].ResetPoint();
-
-            _remaining.Add(new Entry
-            {
-                Pair = new DifferentPair(_listA[i], _listB[i]),
-                Mark = level.MarkData[Mathf.Min(i, markLast)]
-            });
-        }
-
-        _totalCount = _remaining.Count;
-        StartListening();
-    }
-    private void HandleClick(Vector2 screenPoint)
-    {
-        float dist = Mathf.Abs(
-            cam.transform.position.z -
-            rawImage.canvas.transform.position.z
+        levelImageView.GetCurrentRoots(
+            currentIndex,
+            out GameObject rootA,
+            out GameObject rootB
         );
 
-        Vector2 worldPoint = cam.ScreenToWorldPoint(
-            new Vector3(screenPoint.x, screenPoint.y, dist)
+        pairManagerHolder.Manager.Build(
+            rootA,
+            rootB,
+            level.MarkData
         );
-        
-        for (int i = 0; i < _remaining.Count; i++)
-        {
-            Entry e = _remaining[i];
 
-            if (!e.Pair.Contains(worldPoint))
-                continue;
-            
-            if (!e.Pair.TryHit(worldPoint))
-                continue;
-
-            _remaining.RemoveAt(i);
-            _found.Add(e);
-            _foundCount++;
-
-            Log($"Click ĐÚNG ({_foundCount}/{_totalCount})");
-
-            DrawMark(e.Pair.PointA, e.Mark);
-            DrawMark(e.Pair.PointB, e.Mark);
-
-            OnPairFound?.Invoke(e.Pair, e.Mark);
-
-            if (_remaining.Count == 0)
-            {
-                StopListening();
-                Log("Đã tìm đủ!");
-                OnAllFound?.Invoke();
-            }
-
-            return;
-        }
-        
-        for (int i = 0; i < _found.Count; i++)
-        {
-            Entry e = _found[i];
-
-            if (e.Pair.Contains(worldPoint))
-            {
-                return;
-            }
-        }
-        Log("Click SAI");
+        clickHandler.StartListening();
     }
-    
 
-    private void DrawMark(DifferentPoint point, MarkData d)
+    private void HandlePairFound(DifferentPair pair, MarkData mark)
     {
-        MarkFound mark = factoryManager.Create();
-        mark.Init(d.ShapeMark, point.Center, point.Size, d.LineWidth, d.ColorLine, d.Segments);
+        OnPairFound?.Invoke(pair, mark);
     }
 
-    private void StartListening()
+    private void HandleAllFound()
     {
-        if (_listening) return;
-        inputManager.OnClick += HandleClick;
-        _listening = true;
+        OnAllFound?.Invoke();
     }
-
-    private void StopListening()
-    {
-        if (!_listening) return;
-        inputManager.OnClick -= HandleClick;
-        _listening = false;
-    }
-    [Conditional("UNITY_EDITOR")]
-    private static void Log(string message) => UnityEngine.Debug.Log(message);
 }
