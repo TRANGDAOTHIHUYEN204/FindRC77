@@ -13,6 +13,14 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private Image errorImage;
     [SerializeField] private Camera cam;
 
+    [System.Serializable]
+    private struct LevelRoots
+    {
+        public GameObject rootA;   
+        public GameObject rootB; 
+    }
+    
+    [SerializeField] private LevelRoots[] levelRoots; 
     private struct Entry
     {
         public DifferentPair Pair;
@@ -46,21 +54,32 @@ public class GamePlayImage : MonoBehaviour
 
         rawImage.sprite = level.RawSprite;
         errorImage.sprite = level.ErrorSprite;
+        
+        int cur = levelManager.CurrentIndex;
+        for (int i = 0; i < levelRoots.Length; i++)
+        {
+            bool on = i == cur;
+            levelRoots[i].rootA.SetActive(on);
+            levelRoots[i].rootB.SetActive(on);
+        }
 
-        rawImage.GetComponentsInChildren(true, _listA);
-        errorImage.GetComponentsInChildren(true, _listB);
+        var roots = levelRoots[cur];
+        roots.rootA.GetComponentsInChildren(true, _listA);
+        roots.rootB.GetComponentsInChildren(true, _listB);
 
         int count = Mathf.Min(_listA.Count, _listB.Count);
         int markLast = level.MarkData.Length - 1;
 
         for (int i = 0; i < count; i++)
         {
+            _listA[i].gameObject.SetActive(true);
+            _listB[i].gameObject.SetActive(true);
             _listA[i].ResetPoint();
             _listB[i].ResetPoint();
 
             _remaining.Add(new Entry
             {
-                Pair = new DifferentPair(_listA[i], _listB[i]), 
+                Pair = new DifferentPair(_listA[i], _listB[i]),
                 Mark = level.MarkData[Mathf.Min(i, markLast)]
             });
         }
@@ -68,7 +87,6 @@ public class GamePlayImage : MonoBehaviour
         _totalCount = _remaining.Count;
         StartListening();
     }
-
     private void HandleClick(Vector2 screenPoint)
     {
         float dist = Mathf.Abs(cam.transform.position.z - rawImage.canvas.transform.position.z);
