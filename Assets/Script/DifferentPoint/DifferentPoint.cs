@@ -14,7 +14,7 @@ public class DifferentPoint : MonoBehaviour
     public void ResetPoint() => IsFound = false;
 
     public bool IsHit(Vector2 worldPoint)
-        => !IsFound && _collider.OverlapPoint(worldPoint);
+        => _collider.OverlapPoint(worldPoint);
 
     public void MarkFound() => IsFound = true;
 }

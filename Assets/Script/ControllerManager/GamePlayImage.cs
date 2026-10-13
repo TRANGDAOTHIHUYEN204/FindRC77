@@ -13,8 +13,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private Image errorImage;
     [SerializeField] private Camera cam;
 
-    [System.Serializable]
-    private struct LevelRoots
+    [Serializable]  private struct LevelRoots
     {
         public GameObject rootA;   
         public GameObject rootB; 
@@ -30,6 +29,7 @@ public class GamePlayImage : MonoBehaviour
     private readonly List<Entry> _remaining = new();   
     private readonly List<DifferentPoint> _listA = new();
     private readonly List<DifferentPoint> _listB = new();
+    private readonly List<Entry> _found = new(); 
     private int _totalCount;
     private int _foundCount;
     private bool _listening;
@@ -50,6 +50,7 @@ public class GamePlayImage : MonoBehaviour
         factoryManager.ReleaseAll();
 
         _remaining.Clear();
+        _found.Clear();        
         _foundCount = 0;
 
         rawImage.sprite = level.RawSprite;
@@ -89,33 +90,58 @@ public class GamePlayImage : MonoBehaviour
     }
     private void HandleClick(Vector2 screenPoint)
     {
-        float dist = Mathf.Abs(cam.transform.position.z - rawImage.canvas.transform.position.z);
-        Vector2 worldPoint = cam.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, dist));
+        float dist = Mathf.Abs(
+            cam.transform.position.z -
+            rawImage.canvas.transform.position.z
+        );
 
+        Vector2 worldPoint = cam.ScreenToWorldPoint(
+            new Vector3(screenPoint.x, screenPoint.y, dist)
+        );
+        
         for (int i = 0; i < _remaining.Count; i++)
         {
             Entry e = _remaining[i];
-            if (!e.Pair.TryHit(worldPoint)) continue;
 
-            _remaining.RemoveAt(i);   
+            if (!e.Pair.Contains(worldPoint))
+                continue;
+            
+            if (!e.Pair.TryHit(worldPoint))
+                continue;
+
+            _remaining.RemoveAt(i);
+            _found.Add(e);
             _foundCount++;
+
             Log($"Click ĐÚNG ({_foundCount}/{_totalCount})");
 
             DrawMark(e.Pair.PointA, e.Mark);
             DrawMark(e.Pair.PointB, e.Mark);
+
             OnPairFound?.Invoke(e.Pair, e.Mark);
 
             if (_remaining.Count == 0)
             {
-                StopListening();     
+                StopListening();
                 Log("Đã tìm đủ!");
                 OnAllFound?.Invoke();
             }
+
             return;
         }
+        
+        for (int i = 0; i < _found.Count; i++)
+        {
+            Entry e = _found[i];
 
+            if (e.Pair.Contains(worldPoint))
+            {
+                return;
+            }
+        }
         Log("Click SAI");
     }
+    
 
     private void DrawMark(DifferentPoint point, MarkData d)
     {
