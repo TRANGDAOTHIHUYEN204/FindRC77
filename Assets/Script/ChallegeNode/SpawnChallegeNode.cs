@@ -4,14 +4,15 @@ using System.Collections.Generic;
 public class SpawnChallegeNode : MonoBehaviour
 {
     private int _countSpawn;
+    private int _changedCount;
+
     [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer spriteBackGround;
 
     [SerializeField] private List<ChallengeNode> nodes = new List<ChallengeNode>();
-    [SerializeField] private ChallengeNode challengeNode;
     [SerializeField] private Sprite sprite;
-    
+
     public void Init(int countSpawn)
     {
         _countSpawn = countSpawn;
@@ -21,6 +22,7 @@ public class SpawnChallegeNode : MonoBehaviour
     public void Spawn()
     {
         Clear();
+        _changedCount = 0;
 
         if (_countSpawn <= 0 || spriteBackGround == null || factoryManager == null || spawnPoint == null) return;
 
@@ -40,6 +42,14 @@ public class SpawnChallegeNode : MonoBehaviour
             node.Init(sprite);
             nodes.Add(node);
         }
+    }
+
+    public void ChangeNext(Sprite spriteChange)
+    {
+        if (_changedCount >= nodes.Count) return;
+
+        nodes[_changedCount].ChangeSprite(spriteChange);
+        _changedCount++;
     }
 
     public void Clear()

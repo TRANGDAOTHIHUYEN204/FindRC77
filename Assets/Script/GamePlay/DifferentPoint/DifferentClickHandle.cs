@@ -7,6 +7,8 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private Camera worldCamera;
     [SerializeField] private StateGame stateGame;
+    [SerializeField] private SpawnChallegeNode  spawnChallegeNode;
+    [SerializeField] private Sprite spriteChange;
     public bool HandleClick(Vector2 screenPoint)
     {
         if (!stateGame.IsPlaying) return false;
@@ -24,8 +26,9 @@ public class DifferentClickHandler : MonoBehaviour
                 return false;
 
             markPresenter.DrawPair(entry.Pair, entry.Mark);
+            
             Debug.Log($"Click ĐÚNG ({manager.FoundCount}/{manager.TotalCount})");
-
+            spawnChallegeNode.ChangeNext(spriteChange);
             return manager.IsComplete;
         }
         if (manager.IsInFoundArea(worldPoint))

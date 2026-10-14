@@ -6,7 +6,12 @@ public class ChallengeNode : MonoBehaviour
 
     public void Init(Sprite sprite)
     {
+        ChangeSprite(sprite);
+
+    }
+
+    public void ChangeSprite(Sprite sprite)
+    {
         _spriteRenderer.sprite = sprite;
- 
     }
 }
