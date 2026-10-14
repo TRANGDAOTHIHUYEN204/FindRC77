@@ -9,7 +9,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
-    
+    [SerializeField] private SpawnChallegeNode spawnChallegeNode;
     private bool _isPlaying;
 
     private void OnEnable()
@@ -33,6 +33,7 @@ public class GamePlayImage : MonoBehaviour
         pairManagerHolder.Manager.Build(rootA, rootB, level.MarkData);
         stateGame.Init(level.TimeLimit);
         _isPlaying = true;
+        spawnChallegeNode.Init(level.CountDifferent);
     }
 
     private void Update()
