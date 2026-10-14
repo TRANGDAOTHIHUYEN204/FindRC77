@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871348643906e7940b09b74a86fdb948, type: 3}
   m_Name: RectangleDifferentData
   m_EditorClassIdentifier: Assembly-CSharp::MarkData
-  lineWidth: 0
-  colorLine: {r: 0, g: 0, b: 0, a: 0}
-  segments: 0
-  shapeMark: 0
+  lineWidth: 0.08
+  colorLine: {r: 0.41738117, g: 1, b: 0, a: 1}
+  segments: 100
+  shapeMark: 1

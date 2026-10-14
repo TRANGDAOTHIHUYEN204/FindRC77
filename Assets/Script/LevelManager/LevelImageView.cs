@@ -17,8 +17,7 @@ public class LevelImageView : MonoBehaviour
 
     public void ShowLevel(LevelData level, int currentIndex)
     {
-        if (level == null)
-            return;
+        if (level == null) return;
 
         rawImage.sprite = level.RawSprite;
         errorImage.sprite = level.ErrorSprite;
@@ -43,17 +42,12 @@ public class LevelImageView : MonoBehaviour
         }
     }
 
-    public void GetCurrentRoots(
-        int currentIndex,
-        out GameObject rootA,
-        out GameObject rootB)
+    public void GetCurrentRoots(int currentIndex, out GameObject rootA, out GameObject rootB)
     {
         rootA = null;
         rootB = null;
 
-        if (levelRoots == null ||
-            currentIndex < 0 ||
-            currentIndex >= levelRoots.Length)
+        if (levelRoots == null || currentIndex < 0 || currentIndex >= levelRoots.Length)
         {
             return;
         }
@@ -67,8 +61,7 @@ public class LevelImageView : MonoBehaviour
         if (rawImage == null || errorImage == null)
             return false;
 
-        return IsInsideImage(rawImage, screenPoint)
-            || IsInsideImage(errorImage, screenPoint);
+        return IsInsideImage(rawImage, screenPoint) || IsInsideImage(errorImage, screenPoint);
     }
 
     private bool IsInsideImage(Image image, Vector2 screenPoint)
@@ -77,31 +70,19 @@ public class LevelImageView : MonoBehaviour
 
         Camera uiCamera = null;
 
-        if (canvas != null &&
-            canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        if (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
         {
             uiCamera = canvas.worldCamera;
         }
 
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            image.rectTransform,
-            screenPoint,
-            uiCamera
-        );
+        return RectTransformUtility.RectangleContainsScreenPoint(image.rectTransform, screenPoint, uiCamera);
     }
 
-    public Vector2 ScreenToWorldPoint(
-        Vector2 screenPoint,
-        Camera worldCamera)
+    public Vector2 ScreenToWorldPoint(Vector2 screenPoint, Camera worldCamera)
     {
-        float distance = Mathf.Abs(
-            worldCamera.transform.position.z -
-            rawImage.canvas.transform.position.z
-        );
+        float distance = Mathf.Abs(worldCamera.transform.position.z - rawImage.canvas.transform.position.z);
 
-        Vector3 worldPoint = worldCamera.ScreenToWorldPoint(
-            new Vector3(screenPoint.x, screenPoint.y, distance)
-        );
+        Vector3 worldPoint = worldCamera.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, distance));
 
         return worldPoint;
     }
