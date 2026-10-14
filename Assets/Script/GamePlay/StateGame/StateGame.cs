@@ -15,6 +15,7 @@ public class StateGame : MonoBehaviour
     public float TimeLimit { get; private set; }
 
     public bool IsPlaying => State == GameState.Playing;
+    [SerializeField] private TimeOutline outline;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class StateGame : MonoBehaviour
         State = GameState.Playing;
         Time.timeScale = 1f;
         SetPanels(false, false, false);
+        if (outline) outline.SetFill(1f); 
     }
 
     private void Update()
@@ -41,11 +43,13 @@ public class StateGame : MonoBehaviour
             TimeLeft = 0f;
             LoseGame();
         }
+        if (outline) outline.SetFill(TimeLeft / TimeLimit);
     }
 
     public void PauseGame()
     {
         if (State != GameState.Playing) return;
+        Debug.Log("PauseGame called!\n" + System.Environment.StackTrace);
         State = GameState.Paused;
         SetPanels(true, false, false);
         Time.timeScale = 0f;
