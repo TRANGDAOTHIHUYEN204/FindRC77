@@ -4,9 +4,9 @@ public class ChallengeNode : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public void Init(Sprite sprite, Vector3 position)
+    public void Init(Sprite sprite)
     {
         _spriteRenderer.sprite = sprite;
-        transform.position = position;
+ 
     }
 }

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 public class SpawnChallegeNode : MonoBehaviour
 {
     private int _countSpawn;
-    [SerializeField] private FactoryManager _factoryManager;
+    [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer spriteBackGround;
 
-    [SerializeField] private List<ChallengeNode> _nodes = new List<ChallengeNode>();
-
+    [SerializeField] private List<ChallengeNode> nodes = new List<ChallengeNode>();
+    [SerializeField] private ChallengeNode challengeNode;
+    [SerializeField] private Sprite sprite;
+    
     public void Init(int countSpawn)
     {
         _countSpawn = countSpawn;
@@ -20,7 +22,7 @@ public class SpawnChallegeNode : MonoBehaviour
     {
         Clear();
 
-        if (_countSpawn <= 0 || spriteBackGround == null || _factoryManager == null || spawnPoint == null) return;
+        if (_countSpawn <= 0 || spriteBackGround == null || factoryManager == null || spawnPoint == null) return;
 
         Vector3 pos = spawnPoint.position;
         float startX = pos.x;
@@ -28,24 +30,25 @@ public class SpawnChallegeNode : MonoBehaviour
 
         for (int i = 0; i < _countSpawn; i++)
         {
-            ChallengeNode node = _factoryManager.CreateChallengeNode();
+            ChallengeNode node = factoryManager.CreateChallengeNode();
             if (node == null) continue;
 
             float t = _countSpawn == 1 ? 0.5f : (float)i / (_countSpawn - 1);
             pos.x = Mathf.Lerp(startX, endX, t);
 
             node.transform.position = pos;
-            _nodes.Add(node);
+            node.Init(sprite);
+            nodes.Add(node);
         }
     }
 
     public void Clear()
     {
-        for (int i = _nodes.Count - 1; i >= 0; i--)
+        for (int i = nodes.Count - 1; i >= 0; i--)
         {
-            if (_nodes[i] != null)
-                _factoryManager.Release(_nodes[i].gameObject);
+            if (nodes[i] != null)
+                factoryManager.Release(nodes[i].gameObject);
         }
-        _nodes.Clear();
+        nodes.Clear();
     }
 }

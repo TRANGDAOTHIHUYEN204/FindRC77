@@ -1,0 +1,3016 @@
+fileFormatVersion: 2
+guid: adee747ef03fa1d4c94a391a32b919b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2698036576727383389
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_0
+  - first:
+      213: -5124482350038559429
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_1
+  - first:
+      213: 8988480073325600798
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_2
+  - first:
+      213: 813416600604497916
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_3
+  - first:
+      213: -5251699813220289545
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_4
+  - first:
+      213: -6573794630017748659
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_5
+  - first:
+      213: -8896541198397075905
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_6
+  - first:
+      213: 2028470777012766086
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_7
+  - first:
+      213: -8202332708359194267
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_8
+  - first:
+      213: -5780833590401837026
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_9
+  - first:
+      213: -2245239521177593122
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_10
+  - first:
+      213: -4748330245328817058
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_11
+  - first:
+      213: -1828151031003199530
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_12
+  - first:
+      213: -3584741482623684656
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_13
+  - first:
+      213: -2018847246667421611
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_14
+  - first:
+      213: -6363185112926509781
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_15
+  - first:
+      213: 7187501297792731724
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_16
+  - first:
+      213: -8698156052975791484
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_17
+  - first:
+      213: 3437097244869023863
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_18
+  - first:
+      213: 5409884036307235375
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_19
+  - first:
+      213: 4097308793804476693
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_20
+  - first:
+      213: 3385047905112394362
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_21
+  - first:
+      213: -5333191694293629716
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_22
+  - first:
+      213: -8353048078372534576
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_23
+  - first:
+      213: -530026657808216143
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_24
+  - first:
+      213: -8281513290460744919
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_25
+  - first:
+      213: -6363517154954634131
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_26
+  - first:
+      213: -4231571132736163910
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_27
+  - first:
+      213: 5957250887297674475
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_28
+  - first:
+      213: -3907149814997362332
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_29
+  - first:
+      213: -4980633577371236751
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_30
+  - first:
+      213: 7102843098552294714
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_31
+  - first:
+      213: -3440907297752356882
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_32
+  - first:
+      213: -6059810176347088146
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_33
+  - first:
+      213: -4625343361998247000
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_34
+  - first:
+      213: 1350069314958147743
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_35
+  - first:
+      213: 7275871442902510606
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_36
+  - first:
+      213: -9194893795001761511
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_37
+  - first:
+      213: 3976177905094022792
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_38
+  - first:
+      213: 5466277973320119497
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_39
+  - first:
+      213: -8601582423215270686
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_40
+  - first:
+      213: -975497177839577456
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_41
+  - first:
+      213: -5971620897806248505
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_42
+  - first:
+      213: -2960795014370851428
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_43
+  - first:
+      213: 8374223537897425199
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_44
+  - first:
+      213: -7746511323161261597
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_45
+  - first:
+      213: -325416873352448827
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_46
+  - first:
+      213: -6392396812999511757
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_47
+  - first:
+      213: 3155340615093588136
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_48
+  - first:
+      213: -2614261491387816240
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_49
+  - first:
+      213: -8265075004051533650
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_50
+  - first:
+      213: 3330158843826231510
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_51
+  - first:
+      213: -9217693455982440499
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_52
+  - first:
+      213: 7590818207349870607
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_53
+  - first:
+      213: 1621172967055751618
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_54
+  - first:
+      213: -8043035095313670686
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_55
+  - first:
+      213: 4578245910748903642
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_56
+  - first:
+      213: -3214790798330867620
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_57
+  - first:
+      213: 227426091772837856
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_58
+  - first:
+      213: -6579447650089310817
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_59
+  - first:
+      213: -6006796366261854118
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_60
+  - first:
+      213: 4948723917741856993
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_61
+  - first:
+      213: -5058368417053485733
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_62
+  - first:
+      213: 2860293636890266971
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_63
+  - first:
+      213: 4699795164284022372
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_64
+  - first:
+      213: -1688562946019521306
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_65
+  - first:
+      213: 2201463317449020858
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_66
+  - first:
+      213: 8579941195570609860
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_67
+  - first:
+      213: -8902777526659319603
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_68
+  - first:
+      213: -4366613668511234657
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_69
+  - first:
+      213: -5216568203593898634
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_70
+  - first:
+      213: -3324013035221446514
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_71
+  - first:
+      213: -1333239778839592024
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_72
+  - first:
+      213: -2217950410744666887
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_73
+  - first:
+      213: -5441995964578094341
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_74
+  - first:
+      213: 5896050236881205339
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_75
+  - first:
+      213: 7014970070276971642
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_76
+  - first:
+      213: -5504782309356564917
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_77
+  - first:
+      213: -6830813392319972820
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_78
+  - first:
+      213: 1037877395738488625
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_79
+  - first:
+      213: 5402918878070619521
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_80
+  - first:
+      213: -6597140712364491297
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_81
+  - first:
+      213: 8604769137945747248
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_82
+  - first:
+      213: -703877422005990390
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_83
+  - first:
+      213: -2159117087035350552
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_84
+  - first:
+      213: -6311679969749090460
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_85
+  - first:
+      213: 8963401803615255257
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_86
+  - first:
+      213: 520314264282441829
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_87
+  - first:
+      213: -5766341459555985043
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_88
+  - first:
+      213: 3165292404460262855
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_89
+  - first:
+      213: -8818854614842411102
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_90
+  - first:
+      213: 6219613408447951635
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_91
+  - first:
+      213: -2967670349815353066
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_92
+  - first:
+      213: -2753215462309107695
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_93
+  - first:
+      213: 8595745401252881148
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_94
+  - first:
+      213: 8156701168864738304
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_95
+  - first:
+      213: 4513548716080367448
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_96
+  - first:
+      213: -517471090336466546
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_97
+  - first:
+      213: -5976521269214956402
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_98
+  - first:
+      213: 5864594507819025674
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_99
+  - first:
+      213: -1487989831147263521
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_100
+  - first:
+      213: -8772936553124132756
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_101
+  - first:
+      213: -897578123390751277
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_102
+  - first:
+      213: 436494418503705203
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_103
+  - first:
+      213: 4371340658190094550
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_104
+  - first:
+      213: -479789054966150119
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_105
+  - first:
+      213: -6553120240906933581
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_106
+  - first:
+      213: -6045707454607621670
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_107
+  - first:
+      213: 3632991566544759121
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_108
+  - first:
+      213: -8788545659537842210
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_109
+  - first:
+      213: -2574187067580131061
+    second: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_110
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 3000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a2472d3706ae8ad0800000000000000
+      internalID: -2698036576727383389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_1
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 712
+        width: 1725
+        height: 1781
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b35513c047e22e8b0800000000000000
+      internalID: -5124482350038559429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_2
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 2365
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e10ef31f00f7dbc70800000000000000
+      internalID: 8988480073325600798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_3
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf7df6da616d94b00800000000000000
+      internalID: 813416600604497916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_4
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 2397
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3f40638d63e17b0800000000000000
+      internalID: -5251699813220289545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_5
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41fb6b0d9035c4a0800000000000000
+      internalID: -6573794630017748659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_6
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 2345
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3e0aeb7ae2298480800000000000000
+      internalID: -8896541198397075905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_7
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 2247
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6854b15ac63962c10800000000000000
+      internalID: 2028470777012766086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_8
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 2278
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569beac0cd57b2e80800000000000000
+      internalID: -8202332708359194267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_9
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 2162
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18d37a4a7a56cfa0800000000000000
+      internalID: -5780833590401837026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_10
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 2162
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eda9a802d8e47d0e0800000000000000
+      internalID: -2245239521177593122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_11
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1914
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e54bee2bcca8a1eb0800000000000000
+      internalID: -4748330245328817058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_12
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 2086
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d74a41c25a11a6e0800000000000000
+      internalID: -1828151031003199530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_13
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 2111
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dfab944d90704ec0800000000000000
+      internalID: -3584741482623684656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_14
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 2028
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 558ec9e102d9bf3e0800000000000000
+      internalID: -2018847246667421611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_15
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 2066
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2526f77adc61b7a0800000000000000
+      internalID: -6363185112926509781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_16
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1968
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a489d69522fb360800000000000000
+      internalID: 7187501297792731724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_17
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1999
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482d6759721f94780800000000000000
+      internalID: -8698156052975791484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_18
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1969
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77854e2dbb503bf20800000000000000
+      internalID: 3437097244869023863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_19
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1645
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2236244ed4c31b40800000000000000
+      internalID: 5409884036307235375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_20
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1764
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 511dcc5b3a09cd830800000000000000
+      internalID: 4097308793804476693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_21
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 1789
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7a87eb822b1afe20800000000000000
+      internalID: 3385047905112394362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_22
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1796
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce480961962bcf5b0800000000000000
+      internalID: -5333191694293629716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_23
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1707
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d688d07703041c80800000000000000
+      internalID: -8353048078372534576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_24
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1744
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf8adb1097f4a8f0800000000000000
+      internalID: -530026657808216143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_25
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 1646
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92339672a87221d80800000000000000
+      internalID: -8281513290460744919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_26
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 1677
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6c13d8ecde30b7a0800000000000000
+      internalID: -6363517154954634131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_27
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 1561
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abfa67f79707645c0800000000000000
+      internalID: -4231571132736163910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_28
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 1561
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bec224f7e186ca250800000000000000
+      internalID: 5957250887297674475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_29
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1313
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46959d8b1f307c9c0800000000000000
+      internalID: -3907149814997362332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_30
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 1485
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1768760662c31eab0800000000000000
+      internalID: -4980633577371236751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_31
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1510
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3d5b886a2e529260800000000000000
+      internalID: 7102843098552294714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_32
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 1427
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7eb6c1b017f30d0800000000000000
+      internalID: -3440907297752356882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_33
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 1465
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eead88830ca37eba0800000000000000
+      internalID: -6059810176347088146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_34
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1367
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ab22e7e7ba7fcfb0800000000000000
+      internalID: -4625343361998247000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_35
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1398
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f904c3493e86cb210800000000000000
+      internalID: 1350069314958147743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_36
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1368
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0cec91378619f460800000000000000
+      internalID: 7275871442902510606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_37
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1044
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9110a716fcc256080800000000000000
+      internalID: -9194893795001761511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_38
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1163
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 886d2ececb83e2730800000000000000
+      internalID: 3976177905094022792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_39
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 1188
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4b94beade1cdb40800000000000000
+      internalID: 5466277973320119497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_40
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1195
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e49206fb5a01a880800000000000000
+      internalID: -8601582423215270686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_41
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1106
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096d9733c765672f0800000000000000
+      internalID: -975497177839577456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_42
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1143
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c595f4be6a802da0800000000000000
+      internalID: -5971620897806248505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_43
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 1045
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c958da31f9429e6d0800000000000000
+      internalID: -2960795014370851428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_44
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 1076
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f29471e60f7373470800000000000000
+      internalID: 8374223537897425199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_45
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 960
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e98e6e8efcde7490800000000000000
+      internalID: -7746511323161261597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_46
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 960
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4b8ebe313eb7bf0800000000000000
+      internalID: -325416873352448827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_47
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 712
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33133d987f4a947a0800000000000000
+      internalID: -6392396812999511757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_48
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 884
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a0140c52950acb20800000000000000
+      internalID: 3155340615093588136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_49
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 909
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d6a8d7460748bbd0800000000000000
+      internalID: -2614261491387816240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_50
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 826
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea05c85f21e8c4d80800000000000000
+      internalID: -8265075004051533650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_51
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 864
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d853e313d9173e20800000000000000
+      internalID: 3330158843826231510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_52
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 766
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcf49b3a3ac241080800000000000000
+      internalID: -9217693455982440499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_53
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 797
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0018a311f0085960800000000000000
+      internalID: 7590818207349870607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_54
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 767
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9f2d469309f7610800000000000000
+      internalID: 1621172967055751618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_55
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 443
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ed14d3d136616090800000000000000
+      internalID: -8043035095313670686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_56
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 562
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8b2943662398f30800000000000000
+      internalID: 4578245910748903642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_57
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 587
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c505b463dc4c263d0800000000000000
+      internalID: -3214790798330867620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_58
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 443
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ef76c453daf72300800000000000000
+      internalID: 227426091772837856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_59
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 111
+        width: 676
+        height: 579
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f95e52eb83b11b4a0800000000000000
+      internalID: -6579447650089310817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_60
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 562
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50eadeb78293aca0800000000000000
+      internalID: -6006796366261854118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_61
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 587
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e89b780f266da440800000000000000
+      internalID: 4948723917741856993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_62
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 443
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b55d87e99b01dc9b0800000000000000
+      internalID: -5058368417053485733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_63
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 562
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5d872488edc1b720800000000000000
+      internalID: 2860293636890266971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_64
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 587
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46e6f342dc6093140800000000000000
+      internalID: 4699795164284022372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_65
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 594
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ec8e9d62f40198e0800000000000000
+      internalID: -1688562946019521306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_66
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 505
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab51a9e293b2d8e10800000000000000
+      internalID: 2201463317449020858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_67
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 542
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cef9b31f03121770800000000000000
+      internalID: 8579941195570609860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_68
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 505
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8f329220bf27480800000000000000
+      internalID: -8902777526659319603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_69
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 542
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f95c509f00ca663c0800000000000000
+      internalID: -4366613668511234657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_70
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 505
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675203e7bd60b97b0800000000000000
+      internalID: -5216568203593898634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_71
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 542
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e809bde71cbbed1d0800000000000000
+      internalID: -3324013035221446514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_72
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 444
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a388d52c716f7de0800000000000000
+      internalID: -1333239778839592024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_73
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 475
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f4e1264ad14831e0800000000000000
+      internalID: -2217950410744666887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_74
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 444
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2a63ec0852a74b0800000000000000
+      internalID: -5441995964578094341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_75
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 475
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58792ba37af2d150800000000000000
+      internalID: 5896050236881205339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_76
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 444
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c1bdcac1e2a5160800000000000000
+      internalID: 7014970070276971642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_77
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 475
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e82fcb7a51b93b0800000000000000
+      internalID: -5504782309356564917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_78
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 359
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2a79cf29631431a0800000000000000
+      internalID: -6830813392319972820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_79
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 111
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f66651ef7476e00800000000000000
+      internalID: 1037877395738488625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_80
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 111
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18db6adf7160bfa40800000000000000
+      internalID: 5402918878070619521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_81
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 359
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd3f3aa97f3274a0800000000000000
+      internalID: -6597140712364491297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_82
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 111
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03f1081e0f74a6770800000000000000
+      internalID: 8604769137945747248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_83
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 283
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c4ae7c6335b36f0800000000000000
+      internalID: -703877422005990390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_84
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 308
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e128c6e2764902e0800000000000000
+      internalID: -2159117087035350552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_85
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 283
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46f382b12886868a0800000000000000
+      internalID: -6311679969749090460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_86
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 308
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9da35934376646c70800000000000000
+      internalID: 8963401803615255257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_87
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 283
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568af1e0117883700800000000000000
+      internalID: 520314264282441829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_88
+      rect:
+        serializedVersion: 2
+        x: 2009
+        y: 308
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69de817ef6d9ffa0800000000000000
+      internalID: -5766341459555985043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_89
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 225
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c59812eba06deb20800000000000000
+      internalID: 3165292404460262855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_90
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 263
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a7f08cb3722d9580800000000000000
+      internalID: -8818854614842411102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_91
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 225
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 313fbca2171805650800000000000000
+      internalID: 6219613408447951635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_92
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 263
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 611fbcc4a87b0d6d0800000000000000
+      internalID: -2967670349815353066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_93
+      rect:
+        serializedVersion: 2
+        x: 1927
+        y: 225
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 118e3facf1d9ac9d0800000000000000
+      internalID: -2753215462309107695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_94
+      rect:
+        serializedVersion: 2
+        x: 1970
+        y: 263
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf2206576e83a4770800000000000000
+      internalID: 8595745401252881148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_95
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 165
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c323d3f7c623170800000000000000
+      internalID: 8156701168864738304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_96
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 196
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 857046ab4a853ae30800000000000000
+      internalID: 4513548716080367448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_97
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 165
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e89f5f6f8c291d8f0800000000000000
+      internalID: -517471090336466546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_98
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 196
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8430e312912f0da0800000000000000
+      internalID: -5976521269214956402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_99
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 165
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a05824602a9336150800000000000000
+      internalID: 5864594507819025674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_100
+      rect:
+        serializedVersion: 2
+        x: 1903
+        y: 196
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9e21dd129995be0800000000000000
+      internalID: -1487989831147263521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_101
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 166
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c680ff99fa4404680800000000000000
+      internalID: -8772936553124132756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_102
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dde12dc3792b83f0800000000000000
+      internalID: -897578123390751277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_103
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 372aa596c5dbe0600800000000000000
+      internalID: 436494418503705203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_104
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d094a31b2f1aac30800000000000000
+      internalID: 4371340658190094550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_105
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91c4f9385627759f0800000000000000
+      internalID: -479789054966150119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_106
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bae15e5cd3ae05a0800000000000000
+      internalID: -6553120240906933581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_107
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad18e200a15591ca0800000000000000
+      internalID: -6045707454607621670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_108
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 159e3e3d49afa6230800000000000000
+      internalID: 3632991566544759121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_109
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edf12fe4940d80680800000000000000
+      internalID: -8788545659537842210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_110
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 0
+        width: 90
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b095b7b2086a64cd0800000000000000
+      internalID: -2574187067580131061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_0: -2698036576727383389
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_1: -5124482350038559429
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_10: -2245239521177593122
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_100: -1487989831147263521
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_101: -8772936553124132756
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_102: -897578123390751277
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_103: 436494418503705203
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_104: 4371340658190094550
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_105: -479789054966150119
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_106: -6553120240906933581
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_107: -6045707454607621670
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_108: 3632991566544759121
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_109: -8788545659537842210
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_11: -4748330245328817058
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_110: -2574187067580131061
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_12: -1828151031003199530
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_13: -3584741482623684656
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_14: -2018847246667421611
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_15: -6363185112926509781
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_16: 7187501297792731724
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_17: -8698156052975791484
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_18: 3437097244869023863
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_19: 5409884036307235375
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_2: 8988480073325600798
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_20: 4097308793804476693
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_21: 3385047905112394362
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_22: -5333191694293629716
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_23: -8353048078372534576
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_24: -530026657808216143
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_25: -8281513290460744919
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_26: -6363517154954634131
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_27: -4231571132736163910
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_28: 5957250887297674475
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_29: -3907149814997362332
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_3: 813416600604497916
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_30: -4980633577371236751
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_31: 7102843098552294714
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_32: -3440907297752356882
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_33: -6059810176347088146
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_34: -4625343361998247000
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_35: 1350069314958147743
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_36: 7275871442902510606
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_37: -9194893795001761511
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_38: 3976177905094022792
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_39: 5466277973320119497
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_4: -5251699813220289545
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_40: -8601582423215270686
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_41: -975497177839577456
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_42: -5971620897806248505
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_43: -2960795014370851428
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_44: 8374223537897425199
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_45: -7746511323161261597
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_46: -325416873352448827
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_47: -6392396812999511757
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_48: 3155340615093588136
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_49: -2614261491387816240
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_5: -6573794630017748659
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_50: -8265075004051533650
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_51: 3330158843826231510
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_52: -9217693455982440499
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_53: 7590818207349870607
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_54: 1621172967055751618
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_55: -8043035095313670686
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_56: 4578245910748903642
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_57: -3214790798330867620
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_58: 227426091772837856
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_59: -6579447650089310817
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_6: -8896541198397075905
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_60: -6006796366261854118
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_61: 4948723917741856993
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_62: -5058368417053485733
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_63: 2860293636890266971
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_64: 4699795164284022372
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_65: -1688562946019521306
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_66: 2201463317449020858
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_67: 8579941195570609860
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_68: -8902777526659319603
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_69: -4366613668511234657
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_7: 2028470777012766086
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_70: -5216568203593898634
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_71: -3324013035221446514
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_72: -1333239778839592024
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_73: -2217950410744666887
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_74: -5441995964578094341
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_75: 5896050236881205339
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_76: 7014970070276971642
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_77: -5504782309356564917
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_78: -6830813392319972820
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_79: 1037877395738488625
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_8: -8202332708359194267
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_80: 5402918878070619521
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_81: -6597140712364491297
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_82: 8604769137945747248
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_83: -703877422005990390
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_84: -2159117087035350552
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_85: -6311679969749090460
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_86: 8963401803615255257
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_87: 520314264282441829
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_88: -5766341459555985043
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_89: 3165292404460262855
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_9: -5780833590401837026
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_90: -8818854614842411102
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_91: 6219613408447951635
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_92: -2967670349815353066
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_93: -2753215462309107695
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_94: 8595745401252881148
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_95: 8156701168864738304
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_96: 4513548716080367448
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_97: -517471090336466546
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_98: -5976521269214956402
+      pngtree-hand-drawn-red-question-mark-with-dot-png-image_21140819_99: 5864594507819025674
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
