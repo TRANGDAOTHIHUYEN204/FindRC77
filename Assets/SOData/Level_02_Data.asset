@@ -19,3 +19,5 @@ MonoBehaviour:
   timeLimit: 240
   _markData:
   - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
+  differentPoints: []
+  textWin: "Streamer or TikToker? I\u2019d dominate both."

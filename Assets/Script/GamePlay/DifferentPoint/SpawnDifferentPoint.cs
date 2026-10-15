@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnDifferentPoint : MonoBehaviour
 {
     [SerializeField] private FactoryManager factoryManager;
-    [SerializeField] private Transform pairContainer; 
+    private Transform pairContainer; 
     
     private readonly List<DifferentPair> pairs = new List<DifferentPair>();
     public IReadOnlyList<DifferentPair> Pairs => pairs;

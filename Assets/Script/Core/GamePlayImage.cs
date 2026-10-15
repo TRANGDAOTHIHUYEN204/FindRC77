@@ -11,6 +11,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallegeNode spawnChallegeNode;
+    [SerializeField] private HeartManager heartManager;
     private bool _isPlaying;
 
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
@@ -20,7 +21,7 @@ public class GamePlayImage : MonoBehaviour
     {
         _isPlaying = false;
         factoryManager.ReleaseAll();
-
+        heartManager.ResetLives(); 
         levelImageView.ShowLevel(level);
         pairManagerHolder.Build(level, levelImageView.RootA, levelImageView.RootB);
         Debug.Log($"RootA = {levelImageView.RootA.name}, RootB = {levelImageView.RootB.name}");

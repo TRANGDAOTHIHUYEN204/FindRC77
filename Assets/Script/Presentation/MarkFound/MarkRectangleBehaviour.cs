@@ -4,8 +4,10 @@ using UnityEngine;
 public class MarkRectangleBehaviour : IDrawShape
 {
     private readonly LineRenderer _lineRenderer;
+    private LineRenderer _outline;
 
     private const float Padding = 1.15f;
+    private const float OutlineThickness = 0.02f;
 
     public MarkRectangleBehaviour(LineRenderer lineRenderer)
     {
@@ -16,9 +18,8 @@ public class MarkRectangleBehaviour : IDrawShape
     {
         if (_lineRenderer == null)
             yield break;
-        
+
         _lineRenderer.transform.position = new Vector3(center.x, center.y, 0f);
-        
         _lineRenderer.useWorldSpace = false;
 
         _lineRenderer.startWidth = lineWidth;
@@ -28,13 +29,20 @@ public class MarkRectangleBehaviour : IDrawShape
         _lineRenderer.endColor = color;
 
         _lineRenderer.sortingOrder = Mathf.Max(_lineRenderer.sortingOrder, 1);
-        
-        float halfW = Mathf.Max(0.001f, size.x * 0.5f * Padding + lineWidth * 0.5f);
 
+        float halfW = Mathf.Max(0.001f, size.x * 0.5f * Padding + lineWidth * 0.5f);
         float halfH = Mathf.Max(0.001f, size.y * 0.5f * Padding + lineWidth * 0.5f);
 
-        Vector3[] points = { new Vector3(-halfW,  halfH, 0f), new Vector3( halfW,  halfH, 0f), new Vector3( halfW, -halfH, 0f), new Vector3(-halfW, -halfH, 0f) };
+        Vector3[] points =
+        {
+            new Vector3(-halfW,  halfH, 0f),
+            new Vector3( halfW,  halfH, 0f),
+            new Vector3( halfW, -halfH, 0f),
+            new Vector3(-halfW, -halfH, 0f)
+        };
 
-        yield return LineDrawUtil.AnimateDraw(_lineRenderer, points, true, duration);
+        _outline = LineDrawUtil.SetupOutline(_lineRenderer, _outline, lineWidth, OutlineThickness);
+
+        yield return LineDrawUtil.AnimateDraw(new[] { _lineRenderer, _outline }, points, true, duration, 0, 0);
     }
 }

@@ -1,9 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro; 
 
 public class MenuHome : MonoBehaviour
 {
+    [SerializeField] private TMP_Text levelText; 
+
+    private void Start()
+    {
+        levelText.text = "Level " + (SaveGame.CurrentLevel + 1);
+    }
+
     public void JoinGamePlay(string screenName)
     {
         StartCoroutine(GamePlay(screenName));
@@ -11,7 +19,7 @@ public class MenuHome : MonoBehaviour
 
     private IEnumerator GamePlay(string screenName)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(screenName);
     }
 }

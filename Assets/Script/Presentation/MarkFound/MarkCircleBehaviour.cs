@@ -33,7 +33,7 @@ public class MarkCircleBehaviour : IDrawShape
             pts[i] = new Vector3(Mathf.Cos(a) * radius, Mathf.Sin(a) * radius, 0f);
         }
 
-        yield return LineDrawUtil.AnimateDraw(new[] { _lineRenderer, _outline }, pts, true, duration);
+        yield return LineDrawUtil.AnimateDraw(new[] { _lineRenderer, _outline }, pts, true, duration, 8, 8);
     }
 
     private void SetupOutline(float lineWidth)

@@ -16,13 +16,18 @@ public class LevelManager : MonoBehaviour
     public int CurrentIndex => _currentIndex;
     public event Action<LevelData> OnLevelLoaded;
 
-    private void Start() => LoadLevel(0);
+    private void Awake()
+    {
+        SaveGame.Reset();
+    }
+    private void Start() => LoadLevel(SaveGame.CurrentLevel);
 
     public void LoadLevel(int index)
     {
         if (_levels == null || _levels.Length == 0) return;
         _currentIndex = Mathf.Clamp(index, 0, _levels.Length - 1);
         _levelData = _levels[_currentIndex];
+
         OnLevelLoaded?.Invoke(_levelData);
     }
 

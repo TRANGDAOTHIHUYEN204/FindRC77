@@ -826,6 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd138407f1ce7a42903caf0c7b9117c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHome
+  levelText: {fileID: 1522090765}
 --- !u!1 &2099527267
 GameObject:
   m_ObjectHideFlags: 0

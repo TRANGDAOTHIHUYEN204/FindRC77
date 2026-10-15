@@ -3,10 +3,32 @@ using UnityEngine;
 
 public static class LineDrawUtil
 {
-    public static IEnumerator AnimateDraw(LineRenderer lr, Vector3[] points, bool closed, float duration)
-        => AnimateDraw(new[] { lr }, points, closed, duration);
+    public static LineRenderer SetupOutline(LineRenderer main, LineRenderer outline, float lineWidth, float thickness)
+    {
+        if (outline == null)
+        {
+            Transform t = main.transform.Find("Outline");
+            GameObject go = t != null ? t.gameObject : new GameObject("Outline");
+            go.transform.SetParent(main.transform, false);
+            outline = go.GetComponent<LineRenderer>();
+            if (outline == null) outline = go.AddComponent<LineRenderer>();
+        }
 
-    public static IEnumerator AnimateDraw(LineRenderer[] lrs, Vector3[] points, bool closed, float duration)
+        outline.useWorldSpace = false;
+        outline.sharedMaterial = main.sharedMaterial;
+        outline.sortingLayerID = main.sortingLayerID;
+        outline.sortingOrder = main.sortingOrder - 1;
+        outline.alignment = main.alignment;
+        outline.startWidth = outline.endWidth = lineWidth + thickness * 2f;
+        outline.startColor = outline.endColor = Color.white;
+        return outline;
+    }
+    public static IEnumerator AnimateDraw(LineRenderer lr, Vector3[] points, bool closed, float duration,
+        int cornerVertices = 0, int capVertices = 0)
+        => AnimateDraw(new[] { lr }, points, closed, duration, cornerVertices, capVertices);
+
+    public static IEnumerator AnimateDraw(LineRenderer[] lrs, Vector3[] points, bool closed, float duration,
+        int cornerVertices = 0, int capVertices = 0)
     {
         if (points == null || points.Length < 2) yield break;
 
@@ -19,10 +41,9 @@ public static class LineDrawUtil
         {
             lr.enabled = true;
             lr.loop = false;
-            lr.numCornerVertices = 4;
-            lr.numCapVertices = 4;
+            lr.numCornerVertices = cornerVertices;
+            lr.numCapVertices = capVertices;
         }
-
         if (duration > 0f)
         {
             int segCount = total - 1;

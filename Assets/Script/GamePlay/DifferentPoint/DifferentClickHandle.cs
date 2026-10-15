@@ -9,7 +9,8 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallegeNode spawnChallegeNode;
     [SerializeField] private Sprite spriteChange;
-    [SerializeField] private Camera uiCamera; 
+    [SerializeField] private Camera uiCamera;
+    [SerializeField] private HeartManager heartManager;
 
     public bool HandleClick(Vector2 screenPoint)
     {
@@ -30,7 +31,11 @@ public class DifferentClickHandler : MonoBehaviour
         }
 
         if (manager.IsInFoundArea(screenPoint, uiCamera)) return false;
-        Debug.Log("Click SAI");
+        Debug.Log("Click sai");
+        bool outOfLives = heartManager.SubstractLives();
+        if (outOfLives)
+            stateGame.LoseGame();
+
         return false;
     }
 }
