@@ -7,32 +7,29 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private Camera worldCamera;
     [SerializeField] private StateGame stateGame;
-    [SerializeField] private SpawnChallegeNode  spawnChallegeNode;
+    [SerializeField] private SpawnChallegeNode spawnChallegeNode;
     [SerializeField] private Sprite spriteChange;
+    [SerializeField] private Camera uiCamera; 
+
     public bool HandleClick(Vector2 screenPoint)
     {
         if (!stateGame.IsPlaying) return false;
-        if (!levelImageView.IsInsideImages(screenPoint))
-            return false;
+        if (!levelImageView.IsInsideImages(screenPoint)) return false;
 
-        Vector2 worldPoint = levelImageView.ScreenToWorldPoint(screenPoint, worldCamera);
         DifferentPairManager manager = pairManagerHolder.Manager;
-        
-        DifferentPairManager.Entry entry = manager.FindRemaining(worldPoint);
+        if (manager == null) return false;
 
+        var entry = manager.FindRemaining(screenPoint, uiCamera);
         if (entry != null)
         {
-            if (!manager.MarkFound(entry, worldPoint))
-                return false;
+            if (!manager.MarkFound(entry)) return false;
 
             markPresenter.DrawPair(entry.Pair, entry.Mark);
-            
-            Debug.Log($"Click ĐÚNG ({manager.FoundCount}/{manager.TotalCount})");
             spawnChallegeNode.ChangeNext(spriteChange);
             return manager.IsComplete;
         }
-        if (manager.IsInFoundArea(worldPoint))
-            return false;
+
+        if (manager.IsInFoundArea(screenPoint, uiCamera)) return false;
         Debug.Log("Click SAI");
         return false;
     }

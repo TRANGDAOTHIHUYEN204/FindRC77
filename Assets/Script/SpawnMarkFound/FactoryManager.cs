@@ -4,7 +4,7 @@ public class FactoryManager : MonoBehaviour
 {
     [SerializeField] private MarkFound prefabMarkFound;
     [SerializeField] private ChallengeNode challengeNodePrefab;
-
+    [SerializeField] private DifferentPair differentPairPrefab;
     private readonly PoolManager _pool = new PoolManager();
 
     public MarkFound Create()
@@ -16,7 +16,12 @@ public class FactoryManager : MonoBehaviour
     {
         return CreateObject(challengeNodePrefab);
     }
+    
 
+    public DifferentPair CreateDifferentPair()
+    {
+        return CreateObject(differentPairPrefab);
+    }
     private T CreateObject<T>(T prefab) where T : Component
     {
         if (prefab == null) return null;

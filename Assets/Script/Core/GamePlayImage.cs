@@ -1,39 +1,32 @@
+using System.Collections;
 using UnityEngine;
 
 public class GamePlayImage : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private LevelImageView levelImageView;
-    [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private DifferentClickHandler clickHandler;
+    [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallegeNode spawnChallegeNode;
     private bool _isPlaying;
 
-    private void OnEnable()
-    {
-        levelManager.OnLevelLoaded += Build;
-    }
-
-    private void OnDisable()
-    {
-        levelManager.OnLevelLoaded -= Build;
-    }
+    private void OnEnable()  => levelManager.OnLevelLoaded += Build;
+    private void OnDisable() => levelManager.OnLevelLoaded -= Build;
 
     private void Build(LevelData level)
     {
+        _isPlaying = false;
         factoryManager.ReleaseAll();
 
-        int currentIndex = levelManager.CurrentIndex;
-
-        levelImageView.ShowLevel(level, currentIndex);
-        levelImageView.GetCurrentRoots(currentIndex, out GameObject rootA, out GameObject rootB);
-        pairManagerHolder.Manager.Build(rootA, rootB, level.MarkData);
+        levelImageView.ShowLevel(level);
+        pairManagerHolder.Build(level, levelImageView.RootA, levelImageView.RootB);
+        Debug.Log($"RootA = {levelImageView.RootA.name}, RootB = {levelImageView.RootB.name}");
         stateGame.Init(level.TimeLimit);
-        _isPlaying = true;
         spawnChallegeNode.Init(level.CountDifferent);
+        _isPlaying = true;
     }
 
     private void Update()
@@ -41,15 +34,14 @@ public class GamePlayImage : MonoBehaviour
         if (!_isPlaying) return;
         if (!inputManager.ClickedThisFrame) return;
 
-        bool allFound = clickHandler.HandleClick(inputManager.ClickScreenPosition);
-
-        if (allFound)
-            Win();
+        if (clickHandler.HandleClick(inputManager.ClickScreenPosition))
+            StartCoroutine(Win());
     }
 
-    private void Win()
+    private IEnumerator Win()
     {
         _isPlaying = false;
+        yield return new WaitForSeconds(1f);
         Debug.Log("Đã tìm đủ!");
         stateGame.WinGame();
     }

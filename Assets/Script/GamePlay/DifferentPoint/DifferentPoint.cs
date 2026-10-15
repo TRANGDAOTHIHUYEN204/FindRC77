@@ -1,20 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class DifferentPoint : MonoBehaviour
 {
-    private Collider2D _collider;
+    [SerializeField] private BoxCollider2D boxCollider;
 
-    public bool IsFound { get; private set; }
-    public Vector2 Center => _collider.bounds.center;   
-    public Vector2 Size => _collider.bounds.size;      
+    public Vector2 Center => boxCollider.bounds.center;
+    public Vector2 Size   => boxCollider.bounds.size;
 
-    private void Awake() => _collider = GetComponent<Collider2D>();
+    public void Init(DifferentPointInfo data, Transform root)
+    {
+        transform.position = root.TransformPoint(data.Position); 
 
-    public void ResetPoint() => IsFound = false;
+        Vector3 parentScale = transform.parent != null ? transform.parent.lossyScale : Vector3.one;
+        Vector3 rootScale = root.lossyScale;
+        transform.localScale = new Vector3(
+            rootScale.x / parentScale.x,
+            rootScale.y / parentScale.y,
+            1f);
 
-    public bool IsHit(Vector2 worldPoint)
-        => _collider.OverlapPoint(worldPoint);
+        boxCollider.offset = Vector2.zero;
+        boxCollider.size = data.Size;
+    }
 
-    public void MarkFound() => IsFound = true;
+    public bool IsHit(Vector2 worldPoint) => boxCollider.OverlapPoint(worldPoint);
 }

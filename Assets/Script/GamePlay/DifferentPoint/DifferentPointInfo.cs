@@ -1,8 +1,8 @@
 using UnityEngine;
 
+[System.Serializable]
 public struct DifferentPointInfo
 {
-    public int ID;
-    public Vector2 Position; 
+    public Vector3 Position; 
     public Vector2 Size;    
 }
