@@ -13,13 +13,15 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private SpawnChallegeNode spawnChallegeNode;
     [SerializeField] private HeartManager heartManager;
     private bool _isPlaying;
-
+    [SerializeField] private HintPresenter hintPresenter;
+    
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
     private void OnDisable() => levelManager.OnLevelLoaded -= Build;
 
     private void Build(LevelData level)
     {
         _isPlaying = false;
+        hintPresenter.ClearHint();      
         factoryManager.ReleaseAll();
         heartManager.ResetLives(); 
         levelImageView.ShowLevel(level);

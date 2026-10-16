@@ -12,7 +12,7 @@ public class DifferentPairManager
     public int TotalCount => entries.Count;
     public int FoundCount { get; private set; }
     public bool IsComplete => TotalCount > 0 && FoundCount >= TotalCount;
-
+    
     public DifferentPairManager(IReadOnlyList<DifferentPair> pairs, MarkData[] marks)
     {
         for (int i = 0; i < pairs.Count; i++)
@@ -51,5 +51,16 @@ public class DifferentPairManager
         }
         return false;
     }
-    
+
+    public Entry GetHintEntry()
+    {
+        var remaining = new List<Entry>();
+        for (int i = 0; i < entries.Count ; i++)
+        {
+            if (!entries[i].Pair.IsFound) remaining.Add(entries[i]); 
+        }
+
+        if (remaining.Count == 0) return null;
+        return remaining[Random.Range(0, remaining.Count)];
+    }
 }

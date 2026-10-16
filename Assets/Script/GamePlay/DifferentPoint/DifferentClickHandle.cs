@@ -11,7 +11,8 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private Sprite spriteChange;
     [SerializeField] private Camera uiCamera;
     [SerializeField] private HeartManager heartManager;
-
+    [SerializeField] private HintPresenter hintPresenter;
+        
     public bool HandleClick(Vector2 screenPoint)
     {
         if (!stateGame.IsPlaying) return false;
@@ -24,6 +25,7 @@ public class DifferentClickHandler : MonoBehaviour
         if (entry != null)
         {
             if (!manager.MarkFound(entry)) return false;
+            if (hintPresenter.HintedPair == entry.Pair) hintPresenter.ClearHint();
 
             markPresenter.DrawPair(entry.Pair, entry.Mark);
             spawnChallegeNode.ChangeNext(spriteChange);
@@ -34,8 +36,10 @@ public class DifferentClickHandler : MonoBehaviour
         Debug.Log("Click sai");
         bool outOfLives = heartManager.SubstractLives();
         if (outOfLives)
+        {
+            hintPresenter.ClearHint();
             stateGame.LoseGame();
-
+        }
         return false;
     }
 }
