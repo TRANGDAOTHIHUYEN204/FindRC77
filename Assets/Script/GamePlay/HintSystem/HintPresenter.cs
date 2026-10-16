@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,33 +8,27 @@ public class HintPresenter : MonoBehaviour
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private MarkData hintMarkData;
-    
-    [SerializeField] private int defaultHint = 3;   
-    [SerializeField] private int currentHint;    
-
-    private const string KeyHint = "HintCount";
-
     private readonly List<MarkFound> _marks = new List<MarkFound>();
-    public DifferentPair HintedPair { get; private set; }
-    public int CountHint => currentHint;
 
-    private void Awake()
-    {
-        currentHint = PlayerPrefs.GetInt(KeyHint, defaultHint);
-    }
+    public DifferentPair HintedPair { get; private set; }
+    public int CountHint => SaveGame.HintCount;
+
+    public event Action<int> OnHintChanged;
+
+    private void Start() => OnHintChanged?.Invoke(CountHint);
 
     [ContextMenu("Reset Hint Count")]
     public void ResetHint()
     {
-        PlayerPrefs.DeleteKey(KeyHint);
-        currentHint = defaultHint;
+        SaveGame.ResetHint();
+        OnHintChanged?.Invoke(CountHint);
     }
 
     public void ShowHint()
     {
-        if (currentHint <= 0)
+        if (CountHint <= 0)
         {
-            Debug.Log("hết key rồi");
+            Debug.Log("Hết hint rồi");
             return;
         }
         if (!stateGame.IsPlaying) return;
@@ -48,16 +43,15 @@ public class HintPresenter : MonoBehaviour
         HintedPair = entry.Pair;
         Draw(HintedPair.RootA);
         Draw(HintedPair.RootB);
-        SetCount(currentHint - 1);
+        SetCount(CountHint - 1);
     }
 
-    public void AddHint(int amount) => SetCount(currentHint + amount);
+    public void AddHint(int amount) => SetCount(CountHint + amount);
 
     private void SetCount(int value)
     {
-        currentHint = Mathf.Max(0, value);
-        PlayerPrefs.SetInt(KeyHint, currentHint);
-        PlayerPrefs.Save();
+        SaveGame.HintCount = value;
+        OnHintChanged?.Invoke(CountHint);
     }
 
     private void Draw(RectTransform root)

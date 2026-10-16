@@ -46,6 +46,6 @@ public class GamePlayImage : MonoBehaviour
         _isPlaying = false;
         yield return new WaitForSeconds(1f);
         Debug.Log("Đã tìm đủ!");
-        stateGame.WinGame();
+        stateGame.WinGame(levelManager.TextWin);
     }
 }

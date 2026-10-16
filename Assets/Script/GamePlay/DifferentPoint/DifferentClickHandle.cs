@@ -12,7 +12,7 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private Camera uiCamera;
     [SerializeField] private HeartManager heartManager;
     [SerializeField] private HintPresenter hintPresenter;
-        
+    
     public bool HandleClick(Vector2 screenPoint)
     {
         if (!stateGame.IsPlaying) return false;

@@ -3,7 +3,7 @@ using System;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private LevelData[] _levels;
+    [SerializeField] private LevelData[] levels;
     private int _currentIndex;
     private LevelData _levelData;
 
@@ -12,22 +12,19 @@ public class LevelManager : MonoBehaviour
     public int NumberLevel => _levelData.NumberLevel;
     public int CountDifferent => _levelData.CountDifferent;
     public float TimeLimit => _levelData.TimeLimit;
-    public bool HasNextLevel => _currentIndex < _levels.Length - 1;
+    public bool HasNextLevel => _currentIndex < levels.Length - 1;
     public int CurrentIndex => _currentIndex;
     public event Action<LevelData> OnLevelLoaded;
-
-    private void Awake()
-    {
-        SaveGame.Reset();
-    }
+    public string TextWin => _levelData.TextWin;
+    
     private void Start() => LoadLevel(SaveGame.CurrentLevel);
 
     public void LoadLevel(int index)
     {
-        if (_levels == null || _levels.Length == 0) return;
-        _currentIndex = Mathf.Clamp(index, 0, _levels.Length - 1);
-        _levelData = _levels[_currentIndex];
-
+        if (levels == null || levels.Length == 0) return;
+        _currentIndex = Mathf.Clamp(index, 0, levels.Length - 1);
+        _levelData = levels[_currentIndex];
+        SaveGame.CurrentLevel = _currentIndex;
         OnLevelLoaded?.Invoke(_levelData);
     }
 

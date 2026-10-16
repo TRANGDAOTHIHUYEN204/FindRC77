@@ -14,7 +14,7 @@ public class StateGame : MonoBehaviour
     public GameState State { get; private set; } = GameState.Paused; 
     public float TimeLeft { get; private set; }
     public float TimeLimit { get; private set; }
-
+    [SerializeField] private TextMeshProUGUI winText;
     public bool IsPlaying => State == GameState.Playing;
     [SerializeField] private TimeOutline outline;
     private int _lastShownSecond = -1;
@@ -69,17 +69,19 @@ public class StateGame : MonoBehaviour
 
     public void ResumeGame()
     {
+        Debug.Log($"ResumeGame called, State = {State}");
         if (State != GameState.Paused) return;
         Time.timeScale = 1f;
         SetPanels(false, false, false);
         State = GameState.Playing;
     }
 
-    public void WinGame()
+    public void WinGame(string textWin)
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
         SetPanels(false, true, false);
+        winText.text = textWin;
         Time.timeScale = 0f;
     }
 

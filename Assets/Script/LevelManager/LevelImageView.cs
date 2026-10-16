@@ -25,8 +25,7 @@ public class LevelImageView : MonoBehaviour
     private bool IsInside(Image image, Vector2 screenPoint)
     {
         Canvas canvas = image.canvas;
-        Camera cam = (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
-            ? canvas.worldCamera : null;
+        Camera cam = (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay) ? canvas.worldCamera : null;
         return RectTransformUtility.RectangleContainsScreenPoint(image.rectTransform, screenPoint, cam);
     }
 }

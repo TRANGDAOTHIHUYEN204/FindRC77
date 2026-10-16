@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnDifferentPoint : MonoBehaviour
 {
     [SerializeField] private FactoryManager factoryManager;
-    private Transform pairContainer; 
+    private Transform _pairContainer; 
     
     private readonly List<DifferentPair> pairs = new List<DifferentPair>();
     public IReadOnlyList<DifferentPair> Pairs => pairs;
@@ -19,7 +19,7 @@ public class SpawnDifferentPoint : MonoBehaviour
             DifferentPair pair = factoryManager.CreateDifferentPair();
             if (pair == null) continue;
 
-            pair.transform.SetParent(pairContainer != null ? pairContainer : transform, false);
+            pair.transform.SetParent(_pairContainer != null ? _pairContainer : transform, false);
             pair.Init(info, rootA, rootB);
             pairs.Add(pair);
         }
