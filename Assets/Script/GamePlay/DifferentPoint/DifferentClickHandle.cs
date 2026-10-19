@@ -8,7 +8,7 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private Camera worldCamera;
     [SerializeField] private StateGame stateGame;
-    [SerializeField] private SpawnChallengeNode spawnChallegeNode;
+    [SerializeField] private SpawnChallengeNode spawnChallengeNode;
     [SerializeField] private Sprite spriteChange;
     [SerializeField] private Camera uiCamera;
     [SerializeField] private HeartManager heartManager;
@@ -17,7 +17,6 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private AudioClip clickErrorSound;
     [SerializeField] private AudioClip loseGameSound;
     [SerializeField] private AudioClip clickSuccessSound;
-    
     public bool HandleClick(Vector2 screenPoint)
     {
         if (!stateGame.IsPlaying) return false;
@@ -33,7 +32,13 @@ public class DifferentClickHandler : MonoBehaviour
             if (hintPresenter.HintedPair == entry.Pair) hintPresenter.ClearHint();
             markPresenter.DrawPair(entry.Pair, entry.Mark);
             SoundManager.Instance.PlaySfx(clickSuccessSound);
-            spawnChallegeNode.ChangeNext(spriteChange);
+
+            Vector3 from = worldCamera.ScreenToWorldPoint(new Vector3(
+                screenPoint.x,
+                screenPoint.y,
+                spawnChallengeNode.transform.position.z - worldCamera.transform.position.z));
+
+            spawnChallengeNode.ChangeNext(spriteChange, from);
             return manager.IsComplete;
         }
 
