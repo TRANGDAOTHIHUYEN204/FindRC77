@@ -10,12 +10,12 @@ public class StarTrailEffect : MonoBehaviour
     [SerializeField] private float arcHeight = 0.8f;
     [SerializeField] private AnimationCurve ease = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
-    [SerializeField] private float startRadius = 0.5f;   
-    [SerializeField] private float endRadius = 0.02f;    
-    [SerializeField] private float startSizeMul = 1f;
-    [SerializeField] private float endSizeMul = 0.3f;
-    [SerializeField] private float startTrailWidth = 0.3f;
-    [SerializeField] private float endTrailWidth = 0.02f;
+    [SerializeField] private float startRadius = 0.05f;
+    [SerializeField] private float endRadius = 0f;
+    [SerializeField] private float startSizeMul = 5f;
+    [SerializeField] private float endSizeMul = 0.02f;
+    [SerializeField] private float startTrailWidth = 0.05f;
+    [SerializeField] private float endTrailWidth = 0.005f;
 
     private Coroutine _routine;
 
@@ -23,11 +23,26 @@ public class StarTrailEffect : MonoBehaviour
     {
         if (_routine != null) StopCoroutine(_routine);
 
+        if (trail != null)
+        {
+            trail.emitting = false;
+            trail.Clear();
+        }
+
         transform.position = from;
         ApplyConverge(0f);
 
-        if (trail != null) trail.Clear();
-        if (sparkle != null) sparkle.Play();
+        if (trail != null)
+        {
+            trail.Clear();
+            trail.emitting = true;
+        }
+
+        if (sparkle != null)
+        {
+            sparkle.Clear();
+            sparkle.Play();
+        }
 
         _routine = StartCoroutine(Fly(from, to, onArrived));
     }
