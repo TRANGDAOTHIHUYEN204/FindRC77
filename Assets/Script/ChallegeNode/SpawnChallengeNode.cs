@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SpawnChallegeNode : MonoBehaviour
+public class SpawnChallengeNode : MonoBehaviour
 {
     private int _countSpawn;
     private int _changedCount;

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 2
   countDifferent: 2
-  rawSprite: {fileID: 21300000, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
-  errorSprite: {fileID: 8573565815015891458, guid: b4d6e6783dee6db4db061f76889b6461, type: 3}
+  rawSprite: {fileID: 2389001477372362515, guid: dc6ffb9b99602764c9725fec495dabd7, type: 3}
+  errorSprite: {fileID: 8674786332206525945, guid: a2c7b90ba93f68a4a818c0dc32fbf9a5, type: 3}
   timeLimit: 240
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}

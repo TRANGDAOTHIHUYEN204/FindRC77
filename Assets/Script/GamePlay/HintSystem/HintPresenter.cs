@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HintPresenter : MonoBehaviour
 {
-    [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
-    [SerializeField] private MarkData hintMarkData;
-    private readonly List<MarkFound> _marks = new List<MarkFound>();
+    [SerializeField] private HintSpotlight spotlight;
 
     public DifferentPair HintedPair { get; private set; }
     public int CountHint => SaveGame.HintCount;
@@ -23,7 +20,6 @@ public class HintPresenter : MonoBehaviour
         SaveGame.ResetHint();
         OnHintChanged?.Invoke(CountHint);
     }
-
     public void ShowHint()
     {
         if (CountHint <= 0)
@@ -41,11 +37,9 @@ public class HintPresenter : MonoBehaviour
         if (entry == null) return;
 
         HintedPair = entry.Pair;
-        Draw(HintedPair.RootA);
-        Draw(HintedPair.RootB);
+        spotlight.Show(HintedPair);
         SetCount(CountHint - 1);
     }
-
     public void AddHint(int amount) => SetCount(CountHint + amount);
 
     private void SetCount(int value)
@@ -53,23 +47,9 @@ public class HintPresenter : MonoBehaviour
         SaveGame.HintCount = value;
         OnHintChanged?.Invoke(CountHint);
     }
-
-    private void Draw(RectTransform root)
-    {
-        MarkFound mark = factoryManager.Create();
-        if (mark == null) return;
-
-        HintedPair.GetWorldRect(root, out Vector2 center, out Vector2 size);
-        mark.Init(hintMarkData.ShapeMark, center, size,
-                  hintMarkData.LineWidth, hintMarkData.ColorLine, hintMarkData.Segments);
-        _marks.Add(mark);
-    }
-
     public void ClearHint()
     {
-        foreach (var m in _marks)
-            if (m != null) factoryManager.Release(m.gameObject);
-        _marks.Clear();
         HintedPair = null;
+        spotlight.Hide();
     }
 }

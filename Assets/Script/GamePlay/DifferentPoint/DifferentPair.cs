@@ -11,7 +11,8 @@ public class DifferentPair : MonoBehaviour
     public bool IsFound { get; private set; }
     public DifferentPoint PointA => pointA;
     public DifferentPoint PointB => pointB;
-
+    public Vector3 LocalPosition => _info.Position;
+    public Vector2 LocalSize => _info.Size;
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
         IsFound = false;
@@ -19,8 +20,19 @@ public class DifferentPair : MonoBehaviour
         _rootA = rootA as RectTransform;
         _rootB = rootB as RectTransform;
     }
+    public bool IsHit(Vector2 screenPoint, Camera cam)
+    {
+        RectTransform frameA = _rootA.parent as RectTransform;
+        RectTransform frameB = _rootB.parent as RectTransform;
 
-    public bool IsHit(Vector2 screenPoint, Camera cam) => Contains(_rootA, screenPoint, cam) || Contains(_rootB, screenPoint, cam);
+        if (RectTransformUtility.RectangleContainsScreenPoint(frameA, screenPoint, cam))
+            return Contains(_rootA, screenPoint, cam);
+
+        if (RectTransformUtility.RectangleContainsScreenPoint(frameB, screenPoint, cam))
+            return Contains(_rootB, screenPoint, cam);
+
+        return false;
+    }
 
     private bool Contains(RectTransform root, Vector2 screenPoint, Camera cam)
     {

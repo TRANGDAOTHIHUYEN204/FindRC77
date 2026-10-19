@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class FactoryManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class FactoryManager : MonoBehaviour
     [SerializeField] private MarkFound prefabMarkFound;
     [SerializeField] private ChallengeNode challengeNodePrefab;
     [SerializeField] private DifferentPair differentPairPrefab;
+    [SerializeField] private ErrorMark errorMark;
     private readonly PoolManager _pool = new PoolManager();
     [SerializeField] private HeartLives heartPrefab;
     
@@ -21,6 +23,10 @@ public class FactoryManager : MonoBehaviour
     public DifferentPair CreateDifferentPair()
     {
         return CreateObject(differentPairPrefab);
+    }
+    public ErrorMark CreateErrorManager()
+    {
+        return CreateObject(errorMark);
     }
 
     public HeartLives CreateHeart()

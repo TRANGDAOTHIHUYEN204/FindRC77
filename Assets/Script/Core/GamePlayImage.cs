@@ -10,10 +10,11 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private FactoryManager factoryManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
-    [SerializeField] private SpawnChallegeNode spawnChallegeNode;
+    [SerializeField] private SpawnChallengeNode spawnChallegeNode;
     [SerializeField] private HeartManager heartManager;
     private bool _isPlaying;
     [SerializeField] private HintPresenter hintPresenter;
+    [SerializeField] private AudioClip winSound;
     
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
     private void OnDisable() => levelManager.OnLevelLoaded -= Build;
@@ -26,7 +27,6 @@ public class GamePlayImage : MonoBehaviour
         heartManager.ResetLives(); 
         levelImageView.ShowLevel(level);
         pairManagerHolder.Build(level, levelImageView.RootA, levelImageView.RootB);
-        Debug.Log($"RootA = {levelImageView.RootA.name}, RootB = {levelImageView.RootB.name}");
         stateGame.Init(level.TimeLimit);
         spawnChallegeNode.Init(level.CountDifferent);
         _isPlaying = true;
@@ -44,8 +44,10 @@ public class GamePlayImage : MonoBehaviour
     private IEnumerator Win()
     {
         _isPlaying = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("Đã tìm đủ!");
+        SoundManager.Instance.PlaySfx(winSound);
         stateGame.WinGame(levelManager.TextWin);
+        
     }
 }

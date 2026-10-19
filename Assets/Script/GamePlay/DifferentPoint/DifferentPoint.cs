@@ -14,10 +14,7 @@ public class DifferentPoint : MonoBehaviour
 
         Vector3 parentScale = transform.parent != null ? transform.parent.lossyScale : Vector3.one;
         Vector3 rootScale = root.lossyScale;
-        transform.localScale = new Vector3(
-            rootScale.x / parentScale.x,
-            rootScale.y / parentScale.y,
-            1f);
+        transform.localScale = new Vector3(rootScale.x / parentScale.x, rootScale.y / parentScale.y, 1f);
 
         boxCollider.offset = Vector2.zero;
         boxCollider.size = data.Size;

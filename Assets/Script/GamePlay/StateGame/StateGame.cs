@@ -18,6 +18,8 @@ public class StateGame : MonoBehaviour
     public bool IsPlaying => State == GameState.Playing;
     [SerializeField] private TimeOutline outline;
     private int _lastShownSecond = -1;
+    [SerializeField] private AudioClip clickWarningSound;
+    private int _lastBeepSecond = -1;
     private void Awake()
     {
         Instance = this;
@@ -34,6 +36,7 @@ public class StateGame : MonoBehaviour
         if (outline) outline.SetFill(1f); 
         _lastShownSecond = -1;
         UpdateTimeText();
+        _lastBeepSecond = -1;
     }
 
     private void Update()
@@ -41,14 +44,24 @@ public class StateGame : MonoBehaviour
         if (State != GameState.Playing) return;
 
         TimeLeft -= Time.deltaTime;
+
+        int sec = Mathf.CeilToInt(TimeLeft);
+        if (sec <= 10 && sec > 0 && sec != _lastBeepSecond)
+        {
+            _lastBeepSecond = sec;
+            SoundManager.Instance.PlaySfx(clickWarningSound);
+        }
+
         if (TimeLeft <= 0f)
         {
             TimeLeft = 0f;
             LoseGame();
         }
+
         if (outline) outline.SetFill(TimeLeft / TimeLimit);
         UpdateTimeText();
     }
+    
     private void UpdateTimeText()
     {
         if (!currentTimeText) return;

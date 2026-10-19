@@ -5,7 +5,7 @@ public static class SaveGame
     private const string KeyLevel = "save_current_level";
     private const string KeyScore = "save_score";
     private const string KeyHint  = "save_hint_count";
-    private const int DefaultHint = 3;
+    private const int DefaultHint = 10;
 
     public static int CurrentLevel
     {
