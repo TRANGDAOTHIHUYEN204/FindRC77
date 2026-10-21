@@ -18,6 +18,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private MarkPresenter markPresenter;
+    
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
     private void OnDisable() => levelManager.OnLevelLoaded -= Build;
 
@@ -27,6 +28,7 @@ public class GamePlayImage : MonoBehaviour
         clickHandler.ResetLoseState();
         hintPresenter.ClearHint();      
         factoryManager.ReleaseAll();
+        heartManager.ReleaseHearts();
         heartManager.ResetLives(); 
         levelImageView.ShowLevel(level);
         pairManagerHolder.Build(level, levelImageView.RootA, levelImageView.RootB);

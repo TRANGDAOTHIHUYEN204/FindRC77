@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public event Action<LevelData> OnLevelLoaded;
     public string TextWin => _levelData.TextWin;
     
+    
     private void Start() => LoadLevel(SaveGame.CurrentLevel);
 
     public void LoadLevel(int index)
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
         _currentIndex = Mathf.Clamp(index, 0, levels.Length - 1);
         _levelData = levels[_currentIndex];
         SaveGame.CurrentLevel = _currentIndex;
+        
         OnLevelLoaded?.Invoke(_levelData);
     }
 

@@ -41,3 +41,4 @@ MonoBehaviour:
   - Position: {x: -9, y: -82.9, z: 0}
     Size: {x: 170, y: 170}
   textWin: 'Coffee date with the luckiest people alive: my squad.'
+  difficulty: 1

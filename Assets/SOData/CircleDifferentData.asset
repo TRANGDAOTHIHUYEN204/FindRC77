@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871348643906e7940b09b74a86fdb948, type: 3}
   m_Name: CircleDifferentData
   m_EditorClassIdentifier: Assembly-CSharp::CircleDifferentData
-  lineWidth: 0.08
+  lineWidth: 0.05
   colorLine: {r: 0.44034088, g: 1, b: 0.07075471, a: 1}
   segments: 50
   shapeMark: 0

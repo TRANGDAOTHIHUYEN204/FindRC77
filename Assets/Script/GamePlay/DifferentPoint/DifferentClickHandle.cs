@@ -69,7 +69,7 @@ public class DifferentClickHandler : MonoBehaviour
         yield return new WaitForSeconds(1f);
         stateGame.LoseGame();
         SoundManager.Instance.PlaySfx(loseGameSound);
-        }
+    }
     public void ResetLoseState()
     {
         _isLosing = false;

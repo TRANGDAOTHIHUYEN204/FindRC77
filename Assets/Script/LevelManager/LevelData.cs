@@ -1,6 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum DifficultyLevel
+{
+    Easy,
+    Normal,
+    Hard
+}
+
 [CreateAssetMenu(fileName = "LevelData", menuName = "Scriptable Objects/LevelData")]
 public class LevelData : ScriptableObject
 {
@@ -12,6 +19,8 @@ public class LevelData : ScriptableObject
     [SerializeField] private MarkData[] markData;
     [SerializeField] private List<DifferentPointInfo> differentPoints;
     [TextArea(3, 10)] [SerializeField] private string textWin;
+    [SerializeField] DifficultyLevel difficulty;
+    
     public int NumberLevel => numberLevel;
     public int CountDifferent => countDifferent;
     public Sprite RawSprite => rawSprite;
@@ -20,6 +29,8 @@ public class LevelData : ScriptableObject
     public MarkData[] MarkData => markData;
     public List<DifferentPointInfo> DifferentPoints => differentPoints;
     public string TextWin => textWin;
+    public DifficultyLevel Difficulty =>  difficulty;
+    
 #if UNITY_EDITOR
     public void SetDifferentPoints(List<DifferentPointInfo> points)
     {

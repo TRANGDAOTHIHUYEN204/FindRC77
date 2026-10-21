@@ -13,7 +13,7 @@ public class LoadingScreen : MonoBehaviour
     }
     private void Awake()
     {
-        SaveGame.Reset();
+        // SaveGame.Reset();
     }
     private IEnumerator HideAfterDelay()
     {

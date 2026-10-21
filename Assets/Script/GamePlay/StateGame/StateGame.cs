@@ -20,7 +20,10 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TimeOutline outline;
     private int _lastShownSecond = -1;
     [SerializeField] private AudioClip clickWarningSound;
-    private int _lastBeepSecond = -1; 
+    [SerializeField] private TextMeshProUGUI loseText ;
+    private int _lastBeepSecond = -1;
+    [SerializeField] private TextMeshProUGUI loseLevelText;
+    [SerializeField] private TextMeshProUGUI winLevelText;
     
     private void Awake()
     {
@@ -82,17 +85,7 @@ public class StateGame : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void ResumeWithBounce()
-    {
-        StartCoroutine(ResumeRoutine());
-    }
-
-    private IEnumerator ResumeRoutine()
-    {
-        yield return new WaitForSecondsRealtime(0.3f); 
-        StateGame.Instance.ResumeGame();
-    }
-    private void ResumeGame()
+    public void ResumeGame()
     {
         Debug.Log($"ResumeGame called, State = {State}");
         if (State != GameState.Paused) return;
@@ -108,14 +101,18 @@ public class StateGame : MonoBehaviour
         SetPanels(false, true, false);
         winText.text = textWin;
         Time.timeScale = 0f;
+        winLevelText.text = "LEVEL " + SaveGame.CurrentLevel.ToString();
     }
 
     public void LoseGame()
     {
+        string textLose = "Am I make the wrong choice?!";
         if (State != GameState.Playing) return;
         State = GameState.Lost;
         SetPanels(false, false, true);
+        loseText.text = textLose;
         Time.timeScale = 0f;
+        loseLevelText.text = "LEVEL " + SaveGame.CurrentLevel.ToString();
     }
 
     private void SetPanels(bool pause, bool win, bool lose)

@@ -41,3 +41,4 @@ MonoBehaviour:
   - Position: {x: -124.4, y: -99.5, z: 0}
     Size: {x: 94.8, y: 62.4}
   textWin: My grandpa is getting better today, i am so happy!
+  difficulty: 2
