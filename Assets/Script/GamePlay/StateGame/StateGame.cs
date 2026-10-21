@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public enum GameState { Playing, Paused, Won, Lost }
 
@@ -19,7 +20,8 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TimeOutline outline;
     private int _lastShownSecond = -1;
     [SerializeField] private AudioClip clickWarningSound;
-    private int _lastBeepSecond = -1;
+    private int _lastBeepSecond = -1; 
+    
     private void Awake()
     {
         Instance = this;
@@ -80,7 +82,17 @@ public class StateGame : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void ResumeGame()
+    public void ResumeWithBounce()
+    {
+        StartCoroutine(ResumeRoutine());
+    }
+
+    private IEnumerator ResumeRoutine()
+    {
+        yield return new WaitForSecondsRealtime(0.3f); 
+        StateGame.Instance.ResumeGame();
+    }
+    private void ResumeGame()
     {
         Debug.Log($"ResumeGame called, State = {State}");
         if (State != GameState.Paused) return;

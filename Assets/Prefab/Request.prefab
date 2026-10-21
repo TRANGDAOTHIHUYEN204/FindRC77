@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3631542501005461118}
   - component: {fileID: 6525438488148294034}
   - component: {fileID: 3444619334678531160}
+  - component: {fileID: -6283125869704052557}
   m_Layer: 0
   m_Name: Request
   m_TagString: Untagged
@@ -104,4 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17483ddf69eb7d42b2fafa9391e992c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChallengeNode
-  _spriteRenderer: {fileID: 6525438488148294034}
+  spriteRenderer: {fileID: 6525438488148294034}
+  bounceEffect: {fileID: -6283125869704052557}
+--- !u!114 &-6283125869704052557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400853131744119024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beafd28bae4ae2042b3bcf5115934322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BounceEffect
+  scaleAmount: 0.2
+  duration: 0.35

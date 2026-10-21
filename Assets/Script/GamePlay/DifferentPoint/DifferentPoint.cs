@@ -8,6 +8,7 @@ public class DifferentPoint : MonoBehaviour
     public Vector2 Center => boxCollider.bounds.center;
     public Vector2 Size   => boxCollider.bounds.size;
 
+
     public void Init(DifferentPointInfo data, Transform root)
     {
         transform.position = root.TransformPoint(data.Position); 
@@ -20,5 +21,16 @@ public class DifferentPoint : MonoBehaviour
         boxCollider.size = data.Size;
     }
 
-    public bool IsHit(Vector2 worldPoint) => boxCollider.OverlapPoint(worldPoint);
+    public float Radius => Mathf.Min(Size.x, Size.y) * 0.5f;
+
+    public bool IsHit(Vector2 worldPoint, ShapeMark shape)
+    {
+        Vector2 d = worldPoint - Center;
+
+        if (shape == ShapeMark.Rectangle)
+            return Mathf.Abs(d.x) <= Size.x * 0.5f && Mathf.Abs(d.y) <= Size.y * 0.5f;
+
+        float r = Mathf.Min(Size.x, Size.y) * 0.5f;        
+        return d.sqrMagnitude <= r * r;
+    }
 }

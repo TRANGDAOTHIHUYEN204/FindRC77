@@ -13,13 +13,31 @@ MonoBehaviour:
   m_Name: Level_02_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 2
-  countDifferent: 1
+  countDifferent: 10
   rawSprite: {fileID: -2846453280573468258, guid: a007521e42a9da345bd0dd5ef349d137, type: 3}
   errorSprite: {fileID: 9070357606743538728, guid: 607fb9c4a888ac74b88e51643748b88a, type: 3}
   timeLimit: 240
   markData:
   - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
   differentPoints:
-  - Position: {x: 357, y: 70, z: 0}
+  - Position: {x: 381.2, y: -53.6, z: 0}
+    Size: {x: 72.5, y: 47.7}
+  - Position: {x: 439.5, y: -129.1, z: 0}
+    Size: {x: 159.6, y: 87.6}
+  - Position: {x: 41.8, y: 161.4, z: 0}
+    Size: {x: 144.2, y: 154.5}
+  - Position: {x: 197.5, y: 84.1, z: 0}
+    Size: {x: 73.7, y: 93.1}
+  - Position: {x: -399.6, y: -94.2, z: 0}
+    Size: {x: 181.7, y: 114.8}
+  - Position: {x: -291.9, y: 213.3, z: 0}
+    Size: {x: 120, y: 120}
+  - Position: {x: -106, y: 273.8, z: 0}
     Size: {x: 100, y: 100}
+  - Position: {x: -338.6, y: 63.4, z: 0}
+    Size: {x: 163, y: 112.7}
+  - Position: {x: 48.8, y: -69.5, z: 0}
+    Size: {x: 220, y: 220}
+  - Position: {x: 404.2, y: 105.3, z: 0}
+    Size: {x: 217.5, y: 209.1}
   textWin: "Streamer or TikToker? I\u2019d dominate both."

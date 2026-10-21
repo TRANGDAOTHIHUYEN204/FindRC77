@@ -23,6 +23,6 @@ public class SettingManager : MonoBehaviour
     private void OnResumeGame()
     {
         Debug.Log("OnResumeGame");
-        StateGame.Instance.ResumeGame();
+        StateGame.Instance.ResumeWithBounce();
     }
 }

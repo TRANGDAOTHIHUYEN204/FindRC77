@@ -12,12 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
   m_Name: Level_05_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  numberLevel: 2
-  countDifferent: 2
+  numberLevel: 5
+  countDifferent: 10
   rawSprite: {fileID: 2389001477372362515, guid: dc6ffb9b99602764c9725fec495dabd7, type: 3}
   errorSprite: {fileID: 8674786332206525945, guid: a2c7b90ba93f68a4a818c0dc32fbf9a5, type: 3}
   timeLimit: 240
   markData:
-  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
-  differentPoints: []
+  - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
+  differentPoints:
+  - Position: {x: 230.3, y: 101.2, z: 0}
+    Size: {x: 41, y: 41}
+  - Position: {x: 123.6, y: 111.5, z: 0}
+    Size: {x: 60, y: 60}
+  - Position: {x: -357.8, y: 74.7, z: 0}
+    Size: {x: 60.5, y: 52.6}
+  - Position: {x: 116.2, y: 231.6, z: 0}
+    Size: {x: 98.6, y: 60.9}
+  - Position: {x: 271.9, y: 48.1, z: 0}
+    Size: {x: 53.3, y: 43}
+  - Position: {x: -239.8, y: 102.6, z: 0}
+    Size: {x: 71.9, y: 56.4}
+  - Position: {x: -303.6, y: 281, z: 0}
+    Size: {x: 271.5, y: 87.8}
+  - Position: {x: -401.8, y: 174, z: 0}
+    Size: {x: 104.7, y: 77.3}
+  - Position: {x: -252.8, y: 172.6, z: 0}
+    Size: {x: 79.1, y: 52.5}
+  - Position: {x: -124.4, y: -99.5, z: 0}
+    Size: {x: 94.8, y: 62.4}
   textWin: My grandpa is getting better today, i am so happy!

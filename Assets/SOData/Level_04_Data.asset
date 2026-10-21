@@ -12,12 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
   m_Name: Level_04_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  numberLevel: 2
-  countDifferent: 2
+  numberLevel: 4
+  countDifferent: 10
   rawSprite: {fileID: 5569473884242428888, guid: b6b35ff45914f814497f1505b516828d, type: 3}
   errorSprite: {fileID: -2859260956764192035, guid: be232003742be35428b7eb15a394115b, type: 3}
   timeLimit: 240
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
-  differentPoints: []
+  differentPoints:
+  - Position: {x: 38.7, y: 54.4, z: 0}
+    Size: {x: 67.4, y: 68}
+  - Position: {x: 286.4, y: -114.9, z: 0}
+    Size: {x: 35, y: 35}
+  - Position: {x: 419.6, y: -120.9, z: 0}
+    Size: {x: 50, y: 50}
+  - Position: {x: -115.3, y: 115.6, z: 0}
+    Size: {x: 50, y: 50}
+  - Position: {x: -317.5, y: 236.5, z: 0}
+    Size: {x: 50, y: 50}
+  - Position: {x: -106, y: 225.6, z: 0}
+    Size: {x: 90, y: 90}
+  - Position: {x: 274.7, y: 104.4, z: 0}
+    Size: {x: 150, y: 150}
+  - Position: {x: 382.4, y: 239.7, z: 0}
+    Size: {x: 90, y: 90}
+  - Position: {x: -267.8, y: -63.6, z: 0}
+    Size: {x: 60, y: 60}
+  - Position: {x: 311.1, y: -237.9, z: 0}
+    Size: {x: 150, y: 150}
   textWin: Capys or crocs? Giving the kids a VIP zoo day.

@@ -51,7 +51,9 @@ public static class LineDrawUtil
             while (t < 1f)
             {
                 t += Time.unscaledDeltaTime / duration;
-                float progress = Mathf.Clamp01(t) * segCount;
+                float normalizedTime = Mathf.Clamp01(t);
+                float easedTime = Mathf.Sin(normalizedTime * Mathf.PI * 0.5f);
+                float progress = easedTime * segCount;
                 int full = Mathf.Min(Mathf.FloorToInt(progress), segCount);
                 float partial = progress - full;
                 bool hasPartial = full < segCount;

@@ -21,18 +21,27 @@ public class DifferentPairManager
             if (marks != null && marks.Length > 0)
                 mark = marks[Mathf.Min(i, marks.Length - 1)];
 
+            if (mark != null) pairs[i].SetShape(mark.ShapeMark);
             entries.Add(new Entry { Pair = pairs[i], Mark = mark });
         }
     }
-    
-    public Entry FindRemaining(Vector2 screenPoint, Camera cam)
+    private Entry FindOwner(Vector2 screenPoint, Camera cam)
     {
         for (int i = 0; i < entries.Count; i++)
-        {
-            Entry e = entries[i];
-            if (!e.Pair.IsFound && e.Pair.IsHit(screenPoint, cam)) return e;
-        }
+            if (entries[i].Pair.ContainsPoint(screenPoint, cam)) return entries[i];
         return null;
+    }
+
+    public Entry FindRemaining(Vector2 screenPoint, Camera cam)
+    {
+        Entry owner = FindOwner(screenPoint, cam);
+        return (owner != null && !owner.Pair.IsFound) ? owner : null;
+    }
+
+    public bool IsInFoundArea(Vector2 screenPoint, Camera cam)
+    {
+        Entry owner = FindOwner(screenPoint, cam);
+        return owner != null && owner.Pair.IsFound;
     }
     
     public bool MarkFound(Entry entry)
@@ -42,15 +51,6 @@ public class DifferentPairManager
         return true;
     }
     
-    public bool IsInFoundArea(Vector2 screenPoint, Camera cam)
-    {
-        for (int i = 0; i < entries.Count; i++)
-        {
-            Entry e = entries[i];
-            if (e.Pair.IsFound && e.Pair.IsHit(screenPoint, cam)) return true;
-        }
-        return false;
-    }
 
     public Entry GetHintEntry()
     {

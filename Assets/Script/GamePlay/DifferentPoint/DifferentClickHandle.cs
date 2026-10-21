@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Char.Haptic;
+using Char.Haptic;
+using MoreMountains.NiceVibrations;   
 
 public class DifferentClickHandler : MonoBehaviour
 {
@@ -17,8 +20,11 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private AudioClip clickErrorSound;
     [SerializeField] private AudioClip loseGameSound;
     [SerializeField] private AudioClip clickSuccessSound;
+    private bool _isLosing = false;
+    
     public bool HandleClick(Vector2 screenPoint)
     {
+        if (_isLosing) return false;
         if (!stateGame.IsPlaying) return false;
         if (!levelImageView.IsInsideImages(screenPoint)) return false;
 
@@ -31,12 +37,9 @@ public class DifferentClickHandler : MonoBehaviour
             if (!manager.MarkFound(entry)) return false;
             if (hintPresenter.HintedPair == entry.Pair) hintPresenter.ClearHint();
             markPresenter.DrawPair(entry.Pair, entry.Mark);
+            Haptics.Light();
             SoundManager.Instance.PlaySfx(clickSuccessSound);
-
-            Vector3 from = worldCamera.ScreenToWorldPoint(new Vector3(
-                screenPoint.x,
-                screenPoint.y,
-                spawnChallengeNode.transform.position.z - worldCamera.transform.position.z));
+            Vector3 from = worldCamera.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, spawnChallengeNode.transform.position.z - worldCamera.transform.position.z));
 
             spawnChallengeNode.ChangeNext(spriteChange, from);
             return manager.IsComplete;
@@ -49,16 +52,26 @@ public class DifferentClickHandler : MonoBehaviour
         bool outOfLives = heartManager.SubstractLives();
         if (outOfLives)
         {
+            _isLosing = true;
             hintPresenter.ClearHint();
+            Haptics.Play(HapticTypes.Failure);  
             StartCoroutine(LoseGame());
+        }
+        else
+        {
+            Haptics.Heavy();                     
         }
         return false;
     }
 
     private IEnumerator LoseGame()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         stateGame.LoseGame();
         SoundManager.Instance.PlaySfx(loseGameSound);
+        }
+    public void ResetLoseState()
+    {
+        _isLosing = false;
     }
 }

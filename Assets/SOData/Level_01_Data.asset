@@ -13,27 +13,31 @@ MonoBehaviour:
   m_Name: Level_01_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 1
-  countDifferent: 8
+  countDifferent: 10
   rawSprite: {fileID: 774992141187699822, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
   errorSprite: {fileID: 8573565815015891458, guid: b4d6e6783dee6db4db061f76889b6461, type: 3}
   timeLimit: 240
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
-  - Position: {x: -370, y: -156.94, z: 0}
-    Size: {x: 50, y: 69}
-  - Position: {x: -410, y: 57, z: 0}
-    Size: {x: 145.5, y: 109}
-  - Position: {x: -240, y: 113, z: 0}
-    Size: {x: 150, y: 150}
-  - Position: {x: -37, y: 282, z: 0}
-    Size: {x: 70, y: 70}
-  - Position: {x: 8, y: 36, z: 0}
-    Size: {x: 70, y: 70}
-  - Position: {x: 159, y: -262, z: 0}
-    Size: {x: 70, y: 70}
-  - Position: {x: 359, y: 63, z: 0}
-    Size: {x: 120, y: 120}
-  - Position: {x: 452, y: -197, z: 0}
-    Size: {x: 100, y: 100}
+  - Position: {x: -454.6, y: -79.3, z: 0}
+    Size: {x: 69, y: 69}
+  - Position: {x: 256.7, y: -89.1, z: 0}
+    Size: {x: 80, y: 80}
+  - Position: {x: -81.6, y: 300.8, z: 0}
+    Size: {x: 45, y: 45}
+  - Position: {x: -371.4, y: -30.2, z: 0}
+    Size: {x: 82, y: 82}
+  - Position: {x: -211.3, y: -212.5, z: 0}
+    Size: {x: 90, y: 90}
+  - Position: {x: 29.3, y: 61.8, z: 0}
+    Size: {x: 110, y: 110}
+  - Position: {x: 66.6, y: -210.6, z: 0}
+    Size: {x: 200, y: 200}
+  - Position: {x: 442.7, y: -59.4, z: 0}
+    Size: {x: 134, y: 134}
+  - Position: {x: -345.5, y: 163.1, z: 0}
+    Size: {x: 185, y: 185}
+  - Position: {x: 420.8, y: 104.7, z: 0}
+    Size: {x: 140, y: 140}
   textWin: Bikini or casual? Hot in both anyway.

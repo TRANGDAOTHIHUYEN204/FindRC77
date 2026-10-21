@@ -12,12 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
   m_Name: Level_03_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  numberLevel: 2
-  countDifferent: 2
+  numberLevel: 3
+  countDifferent: 10
   rawSprite: {fileID: 3301243711951162130, guid: 092a491809753e74fb2f805f7b73225e, type: 3}
   errorSprite: {fileID: -7567243632706297476, guid: 6f47dea9c0c211d41a885dbe350ec29b, type: 3}
   timeLimit: 240
   markData:
   - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
-  differentPoints: []
+  differentPoints:
+  - Position: {x: 414.3, y: -90.8, z: 0}
+    Size: {x: 40, y: 40}
+  - Position: {x: 27.4, y: 35.6, z: 0}
+    Size: {x: 40, y: 40}
+  - Position: {x: -294.8, y: 215.5, z: 0}
+    Size: {x: 55, y: 55}
+  - Position: {x: -162.6, y: 57.1, z: 0}
+    Size: {x: 70, y: 70}
+  - Position: {x: -446.3, y: -173.7, z: 0}
+    Size: {x: 60, y: 60}
+  - Position: {x: 295.7, y: 278.5, z: 0}
+    Size: {x: 90, y: 90}
+  - Position: {x: 6.7, y: 151, z: 0}
+    Size: {x: 90, y: 90}
+  - Position: {x: -62.5, y: -218.8, z: 0}
+    Size: {x: 80, y: 80}
+  - Position: {x: -405.9, y: 262.5, z: 0}
+    Size: {x: 37, y: 37}
+  - Position: {x: -9, y: -82.9, z: 0}
+    Size: {x: 170, y: 170}
   textWin: 'Coffee date with the luckiest people alive: my squad.'

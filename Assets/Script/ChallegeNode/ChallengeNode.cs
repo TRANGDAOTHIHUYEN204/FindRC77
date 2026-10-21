@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class ChallengeNode : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private BounceEffect bounceEffect;
     public void Init(Sprite sprite)
     {
         ChangeSprite(sprite);
 
     }
-
+    public void PlayWinBounce()
+    {
+        bounceEffect.Play();
+    }
     public void ChangeSprite(Sprite sprite)
     {
-        _spriteRenderer.sprite = sprite;
+        spriteRenderer.sprite = sprite;
     }
 }

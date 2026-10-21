@@ -145,4 +145,19 @@ public class SpawnChallengeNode : MonoBehaviour
 
         nodes.Clear();
     }
+    public void PlayWinBounce(float stagger = 0.05f)
+    {
+        StartCoroutine(WinBounceRoutine(stagger));
+    }
+
+    private IEnumerator WinBounceRoutine(float stagger)
+    {
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            if (nodes[i] != null)
+                nodes[i].PlayWinBounce();
+            if (stagger > 0f)
+                yield return new WaitForSeconds(stagger);
+        }
+    }
 }

@@ -6,7 +6,7 @@ public class MarkCircleBehaviour : IDrawShape
     private readonly LineRenderer _lineRenderer;
     private LineRenderer _outline;
 
-    private const float Padding = 1.15f;       
+    private const float Padding = 1f;       
     private const float OutlineThickness = 0.02f; 
 
     public MarkCircleBehaviour(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
@@ -24,7 +24,7 @@ public class MarkCircleBehaviour : IDrawShape
         SetupOutline(lineWidth);
         
         segments = Mathf.Max(24, segments);
-        float radius = Mathf.Max(size.x, size.y) * 0.5f * Padding + lineWidth * 0.5f;
+        float radius = size.x * 0.5f + lineWidth * 0.5f;
 
         Vector3[] pts = new Vector3[segments];
         for (int i = 0; i < segments; i++)

@@ -6,7 +6,7 @@ public class MarkRectangleBehaviour : IDrawShape
     private readonly LineRenderer _lineRenderer;
     private LineRenderer _outline;
 
-    private const float Padding = 1.15f;
+    private const float Padding = 1f;
     private const float OutlineThickness = 0.02f;
 
     public MarkRectangleBehaviour(LineRenderer lineRenderer)

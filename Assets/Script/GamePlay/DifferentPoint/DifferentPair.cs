@@ -11,39 +11,50 @@ public class DifferentPair : MonoBehaviour
     public bool IsFound { get; private set; }
     public DifferentPoint PointA => pointA;
     public DifferentPoint PointB => pointB;
-    public Vector3 LocalPosition => _info.Position;
-    public Vector2 LocalSize => _info.Size;
+    public RectTransform RootA => _rootA;
+    public RectTransform RootB => _rootB;
+    private ShapeMark _shape;
+    public void SetShape(ShapeMark shape) => _shape = shape;
+    public ShapeMark Shape => _shape;
+
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
         IsFound = false;
         _info = data;
         _rootA = rootA as RectTransform;
         _rootB = rootB as RectTransform;
+
+        pointA.Init(data, rootA);
+        pointB.Init(data, rootB);
     }
+
     public bool IsHit(Vector2 screenPoint, Camera cam)
-    {
-        RectTransform frameA = _rootA.parent as RectTransform;
-        RectTransform frameB = _rootB.parent as RectTransform;
+        => !IsFound && ContainsPoint(screenPoint, cam);
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(frameA, screenPoint, cam))
-            return Contains(_rootA, screenPoint, cam);
+    public bool ContainsPoint(Vector2 screenPoint, Camera cam)
+        => HitRoot(_rootA, screenPoint, cam) || HitRoot(_rootB, screenPoint, cam);
 
-        if (RectTransformUtility.RectangleContainsScreenPoint(frameB, screenPoint, cam))
-            return Contains(_rootB, screenPoint, cam);
-
-        return false;
-    }
-
-    private bool Contains(RectTransform root, Vector2 screenPoint, Camera cam)
+    private bool HitRoot(RectTransform root, Vector2 screenPoint, Camera cam)
     {
         if (root == null) return false;
-        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screenPoint, cam, out Vector2 local))
+
+        var frame = root.parent as RectTransform;
+        if (!RectTransformUtility.RectangleContainsScreenPoint(frame, screenPoint, cam))
             return false;
 
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screenPoint, cam, out Vector2 local))
+            return false;
         Vector2 d = local - (Vector2)_info.Position;
-        return Mathf.Abs(d.x) <= _info.Size.x * 0.5f &&
-               Mathf.Abs(d.y) <= _info.Size.y * 0.5f;
+
+        if (_shape == ShapeMark.Rectangle)
+            return Mathf.Abs(d.x) <= _info.Size.x * 0.5f &&
+                   Mathf.Abs(d.y) <= _info.Size.y * 0.5f;
+
+        float r = Mathf.Min(_info.Size.x, _info.Size.y) * 0.5f;
+        return d.sqrMagnitude <= r * r;
     }
+
+    
 
     public bool MarkFound()
     {
@@ -51,21 +62,23 @@ public class DifferentPair : MonoBehaviour
         IsFound = true;
         return true;
     }
+
     public void GetWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
     {
-        Vector3 c = root.TransformPoint(new Vector3(_info.Position.x, _info.Position.y, 0f));
+        center = root.TransformPoint(_info.Position);
         Vector3 s = root.TransformVector(new Vector3(_info.Size.x, _info.Size.y, 0f));
-        center = c;
         size = new Vector2(Mathf.Abs(s.x), Mathf.Abs(s.y));
     }
 
-    public RectTransform RootA => _rootA;
-    public RectTransform RootB => _rootB;
-    public void GetWorldRect(RectTransform root, out Vector2 center, out Vector2 size)
+    public void GetShapeWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
     {
-        Vector3 c = root.TransformPoint(new Vector3(_info.Position.x, _info.Position.y, 0f));
-        Vector3 s = root.TransformVector(new Vector3(_info.Size.x, _info.Size.y, 0f));
-        center = c;
-        size = new Vector2(Mathf.Abs(s.x), Mathf.Abs(s.y));
+        GetWorldRect(root, out center, out Vector2 boxSize);
+        if (_shape == ShapeMark.Rectangle)
+            size = boxSize;
+        else
+        {
+            float d = Mathf.Min(boxSize.x, boxSize.y);
+            size = new Vector2(d, d);
+        }
     }
 }

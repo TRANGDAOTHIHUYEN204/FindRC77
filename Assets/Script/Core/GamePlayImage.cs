@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using Char.Haptic;
+using MoreMountains.NiceVibrations;   
 
 public class GamePlayImage : MonoBehaviour
 {
@@ -15,13 +17,14 @@ public class GamePlayImage : MonoBehaviour
     private bool _isPlaying;
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private AudioClip winSound;
-    
+    [SerializeField] private MarkPresenter markPresenter;
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
     private void OnDisable() => levelManager.OnLevelLoaded -= Build;
 
     private void Build(LevelData level)
     {
         _isPlaying = false;
+        clickHandler.ResetLoseState();
         hintPresenter.ClearHint();      
         factoryManager.ReleaseAll();
         heartManager.ResetLives(); 
@@ -44,10 +47,14 @@ public class GamePlayImage : MonoBehaviour
     private IEnumerator Win()
     {
         _isPlaying = false;
-        yield return new WaitForSeconds(2f);
-        Debug.Log("Đã tìm đủ!");
+        
+        yield return new WaitForSeconds(1f);
+        Haptics.Play(HapticTypes.Success);
+        markPresenter.PlayWinBounce();
+        spawnChallegeNode.PlayWinBounce();
+        yield return new WaitForSeconds(1f);
+
         SoundManager.Instance.PlaySfx(winSound);
         stateGame.WinGame(levelManager.TextWin);
-        
     }
 }
