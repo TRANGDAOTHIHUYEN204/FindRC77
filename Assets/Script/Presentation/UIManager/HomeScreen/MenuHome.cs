@@ -9,11 +9,11 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private GameObject settingPanel;
     private void Awake()
     {
-        /*
+        
         PendingReward.Clear();
         Wallets.Coin.Reset();
         SaveGame.Reset();
-        */
+        
     }
 
 

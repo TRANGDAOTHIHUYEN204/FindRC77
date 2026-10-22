@@ -648,8 +648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 363.4}
-  m_SizeDelta: {x: 0, y: 726.8}
+  m_AnchoredPosition: {x: 0, y: 376}
+  m_SizeDelta: {x: 0, y: 726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &158786293
 MonoBehaviour:
@@ -1429,8 +1429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.6}
-  m_SizeDelta: {x: 0, y: 725.6}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &412785926
 CanvasRenderer:
@@ -3089,8 +3089,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -383.5}
-  m_SizeDelta: {x: 0, y: 730.9}
+  m_AnchoredPosition: {x: 0, y: -376}
+  m_SizeDelta: {x: 0, y: 726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956188786
 MonoBehaviour:
@@ -3136,6 +3136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MarkPresenter
   factoryManager: {fileID: 987585498}
+  visualRatio: 0.5
+  smallThreshold: 0.05
+  smallLineMul: 0.7
 --- !u!4 &962908399
 Transform:
   m_ObjectHideFlags: 0
@@ -5030,8 +5033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.57501984}
-  m_SizeDelta: {x: 0, y: 726.35}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1410610194
 GameObject:
@@ -5589,7 +5592,7 @@ MonoBehaviour:
   hintPresenter: {fileID: 1301881755}
   errorSpawnManager: {fileID: 818946508}
   clickErrorSound: {fileID: 8300000, guid: 1a876cb5adc90a546832f99b734c575e, type: 3}
-  loseGameSound: {fileID: 8300000, guid: 6a9052a95c567f94eb813109f3f8f7e2, type: 3}
+  loseGameSound: {fileID: 8300000, guid: 2e7a68f44bc15b04786607f4e4ac6b96, type: 3}
   clickSuccessSound: {fileID: 8300000, guid: 87f61c98b5aa45948af20835f99add98, type: 3}
 --- !u!4 &1551937417
 Transform:

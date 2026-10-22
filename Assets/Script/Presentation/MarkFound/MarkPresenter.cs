@@ -3,15 +3,20 @@ using UnityEngine;
 public class MarkPresenter : MonoBehaviour
 {
     [SerializeField] private FactoryManager factoryManager;
+
+    [SerializeField, Range(0.1f, 1f)] private float visualRatio = 0.5f;
+    
+    [SerializeField] private float smallThreshold = 0.05f;
+    [SerializeField] private float smallLineMul = 0.7f;
+
     private readonly System.Collections.Generic.List<MarkFound> _marks = new();
-    private static readonly Vector3[] _corners = new Vector3[4];
 
     public void DrawPair(DifferentPair pair, MarkData data)
     {
-        if (data == null) 
-        { 
-            Debug.LogError("MarkData null", this); 
-            return; 
+        if (data == null)
+        {
+            Debug.LogError("MarkData null", this);
+            return;
         }
 
         DrawMark(pair, pair.RootA, data);
@@ -24,21 +29,18 @@ public class MarkPresenter : MonoBehaviour
         if (mark == null) return;
         _marks.Add(mark);
 
+
         pair.GetShapeWorldRect(root, out Vector3 center, out Vector2 size);
 
-        float baseWidth = data.LineWidth;
-        
-        float shapeSize = Mathf.Min(size.x, size.y);
-        float referenceSize = 1f;
-        
-        float sizeFactor = shapeSize / referenceSize;
-        float targetWidth = baseWidth * sizeFactor;
-        float minWidth = baseWidth * 0.85f;
-        float maxWidth = baseWidth * 1.105f;
 
-        float lw = Mathf.Clamp(targetWidth, minWidth, maxWidth);
-        
-        Vector2 pathSize = new Vector2(Mathf.Max(size.x - lw, 0.01f), Mathf.Max(size.y - lw, 0.01f));
+        float shapeSize = Mathf.Min(size.x, size.y) * visualRatio;
+
+        float imageWidth = root.rect.width * root.lossyScale.x;
+        bool isSmall = shapeSize / imageWidth <= smallThreshold;
+        float lw = data.LineWidth * (isSmall ? smallLineMul : 1f);
+
+        float path = Mathf.Max(shapeSize - lw, 0.01f);
+        Vector2 pathSize = new Vector2(path, path);  
 
         Transform t = mark.transform;
         t.SetParent(root, false);
@@ -52,10 +54,9 @@ public class MarkPresenter : MonoBehaviour
         int order = (root == pair.RootA) ? 20 : 30;
         FrameMaskUtil.ApplyMask(frame, mark, order);
     }
-    public void ClearMarks()
-    {
-        _marks.Clear();
-    }
+
+    public void ClearMarks() => _marks.Clear();
+
     public void PlayWinBounce()
     {
         for (int i = 0; i < _marks.Count; i++)

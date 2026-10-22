@@ -24,20 +24,21 @@ MonoBehaviour:
     Size: {x: 69, y: 69}
   - Position: {x: 256.7, y: -89.1, z: 0}
     Size: {x: 80, y: 80}
-  - Position: {x: -81.6, y: 300.8, z: 0}
-    Size: {x: 45, y: 45}
-  - Position: {x: -371.4, y: -30.2, z: 0}
-    Size: {x: 82, y: 82}
-  - Position: {x: -211.3, y: -212.5, z: 0}
+  - Position: {x: -84.7, y: 296.4, z: 0}
+    Size: {x: 59.8, y: 57.3}
+  - Position: {x: -258.4, y: -69, z: 0}
+    Size: {x: 271.4, y: 183.6}
+  - Position: {x: -202.5, y: -217.8, z: 0}
     Size: {x: 90, y: 90}
-  - Position: {x: 29.3, y: 61.8, z: 0}
-    Size: {x: 110, y: 110}
-  - Position: {x: 66.6, y: -210.6, z: 0}
-    Size: {x: 200, y: 200}
-  - Position: {x: 442.7, y: -59.4, z: 0}
-    Size: {x: 134, y: 134}
-  - Position: {x: -345.5, y: 163.1, z: 0}
-    Size: {x: 185, y: 185}
-  - Position: {x: 420.8, y: 104.7, z: 0}
-    Size: {x: 140, y: 140}
+  - Position: {x: 25.7, y: 58.7, z: 0}
+    Size: {x: 144.8, y: 203.9}
+  - Position: {x: 70.1, y: -234.8, z: 0}
+    Size: {x: 224.6, y: 98.4}
+  - Position: {x: 440, y: -47.7, z: 0}
+    Size: {x: 163.8, y: 117.7}
+  - Position: {x: -347.6, y: 154.9, z: 0}
+    Size: {x: 308.6, y: 263.8}
+  - Position: {x: 414.3, y: 95.6, z: 0}
+    Size: {x: 207.4, y: 158.2}
   textWin: Bikini or casual? Hot in both anyway.
+  difficulty: 0
