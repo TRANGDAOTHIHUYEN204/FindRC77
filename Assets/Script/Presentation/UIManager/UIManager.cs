@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,5 +34,15 @@ public class UIManager : MonoBehaviour
     public void Hint()
     {
         hintPresenter.ShowHint();
+    }
+
+    public void ReturnHomeScene(string sceneName)
+    {
+        StartCoroutine(ReturnHome(sceneName));
+    }
+    private IEnumerator ReturnHome(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        SceneManager.LoadScene(sceneName);
     }
 }

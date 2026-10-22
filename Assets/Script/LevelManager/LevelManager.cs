@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     public int CurrentIndex => _currentIndex;
     public event Action<LevelData> OnLevelLoaded;
     public string TextWin => _levelData.TextWin;
-    
+    private bool _completed; 
     
     private void Start() => LoadLevel(SaveGame.CurrentLevel);
 
@@ -25,15 +25,18 @@ public class LevelManager : MonoBehaviour
         if (levels == null || levels.Length == 0) return;
         _currentIndex = Mathf.Clamp(index, 0, levels.Length - 1);
         _levelData = levels[_currentIndex];
-        SaveGame.CurrentLevel = _currentIndex;
-        
-        OnLevelLoaded?.Invoke(_levelData);
+        _completed = false;
+
+        OnLevelLoaded?.Invoke(_levelData);   
     }
 
-    public void LoadNextLevel()
+    public void CompleteCurrentLevel()
     {
-        if (HasNextLevel) LoadLevel(_currentIndex + 1);
+        if (_completed) return;
+        _completed = true;
+        SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1);
     }
 
-    public void ReloadLevel() => LoadLevel(_currentIndex);
+    public void LoadNextLevel() => LoadLevel(SaveGame.CurrentLevel);
+    public void ReloadLevel()   => LoadLevel(_currentIndex);  
 }

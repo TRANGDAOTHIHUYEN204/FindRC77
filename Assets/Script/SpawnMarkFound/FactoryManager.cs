@@ -33,6 +33,8 @@ public class FactoryManager : MonoBehaviour
     {
         return CreateObject(heartPrefab);
     }
+    
+    
     private T CreateObject<T>(T prefab) where T : Component
     {
         if (prefab == null) return null;

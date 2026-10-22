@@ -101,7 +101,7 @@ public class StateGame : MonoBehaviour
         SetPanels(false, true, false);
         winText.text = textWin;
         Time.timeScale = 0f;
-        winLevelText.text = "LEVEL " + SaveGame.CurrentLevel.ToString();
+        winLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
     }
 
     public void LoseGame()
@@ -112,14 +112,37 @@ public class StateGame : MonoBehaviour
         SetPanels(false, false, true);
         loseText.text = textLose;
         Time.timeScale = 0f;
-        loseLevelText.text = "LEVEL " + SaveGame.CurrentLevel.ToString();
+        loseLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
     }
 
     private void SetPanels(bool pause, bool win, bool lose)
     {
-        if (pausePanel) pausePanel.SetActive(pause);
-        if (winPanel) winPanel.SetActive(win);
-        if (losePanel) losePanel.SetActive(lose);
+        SetPanel(pausePanel, pause);
+        SetPanel(winPanel, win);
+        SetPanel(losePanel, lose);
+    }
+    
+    private void SetPanel(GameObject panel, bool show)
+    {
+        if (!panel) return;
+
+        var anim = panel.GetComponentInChildren<PanelAnimation>(true);
+        if (anim == null)
+        {
+            panel.SetActive(show);
+            return;
+        }
+
+        if (show)
+        {
+            panel.SetActive(true);   
+            anim.Show(); 
+        }
+        else
+        {
+            if (!panel.activeSelf) return;
+            anim.Close(() => panel.SetActive(false)); 
+        }
     }
 
     private void OnApplicationPause(bool paused)

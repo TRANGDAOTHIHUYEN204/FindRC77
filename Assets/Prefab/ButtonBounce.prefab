@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 9000205345082470191}
   - component: {fileID: 6072361870124886094}
   - component: {fileID: 9075280945167112297}
+  - component: {fileID: 405628669263212453}
   m_Layer: 5
   m_Name: ButtonBounce
   m_TagString: Untagged
@@ -296,3 +297,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
   button: {fileID: 9000205345082470191}
   animator: {fileID: 6072361870124886094}
+--- !u!114 &405628669263212453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524674995441771686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b66b74857967e042b61fac1d61c7ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonSound
+  soundButton: {fileID: 8300000, guid: 8c5f01645b2329a4d81552a75b37aa4a, type: 3}

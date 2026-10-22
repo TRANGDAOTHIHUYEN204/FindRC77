@@ -18,15 +18,17 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private MarkPresenter markPresenter;
+    private LevelData _currentLevel;
     
     private void OnEnable()  => levelManager.OnLevelLoaded += Build;
     private void OnDisable() => levelManager.OnLevelLoaded -= Build;
 
     private void Build(LevelData level)
     {
+        _currentLevel =  level;
         _isPlaying = false;
         clickHandler.ResetLoseState();
-        hintPresenter.ClearHint();      
+        hintPresenter.ResetForLevel();      
         factoryManager.ReleaseAll();
         heartManager.ReleaseHearts();
         heartManager.ResetLives(); 
@@ -35,6 +37,7 @@ public class GamePlayImage : MonoBehaviour
         stateGame.Init(level.TimeLimit);
         spawnChallegeNode.Init(level.CountDifferent);
         _isPlaying = true;
+        
     }
 
     private void Update()
@@ -50,6 +53,10 @@ public class GamePlayImage : MonoBehaviour
     {
         _isPlaying = false;
         
+        int reward = CoinReward.Get(_currentLevel.Difficulty);
+        PendingReward.Add(reward);       
+        levelManager.CompleteCurrentLevel(); 
+
         yield return new WaitForSeconds(1f);
         Haptics.Play(HapticTypes.Success);
         markPresenter.PlayWinBounce();
