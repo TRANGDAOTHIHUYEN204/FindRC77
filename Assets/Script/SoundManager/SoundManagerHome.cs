@@ -8,12 +8,17 @@ public class SoundManagerHome : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
     [Range(0f, 1f)] [SerializeField] private float sfxVolume = 1f;
 
-    private bool _musicOn = true;
-    private bool _sfxOn = true;
+    private bool _musicOn;
+    private bool _sfxOn;
+
+    public bool MusicOn => _musicOn;
+    public bool SfxOn => _sfxOn;
 
     void Awake()
     {
         Instance = this;
+        _musicOn = SaveGame.MusicOn;
+        _sfxOn = SaveGame.SfxOn;
     }
 
     void Start()
@@ -24,29 +29,22 @@ public class SoundManagerHome : MonoBehaviour
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
 
-        Refresh();
+        soundBackGround.mute = !_musicOn;
+        soundBackGround.Play();
     }
 
     public void ToggleMusic()
     {
         _musicOn = !_musicOn;
-        Refresh();
+        SaveGame.MusicOn = _musicOn;
+        soundBackGround.mute = !_musicOn;
     }
 
-    private void Refresh()
+    public void ToggleSfx()
     {
-        if (_musicOn)
-        {
-            if (!soundBackGround.isPlaying)
-                soundBackGround.Play();
-        }
-        else
-        {
-            soundBackGround.Stop();
-        }
+        _sfxOn = !_sfxOn;
+        SaveGame.SfxOn = _sfxOn;
     }
-
-    public void ToggleSfx() => _sfxOn = !_sfxOn;
 
     public void PlaySfx(AudioClip clip, float volume = 1f)
     {

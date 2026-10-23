@@ -3,21 +3,38 @@ using UnityEngine;
 public static class SaveGame
 {
     private const string KeyLevel = "save_current_level";
-    private const int DefaultHint = 10;
+    private const string KeyMusic = "save_music_on";
+    private const string KeySfx = "save_sfx_on";
+    private const string KeyTutorial = "isCompletedTutorial";
 
     public static int CurrentLevel
     {
         get => PlayerPrefs.GetInt(KeyLevel, 0);
         set { PlayerPrefs.SetInt(KeyLevel, Mathf.Max(0, value)); PlayerPrefs.Save(); }
     }
-    
-    
+
+    public static bool MusicOn
+    {
+        get => PlayerPrefs.GetInt(KeyMusic, 1) == 1;
+        set { PlayerPrefs.SetInt(KeyMusic, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static bool SfxOn
+    {
+        get => PlayerPrefs.GetInt(KeySfx, 1) == 1;
+        set { PlayerPrefs.SetInt(KeySfx, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
 
     public static void Save() => PlayerPrefs.Save();
-    
+
     public static void Reset()
     {
         PlayerPrefs.DeleteKey(KeyLevel);
         PlayerPrefs.Save();
+    }
+    public static bool TutorialCompleted
+    {
+        get => PlayerPrefs.GetInt(KeyTutorial, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyTutorial, value ? 1 : 0); PlayerPrefs.Save(); }
     }
 }

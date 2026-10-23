@@ -16,14 +16,12 @@ public class SpawnDifferentPoint : MonoBehaviour
         int idx = 0;
         foreach (DifferentPointInfo info in levelData.DifferentPoints)
         {
-            Debug.Log($"[Spawn] #{idx++} pos={info.Position} size={info.Size}");
             DifferentPair pair = factoryManager.CreateDifferentPair();
 
             if (pair == null) continue;
 
             pair.transform.SetParent(_pairContainer != null ? _pairContainer : transform, false);
             pair.Init(info, rootA, rootB);
-            Debug.Log($"[Spawn] #{idx} pairID={pair.GetInstanceID()}");
             pairs.Add(pair);
         }
         Debug.Log($"Spawn {pairs.Count}/{levelData.DifferentPoints.Count} pair");

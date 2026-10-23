@@ -26,8 +26,6 @@ public class DifferentPair : MonoBehaviour
         _info = data;
         _rootA = rootA as RectTransform;
         _rootB = rootB as RectTransform;
-
-        // Layout phải sẵn trước khi đọc rect (tránh size 0 lúc Start).
         Canvas.ForceUpdateCanvases();
 
         Vector2 rect = _rootA != null ? _rootA.rect.size : DesignSize;
@@ -37,9 +35,6 @@ public class DifferentPair : MonoBehaviour
         Vector2 scale = new Vector2(rect.x / DesignSize.x, rect.y / DesignSize.y);
         _pos  = Vector2.Scale((Vector2)data.Position, scale);
         _size = Vector2.Scale(data.Size, scale);
-
-        // pointA/B trên prefab hiện đang trỏ asset dùng chung — không dùng cho hit-test.
-        // Vẫn Init nếu có instance riêng (sau khi sửa prefab nest children).
         if (pointA != null && pointA.gameObject.scene.IsValid())
             pointA.Init(_pos, _size, rootA);
         if (pointB != null && pointB.gameObject.scene.IsValid())
@@ -50,33 +45,8 @@ public class DifferentPair : MonoBehaviour
         => !IsFound && ContainsPoint(screenPoint, cam);
 
     public bool ContainsPoint(Vector2 screenPoint, Camera cam)
-        => HitRoot(_rootA, screenPoint, cam) || HitRoot(_rootB, screenPoint, cam);
-
-    private bool HitRoot(RectTransform root, Vector2 screenPoint, Camera cam)
-    {
-        if (root == null) return false;
-
-        var frame = root.parent as RectTransform;
-        if (frame != null &&
-            !RectTransformUtility.RectangleContainsScreenPoint(frame, screenPoint, cam))
-            return false;
-
-        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                root, screenPoint, cam, out Vector2 local))
-            return false;
-
-        Vector2 d = local - _pos;
-
-        if (_shape == ShapeMark.Circle)
-        {
-            float r = Mathf.Min(_size.x, _size.y) * 0.5f;
-            return d.sqrMagnitude <= r * r;
-        }
-
-        return Mathf.Abs(d.x) <= _size.x * 0.5f &&
-               Mathf.Abs(d.y) <= _size.y * 0.5f;
-    }
-
+        => pointA.IsHit(screenPoint, cam) || pointB.IsHit(screenPoint, cam);
+    
     public bool MarkFound()
     {
         if (IsFound) return false;
@@ -102,4 +72,5 @@ public class DifferentPair : MonoBehaviour
             size = new Vector2(d, d);
         }
     }
+    
 }

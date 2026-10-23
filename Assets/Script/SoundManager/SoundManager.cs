@@ -4,17 +4,20 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioSource soundBackGround;
-    [SerializeField] private StateGame stateGame;
     [SerializeField] private AudioSource sfxSource;
     [Range(0f, 1f)] [SerializeField] private float sfxVolume = 1f;
 
-    private bool _musicOn = true;
-    private bool _sfxOn = true;
-    private bool _lastIsPlaying;
+    private bool _musicOn;
+    private bool _sfxOn;
+
+    public bool MusicOn => _musicOn;
+    public bool SfxOn => _sfxOn;
 
     void Awake()
     {
         Instance = this;
+        _musicOn = SaveGame.MusicOn;
+        _sfxOn = SaveGame.SfxOn;
     }
 
     void Start()
@@ -25,40 +28,22 @@ public class SoundManager : MonoBehaviour
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
 
-        _lastIsPlaying = stateGame.IsPlaying;
-        Refresh();
-    }
-
-    void Update()
-    {
-        if (stateGame.IsPlaying != _lastIsPlaying)
-        {
-            _lastIsPlaying = stateGame.IsPlaying;
-            Refresh();
-        }
+        soundBackGround.mute = !_musicOn;
+        soundBackGround.Play();  
     }
 
     public void ToggleMusic()
     {
         _musicOn = !_musicOn;
-        Refresh();
+        SaveGame.MusicOn = _musicOn;
+        soundBackGround.mute = !_musicOn;
     }
 
-    private void Refresh()
+    public void ToggleSfx()
     {
-        bool shouldPlay = _musicOn && stateGame.IsPlaying;
-
-        if (shouldPlay)
-        {
-            if (!soundBackGround.isPlaying)
-                soundBackGround.Play();
-        }
-        else
-        {
-            soundBackGround.Stop();
-        }
+        _sfxOn = !_sfxOn;
+        SaveGame.SfxOn = _sfxOn;
     }
-    public void ToggleSfx() => _sfxOn = !_sfxOn;
 
     public void PlaySfx(AudioClip clip, float volume = 1f)
     {
@@ -73,6 +58,7 @@ public class SoundManager : MonoBehaviour
         sfxSource.pitch = 1f + Random.Range(-range, range);
         sfxSource.PlayOneShot(clip, volume * sfxVolume);
     }
+
     void OnDestroy()
     {
         if (Instance == this) Instance = null;

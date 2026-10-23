@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: TutorialData
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 0
+  countDifferent: 5
+  rawSprite: {fileID: 774992141187699822, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
+  errorSprite: {fileID: 8573565815015891458, guid: b4d6e6783dee6db4db061f76889b6461, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 29.4, y: 54, z: 0}
+    Size: {x: 147.1, y: 175.3}
+  - Position: {x: -357.2, y: 159.6, z: 0}
+    Size: {x: 291.1, y: 239.4}
+  - Position: {x: 61.4, y: -237.9, z: 0}
+    Size: {x: 239.5, y: 123.6}
+  - Position: {x: 430.8, y: -50.8, z: 0}
+    Size: {x: 151.8, y: 150.3}
+  - Position: {x: -273.5, y: -49.2, z: 0}
+    Size: {x: 317.7, y: 153.4}
+  textWin: 
+  difficulty: 0

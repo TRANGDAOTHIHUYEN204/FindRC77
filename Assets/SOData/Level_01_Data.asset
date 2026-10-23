@@ -26,19 +26,19 @@ MonoBehaviour:
     Size: {x: 80, y: 80}
   - Position: {x: -84.7, y: 296.4, z: 0}
     Size: {x: 59.8, y: 57.3}
-  - Position: {x: -258.4, y: -69, z: 0}
-    Size: {x: 271.4, y: 183.6}
-  - Position: {x: -202.5, y: -217.8, z: 0}
-    Size: {x: 90, y: 90}
+  - Position: {x: -246.5, y: -53.2, z: 0}
+    Size: {x: 295.1, y: 151.9}
+  - Position: {x: -206.1, y: -217.5, z: 0}
+    Size: {x: 97.2, y: 89.4}
   - Position: {x: 25.7, y: 58.7, z: 0}
     Size: {x: 144.8, y: 203.9}
   - Position: {x: 70.1, y: -234.8, z: 0}
     Size: {x: 224.6, y: 98.4}
-  - Position: {x: 440, y: -47.7, z: 0}
-    Size: {x: 163.8, y: 117.7}
+  - Position: {x: 436.3, y: -50.1, z: 0}
+    Size: {x: 156.5, y: 126.8}
   - Position: {x: -347.6, y: 154.9, z: 0}
     Size: {x: 308.6, y: 263.8}
-  - Position: {x: 414.3, y: 95.6, z: 0}
+  - Position: {x: 415.9, y: 106.6, z: 0}
     Size: {x: 207.4, y: 158.2}
   textWin: Bikini or casual? Hot in both anyway.
   difficulty: 0

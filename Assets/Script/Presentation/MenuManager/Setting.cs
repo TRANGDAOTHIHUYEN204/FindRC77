@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingManager : MonoBehaviour
+public class Setting : MonoBehaviour
 {
     [SerializeField] private Button resumeButton;
 

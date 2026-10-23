@@ -34,10 +34,11 @@ MonoBehaviour:
     Size: {x: 120, y: 120}
   - Position: {x: -106, y: 273.8, z: 0}
     Size: {x: 100, y: 100}
-  - Position: {x: -338.6, y: 63.4, z: 0}
-    Size: {x: 163, y: 112.7}
+  - Position: {x: -309.6, y: 60.3, z: 0}
+    Size: {x: 220.9, y: 119}
   - Position: {x: 48.8, y: -69.5, z: 0}
     Size: {x: 220, y: 220}
   - Position: {x: 404.2, y: 105.3, z: 0}
     Size: {x: 217.5, y: 209.1}
   textWin: "Streamer or TikToker? I\u2019d dominate both."
+  difficulty: 0

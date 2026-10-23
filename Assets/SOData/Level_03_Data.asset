@@ -20,25 +20,25 @@ MonoBehaviour:
   markData:
   - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
   differentPoints:
-  - Position: {x: 414.3, y: -90.8, z: 0}
-    Size: {x: 40, y: 40}
-  - Position: {x: 27.4, y: 35.6, z: 0}
-    Size: {x: 40, y: 40}
+  - Position: {x: 411.8, y: -89, z: 0}
+    Size: {x: 41.2, y: 45.8}
+  - Position: {x: 29.3, y: 36, z: 0}
+    Size: {x: 43.9, y: 39.2}
   - Position: {x: -294.8, y: 215.5, z: 0}
     Size: {x: 55, y: 55}
   - Position: {x: -162.6, y: 57.1, z: 0}
     Size: {x: 70, y: 70}
-  - Position: {x: -446.3, y: -173.7, z: 0}
-    Size: {x: 60, y: 60}
-  - Position: {x: 295.7, y: 278.5, z: 0}
-    Size: {x: 90, y: 90}
-  - Position: {x: 6.7, y: 151, z: 0}
-    Size: {x: 90, y: 90}
-  - Position: {x: -62.5, y: -218.8, z: 0}
-    Size: {x: 80, y: 80}
-  - Position: {x: -405.9, y: 262.5, z: 0}
-    Size: {x: 37, y: 37}
-  - Position: {x: -9, y: -82.9, z: 0}
-    Size: {x: 170, y: 170}
+  - Position: {x: -450.4, y: -179.4, z: 0}
+    Size: {x: 76.8, y: 84}
+  - Position: {x: 294.1, y: 286.5, z: 0}
+    Size: {x: 99.5, y: 70.7}
+  - Position: {x: 8.8, y: 142.6, z: 0}
+    Size: {x: 94.3, y: 73.2}
+  - Position: {x: -61.5, y: -212.2, z: 0}
+    Size: {x: 111, y: 87.7}
+  - Position: {x: -408, y: 259.1, z: 0}
+    Size: {x: 39, y: 43.9}
+  - Position: {x: -9, y: -103.3, z: 0}
+    Size: {x: 217.6, y: 117.3}
   textWin: 'Coffee date with the luckiest people alive: my squad.'
   difficulty: 1
