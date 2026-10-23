@@ -43,6 +43,6 @@ public class MarkRectangleBehaviour : IDrawShape
 
         _outline = LineDrawUtil.SetupOutline(_lineRenderer, _outline, lineWidth, OutlineThickness);
 
-        yield return LineDrawUtil.AnimateDraw(new[] { _lineRenderer, _outline }, points, true, duration, 0, 0);
+        yield return LineDrawUtil.AnimateDraw(_lineRenderer, _outline, points, true, duration, 0, 0);
     }
 }

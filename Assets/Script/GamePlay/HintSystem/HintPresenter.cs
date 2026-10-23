@@ -56,7 +56,11 @@ public class HintPresenter : MonoBehaviour
             spotlight.ShowAnimated(HintedPair);
             ReleaseHand();
             _hand = factory.CreateHand();
-            if (_hand != null) _hand.PointAt(GetPairWorldCenter(HintedPair));
+            if (_hand != null)
+            {
+                HintedPair.GetWorldRect(HintedPair.RootA, out Vector3 center, out _);
+                _hand.PointAt(HintedPair.RootA, center);
+            }
         }
         else
         {
@@ -84,19 +88,8 @@ public class HintPresenter : MonoBehaviour
     private void ReleaseHand()
     {
         if (_hand == null) return;
+        _hand.Detach();
         factory.Release(_hand.gameObject);
         _hand = null;
-    }
-
-    private void LateUpdate()
-    {
-        if (_hand != null && HintedPair != null)
-            _hand.PointAt(GetPairWorldCenter(HintedPair));
-    }
-
-    private Vector3 GetPairWorldCenter(DifferentPair pair)
-    {
-        pair.GetWorldRect(pair.RootA, out Vector3 center, out Vector2 _);
-        return center;
     }
 }

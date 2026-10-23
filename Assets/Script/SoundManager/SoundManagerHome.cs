@@ -25,12 +25,18 @@ public class SoundManagerHome : MonoBehaviour
     {
         soundBackGround.playOnAwake = false;
         soundBackGround.loop = true;
+        soundBackGround.spatialBlend = 0f;
 
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
 
         soundBackGround.mute = !_musicOn;
-        soundBackGround.Play();
+
+        if (soundBackGround.clip != null && soundBackGround.clip.loadState != AudioDataLoadState.Loaded)
+            soundBackGround.clip.LoadAudioData();
+
+        if (!soundBackGround.isPlaying)
+            soundBackGround.Play();
     }
 
     public void ToggleMusic()

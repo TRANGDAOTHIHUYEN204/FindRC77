@@ -15,6 +15,12 @@ public class InputManager : MonoBehaviour
     private Vector2 _pressStart;
 
     private readonly List<RaycastResult> _hits = new List<RaycastResult>();
+    private PointerEventData _pointerData;
+
+    private void Awake()
+    {
+        _pointerData = new PointerEventData(EventSystem.current);
+    }
 
     private void Update()
     {
@@ -28,7 +34,7 @@ public class InputManager : MonoBehaviour
         if (pointer.press.wasPressedThisFrame)
         {
             _pressing = true;
-            _cancelled = IsOverButton(pos); 
+            _cancelled = IsOverButton(pos);
             _pressStart = pos;
         }
 
@@ -51,14 +57,18 @@ public class InputManager : MonoBehaviour
             _pressing = false;
         }
     }
-    
+
     private bool IsOverButton(Vector2 screenPos)
     {
         if (EventSystem.current == null) return false;
 
-        var data = new PointerEventData(EventSystem.current) { position = screenPos };
+        if (_pointerData == null)
+            _pointerData = new PointerEventData(EventSystem.current);
+
+        _pointerData.Reset();
+        _pointerData.position = screenPos;
         _hits.Clear();
-        EventSystem.current.RaycastAll(data, _hits);
+        EventSystem.current.RaycastAll(_pointerData, _hits);
 
         if (_hits.Count == 0) return false;
         return _hits[0].gameObject.GetComponentInParent<Selectable>() != null;

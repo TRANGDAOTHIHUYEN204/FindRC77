@@ -2,37 +2,67 @@ using UnityEngine;
 
 public class HintHand : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset = new Vector3(0f, -0.3f, 0f);
-    [SerializeField] private float moveDistance = 0.15f;
+    [SerializeField] private Vector3 offset = new Vector3(40f, -80f, 0f);
+    [SerializeField] private float moveDistance = 20f;
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private int sortingOrder = 50;
 
-    private Transform _target;
-    private Vector3 _fixedPoint;
-    private bool _useTarget;
-    
-    public void Follow(Transform target)
+    private SpriteRenderer _renderer;
+    private Vector3 _localPoint;
+    private bool _hasTarget;
+
+    private void Awake()
     {
-        _target = target;
-        _useTarget = true;
-        gameObject.SetActive(true);
-    }
-    
-    public void PointAt(Vector3 worldPoint)
-    {
-        _fixedPoint = worldPoint;
-        _useTarget = false;
-        gameObject.SetActive(true);
+        _renderer = GetComponent<SpriteRenderer>();
+        if (_renderer != null)
+            _renderer.sortingOrder = sortingOrder;
     }
 
-    public void Hide() => gameObject.SetActive(false);
+    /// <summary>
+    /// Parent under the level image so the hand sorts with gameplay content.
+    /// A free world SpriteRenderer stays behind the Screen Space Camera canvas.
+    /// </summary>
+    public void PointAt(RectTransform root, Vector3 worldPoint)
+    {
+        if (root == null)
+        {
+            Hide();
+            return;
+        }
+
+        transform.SetParent(root, false);
+        Vector3 lossy = root.lossyScale;
+        transform.localScale = new Vector3(SafeInv(lossy.x), SafeInv(lossy.y), 1f);
+        transform.localRotation = Quaternion.identity;
+
+        _localPoint = root.InverseTransformPoint(worldPoint);
+        _hasTarget = true;
+        gameObject.SetActive(true);
+
+        if (_renderer != null)
+            _renderer.sortingOrder = sortingOrder;
+    }
+
+    public void Hide()
+    {
+        _hasTarget = false;
+        gameObject.SetActive(false);
+    }
+
+    public void Detach()
+    {
+        _hasTarget = false;
+        transform.SetParent(null, false);
+        gameObject.SetActive(false);
+    }
 
     private void LateUpdate()
     {
-        Vector3 basePos = _useTarget
-            ? (_target != null ? _target.position : transform.position)
-            : _fixedPoint;
+        if (!_hasTarget) return;
 
         float bob = Mathf.Sin(Time.unscaledTime * moveSpeed * Mathf.PI * 2f) * moveDistance;
-        transform.position = basePos + offset + Vector3.up * bob;
+        transform.localPosition = _localPoint + offset + Vector3.up * bob;
     }
+
+    private static float SafeInv(float v) => Mathf.Abs(v) < 0.0001f ? 1f : 1f / v;
 }
