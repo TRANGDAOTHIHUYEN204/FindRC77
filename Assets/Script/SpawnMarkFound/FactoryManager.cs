@@ -9,7 +9,12 @@ public class FactoryManager : MonoBehaviour
     [SerializeField] private ErrorMark errorMark;
     private readonly PoolManager _pool = new PoolManager();
     [SerializeField] private HeartLives heartPrefab;
-    
+    [SerializeField] private HintHand handPrefab;
+
+    public HintHand CreateHand()
+    {
+        return CreateObject(handPrefab);
+    }
     public MarkFound Create()
     {
         return CreateObject(prefabMarkFound);

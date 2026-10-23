@@ -6,7 +6,10 @@ public class HintPresenter : MonoBehaviour
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private HintSpotlight spotlight;
+    [SerializeField] private FactoryManager factory;
     [SerializeField, Min(0)] private int hintPerLevel = 1;
+
+    private HintHand _hand;
 
     public DifferentPair HintedPair { get; private set; }
     public int CountHint { get; private set; }
@@ -14,6 +17,7 @@ public class HintPresenter : MonoBehaviour
     public event Action<int> OnHintChanged;
 
     private void Start() => ResetForLevel();
+
     [ContextMenu("Reset Hint For Level")]
     public void ResetForLevel()
     {
@@ -29,6 +33,13 @@ public class HintPresenter : MonoBehaviour
             Debug.Log("Hết hint của màn này rồi");
             return;
         }
+        ShowInternal(consume: true, tutorial: false);
+    }
+
+    public void ShowTutorialHint() => ShowInternal(consume: false, tutorial: true);
+
+    private void ShowInternal(bool consume, bool tutorial)
+    {
         if (!stateGame.IsPlaying) return;
 
         var manager = pairManagerHolder.Manager;
@@ -39,10 +50,22 @@ public class HintPresenter : MonoBehaviour
         if (entry == null) return;
 
         HintedPair = entry.Pair;
-        spotlight.Show(HintedPair);
-        SetCount(CountHint - 1);
+
+        if (tutorial)
+        {
+            spotlight.ShowAnimated(HintedPair);
+            ReleaseHand();
+            _hand = factory.CreateHand();
+            if (_hand != null) _hand.PointAt(GetPairWorldCenter(HintedPair));
+        }
+        else
+        {
+            spotlight.Show(HintedPair);
+        }
+
+        if (consume) SetCount(CountHint - 1);
     }
-    
+
     public void AddHint(int amount) => SetCount(CountHint + amount);
 
     private void SetCount(int value)
@@ -55,5 +78,25 @@ public class HintPresenter : MonoBehaviour
     {
         HintedPair = null;
         spotlight.Hide();
+        ReleaseHand();
+    }
+
+    private void ReleaseHand()
+    {
+        if (_hand == null) return;
+        factory.Release(_hand.gameObject);
+        _hand = null;
+    }
+
+    private void LateUpdate()
+    {
+        if (_hand != null && HintedPair != null)
+            _hand.PointAt(GetPairWorldCenter(HintedPair));
+    }
+
+    private Vector3 GetPairWorldCenter(DifferentPair pair)
+    {
+        pair.GetWorldRect(pair.RootA, out Vector3 center, out Vector2 _);
+        return center;
     }
 }

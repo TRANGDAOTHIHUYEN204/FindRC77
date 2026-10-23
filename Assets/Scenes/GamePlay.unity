@@ -158,7 +158,6 @@ RectTransform:
   - {fileID: 1086084360}
   - {fileID: 1070288240}
   - {fileID: 1961137160}
-  - {fileID: 453745510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -547,7 +546,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   levels:
-  - {fileID: 11400000, guid: 9c076e535524169458ba4fc5ce6a89a5, type: 2}
   - {fileID: 11400000, guid: 4a8b4e6ef57c06c409b2eb6f77d5f9fc, type: 2}
   - {fileID: 11400000, guid: 4f304a2325c3b8744be22b86b976bf9e, type: 2}
   - {fileID: 11400000, guid: 3cfbd5186e442f44c804e04e3e1acdbe, type: 2}
@@ -1956,81 +1954,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450501422}
   m_CullTransparentMesh: 1
---- !u!1 &453745509
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 453745510}
-  - component: {fileID: 453745512}
-  - component: {fileID: 453745511}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &453745510
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453745509}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 594178}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2160}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &453745511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453745509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39607844}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 8835162290467014627, guid: 1db7ebcecc28d9a418e745374cfe23dc, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &453745512
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453745509}
-  m_CullTransparentMesh: 1
 --- !u!1 &467152190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,6 +2995,59 @@ MonoBehaviour:
   cornerRadius: 30
   cornerSegments: 8
   fill: 0
+--- !u!1 &786714004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786714006}
+  - component: {fileID: 786714005}
+  m_Layer: 0
+  m_Name: tutorialController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &786714005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786714004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a757722d053f2c40a169480a1064962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialController
+  levelManager: {fileID: 153753067}
+  hintPresenter: {fileID: 1301881755}
+  pairManagerHolder: {fileID: 467630240}
+  stateGame: {fileID: 2088011103}
+  delayBetweenHints: 0.6
+  hideDuringTutorial:
+  - {fileID: 1086084359}
+  - {fileID: 1070288239}
+  - {fileID: 1961137159}
+--- !u!4 &786714006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786714004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45827, y: -3.48228, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &818946507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,60 +3512,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
---- !u!1 &957032135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 957032137}
-  - component: {fileID: 957032136}
-  m_Layer: 0
-  m_Name: TutorialController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &957032136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957032135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a757722d053f2c40a169480a1064962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialController
-  levelManager: {fileID: 153753067}
-  pairManagerHolder: {fileID: 467630240}
-  spotlight: {fileID: 1301881757}
-  visualRoot: {fileID: 1197576276}
-  hideDuringTutorial:
-  - {fileID: 1086084359}
-  - {fileID: 1961137159}
-  - {fileID: 1070288239}
-  finishDelay: 1
---- !u!4 &957032137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957032135}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.40116, y: -0.69142, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1197576280}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962908397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,6 +3778,7 @@ MonoBehaviour:
   differentPairPrefab: {fileID: 3927898742464656457, guid: 3b84e89e1b1b2c94abec6450f6b70a71, type: 3}
   errorMark: {fileID: 4325957922978230987, guid: 5dfbabeeff1c2f14c9740c0ce8ebafed, type: 3}
   heartPrefab: {fileID: 7295095873431605742, guid: 9bd24f5d7ef789542aa96518382a494e, type: 3}
+  handPrefab: {fileID: -7274123564322705075, guid: d7a6fdadae3d63c4ba3b47f530af5662, type: 3}
 --- !u!4 &987585499
 Transform:
   m_ObjectHideFlags: 0
@@ -5003,100 +4926,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179352899}
   m_CullTransparentMesh: 1
---- !u!1 &1197576276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1197576280}
-  - component: {fileID: 1197576279}
-  - component: {fileID: 1197576278}
-  - component: {fileID: 1197576277}
-  m_Layer: 0
-  m_Name: handtutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1197576277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197576276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fab50dca7d80743a591a45fc12ab4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialHand
-  tutorial: {fileID: 957032136}
-  spotlight: {fileID: 1301881757}
-  followImageB: 1
-  offset: {x: 30, y: -30}
-  bobAmount: 15
-  bobSpeed: 4
---- !u!114 &1197576278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197576276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 3015328501026307501, guid: 09637b700b48fea419b45b591f60b3d5, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1197576279
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197576276}
-  m_CullTransparentMesh: 1
---- !u!224 &1197576280
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197576276}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 957032137}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1220327196
 GameObject:
   m_ObjectHideFlags: 0
@@ -5359,8 +5188,14 @@ MonoBehaviour:
   left: {fileID: 1742265937}
   right: {fileID: 274596950}
   hole: {fileID: 1220327197}
+  tutorialSpriteRing: {fileID: 5268187495526859981, guid: 7d86a16e6e8a838408cfe2d4bdc1cc37, type: 3}
   overlayColor: {r: 0, g: 0, b: 0, a: 0.64705884}
   softEdge: 0.05
+  pulseAmplitude: 0.08
+  pulseSpeed: 2
+  handOffset: 0.3
+  handMoveDistance: 0.15
+  handMoveSpeed: 2
 --- !u!222 &1300552906
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5426,6 +5261,7 @@ MonoBehaviour:
   pairManagerHolder: {fileID: 467630240}
   stateGame: {fileID: 2088011103}
   spotlight: {fileID: 1301881757}
+  factory: {fileID: 987585498}
   hintPerLevel: 1
 --- !u!224 &1301881756
 RectTransform:
@@ -6566,7 +6402,6 @@ MonoBehaviour:
   clickErrorSound: {fileID: 8300000, guid: 1a876cb5adc90a546832f99b734c575e, type: 3}
   loseGameSound: {fileID: 8300000, guid: 2e7a68f44bc15b04786607f4e4ac6b96, type: 3}
   clickSuccessSound: {fileID: 8300000, guid: 87f61c98b5aa45948af20835f99add98, type: 3}
-  tutorialController: {fileID: 0}
 --- !u!4 &1551937417
 Transform:
   m_ObjectHideFlags: 0
@@ -7532,8 +7367,14 @@ MonoBehaviour:
   left: {fileID: 930615592}
   right: {fileID: 1343129159}
   hole: {fileID: 160887430}
+  tutorialSpriteRing: {fileID: 5268187495526859981, guid: 7d86a16e6e8a838408cfe2d4bdc1cc37, type: 3}
   overlayColor: {r: 0, g: 0, b: 0, a: 0.7}
   softEdge: 0.05
+  pulseAmplitude: 0.08
+  pulseSpeed: 2
+  handOffset: 0.3
+  handMoveDistance: 0.15
+  handMoveSpeed: 2
 --- !u!224 &1825505624 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1706369715120265287, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
@@ -7960,9 +7801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d235717b75e82242a69a7de84e4b080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingController
-  musicToggle: {fileID: 0}
-  soundToggle: {fileID: 0}
-  hapticToggle: {fileID: 0}
 --- !u!1 &2134608764
 GameObject:
   m_ObjectHideFlags: 0
@@ -8386,4 +8224,4 @@ SceneRoots:
   - {fileID: 1934019890}
   - {fileID: 879632246}
   - {fileID: 1301881756}
-  - {fileID: 957032137}
+  - {fileID: 786714006}

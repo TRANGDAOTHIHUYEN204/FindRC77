@@ -1,22 +1,55 @@
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HintOverlay : MonoBehaviour
 {
+    [Header("Overlay")]
     [SerializeField] private RectTransform top;
     [SerializeField] private RectTransform bottom;
     [SerializeField] private RectTransform left;
     [SerializeField] private RectTransform right;
     [SerializeField] private RectTransform hole;
 
-    [SerializeField] private Color overlayColor =
-        new Color(0f, 0f, 0f, 0.7f);
+    [Header("Tutorial Hint")]
+    [SerializeField] private Sprite tutorialSpriteRing;
+
+    [SerializeField] private Color overlayColor = new Color(0f, 0f, 0f, 0.7f);
 
     [SerializeField, Range(0.01f, 0.5f)]
     private float softEdge = 0.05f;
 
+    [Header("Animated Hint")]
+    [SerializeField, Range(0f, 0.3f)]
+    private float pulseAmplitude = 0.08f;
+
+    [SerializeField, Min(0.1f)]
+    private float pulseSpeed = 2f;
+
+    [SerializeField, Min(0f)]
+    private float handOffset = 0.3f;
+
+    [SerializeField, Min(0f)]
+    private float handMoveDistance = 0.15f;
+
+    [SerializeField, Min(0.1f)]
+    private float handMoveSpeed = 2f;
+
     private RectTransform _rect;
+    private Image _holeImage;
+
+    private GameObject _handInstance;
+    private Coroutine _hintRoutine;
+
     private static Sprite _holeSprite;
+
+    private bool _isAnimatedHint;
+
+    private Vector2 _hintCenter;
+    private float _baseRadius;
+    private Vector3 _handStartPosition;
+    private float _handStartOffset;
 
     private void Awake()
     {
@@ -25,12 +58,13 @@ public class HintOverlay : MonoBehaviour
         if (_holeSprite == null)
             _holeSprite = CreateHoleSprite(256, softEdge);
 
-        Image holeImage = hole.GetComponent<Image>();
-        holeImage.sprite = _holeSprite;
+        _holeImage = hole.GetComponent<Image>();
+        _holeImage.sprite = _holeSprite;
+        _holeImage.raycastTarget = false;
 
         RectTransform[] parts =
         {
-            top, bottom, left, right, hole
+            top, bottom, left, right
         };
 
         foreach (RectTransform part in parts)
@@ -40,22 +74,66 @@ public class HintOverlay : MonoBehaviour
             image.raycastTarget = false;
         }
     }
-
+    
     public void Show(Vector3 worldCenter, Vector2 worldSize, float padding = 10f)
     {
+        StopHintAnimation();
+        DestroyHand();
+
+        _isAnimatedHint = false;
+
         if (_rect == null)
             _rect = (RectTransform)transform;
 
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
 
-        Rect rect = _rect.rect;
+        _holeImage.sprite = _holeSprite;
+        _holeImage.color = overlayColor;
 
         Vector2 center = _rect.InverseTransformPoint(worldCenter);
 
         Vector3 size = _rect.InverseTransformVector(new Vector3(worldSize.x, worldSize.y, 0f));
 
         float radius = Mathf.Max(Mathf.Abs(size.x), Mathf.Abs(size.y)) * 0.5f + padding;
+
+        UpdateOverlay(center, radius);
+    }
+
+    public void ShowAnimatedHint(Vector3 worldCenter, Vector2 worldSize, float padding = 10f)
+    {
+        StopHintAnimation();
+        DestroyHand();
+
+        if (_rect == null)
+            _rect = (RectTransform)transform;
+
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
+        _isAnimatedHint = true;
+
+        Vector2 center = _rect.InverseTransformPoint(worldCenter);
+
+        Vector3 size = _rect.InverseTransformVector(new Vector3(worldSize.x, worldSize.y, 0f));
+
+        _baseRadius = Mathf.Max(Mathf.Abs(size.x), Mathf.Abs(size.y)) * 0.5f + padding;
+
+        _hintCenter = center;
+        if (tutorialSpriteRing != null)
+        {
+            _holeImage.sprite = tutorialSpriteRing;
+            _holeImage.color = Color.white;
+        }
+
+        UpdateOverlay(_hintCenter, _baseRadius);
+        _hintRoutine = StartCoroutine(AnimateHint());
+    }
+    
+
+    private void UpdateOverlay(Vector2 center, float radius)
+    {
+        Rect rect = _rect.rect;
 
         float x0 = center.x - radius;
         float x1 = center.x + radius;
@@ -77,7 +155,29 @@ public class HintOverlay : MonoBehaviour
 
     public void Hide()
     {
+        StopHintAnimation();
+        DestroyHand();
+
+        _isAnimatedHint = false;
         gameObject.SetActive(false);
+    }
+
+    private void StopHintAnimation()
+    {
+        if (_hintRoutine != null)
+        {
+            StopCoroutine(_hintRoutine);
+            _hintRoutine = null;
+        }
+    }
+
+    private void DestroyHand()
+    {
+        if (_handInstance != null)
+        {
+            Destroy(_handInstance);
+            _handInstance = null;
+        }
     }
 
     private void SetRect(RectTransform target, float x0, float y0, float x1, float y1)
@@ -111,13 +211,9 @@ public class HintOverlay : MonoBehaviour
                     new Vector2(x + 0.5f, y + 0.5f),
                     new Vector2(half, half)) / half;
 
-                float alpha = Mathf.SmoothStep(
-                    0f,
-                    1f,
-                    Mathf.InverseLerp(1f - soft, 1f, distance));
+                float alpha = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(1f - soft, 1f, distance));
 
-                pixels[y * size + x] = new Color32(
-                    255, 255, 255, (byte)(alpha * 255f));
+                pixels[y * size + x] = new Color32(255, 255, 255, (byte)(alpha * 255f));
             }
         }
 
@@ -125,5 +221,14 @@ public class HintOverlay : MonoBehaviour
         texture.Apply();
 
         return Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f));
+    }
+    private IEnumerator AnimateHint()
+    {
+        while (true)
+        {
+            float pulse = 1f + Mathf.Sin(Time.unscaledTime * pulseSpeed * Mathf.PI * 2f) * pulseAmplitude;
+            UpdateOverlay(_hintCenter, _baseRadius * pulse);
+            yield return null;
+        }
     }
 }

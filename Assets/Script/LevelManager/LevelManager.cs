@@ -4,8 +4,13 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] levels;
+    [SerializeField] private LevelData tutorialLevel;   // asset LevelData riêng cho tutorial
+
     private int _currentIndex;
     private LevelData _levelData;
+    private bool _completed;
+
+    public bool IsTutorial { get; private set; }
 
     public Sprite LevelSprite => _levelData.RawSprite;
     public Sprite ErrorSprite => _levelData.ErrorSprite;
@@ -14,29 +19,49 @@ public class LevelManager : MonoBehaviour
     public float TimeLimit => _levelData.TimeLimit;
     public bool HasNextLevel => _currentIndex < levels.Length - 1;
     public int CurrentIndex => _currentIndex;
-    public event Action<LevelData> OnLevelLoaded;
     public string TextWin => _levelData.TextWin;
-    private bool _completed; 
-    
-    private void Start() => LoadLevel(SaveGame.CurrentLevel);
+    public event Action<LevelData> OnLevelLoaded;
+
+    private void Start()
+    {
+        if (tutorialLevel != null && !SaveGame.TutorialShown)
+            LoadTutorial();
+        else
+            LoadLevel(SaveGame.CurrentLevel);
+    }
+
+    public void LoadTutorial()
+    {
+        IsTutorial = true;
+        SaveGame.TutorialShown = true;   
+        _levelData = tutorialLevel;
+        _completed = false;
+        OnLevelLoaded?.Invoke(_levelData);
+    }
 
     public void LoadLevel(int index)
     {
         if (levels == null || levels.Length == 0) return;
+        IsTutorial = false;
         _currentIndex = Mathf.Clamp(index, 0, levels.Length - 1);
         _levelData = levels[_currentIndex];
         _completed = false;
-
-        OnLevelLoaded?.Invoke(_levelData);   
+        OnLevelLoaded?.Invoke(_levelData);
     }
 
     public void CompleteCurrentLevel()
     {
         if (_completed) return;
         _completed = true;
+        if (IsTutorial) return;   
         SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1);
     }
 
     public void LoadNextLevel() => LoadLevel(SaveGame.CurrentLevel);
-    public void ReloadLevel()   => LoadLevel(_currentIndex);  
+
+    public void ReloadLevel()
+    {
+        if (IsTutorial) LoadTutorial();
+        else LoadLevel(_currentIndex);
+    }
 }

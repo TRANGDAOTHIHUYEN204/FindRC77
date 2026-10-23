@@ -1,24 +1,37 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
-
-
 
 public class LoadingScreen : MonoBehaviour
 {
-    [SerializeField] private float delay = 1f;
-    [SerializeField] private GameObject panelLoading;
-    private void OnEnable()
-    {
-        StartCoroutine(HideAfterDelay());
-    }
+    [SerializeField] private float delay = 3f;
+    [SerializeField] private string homeSceneName = "HomeScene";
+    [SerializeField] private string gameplaySceneName = "GamePlay";
+    
+    [SerializeField] private bool resetAllOnStart = false;
+    [SerializeField] private bool resetTutorialOnStart = false;
+
     private void Awake()
     {
-        // SaveGame.Reset();
+#if UNITY_EDITOR
+        if (resetAllOnStart)
+        {
+            PendingReward.Clear();
+            Wallets.Coin.Reset();
+            SaveGame.Reset();
+        }
+        if (resetTutorialOnStart)
+            SaveGame.ResetTutorial();
+#endif
     }
-    private IEnumerator HideAfterDelay()
+
+    private void OnEnable() => StartCoroutine(LoadNextScene());
+
+    private IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(delay);
 
-        panelLoading.SetActive(false);
+        string target = SaveGame.TutorialShown ? homeSceneName : gameplaySceneName;
+        SceneManager.LoadScene(target);
     }
 }

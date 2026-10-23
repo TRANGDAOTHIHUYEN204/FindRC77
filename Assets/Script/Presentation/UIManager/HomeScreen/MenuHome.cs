@@ -9,14 +9,7 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private TextMeshProUGUI numberLevelText;
     
-    private void Awake()
-    {
-        
-        PendingReward.Clear();
-        Wallets.Coin.Reset();
-        SaveGame.Reset();
-        
-    }
+ 
 
 
     private void Start()
