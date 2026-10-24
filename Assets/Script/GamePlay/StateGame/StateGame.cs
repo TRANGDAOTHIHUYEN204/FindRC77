@@ -104,32 +104,34 @@ public class StateGame : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
+        SetText();                      
         SetPanels(false, true, false);
         winText.text = textWin;
         Time.timeScale = 0f;
-        
-        if (levelManager.IsTutorial)
-        {
-            winLevelText.text = "WELCOME";
-        }
-        else
-        {
-            winLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
-        }
     }
-    public void SetText()
-    {
-        levelText.text = "Level " + (SaveGame.CurrentLevel + 1).ToString();
-    }
+
     public void LoseGame()
     {
         string textLose = "Am I make the wrong choice?!";
         if (State != GameState.Playing) return;
         State = GameState.Lost;
+        SetText();                   
         SetPanels(false, false, true);
         loseText.text = textLose;
         Time.timeScale = 0f;
-        loseLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
+    }
+    private string GetLevelLabel()
+    {
+        if (levelManager.IsTutorial) return "WELCOME";
+        return "LEVEL " + (SaveGame.CurrentLevel + 1);
+    }
+
+    public void SetText()
+    {
+        string label = GetLevelLabel();
+        if (levelText) levelText.text = label;
+        if (winLevelText) winLevelText.text = label;
+        if (loseLevelText) loseLevelText.text = label;
     }
 
     private void SetPanels(bool pause, bool win, bool lose)

@@ -161,6 +161,7 @@ RectTransform:
   - {fileID: 164304628}
   - {fileID: 582283720}
   - {fileID: 859813737}
+  - {fileID: 2147000002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2589,7 +2590,7 @@ MonoBehaviour:
   bounceHeight: 0.2
   bounceDuration: 0.2
   spawnInterval: 0.08
-  spawnStarTrail: {fileID: 0}
+  spawnStarTrail: {fileID: 859813738}
 --- !u!224 &582283720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3298,7 +3299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnStarTrail
   factoryManager: {fileID: 987585498}
-  container: {fileID: 582283720}
+  container: {fileID: 594178}
   initialCount: 2
 --- !u!1 &877037613
 GameObject:
@@ -6575,7 +6576,7 @@ MonoBehaviour:
   loseGameSound: {fileID: 8300000, guid: 2e7a68f44bc15b04786607f4e4ac6b96, type: 3}
   clickSuccessSound: {fileID: 8300000, guid: 87f61c98b5aa45948af20835f99add98, type: 3}
   levelManager: {fileID: 153753067}
-  trailStartPoint: {fileID: 0}
+  trailStartPoint: {fileID: 2147000002}
 --- !u!4 &1551937417
 Transform:
   m_ObjectHideFlags: 0
@@ -8250,6 +8251,41 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -20.4, y: -113}
   m_SizeDelta: {x: 852.3, y: 172.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2147000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2147000002}
+  m_Layer: 5
+  m_Name: TrailStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2147000002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 594178}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &411176450931837103
 CanvasRenderer:

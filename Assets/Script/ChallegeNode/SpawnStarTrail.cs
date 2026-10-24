@@ -10,6 +10,7 @@ public class SpawnStarTrail : MonoBehaviour
 
     private StarTrailEffect[] _trails;
     private bool[] _isUsing;
+    private Action[] _callbacks;
 
     private void Awake()
     {
@@ -21,10 +22,12 @@ public class SpawnStarTrail : MonoBehaviour
         if (_trails != null)
             return;
 
-        int count = Mathf.Max(1, initialCount);
+        // Pool 2: 1 đang dùng + 1 standby (false) cho click nhanh.
+        int count = Mathf.Max(2, initialCount);
 
         _trails = new StarTrailEffect[count];
         _isUsing = new bool[count];
+        _callbacks = new Action[count];
 
         if (factoryManager == null)
         {
@@ -45,11 +48,14 @@ public class SpawnStarTrail : MonoBehaviour
             }
 
             _trails[i] = trail;
+            factoryManager.Detach(trail.gameObject);
 
             if (container != null)
                 trail.transform.SetParent(container, false);
 
+            trail.PrepareInactive();
             trail.gameObject.SetActive(false);
+            _isUsing[i] = false;
         }
     }
 
@@ -67,31 +73,71 @@ public class SpawnStarTrail : MonoBehaviour
         if (_trails == null)
             return false;
 
+        // Mỗi lần Play chỉ bật ĐÚNG 1 trail đang false.
+        // Click nhanh: trail đang chạy vẫn giữ; lấy trail standby (false) mang ra dùng.
+        int freeIndex = FindFreeTrail();
+        if (freeIndex < 0)
+            return false;
+
+        StartTrail(freeIndex, startPoint, endPoint, onComplete);
+        return true;
+    }
+
+    private int FindFreeTrail()
+    {
         for (int i = 0; i < _trails.Length; i++)
         {
-            if (_isUsing[i] || _trails[i] == null)
+            StarTrailEffect trail = _trails[i];
+            if (trail == null)
                 continue;
 
-            int index = i;
-            StarTrailEffect trail = _trails[index];
+            // Đang dùng hoặc vẫn đang active → bỏ qua, lấy cái false khác.
+            if (_isUsing[i] || trail.gameObject.activeSelf)
+                continue;
 
-            _isUsing[index] = true;
-            trail.gameObject.SetActive(true);
-            trail.transform.SetAsLastSibling();
-
-            trail.Play(startPoint, endPoint, () =>
-            {
-                _isUsing[index] = false;
-
-                if (trail != null)
-                    trail.gameObject.SetActive(false);
-
-                onComplete?.Invoke();
-            });
-
-            return true;
+            return i;
         }
-        
-        return false;
+
+        return -1;
+    }
+
+    private void StartTrail(
+        int index,
+        RectTransform startPoint,
+        RectTransform endPoint,
+        Action onComplete)
+    {
+        StarTrailEffect trail = _trails[index];
+
+        _isUsing[index] = true;
+        _callbacks[index] = onComplete;
+
+        trail.gameObject.SetActive(true);
+        trail.transform.SetAsLastSibling();
+
+        int captured = index;
+        trail.Play(startPoint, endPoint, () =>
+        {
+            ReturnToPool(captured);
+        });
+    }
+
+    private void ReturnToPool(int index)
+    {
+        if (index < 0 || index >= _trails.Length)
+            return;
+
+        Action callback = _callbacks[index];
+        _callbacks[index] = null;
+        _isUsing[index] = false;
+
+        StarTrailEffect trail = _trails[index];
+        if (trail != null)
+        {
+            trail.PrepareInactive();
+            trail.gameObject.SetActive(false);
+        }
+
+        callback?.Invoke();
     }
 }

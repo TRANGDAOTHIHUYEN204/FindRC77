@@ -61,6 +61,14 @@ public class FactoryManager : MonoBehaviour
         _pool.ReturnObject(obj);
     }
 
+    public void Detach(GameObject obj)
+    {
+        if (obj == null) return;
+
+        _pool.Detach(obj);
+    }
+
+
     public void ReleaseAll()
     {
         var active = _pool.ActiveGameObjects;

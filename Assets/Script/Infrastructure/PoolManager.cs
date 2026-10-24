@@ -48,4 +48,12 @@ public class PoolManager
         obj.SetActive(false);
         stack.Push(obj);
     }
+
+    public void Detach(GameObject obj)
+    {
+        if (obj == null) return;
+
+        _active.Remove(obj);
+        _owner.Remove(obj);
+    }
 }
