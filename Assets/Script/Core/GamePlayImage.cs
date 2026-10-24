@@ -53,18 +53,13 @@ public class GamePlayImage : MonoBehaviour
     {
         _isPlaying = false;
 
-        if (levelManager.IsTutorial)
+        if (!levelManager.IsTutorial)
         {
-            yield return new WaitForSeconds(1f);
-            Haptics.Play(HapticTypes.Success);
-            markPresenter.PlayWinBounce();
-            spawnChallegeNode.PlayWinBounce();
-            yield break;
+            int reward = CoinReward.Get(_currentLevel.Difficulty);
+            PendingReward.Add(reward);
         }
 
-        int reward = CoinReward.Get(_currentLevel.Difficulty);
-        PendingReward.Add(reward);
-        levelManager.CompleteCurrentLevel();
+        levelManager.MarkWin(); 
 
         yield return new WaitForSeconds(1f);
         Haptics.Play(HapticTypes.Success);

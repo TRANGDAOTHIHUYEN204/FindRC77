@@ -24,13 +24,19 @@ public class StateGame : MonoBehaviour
     private int _lastBeepSecond = -1;
     [SerializeField] private TextMeshProUGUI loseLevelText;
     [SerializeField] private TextMeshProUGUI winLevelText;
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private TextMeshProUGUI levelText;
     
     private void Awake()
     {
         Instance = this;
         Time.timeScale = 1f;
     }
-    
+
+    private void Start()
+    {
+        SetText();
+    }
     public void Init(float timeLimit)
     {
         TimeLimit = timeLimit;
@@ -47,7 +53,7 @@ public class StateGame : MonoBehaviour
     private void Update()
     {
         if (State != GameState.Playing) return;
-
+        if (levelManager.IsTutorial) return;
         TimeLeft -= Time.deltaTime;
 
         int sec = Mathf.CeilToInt(TimeLeft);
@@ -101,9 +107,20 @@ public class StateGame : MonoBehaviour
         SetPanels(false, true, false);
         winText.text = textWin;
         Time.timeScale = 0f;
-        winLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
+        
+        if (levelManager.IsTutorial)
+        {
+            winLevelText.text = "WELCOME";
+        }
+        else
+        {
+            winLevelText.text = "LEVEL " + (SaveGame.CurrentLevel +1 ).ToString();
+        }
     }
-
+    public void SetText()
+    {
+        levelText.text = "Level " + (SaveGame.CurrentLevel + 1).ToString();
+    }
     public void LoseGame()
     {
         string textLose = "Am I make the wrong choice?!";
@@ -147,7 +164,7 @@ public class StateGame : MonoBehaviour
 
     private void OnApplicationPause(bool paused)
     {
-        if (paused) PauseGame();
+        if (paused && !levelManager.IsTutorial) PauseGame();
     }
 
     private void OnDestroy()

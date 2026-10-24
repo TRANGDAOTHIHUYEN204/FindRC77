@@ -21,7 +21,9 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private AudioClip loseGameSound;
     [SerializeField] private AudioClip clickSuccessSound;
     private bool _isLosing = false;
-    
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private RectTransform trailStartPoint;
+   
     public bool HandleClick(Vector2 screenPoint)
     {
         if (_isLosing) return false;
@@ -32,37 +34,70 @@ public class DifferentClickHandler : MonoBehaviour
         if (manager == null) return false;
 
         var entry = manager.FindRemaining(screenPoint, uiCamera);
+
         if (entry != null)
         {
             if (!manager.MarkFound(entry)) return false;
-            if (hintPresenter.HintedPair == entry.Pair) hintPresenter.ClearHint();
+
+            if (hintPresenter.HintedPair == entry.Pair)
+                hintPresenter.ClearHint();
+
             markPresenter.DrawPair(entry.Pair, entry.Mark);
+
             Haptics.Light();
             SoundManager.Instance.PlaySfx(clickSuccessSound);
-            Vector3 from = worldCamera.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, spawnChallengeNode.transform.position.z - worldCamera.transform.position.z));
 
-            spawnChallengeNode.ChangeNext(spriteChange, from);
+            if (trailStartPoint != null &&
+                trailStartPoint.parent is RectTransform canvasRect &&
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvasRect,
+                    screenPoint,
+                    uiCamera,
+                    out Vector2 localPoint))
+            {
+                trailStartPoint.anchoredPosition = localPoint;
+
+                spawnChallengeNode.ChangeNext(
+                    spriteChange,
+                    trailStartPoint);
+            }
+            else
+            {
+                spawnChallengeNode.ChangeNext(spriteChange);
+            }
+
             return manager.IsComplete;
         }
 
-        if (manager.IsInFoundArea(screenPoint, uiCamera)) return false;
+        if (manager.IsInFoundArea(screenPoint, uiCamera))
+            return false;
+
+        if (levelManager.IsTutorial)
+            return false;
+
         Debug.Log("Click sai");
+
         errorSpawnManager.SpawnAtScreen(screenPoint);
         SoundManager.Instance.PlaySfx(clickErrorSound);
+
         bool outOfLives = heartManager.SubstractLives();
+
         if (outOfLives)
         {
             _isLosing = true;
             hintPresenter.ClearHint();
-            Haptics.Play(HapticTypes.Failure);  
+
+            Haptics.Play(HapticTypes.Failure);
             StartCoroutine(LoseGame());
         }
         else
         {
-            Haptics.Heavy();                     
+            Haptics.Heavy();
         }
+
         return false;
     }
+
 
     private IEnumerator LoseGame()
     {

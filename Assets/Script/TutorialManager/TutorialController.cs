@@ -14,6 +14,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private GameObject[] hideDuringTutorial;
     [SerializeField, Min(0f)] private float delayBeforeHome = 1f;
     public bool IsRunning { get; private set; }
+    [SerializeField, Min(1)] private int maxHints = 3; 
 
     private void Start() => StartCoroutine(RunTutorial());
 
@@ -21,20 +22,21 @@ public class TutorialController : MonoBehaviour
     {
         yield return null;
         if (!levelManager.IsTutorial) yield break;
-
-        yield return new WaitUntil(() =>
-            pairManagerHolder.Manager != null && stateGame.IsPlaying);
+        yield return new WaitUntil(() => pairManagerHolder.Manager != null);
 
         IsRunning = true;
         SetUIVisible(false);
 
-        while (true)
+        int hintsShown = 0;
+
+        while (hintsShown < maxHints)
         {
             var manager = pairManagerHolder.Manager;
             if (manager != null && manager.IsComplete) break;
 
             hintPresenter.ShowTutorialHint();
-
+            hintsShown++;
+            
             while (hintPresenter.HintedPair != null)
                 yield return null;
 
@@ -43,13 +45,16 @@ public class TutorialController : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(delayBetweenHints);
         }
+        
+
+        yield return new WaitUntil(() =>
+        {
+            var m = pairManagerHolder.Manager;
+            return m != null && m.IsComplete;
+        });
 
         EndTutorial(completed: true);
-        yield return new WaitForSecondsRealtime(delayBeforeHome);
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(homeSceneName);
     }
-
     private void EndTutorial(bool completed)
     {
         IsRunning = false;

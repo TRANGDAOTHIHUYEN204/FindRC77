@@ -10,7 +10,12 @@ public class FactoryManager : MonoBehaviour
     private readonly PoolManager _pool = new PoolManager();
     [SerializeField] private HeartLives heartPrefab;
     [SerializeField] private HintHand handPrefab;
+    [SerializeField] private StarTrailEffect starTrailPrefab;
 
+    public StarTrailEffect CreateStarTrail()
+    {
+        return CreateObject(starTrailPrefab);
+    }
     public HintHand CreateHand()
     {
         return CreateObject(handPrefab);

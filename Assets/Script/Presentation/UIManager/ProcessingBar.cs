@@ -11,14 +11,13 @@ public class ProcessingBar : MonoBehaviour
     [SerializeField] private float duration = 3f;
     [SerializeField] private bool playOnStart = true;
 
-    [Header("Loading Label")]
     [SerializeField] private string baseText = "Loading";
     [SerializeField] private float dotInterval = 0.4f;   
     [SerializeField] private int maxDots = 3;
     [SerializeField] private bool keepTextWidth = true;  
     [SerializeField] private bool animateAfterComplete = false; 
+    [SerializeField] private float startOffset = 750f;
 
-    [Header("Ads")]
     [SerializeField, Range(0f, 1f)] private float adsAt = 0.8f;
 
     [SerializeField] private AnimationCurve curve = new AnimationCurve(
@@ -200,7 +199,7 @@ public class ProcessingBar : MonoBehaviour
         if (mask == null || fill == null) return;
 
         p = Mathf.Clamp01(p);
-        float w = mask.rect.width;
-        fill.anchoredPosition = new Vector2(-(1f - p) * w, 0f);
+        float x = Mathf.Lerp(-startOffset, 0f, p);
+        fill.anchoredPosition = new Vector2(x, 0f);
     }
 }

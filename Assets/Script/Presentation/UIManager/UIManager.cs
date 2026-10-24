@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,12 +7,19 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private LevelManager leveManager;
     [SerializeField] private HintPresenter hintPresenter;
+    [SerializeField] private string homeSceneName = "HomeScene";
+    
+   
     public void NextLevel()
     {
+        if (leveManager.LastWinWasTutorial)
+        {
+            ReturnHomeScene(homeSceneName);
+            return;
+        }
 
         StartCoroutine(Continue());
     }
-
     public void Replay()
     {
         Debug.Log("Replay");
@@ -36,6 +44,7 @@ public class UIManager : MonoBehaviour
         hintPresenter.ShowHint();
     }
 
+    
     public void ReturnHomeScene(string sceneName)
     {
         StartCoroutine(ReturnHome(sceneName));

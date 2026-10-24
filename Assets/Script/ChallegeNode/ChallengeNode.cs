@@ -1,20 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChallengeNode : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Image image;
+    [SerializeField] private RectTransform visual; 
     [SerializeField] private BounceEffect bounceEffect;
-    public void Init(Sprite sprite)
-    {
-        ChangeSprite(sprite);
 
-    }
-    public void PlayWinBounce()
-    {
-        bounceEffect.Play();
-    }
-    public void ChangeSprite(Sprite sprite)
-    {
-        spriteRenderer.sprite = sprite;
-    }
+    public RectTransform Visual => visual;
+
+    public void Init(Sprite sprite) => ChangeSprite(sprite);
+    public void PlayWinBounce() => bounceEffect.Play();
+    public void ChangeSprite(Sprite sprite) => image.sprite = sprite;
 }

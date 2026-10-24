@@ -17,11 +17,7 @@ public class HintHand : MonoBehaviour
         if (_renderer != null)
             _renderer.sortingOrder = sortingOrder;
     }
-
-    /// <summary>
-    /// Parent under the level image so the hand sorts with gameplay content.
-    /// A free world SpriteRenderer stays behind the Screen Space Camera canvas.
-    /// </summary>
+    
     public void PointAt(RectTransform root, Vector3 worldPoint)
     {
         if (root == null)

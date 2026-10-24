@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public int CurrentIndex => _currentIndex;
     public string TextWin => _levelData.TextWin;
     public event Action<LevelData> OnLevelLoaded;
+    public bool LastWinWasTutorial { get; private set; }
 
     private void Start()
     {
@@ -28,6 +29,11 @@ public class LevelManager : MonoBehaviour
             LoadTutorial();
         else
             LoadLevel(SaveGame.CurrentLevel);
+    }
+    public void MarkWin()
+    {
+        LastWinWasTutorial = IsTutorial;  
+        CompleteCurrentLevel();
     }
 
     public void LoadTutorial()

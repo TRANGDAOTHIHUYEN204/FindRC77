@@ -9,7 +9,8 @@ public class HintPresenter : MonoBehaviour
     [SerializeField] private FactoryManager factory;
     [SerializeField, Min(0)] private int hintPerLevel = 1;
 
-    private HintHand _hand;
+    private HintHand _handA;
+    private HintHand _handB;
 
     public DifferentPair HintedPair { get; private set; }
     public int CountHint { get; private set; }
@@ -54,13 +55,10 @@ public class HintPresenter : MonoBehaviour
         if (tutorial)
         {
             spotlight.ShowAnimated(HintedPair);
-            ReleaseHand();
-            _hand = factory.CreateHand();
-            if (_hand != null)
-            {
-                HintedPair.GetWorldRect(HintedPair.RootA, out Vector3 center, out _);
-                _hand.PointAt(HintedPair.RootA, center);
-            }
+            ReleaseHands();
+
+            _handA = SpawnHand(HintedPair.RootA);
+            _handB = SpawnHand(HintedPair.RootB);
         }
         else
         {
@@ -82,14 +80,32 @@ public class HintPresenter : MonoBehaviour
     {
         HintedPair = null;
         spotlight.Hide();
-        ReleaseHand();
+        ReleaseHands();
     }
 
-    private void ReleaseHand()
+    private HintHand SpawnHand(RectTransform root)
     {
-        if (_hand == null) return;
-        _hand.Detach();
-        factory.Release(_hand.gameObject);
-        _hand = null;
+        if (root == null) return null;
+
+        var hand = factory.CreateHand();
+        if (hand == null) return null;
+
+        HintedPair.GetWorldRect(root, out Vector3 center, out _);
+        hand.PointAt(root, center);
+        return hand;
+    }
+
+    private void ReleaseHands()
+    {
+        ReleaseHand(ref _handA);
+        ReleaseHand(ref _handB);
+    }
+
+    private void ReleaseHand(ref HintHand hand)
+    {
+        if (hand == null) return;
+        hand.Detach();
+        factory.Release(hand.gameObject);
+        hand = null;
     }
 }
