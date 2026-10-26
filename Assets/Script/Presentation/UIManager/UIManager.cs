@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
    
     public void NextLevel()
     {
-        if (leveManager.LastWinWasTutorial)
+        if (leveManager.LastWinWasTutorial || leveManager.IsLastLevel)
         {
             ReturnHomeScene(homeSceneName);
             return;
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     }
     private IEnumerator ReturnHome(string sceneName)
     {
-        yield return new WaitForSecondsRealtime(0.5f);
-        SceneManager.LoadScene(sceneName);
+        yield return new WaitForSecondsRealtime(0.2f);
+        SceneManager.LoadSceneAsync(sceneName);
     }
 }

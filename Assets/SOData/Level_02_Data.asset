@@ -18,7 +18,7 @@ MonoBehaviour:
   errorSprite: {fileID: 9070357606743538728, guid: 607fb9c4a888ac74b88e51643748b88a, type: 3}
   timeLimit: 240
   markData:
-  - {fileID: 11400000, guid: f801f020d7e31124ea10adce92254075, type: 2}
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
   - Position: {x: 381.2, y: -53.6, z: 0}
     Size: {x: 72.5, y: 47.7}

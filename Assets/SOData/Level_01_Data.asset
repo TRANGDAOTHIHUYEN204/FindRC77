@@ -16,7 +16,7 @@ MonoBehaviour:
   countDifferent: 10
   rawSprite: {fileID: 774992141187699822, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
   errorSprite: {fileID: 8573565815015891458, guid: b4d6e6783dee6db4db061f76889b6461, type: 3}
-  timeLimit: 240
+  timeLimit: 40
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:

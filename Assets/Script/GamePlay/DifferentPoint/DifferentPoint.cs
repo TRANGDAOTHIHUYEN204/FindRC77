@@ -37,7 +37,6 @@ public class DifferentPoint : MonoBehaviour
             return false;
 
         Vector2 d = local - _position;
-        return Mathf.Abs(d.x) <= _size.x * 0.5f &&
-               Mathf.Abs(d.y) <= _size.y * 0.5f;
+        return Mathf.Abs(d.x) <= _size.x * 0.5f && Mathf.Abs(d.y) <= _size.y * 0.5f;
     }
 }

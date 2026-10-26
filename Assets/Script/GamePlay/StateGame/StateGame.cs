@@ -12,7 +12,7 @@ public class StateGame : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private TextMeshProUGUI currentTimeText;
-    public GameState State { get; private set; } = GameState.Paused; 
+    public GameState State { get; private set; } = GameState.Paused;
     public float TimeLeft { get; private set; }
     public float TimeLimit { get; private set; }
     [SerializeField] private TextMeshProUGUI winText;
@@ -20,13 +20,20 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TimeOutline outline;
     private int _lastShownSecond = -1;
     [SerializeField] private AudioClip clickWarningSound;
-    [SerializeField] private TextMeshProUGUI loseText ;
+    [SerializeField] private TextMeshProUGUI loseText;
     private int _lastBeepSecond = -1;
     [SerializeField] private TextMeshProUGUI loseLevelText;
     [SerializeField] private TextMeshProUGUI winLevelText;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private TextMeshProUGUI levelText;
+    private string _levelLabel;
     
+    [SerializeField] private int warningStartSecond = 10;
+    [SerializeField, Range(0f, 1f)] private float warningMinVolume = 0.3f;
+    [SerializeField, Range(0f, 1f)] private float warningMaxVolume = 1f;
+    [SerializeField] private AudioClip loseGameSound;
+    [SerializeField] private string loseTextGame;
+
     private void Awake()
     {
         Instance = this;
@@ -37,6 +44,7 @@ public class StateGame : MonoBehaviour
     {
         SetText();
     }
+
     public void Init(float timeLimit)
     {
         TimeLimit = timeLimit;
@@ -44,10 +52,39 @@ public class StateGame : MonoBehaviour
         State = GameState.Playing;
         Time.timeScale = 1f;
         SetPanels(false, false, false);
-        if (outline) outline.SetFill(1f); 
+        if (outline) outline.SetFill(1f);
         _lastShownSecond = -1;
-        UpdateTimeText();
         _lastBeepSecond = -1;
+
+        _levelLabel = GetLevelLabel();
+        SetText();
+        UpdateTimeText();
+    }
+
+    public void WinGame(string textWin)
+    {
+        if (State != GameState.Playing) return;
+        State = GameState.Won;
+        SetPanels(false, true, false);
+        winText.text = textWin;
+        Time.timeScale = 0f;
+    }
+
+    public void LoseGame()
+    {
+        if (State != GameState.Playing) return;
+        State = GameState.Lost;
+        SoundManager.Instance.PlaySfx(loseGameSound);
+        SetPanels(false, false, true);
+        loseText.text = loseTextGame;
+        Time.timeScale = 0f;
+    }
+
+    public void SetText()
+    {
+        if (levelText) levelText.text = _levelLabel;
+        if (winLevelText) winLevelText.text = _levelLabel;
+        if (loseLevelText) loseLevelText.text = _levelLabel;
     }
 
     private void Update()
@@ -57,10 +94,13 @@ public class StateGame : MonoBehaviour
         TimeLeft -= Time.deltaTime;
 
         int sec = Mathf.CeilToInt(TimeLeft);
-        if (sec <= 10 && sec > 0 && sec != _lastBeepSecond)
+        if (sec <= warningStartSecond && sec > 0 && sec != _lastBeepSecond)
         {
             _lastBeepSecond = sec;
-            SoundManager.Instance.PlaySfx(clickWarningSound);
+            float t = (warningStartSecond - sec) / (float)(warningStartSecond - 1);
+            float volume = Mathf.Lerp(warningMinVolume, warningMaxVolume, t);
+
+            SoundManager.Instance.PlaySfx(clickWarningSound, volume);
         }
 
         if (TimeLeft <= 0f)
@@ -72,16 +112,17 @@ public class StateGame : MonoBehaviour
         if (outline) outline.SetFill(TimeLeft / TimeLimit);
         UpdateTimeText();
     }
-    
+
     private void UpdateTimeText()
     {
         if (!currentTimeText) return;
 
         int sec = Mathf.CeilToInt(TimeLeft);
-        if (sec == _lastShownSecond) return; 
+        if (sec == _lastShownSecond) return;
         _lastShownSecond = sec;
         currentTimeText.text = $"{sec / 60}:{sec % 60:00}";
     }
+
     public void PauseGame()
     {
         if (State != GameState.Playing) return;
@@ -100,38 +141,10 @@ public class StateGame : MonoBehaviour
         State = GameState.Playing;
     }
 
-    public void WinGame(string textWin)
-    {
-        if (State != GameState.Playing) return;
-        State = GameState.Won;
-        SetText();                      
-        SetPanels(false, true, false);
-        winText.text = textWin;
-        Time.timeScale = 0f;
-    }
-
-    public void LoseGame()
-    {
-        string textLose = "Am I make the wrong choice?!";
-        if (State != GameState.Playing) return;
-        State = GameState.Lost;
-        SetText();                   
-        SetPanels(false, false, true);
-        loseText.text = textLose;
-        Time.timeScale = 0f;
-    }
     private string GetLevelLabel()
     {
         if (levelManager.IsTutorial) return "WELCOME";
         return "LEVEL " + (SaveGame.CurrentLevel + 1);
-    }
-
-    public void SetText()
-    {
-        string label = GetLevelLabel();
-        if (levelText) levelText.text = label;
-        if (winLevelText) winLevelText.text = label;
-        if (loseLevelText) loseLevelText.text = label;
     }
 
     private void SetPanels(bool pause, bool win, bool lose)
@@ -140,7 +153,7 @@ public class StateGame : MonoBehaviour
         SetPanel(winPanel, win);
         SetPanel(losePanel, lose);
     }
-    
+
     private void SetPanel(GameObject panel, bool show)
     {
         if (!panel) return;
@@ -154,13 +167,13 @@ public class StateGame : MonoBehaviour
 
         if (show)
         {
-            panel.SetActive(true);   
-            anim.Show(); 
+            panel.SetActive(true);
+            anim.Show();
         }
         else
         {
             if (!panel.activeSelf) return;
-            anim.Close(() => panel.SetActive(false)); 
+            anim.Close(() => panel.SetActive(false));
         }
     }
 

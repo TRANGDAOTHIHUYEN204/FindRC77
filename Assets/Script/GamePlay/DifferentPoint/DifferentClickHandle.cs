@@ -18,7 +18,7 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private ErrorSpawnManager  errorSpawnManager;
     [SerializeField] private AudioClip clickErrorSound;
-    [SerializeField] private AudioClip loseGameSound;
+    
     [SerializeField] private AudioClip clickSuccessSound;
     private bool _isLosing = false;
     [SerializeField] private LevelManager levelManager;
@@ -103,7 +103,7 @@ public class DifferentClickHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         stateGame.LoseGame();
-        SoundManager.Instance.PlaySfx(loseGameSound);
+        
     }
     public void ResetLoseState()
     {

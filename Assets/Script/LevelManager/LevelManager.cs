@@ -4,7 +4,7 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] levels;
-    [SerializeField] private LevelData tutorialLevel;   // asset LevelData riêng cho tutorial
+    [SerializeField] private LevelData tutorialLevel; 
 
     private int _currentIndex;
     private LevelData _levelData;
@@ -22,7 +22,8 @@ public class LevelManager : MonoBehaviour
     public string TextWin => _levelData.TextWin;
     public event Action<LevelData> OnLevelLoaded;
     public bool LastWinWasTutorial { get; private set; }
-
+    public int CountLevel => levels.Length;
+    public bool IsLastLevel => !IsTutorial && CurrentIndex >= levels.Length - 1;
     private void Start()
     {
         if (tutorialLevel != null && !SaveGame.TutorialShown)
@@ -60,7 +61,7 @@ public class LevelManager : MonoBehaviour
         if (_completed) return;
         _completed = true;
         if (IsTutorial) return;   
-        SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1);
+        SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1) ;
     }
 
     public void LoadNextLevel() => LoadLevel(SaveGame.CurrentLevel);

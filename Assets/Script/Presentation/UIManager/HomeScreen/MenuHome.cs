@@ -29,15 +29,14 @@ public class MenuHome : MonoBehaviour
 
     private IEnumerator GamePlay(string screenName)
     {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(screenName);
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadSceneAsync(screenName);
     }
     public void OpenSetting()
     {
         settingPanel.SetActive(true);
 
-        PanelAnimation anim =
-            settingPanel.GetComponentInChildren<PanelAnimation>(true);
+        PanelAnimation anim = settingPanel.GetComponentInChildren<PanelAnimation>(true);
 
         if (anim != null)
             anim.Show();

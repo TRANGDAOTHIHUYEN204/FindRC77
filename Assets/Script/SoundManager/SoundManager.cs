@@ -51,7 +51,6 @@ public class SoundManager : MonoBehaviour
         sfxSource.pitch = 1f;
         sfxSource.PlayOneShot(clip, volume * sfxVolume);
     }
-
     public void PlaySfxRandomPitch(AudioClip clip, float volume = 1f, float range = 0.1f)
     {
         if (!_sfxOn || clip == null) return;
