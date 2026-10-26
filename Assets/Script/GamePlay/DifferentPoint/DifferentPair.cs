@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class DifferentPair : MonoBehaviour
 {
     [SerializeField] private DifferentPoint pointA;
@@ -19,6 +19,7 @@ public class DifferentPair : MonoBehaviour
     private ShapeMark _shape;
     public void SetShape(ShapeMark shape) => _shape = shape;
     public ShapeMark Shape => _shape;
+    private Vector2 _scale;
 
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
@@ -35,11 +36,28 @@ public class DifferentPair : MonoBehaviour
         Vector2 scale = new Vector2(rect.x / DesignSize.x, rect.y / DesignSize.y);
         _pos  = Vector2.Scale((Vector2)data.Position, scale);
         _size = Vector2.Scale(data.Size, scale);
+
+        // Lấy điểm từ SO rồi scale theo root
+        Vector3[] outlinePts = null;
+        if (data.Outline != null && data.Outline.points.Count > 1)
+        {
+            outlinePts = new Vector3[data.Outline.points.Count];
+            for (int i = 0; i < outlinePts.Length; i++)
+            {
+                Vector3 p = data.Outline.points[i];
+                outlinePts[i] = new Vector3(p.x * scale.x, p.y * scale.y, 0f);
+            }
+        }
+
         if (pointA != null && pointA.gameObject.scene.IsValid())
-            pointA.Init(_pos, _size, rootA);
+            pointA.Init(_pos, _size, rootA, outlinePts);
         if (pointB != null && pointB.gameObject.scene.IsValid())
-            pointB.Init(_pos, _size, rootB);
+            pointB.Init(_pos, _size, rootB, outlinePts);
     }
+
+    public void ShowOutline() { pointA?.ShowOutline(); pointB?.ShowOutline(); }
+    public void HideOutline() { pointA?.HideOutline(); pointB?.HideOutline(); }
+    
 
     public bool IsHit(Vector2 screenPoint, Camera cam)
         => !IsFound && ContainsPoint(screenPoint, cam);
@@ -47,10 +65,12 @@ public class DifferentPair : MonoBehaviour
     public bool ContainsPoint(Vector2 screenPoint, Camera cam)
         => pointA.IsHit(screenPoint, cam) || pointB.IsHit(screenPoint, cam);
     
+
     public bool MarkFound()
     {
         if (IsFound) return false;
         IsFound = true;
+        ShowOutline();
         return true;
     }
 

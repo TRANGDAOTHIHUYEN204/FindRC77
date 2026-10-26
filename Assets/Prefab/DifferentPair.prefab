@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5069487213972143601}
   - component: {fileID: 3358931657823293228}
   - component: {fileID: 8425743094690588138}
+  - component: {fileID: 1629055911010589765}
   m_Layer: 0
   m_Name: DifferentPointRaw
   m_TagString: Untagged
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifferentPoint
   boxCollider: {fileID: 5069487213972143601}
+  outline: {fileID: 1629055911010589765}
 --- !u!212 &8425743094690588138
 SpriteRenderer:
   serializedVersion: 2
@@ -152,6 +154,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1629055911010589765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001316102782824712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddeba29a8fcfc7c4f889a5d58cd26967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineDifferentPoint
+  differentPoints: []
+  lineMaterial: {fileID: 2100000, guid: 5a6526bda9af7194a9fe13a21f650076, type: 2}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  lineWidth: 4
+  sortingOrder: 10
+  outlineRelativeToPosition: 1
+  drawOnStart: 1
 --- !u!1 &4284816175730915249
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +185,7 @@ GameObject:
   - component: {fileID: 587233904230915285}
   - component: {fileID: 7430157260689799991}
   - component: {fileID: 5627490730048678242}
+  - component: {fileID: 6611229141668521939}
   m_Layer: 0
   m_Name: DifferentPointError
   m_TagString: Untagged
@@ -245,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifferentPoint
   boxCollider: {fileID: 587233904230915285}
+  outline: {fileID: 6611229141668521939}
 --- !u!212 &5627490730048678242
 SpriteRenderer:
   serializedVersion: 2
@@ -304,6 +327,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6611229141668521939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284816175730915249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddeba29a8fcfc7c4f889a5d58cd26967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineDifferentPoint
+  differentPoints: []
+  lineMaterial: {fileID: 0}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  lineWidth: 4
+  sortingOrder: 10
+  outlineRelativeToPosition: 1
+  drawOnStart: 1
 --- !u!1 &4746030814382360577
 GameObject:
   m_ObjectHideFlags: 0
