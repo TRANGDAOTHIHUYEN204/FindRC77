@@ -23,6 +23,7 @@ public class DifferentClickHandler : MonoBehaviour
     private bool _isLosing = false;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private RectTransform trailStartPoint;
+    [SerializeField] private float outlineDuration = 10f;
    
     public bool HandleClick(Vector2 screenPoint)
     {
@@ -42,24 +43,17 @@ public class DifferentClickHandler : MonoBehaviour
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
 
-            markPresenter.DrawPair(entry.Pair, entry.Mark);
+            StartCoroutine(OutlineThenMark(entry.Pair, () => markPresenter.DrawPair(entry.Pair, entry.Mark)));
 
             Haptics.Light();
             SoundManager.Instance.PlaySfx(clickSuccessSound);
 
             if (trailStartPoint != null &&
-                trailStartPoint.parent is RectTransform canvasRect &&
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    canvasRect,
-                    screenPoint,
-                    uiCamera,
-                    out Vector2 localPoint))
+                trailStartPoint.parent is RectTransform canvasRect && RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, uiCamera, out Vector2 localPoint))
             {
                 trailStartPoint.anchoredPosition = localPoint;
 
-                spawnChallengeNode.ChangeNext(
-                    spriteChange,
-                    trailStartPoint);
+                spawnChallengeNode.ChangeNext(spriteChange, trailStartPoint);
             }
             else
             {
@@ -97,8 +91,18 @@ public class DifferentClickHandler : MonoBehaviour
 
         return false;
     }
+    
+    private IEnumerator OutlineThenMark(DifferentPair pair, System.Action drawMark)
+    {
+        pair.ShowOutline();
 
+        yield return new WaitForSecondsRealtime(outlineDuration);
 
+        if (pair == null) yield break; 
+
+        pair.HideOutline();
+        drawMark?.Invoke();
+    }
     private IEnumerator LoseGame()
     {
         yield return new WaitForSeconds(1f);

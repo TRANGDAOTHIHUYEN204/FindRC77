@@ -33,8 +33,23 @@ public class LevelManager : MonoBehaviour
     }
     public void MarkWin()
     {
-        LastWinWasTutorial = IsTutorial;  
-        CompleteCurrentLevel();
+        LastWinWasTutorial = IsTutorial;
+        _completed = true;          
+    }
+
+
+    private void CommitProgress()
+    {
+        if (!_completed || IsTutorial) return;
+        int next = Mathf.Min(_currentIndex + 1, levels.Length - 1);
+        SaveGame.CurrentLevel = Mathf.Max(SaveGame.CurrentLevel, next);
+    }
+
+    public void LoadNextLevel()
+    {
+        CommitProgress();
+        if (LastWinWasTutorial) LoadLevel(SaveGame.CurrentLevel);
+        else LoadLevel(_currentIndex + 1);
     }
 
     public void LoadTutorial()
@@ -63,8 +78,7 @@ public class LevelManager : MonoBehaviour
         if (IsTutorial) return;   
         SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1) ;
     }
-
-    public void LoadNextLevel() => LoadLevel(SaveGame.CurrentLevel);
+    
 
     public void ReloadLevel()
     {

@@ -319,7 +319,7 @@ MonoBehaviour:
   homeSceneName: HomeScene
   gameplaySceneName: GamePlay
   resetAllOnStart: 1
-  resetTutorialOnStart: 0
+  resetTutorialOnStart: 1
 --- !u!1 &575401447
 GameObject:
   m_ObjectHideFlags: 0

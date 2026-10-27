@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
+
 public class DifferentPair : MonoBehaviour
 {
     [SerializeField] private DifferentPoint pointA;
@@ -7,24 +7,21 @@ public class DifferentPair : MonoBehaviour
 
     private static readonly Vector2 DesignSize = new Vector2(1040f, 650f);
 
-    private DifferentPointInfo _info;
     private RectTransform _rootA, _rootB;
     private Vector2 _pos, _size;
+    private ShapeMark _shape;
 
     public bool IsFound { get; private set; }
     public DifferentPoint PointA => pointA;
     public DifferentPoint PointB => pointB;
     public RectTransform RootA => _rootA;
     public RectTransform RootB => _rootB;
-    private ShapeMark _shape;
-    public void SetShape(ShapeMark shape) => _shape = shape;
     public ShapeMark Shape => _shape;
-    private Vector2 _scale;
+    public void SetShape(ShapeMark shape) => _shape = shape;
 
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
         IsFound = false;
-        _info = data;
         _rootA = rootA as RectTransform;
         _rootB = rootB as RectTransform;
         Canvas.ForceUpdateCanvases();
@@ -36,42 +33,37 @@ public class DifferentPair : MonoBehaviour
         Vector2 scale = new Vector2(rect.x / DesignSize.x, rect.y / DesignSize.y);
         _pos  = Vector2.Scale((Vector2)data.Position, scale);
         _size = Vector2.Scale(data.Size, scale);
-
-        // Lấy điểm từ SO rồi scale theo root
-        Vector3[] outlinePts = null;
-        if (data.Outline != null && data.Outline.points.Count > 1)
-        {
-            outlinePts = new Vector3[data.Outline.points.Count];
-            for (int i = 0; i < outlinePts.Length; i++)
-            {
-                Vector3 p = data.Outline.points[i];
-                outlinePts[i] = new Vector3(p.x * scale.x, p.y * scale.y, 0f);
-            }
-        }
+        Vector3[] outline = data.GetScaledOutline(scale);
 
         if (pointA != null && pointA.gameObject.scene.IsValid())
-            pointA.Init(_pos, _size, rootA, outlinePts);
+            pointA.Init(_pos, _size, outline, rootA);
         if (pointB != null && pointB.gameObject.scene.IsValid())
-            pointB.Init(_pos, _size, rootB, outlinePts);
+            pointB.Init(_pos, _size, outline, rootB);
     }
-
-    public void ShowOutline() { pointA?.ShowOutline(); pointB?.ShowOutline(); }
-    public void HideOutline() { pointA?.HideOutline(); pointB?.HideOutline(); }
-    
 
     public bool IsHit(Vector2 screenPoint, Camera cam)
         => !IsFound && ContainsPoint(screenPoint, cam);
 
     public bool ContainsPoint(Vector2 screenPoint, Camera cam)
         => pointA.IsHit(screenPoint, cam) || pointB.IsHit(screenPoint, cam);
-    
 
     public bool MarkFound()
     {
         if (IsFound) return false;
         IsFound = true;
-        ShowOutline();
         return true;
+    }
+
+    public void ShowOutline()
+    {
+        pointA.ShowOutline();
+        pointB.ShowOutline();
+    }
+
+    public void HideOutline()
+    {
+        pointA.HideOutline();
+        pointB.HideOutline();
     }
 
     public void GetWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
@@ -92,5 +84,4 @@ public class DifferentPair : MonoBehaviour
             size = new Vector2(d, d);
         }
     }
-    
 }

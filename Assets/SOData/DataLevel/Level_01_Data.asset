@@ -16,39 +16,49 @@ MonoBehaviour:
   countDifferent: 10
   rawSprite: {fileID: 774992141187699822, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
   errorSprite: {fileID: 8573565815015891458, guid: b4d6e6783dee6db4db061f76889b6461, type: 3}
-  timeLimit: 40
+  timeLimit: 240
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
   - Position: {x: -457.8, y: -76.1, z: 0}
     Size: {x: 69, y: 69}
-    OutlinePoints: []
+    Outline:
+    - {x: -498, y: -61, z: 0}
+    - {x: -499, y: -90, z: 0}
+    - {x: -498, y: -128, z: 0}
+    - {x: -485, y: -129.1, z: 0}
+    - {x: -445, y: -127, z: 0}
+    - {x: -444, y: -106, z: 0}
+    - {x: -445, y: -82, z: 0}
+    - {x: -445, y: -63, z: 0}
+    - {x: -463, y: -47, z: 0}
   - Position: {x: 256.7, y: -89.1, z: 0}
     Size: {x: 80, y: 80}
-    OutlinePoints: []
+    Outline:
+    - {x: 0, y: 0, z: 0}
   - Position: {x: -84.7, y: 296.4, z: 0}
     Size: {x: 59.8, y: 57.3}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: -261.8, y: -57.1, z: 0}
     Size: {x: 319.3, y: 150.2}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: -206.1, y: -217.5, z: 0}
     Size: {x: 97.2, y: 89.4}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: 25.7, y: 58.7, z: 0}
     Size: {x: 144.8, y: 203.9}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: 68.3, y: -231.6, z: 0}
     Size: {x: 228.2, y: 104.8}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: 436.3, y: -50.1, z: 0}
     Size: {x: 156.5, y: 126.8}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: -347.6, y: 154.9, z: 0}
     Size: {x: 308.6, y: 263.8}
-    OutlinePoints: []
+    Outline: []
   - Position: {x: 415.9, y: 106.6, z: 0}
     Size: {x: 207.4, y: 158.2}
-    OutlinePoints: []
+    Outline: []
   textWin: Bikini or casual? Hot in both anyway.
   difficulty: 0
