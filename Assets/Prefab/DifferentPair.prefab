@@ -216,16 +216,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OutlineDifferentPoint
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3584906, g: 0.17079033, b: 0.17079033, a: 1}
+  m_Color: {r: 0.6431373, g: 0.8392157, b: 0.36862746, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  lineWidth: 5
+  lineWidth: 7
   dashLength: 10
   gapLength: 6
+  fadeDuration: 0.3
+  drawDuration: 0.5
 --- !u!1 &4284816175730915249
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,13 +492,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OutlineDifferentPoint
   m_Material: {fileID: 0}
-  m_Color: {r: 0.35686275, g: 0.17254902, b: 0.17254902, a: 1}
+  m_Color: {r: 0.6431373, g: 0.8392157, b: 0.36862746, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  lineWidth: 5
+  lineWidth: 7
   dashLength: 10
   gapLength: 6
+  fadeDuration: 0.3
+  drawDuration: 0.5

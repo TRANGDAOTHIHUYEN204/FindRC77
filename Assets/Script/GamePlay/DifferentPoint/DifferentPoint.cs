@@ -70,8 +70,8 @@ public class DifferentPoint : MonoBehaviour
         if (outline != null) outline.Draw(_outlinePoints, _root, _outlineLoop);
     }
 
-    public void HideOutline()
+    public void HideOutline(float fadeDuration = -1f)
     {
-        if (outline != null) outline.Clear();
+        if (outline != null) outline.Hide(fadeDuration);
     }
 }

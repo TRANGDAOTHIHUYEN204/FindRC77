@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Level_06_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 6
-  countDifferent: 1
+  countDifferent: 0
   rawSprite: {fileID: 0}
   errorSprite: {fileID: 0}
   timeLimit: 240
   markData: []
-  differentPoints:
-  - Position: {x: 102.7, y: 43, z: 0}
-    Size: {x: 165.6, y: 134.4}
+  differentPoints: []
   textWin: Gym or yoga? Serving body either way.
+  difficulty: 0

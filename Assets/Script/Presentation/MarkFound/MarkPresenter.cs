@@ -5,7 +5,7 @@ public class MarkPresenter : MonoBehaviour
     [SerializeField] private FactoryManager factoryManager;
 
     [SerializeField, Range(0.1f, 1f)] private float visualRatio = 0.5f;
-    
+
     [SerializeField] private float smallThreshold = 0.05f;
     [SerializeField] private float smallLineMul = 0.7f;
 
@@ -28,10 +28,8 @@ public class MarkPresenter : MonoBehaviour
         MarkFound mark = factoryManager.Create();
         if (mark == null) return;
         _marks.Add(mark);
-
-
-        pair.GetShapeWorldRect(root, out Vector3 center, out Vector2 size);
-
+        
+        pair.GetMarkWorldRect(root, out Vector3 center, out Vector2 size);
 
         float shapeSize = Mathf.Min(size.x, size.y) * visualRatio;
 
@@ -40,7 +38,7 @@ public class MarkPresenter : MonoBehaviour
         float lw = data.LineWidth * (isSmall ? smallLineMul : 1f);
 
         float path = Mathf.Max(shapeSize - lw, 0.01f);
-        Vector2 pathSize = new Vector2(path, path);  
+        Vector2 pathSize = new Vector2(path, path);
 
         Transform t = mark.transform;
         t.SetParent(root, false);

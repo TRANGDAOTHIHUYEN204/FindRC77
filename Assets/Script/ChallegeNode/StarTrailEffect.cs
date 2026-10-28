@@ -31,7 +31,6 @@ public class StarTrailEffect : MonoBehaviour
         if (_visualParticle != null)
             return;
 
-        // Chỉ dùng VFX con (fx_Trail_2). PS trên root là đường thừa.
         ParticleSystem[] all = GetComponentsInChildren<ParticleSystem>(true);
         for (int i = 0; i < all.Length; i++)
         {
@@ -146,9 +145,7 @@ public class StarTrailEffect : MonoBehaviour
     {
         if (_visualParticle == null)
             return;
-
-        // Giữ ParticleSystemRenderer tắt: UIParticle trên root đã render rồi.
-        // Bật cả hai sẽ ra 2 đường particle chồng nhau.
+        
         ParticleSystemRenderer renderer =
             _visualParticle.GetComponent<ParticleSystemRenderer>();
         if (renderer != null)

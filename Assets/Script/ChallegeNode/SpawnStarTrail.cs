@@ -22,7 +22,6 @@ public class SpawnStarTrail : MonoBehaviour
         if (_trails != null)
             return;
 
-        // Pool 2: 1 đang dùng + 1 standby (false) cho click nhanh.
         int count = Mathf.Max(2, initialCount);
 
         _trails = new StarTrailEffect[count];
@@ -72,9 +71,7 @@ public class SpawnStarTrail : MonoBehaviour
 
         if (_trails == null)
             return false;
-
-        // Mỗi lần Play chỉ bật ĐÚNG 1 trail đang false.
-        // Click nhanh: trail đang chạy vẫn giữ; lấy trail standby (false) mang ra dùng.
+        
         int freeIndex = FindFreeTrail();
         if (freeIndex < 0)
             return false;
@@ -90,8 +87,7 @@ public class SpawnStarTrail : MonoBehaviour
             StarTrailEffect trail = _trails[i];
             if (trail == null)
                 continue;
-
-            // Đang dùng hoặc vẫn đang active → bỏ qua, lấy cái false khác.
+            
             if (_isUsing[i] || trail.gameObject.activeSelf)
                 continue;
 

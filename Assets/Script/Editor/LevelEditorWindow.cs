@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +7,15 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 
 // Tools > Level Editor: chỉnh LevelData và vẽ trực tiếp các vùng khác biệt lên ảnh A/B.
-// Tọa độ DifferentPointInfo là local của RectTransform RawImage (pivot giữa, trục y hướng lên),
-// nên kích thước vùng ảnh ở đây phải khớp với RawImage trong scene GamePlay (mặc định 1040x650).
+// Tọa độ DifferentPointInfo là local của RectTransform frameA/RawImage (pivot giữa, trục y hướng lên),
+// nên kích thước vùng ảnh ở đây phải khớp với nó trong scene GamePlay (mặc định 1080x726).
 public class LevelEditorWindow : EditorWindow
 {
-    private const string PrefImageW = "LevelEditor.ImageW";
-    private const string PrefImageH = "LevelEditor.ImageH";
+    private const string PrefImageW = "LevelEditor.ImageW.v2";   // đổi key để bỏ giá trị 1040x650 cũ
+    private const string PrefImageH = "LevelEditor.ImageH.v2";
+    private const float DefaultImageW = 1080f;
+    private const float DefaultImageH = 720f;
+    private const string FrameName = "frameA";
     private const string LevelFolder = "Assets/SOData";
     private const string GamePlayScene = "Assets/Scenes/GamePlay.unity";
     private const float LeftWidth = 210f;
@@ -48,7 +52,7 @@ public class LevelEditorWindow : EditorWindow
 
     private void OnEnable()
     {
-        _imageSize = new Vector2(EditorPrefs.GetFloat(PrefImageW, 1040f), EditorPrefs.GetFloat(PrefImageH, 650f));
+        _imageSize = new Vector2(EditorPrefs.GetFloat(PrefImageW, DefaultImageW), EditorPrefs.GetFloat(PrefImageH, DefaultImageH));
         Undo.undoRedoPerformed += OnUndoRedo;
         RefreshLevels();
     }
@@ -114,6 +118,10 @@ public class LevelEditorWindow : EditorWindow
     {
         int i = Points.arraySize;
         Points.InsertArrayElementAtIndex(i);
+        SerializedProperty p = Points.GetArrayElementAtIndex(i);
+        p.FindPropertyRelative("Outline").ClearArray();
+        p.FindPropertyRelative("HasMarkCenter").boolValue = false;
+        p.FindPropertyRelative("MarkCenter").vector3Value = Vector3.zero;
         SetPoint(i, pos, size);
         return i;
     }
@@ -306,6 +314,43 @@ public class LevelEditorWindow : EditorWindow
 
     #endregion
 
+    #region Image size
+
+    private void SetImageSize(Vector2 size)
+    {
+        _imageSize = Vector2.Max(size, Vector2.one * 10f);
+        EditorPrefs.SetFloat(PrefImageW, _imageSize.x);
+        EditorPrefs.SetFloat(PrefImageH, _imageSize.y);
+        Repaint();
+    }
+
+    // Lấy kích thước từ RectTransform tên "frameA" trong scene đang mở.
+    private void FitFromFrame()
+    {
+        RectTransform frame = FindObjectsByType<RectTransform>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+            .FirstOrDefault(r => r.name.Equals(FrameName, StringComparison.OrdinalIgnoreCase));
+        if (frame == null)
+        {
+            ShowNotification(new GUIContent($"Không thấy \"{FrameName}\" trong scene đang mở"));
+            return;
+        }
+        SetImageSize(frame.rect.size);
+        ShowNotification(new GUIContent($"Đã lấy {frame.rect.size.x:0.#} x {frame.rect.size.y:0.#} từ {frame.name}"));
+    }
+
+    // Lấy kích thước pixel của ảnh A hiện tại.
+    private void FitFromSpriteA()
+    {
+        if (_level == null || _level.RawSprite == null)
+        {
+            ShowNotification(new GUIContent("Level chưa có ảnh A"));
+            return;
+        }
+        SetImageSize(_level.RawSprite.rect.size);
+    }
+
+    #endregion
+
     #region Toolbar & properties
 
     private void DrawToolbar()
@@ -333,13 +378,12 @@ public class LevelEditorWindow : EditorWindow
             using (new EditorGUILayout.HorizontalScope())
             {
                 EditorGUI.BeginChangeCheck();
-                _imageSize = EditorGUILayout.Vector2Field(new GUIContent("Kích thước RawImage", "Phải khớp RectTransform RawImage trong scene GamePlay"), _imageSize);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    _imageSize = Vector2.Max(_imageSize, Vector2.one * 10f);
-                    EditorPrefs.SetFloat(PrefImageW, _imageSize.x);
-                    EditorPrefs.SetFloat(PrefImageH, _imageSize.y);
-                }
+                Vector2 newSize = EditorGUILayout.Vector2Field(new GUIContent("Kích thước frame", "Phải khớp RectTransform frameA/RawImage trong scene GamePlay"), _imageSize);
+                if (EditorGUI.EndChangeCheck()) SetImageSize(newSize);
+
+                if (GUILayout.Button(new GUIContent("Từ frameA", "Đọc kích thước RectTransform \"frameA\" trong scene đang mở"), GUILayout.Width(70))) FitFromFrame();
+                if (GUILayout.Button(new GUIContent("Từ ảnh A", "Dùng kích thước pixel của ảnh A"), GUILayout.Width(65))) FitFromSpriteA();
+
                 _showLabels = GUILayout.Toggle(_showLabels, "Số thứ tự", EditorStyles.miniButton, GUILayout.Width(70));
                 GUILayout.Label(new GUIContent("Chồng A lên B", "Kéo để so sánh ảnh A đè lên ảnh B"), GUILayout.Width(85));
                 _overlayAlpha = GUILayout.HorizontalSlider(_overlayAlpha, 0f, 1f, GUILayout.Width(80));

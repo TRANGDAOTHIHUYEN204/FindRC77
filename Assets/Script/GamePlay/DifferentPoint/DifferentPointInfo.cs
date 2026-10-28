@@ -6,6 +6,8 @@ public class DifferentPointInfo
     public Vector3 Position;
     public Vector2 Size;
     public Vector3[] Outline;  
+    public bool HasMarkCenter;
+    public Vector3 MarkCenter;  
     
     public Vector3[] GetScaledOutline(Vector2 scale)
     {

@@ -5,7 +5,7 @@ public class DifferentPair : MonoBehaviour
     [SerializeField] private DifferentPoint pointA;
     [SerializeField] private DifferentPoint pointB;
 
-    private static readonly Vector2 DesignSize = new Vector2(1040f, 650f);
+    private static readonly Vector2 DesignSize = new Vector2(1080f, 720f);
 
     private RectTransform _rootA, _rootB;
     private Vector2 _pos, _size;
@@ -18,6 +18,8 @@ public class DifferentPair : MonoBehaviour
     public RectTransform RootB => _rootB;
     public ShapeMark Shape => _shape;
     public void SetShape(ShapeMark shape) => _shape = shape;
+    private Vector2 _markCenter;
+    private bool _hasMarkCenter;
 
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
@@ -33,7 +35,9 @@ public class DifferentPair : MonoBehaviour
         Vector2 scale = new Vector2(rect.x / DesignSize.x, rect.y / DesignSize.y);
         _pos  = Vector2.Scale((Vector2)data.Position, scale);
         _size = Vector2.Scale(data.Size, scale);
-        Vector3[] outline = data.GetScaledOutline(scale);
+        _hasMarkCenter = data.HasMarkCenter;
+        _markCenter = Vector2.Scale((Vector2)data.MarkCenter, scale);
+        Vector3[] outline = data.GetScaledOutline(Vector2.one); 
 
         if (pointA != null && pointA.gameObject.scene.IsValid())
             pointA.Init(_pos, _size, outline, rootA);
@@ -60,10 +64,10 @@ public class DifferentPair : MonoBehaviour
         pointB.ShowOutline();
     }
 
-    public void HideOutline()
+    public void HideOutline(float fadeDuration = -1f)
     {
-        pointA.HideOutline();
-        pointB.HideOutline();
+        pointA.HideOutline(fadeDuration);
+        pointB.HideOutline(fadeDuration);
     }
 
     public void GetWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
@@ -83,5 +87,11 @@ public class DifferentPair : MonoBehaviour
             float d = Mathf.Min(boxSize.x, boxSize.y);
             size = new Vector2(d, d);
         }
+    }
+    public void GetMarkWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
+    {
+        GetShapeWorldRect(root, out center, out size);
+        if (_hasMarkCenter)
+            center = root.TransformPoint(_markCenter);
     }
 }
