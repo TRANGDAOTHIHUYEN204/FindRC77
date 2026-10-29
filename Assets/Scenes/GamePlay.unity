@@ -1327,10 +1327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StarRewardManager
   heartManager: {fileID: 1736347940}
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 153753067}
   stars:
-  - {fileID: 6183837410111952214}
   - {fileID: 789841767}
+  - {fileID: 6183837410111952214}
   - {fileID: 1898587741}
   heartsRequired: 010000000200000003000000
   tutorialAlwaysFullStars: 1
@@ -9171,8 +9171,8 @@ MonoBehaviour:
   heartManager: {fileID: 1736347940}
   levelManager: {fileID: 153753067}
   stars:
-  - {fileID: 1996366915}
   - {fileID: 1049560285}
+  - {fileID: 1996366915}
   - {fileID: 689897414}
   heartsRequired: 010000000200000003000000
   tutorialAlwaysFullStars: 1
