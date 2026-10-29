@@ -9,7 +9,16 @@ public class MarkPresenter : MonoBehaviour
     [SerializeField] private float smallThreshold = 0.05f;
     [SerializeField] private float smallLineMul = 0.7f;
 
+    private int _session;
+    public int Session =>  _session;
+    
     private readonly System.Collections.Generic.List<MarkFound> _marks = new();
+    public bool DrawPair(DifferentPair pair, MarkData data, int session)
+    {
+        if (session != _session) return false;   
+        DrawPair(pair, data);
+        return true;
+    }
 
     public void DrawPair(DifferentPair pair, MarkData data)
     {
@@ -28,7 +37,7 @@ public class MarkPresenter : MonoBehaviour
         MarkFound mark = factoryManager.Create();
         if (mark == null) return;
         _marks.Add(mark);
-        
+
         pair.GetMarkWorldRect(root, out Vector3 center, out Vector2 size);
 
         float shapeSize = Mathf.Min(size.x, size.y) * visualRatio;
@@ -52,12 +61,18 @@ public class MarkPresenter : MonoBehaviour
         int order = (root == pair.RootA) ? 20 : 30;
         FrameMaskUtil.ApplyMask(frame, mark, order);
     }
+
     public void ClearMarks()
     {
+        _session++;  
+
         for (int i = _marks.Count - 1; i >= 0; i--)
         {
-            if (_marks[i] != null)
-                factoryManager.Release(_marks[i].gameObject);
+            MarkFound m = _marks[i];
+            if (m == null) continue;
+
+            m.StopAllCoroutines();
+            factoryManager.Release(m.gameObject);
         }
         _marks.Clear();
     }
