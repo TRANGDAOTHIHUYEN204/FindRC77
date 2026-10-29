@@ -52,8 +52,15 @@ public class MarkPresenter : MonoBehaviour
         int order = (root == pair.RootA) ? 20 : 30;
         FrameMaskUtil.ApplyMask(frame, mark, order);
     }
-
-    public void ClearMarks() => _marks.Clear();
+    public void ClearMarks()
+    {
+        for (int i = _marks.Count - 1; i >= 0; i--)
+        {
+            if (_marks[i] != null)
+                factoryManager.Release(_marks[i].gameObject);
+        }
+        _marks.Clear();
+    }
 
     public void PlayWinBounce()
     {

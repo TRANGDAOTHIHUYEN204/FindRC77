@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "967552748938",
+    "project_id": "rc77-find-differences-seek",
+    "storage_bucket": "rc77-find-differences-seek.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967552748938:android:fdfb24102776f82e898c73",
+        "android_client_info": {
+          "package_name": "com.RC77.find.differences.seek.it"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIJCV79OpmkDlnvvibCio7XN464T21FuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

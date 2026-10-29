@@ -33,6 +33,9 @@ public class StateGame : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float warningMaxVolume = 1f;
     [SerializeField] private AudioClip loseGameSound;
     [SerializeField] private string loseTextGame;
+    [SerializeField] private HeartManager heartManager;
+    [SerializeField] private MarkPresenter markPresenter;
+    [SerializeField] private DifferentPairManagerHolder pairHolder;
 
     private void Awake()
     {
@@ -130,6 +133,19 @@ public class StateGame : MonoBehaviour
         State = GameState.Paused;
         SetPanels(true, false, false);
         Time.timeScale = 0f;
+    }
+    [SerializeField] private SpawnChallengeNode challengeNodes;
+
+    public void ResetGame()
+    {
+        Time.timeScale = 1f;
+
+        markPresenter.ClearMarks();
+        pairHolder.Rebuild();
+        heartManager.ResetLives();
+        challengeNodes.ResetNodes();
+
+        Init(levelManager.TimeLimit);
     }
 
     public void ResumeGame()

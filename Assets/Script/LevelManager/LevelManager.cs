@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public bool LastWinWasTutorial { get; private set; }
     public int CountLevel => levels.Length;
     public bool IsLastLevel => !IsTutorial && CurrentIndex >= levels.Length - 1;
+    public event Action OnLevelReset;
     private void Start()
     {
         if (tutorialLevel != null && !SaveGame.TutorialShown)
@@ -44,7 +45,7 @@ public class LevelManager : MonoBehaviour
         int next = Mathf.Min(_currentIndex + 1, levels.Length - 1);
         SaveGame.CurrentLevel = Mathf.Max(SaveGame.CurrentLevel, next);
     }
-
+    
     public void LoadNextLevel()
     {
         CommitProgress();
@@ -61,6 +62,12 @@ public class LevelManager : MonoBehaviour
         OnLevelLoaded?.Invoke(_levelData);
     }
 
+
+    public void ResetLevel()
+    {
+        _completed = false;
+        OnLevelReset?.Invoke();
+    }
     public void LoadLevel(int index)
     {
         if (levels == null || levels.Length == 0) return;

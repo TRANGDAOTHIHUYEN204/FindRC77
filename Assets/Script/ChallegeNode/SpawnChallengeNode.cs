@@ -106,7 +106,17 @@ public class SpawnChallengeNode : MonoBehaviour
         if (visual != null)
             visual.anchoredPosition = Vector2.zero;
     }
+    public void ResetNodes()
+    {
+        _session++;                 
+        _changedCount = 0;
 
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            if (nodes[i] == null) continue;
+            nodes[i].ChangeSprite(sprite);   
+        }
+    }
     
     public void ChangeNext(Sprite spriteChange)
     {

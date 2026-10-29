@@ -12,4 +12,8 @@ public class ChallengeNode : MonoBehaviour
     public void Init(Sprite sprite) => ChangeSprite(sprite);
     public void PlayWinBounce() => bounceEffect.Play();
     public void ChangeSprite(Sprite sprite) => image.sprite = sprite;
+    public void ResetVisual(Sprite defaultSprite)
+    {
+        ChangeSprite(defaultSprite);
+    }
 }
