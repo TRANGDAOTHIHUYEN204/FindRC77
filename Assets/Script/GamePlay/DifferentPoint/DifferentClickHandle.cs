@@ -13,7 +13,7 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private SpawnChallengeNode spawnChallengeNode;
     [SerializeField] private Sprite spriteChange;
     [SerializeField] private Camera uiCamera;
-    [SerializeField] private HeartManager heartManager;
+    [SerializeField] private HeartLiveManager heartManager;
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private ErrorSpawnManager errorSpawnManager;
     [SerializeField] private AudioClip clickErrorSound;
@@ -44,8 +44,7 @@ public class DifferentClickHandler : MonoBehaviour
 
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
-
-            // chụp session ngay lúc click
+            
             StartCoroutine(OutlineThenMark(entry.Pair, entry.Mark, markPresenter.Session));
 
             Haptics.Light();

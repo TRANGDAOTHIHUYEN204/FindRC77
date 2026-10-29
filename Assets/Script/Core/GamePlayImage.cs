@@ -13,7 +13,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallengeNode spawnChallegeNode;
-    [SerializeField] private HeartManager heartManager;
+    [SerializeField] private HeartLiveManager heartManager;
     private bool _isPlaying;
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private AudioClip winSound;
@@ -53,21 +53,27 @@ public class GamePlayImage : MonoBehaviour
     {
         _isPlaying = false;
 
-        if (!levelManager.IsTutorial)
+        bool isTutorial = levelManager.IsTutorial;  
+        string textWin  = levelManager.TextWin;       
+
+        if (!isTutorial)
         {
             int reward = CoinReward.Get(_currentLevel.Difficulty);
             PendingReward.Add(reward);
         }
 
-        levelManager.MarkWin(); 
+        levelManager.MarkWin();
 
         yield return new WaitForSeconds(1f);
         Haptics.Play(HapticTypes.Success);
         markPresenter.PlayWinBounce();
         spawnChallegeNode.PlayWinBounce();
         yield return new WaitForSeconds(1f);
-
         SoundManager.Instance.PlaySfx(winSound);
-        stateGame.WinGame(levelManager.TextWin);
+
+        if (isTutorial)
+            stateGame.WinTutorial(textWin);
+        else
+            stateGame.WinGame(textWin);
     }
 }

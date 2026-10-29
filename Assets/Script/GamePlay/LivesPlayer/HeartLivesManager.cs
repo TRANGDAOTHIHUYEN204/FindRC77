@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartManager : MonoBehaviour
+public class HeartLiveManager : MonoBehaviour
 {
     [SerializeField] private FactoryManager factory;
     [SerializeField] private RectTransform container;
@@ -12,6 +12,9 @@ public class HeartManager : MonoBehaviour
     private readonly List<HeartLives> _hearts = new List<HeartLives>();
     private int _currentLives;
 
+    public int CurrentLives => _currentLives;
+    public int MaxLives => maxLives;
+
     public bool SubstractLives()
     {
         if (_currentLives <= 0) return true;
@@ -20,25 +23,25 @@ public class HeartManager : MonoBehaviour
         {
             if (!_hearts[i].IsAlive) continue;
 
-            _hearts[i].Lose(); 
+            _hearts[i].Lose();
             _currentLives--;
             break;
         }
 
         return _currentLives == 0;
     }
-    
+
     public void ResetLives()
     {
         if (_hearts.Count == 0)
             SpawnHearts();
-        
+
         for (int i = 0; i < _hearts.Count; i++)
             _hearts[i].Init();
 
         _currentLives = _hearts.Count;
     }
-    
+
     public void ReleaseHearts()
     {
         for (int i = _hearts.Count - 1; i >= 0; i--)
@@ -65,7 +68,6 @@ public class HeartManager : MonoBehaviour
 
             float step = rt.rect.width * rt.localScale.x + gap;
             rt.localPosition = start + Vector3.right * (step * i);
-            Debug.Log($"hearts={_hearts.Count}, lives={_currentLives}");
             _hearts.Add(heart);
         }
     }

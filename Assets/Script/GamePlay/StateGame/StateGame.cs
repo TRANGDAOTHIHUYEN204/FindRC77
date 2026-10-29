@@ -27,16 +27,17 @@ public class StateGame : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private TextMeshProUGUI levelText;
     private string _levelLabel;
-    
+    [SerializeField] private GameObject winTutorial;
     [SerializeField] private int warningStartSecond = 10;
     [SerializeField, Range(0f, 1f)] private float warningMinVolume = 0.3f;
     [SerializeField, Range(0f, 1f)] private float warningMaxVolume = 1f;
     [SerializeField] private AudioClip loseGameSound;
     [SerializeField] private string loseTextGame;
-    [SerializeField] private HeartManager heartManager;
+    [SerializeField] private HeartLiveManager heartManager;
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private DifferentPairManagerHolder pairHolder;
-
+    [SerializeField] private TextMeshProUGUI winTutorialText;
+    [SerializeField] private TextMeshProUGUI winTutorialLevelText;  
     private void Awake()
     {
         Instance = this;
@@ -54,7 +55,7 @@ public class StateGame : MonoBehaviour
         TimeLeft = timeLimit;
         State = GameState.Playing;
         Time.timeScale = 1f;
-        SetPanels(false, false, false);
+        SetPanels(false, false, false, false);
         if (outline) outline.SetFill(1f);
         _lastShownSecond = -1;
         _lastBeepSecond = -1;
@@ -63,12 +64,20 @@ public class StateGame : MonoBehaviour
         SetText();
         UpdateTimeText();
     }
-
+    public void WinTutorial(string textWin)
+    {
+        if (State != GameState.Playing) return;
+        State = GameState.Won;
+        SetPanels(false, false, false, true);
+        if (winTutorialText) winTutorialText.text = textWin;
+        Time.timeScale = 0f;
+    }
+    
     public void WinGame(string textWin)
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
-        SetPanels(false, true, false);
+        SetPanels(false, true, false, false);
         winText.text = textWin;
         Time.timeScale = 0f;
     }
@@ -78,7 +87,7 @@ public class StateGame : MonoBehaviour
         if (State != GameState.Playing) return;
         State = GameState.Lost;
         SoundManager.Instance.PlaySfx(loseGameSound);
-        SetPanels(false, false, true);
+        SetPanels(false, false, true, false);
         loseText.text = loseTextGame;
         Time.timeScale = 0f;
     }
@@ -88,6 +97,7 @@ public class StateGame : MonoBehaviour
         if (levelText) levelText.text = _levelLabel;
         if (winLevelText) winLevelText.text = _levelLabel;
         if (loseLevelText) loseLevelText.text = _levelLabel;
+        if (winTutorialLevelText) winTutorialLevelText.text = _levelLabel;
     }
 
     private void Update()
@@ -125,13 +135,13 @@ public class StateGame : MonoBehaviour
         _lastShownSecond = sec;
         currentTimeText.text = $"{sec / 60}:{sec % 60:00}";
     }
-
+    
     public void PauseGame()
     {
         if (State != GameState.Playing) return;
         Debug.Log("PauseGame called!\n" + System.Environment.StackTrace);
         State = GameState.Paused;
-        SetPanels(true, false, false);
+        SetPanels(true, false, false, false);
         Time.timeScale = 0f;
     }
     [SerializeField] private SpawnChallengeNode challengeNodes;
@@ -153,7 +163,7 @@ public class StateGame : MonoBehaviour
         Debug.Log($"ResumeGame called, State = {State}");
         if (State != GameState.Paused) return;
         Time.timeScale = 1f;
-        SetPanels(false, false, false);
+        SetPanels(false, false, false, false);
         State = GameState.Playing;
     }
 
@@ -163,11 +173,12 @@ public class StateGame : MonoBehaviour
         return "LEVEL " + (SaveGame.CurrentLevel + 1);
     }
 
-    private void SetPanels(bool pause, bool win, bool lose)
+    private void SetPanels(bool pause, bool win, bool lose, bool winTutorialLevel)
     {
         SetPanel(pausePanel, pause);
         SetPanel(winPanel, win);
         SetPanel(losePanel, lose);
+        SetPanel(winTutorial,  winTutorialLevel);
     }
 
     private void SetPanel(GameObject panel, bool show)
