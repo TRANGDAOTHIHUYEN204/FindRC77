@@ -7,7 +7,7 @@ public class MarkCircleBehaviour : IDrawShape
     private LineRenderer _outline;
 
     private const float Padding = 1f;       
-    private const float OutlineThickness = 0.02f; 
+    private const float OutlineThickness = 0.01f; 
 
     public MarkCircleBehaviour(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
 

@@ -108,3 +108,4 @@ MonoBehaviour:
   moveDistance: 20
   moveSpeed: 2
   sortingOrder: 50
+  _renderer: {fileID: 2918713218908051645}

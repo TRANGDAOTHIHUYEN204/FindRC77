@@ -18,9 +18,7 @@ public class ButtonSound : MonoBehaviour
     {
         if (soundButton == null) return;
 
-        if (SoundManagerHome.Instance != null)
-            SoundManagerHome.Instance.PlaySfx(soundButton);
-        else if (SoundManager.Instance != null)
-            SoundManager.Instance.PlaySfx(soundButton);
+        if (SoundManagerHome.Instance != null) SoundManagerHome.Instance.PlaySfx(soundButton);
+        else if (SoundManager.Instance != null) SoundManager.Instance.PlaySfx(soundButton);
     }
 }

@@ -16,15 +16,14 @@ public class ButtonHomeManager : MonoBehaviour
         int index = Mathf.Min(SaveGame.CurrentLevel, levels.Length - 1);
         var level = levels[index];
         int d = (int)level.Difficulty;
-        bool isEasy = level.Difficulty == DifficultyLevel.Easy;
 
         buttonImage.sprite = sprites[d];
 
         infoImage.sprite = spritesInfo[d];
         var c = infoImage.color;
-        c.a = level.Difficulty == DifficultyLevel.Easy ? 0f : 1f;
+        c.a = 1f;
         infoImage.color = c;
 
-        levelDifficulty.text = isEasy ? "" : level.Difficulty.ToString();
+        levelDifficulty.text = level.Difficulty.ToString();
     }
 }

@@ -7,13 +7,12 @@ public class HintHand : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int sortingOrder = 50;
 
-    private SpriteRenderer _renderer;
+    [SerializeField] private SpriteRenderer _renderer;
     private Vector3 _localPoint;
     private bool _hasTarget;
 
     private void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
         if (_renderer != null)
             _renderer.sortingOrder = sortingOrder;
     }

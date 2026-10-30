@@ -19,14 +19,7 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject);   
 
         _musicOn = SaveGame.MusicOn;
         _sfxOn = SaveGame.SfxOn;
@@ -43,6 +36,7 @@ public class SoundManager : MonoBehaviour
             var s = go.AddComponent<AudioSource>();
             s.playOnAwake = false;
             s.loop = false;
+            s.spatialBlend = 0f;
             if (sfxSource != null) s.outputAudioMixerGroup = sfxSource.outputAudioMixerGroup;
             _sfxPool[i] = s;
         }
@@ -50,11 +44,17 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        if (soundBackGround == null) return;
+        if (soundBackGround == null)
+        {
+            return;
+        }
+
         soundBackGround.playOnAwake = false;
         soundBackGround.loop = true;
+        soundBackGround.spatialBlend = 0f;
         soundBackGround.mute = !_musicOn;
-        soundBackGround.Play();
+        
+        if (!soundBackGround.isPlaying) soundBackGround.Play();
     }
 
     public void ToggleMusic()
@@ -89,6 +89,7 @@ public class SoundManager : MonoBehaviour
         src.volume = volume * sfxVolume;
         src.Play();
     }
+
     private AudioSource GetFreeSource()
     {
         for (int i = 0; i < _sfxPool.Length; i++)

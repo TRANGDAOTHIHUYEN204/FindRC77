@@ -20,8 +20,8 @@ MonoBehaviour:
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
-  - Position: {x: 244.3, y: 122.3, z: 0}
-    Size: {x: 53, y: 40.1}
+  - Position: {x: 237.4, y: 117.9, z: 0}
+    Size: {x: 55.7, y: 58.6}
     Outline:
     - {x: 242.4, y: 131.7, z: 0}
     - {x: 228.6, y: 121, z: 0}
@@ -31,21 +31,24 @@ MonoBehaviour:
     - {x: 265.4, y: 96.4, z: 0}
     - {x: 265.4, y: 119.5, z: 0}
     HasMarkCenter: 1
-    MarkCenter: {x: 243.7, y: 111.5, z: 0}
-  - Position: {x: 127.2, y: 128.6, z: 0}
-    Size: {x: 84.4, y: 59.9}
+    MarkCenter: {x: 248.9, y: 111.9, z: 0}
+  - Position: {x: 122.65, y: 133, z: 0}
+    Size: {x: 82.90001, y: 94}
     Outline:
-    - {x: 125.8, y: 147.1, z: 0}
-    - {x: 78.2, y: 145.5, z: 0}
-    - {x: 64.4, y: 116.4, z: 0}
-    - {x: 81.3, y: 91.8, z: 0}
-    - {x: 119.6, y: 87.2, z: 0}
-    - {x: 144.2, y: 96.4, z: 0}
-    - {x: 148.8, y: 119.5, z: 0}
+    - {x: 81.2, y: 138.6, z: 0}
+    - {x: 98.8, y: 162.5, z: 0}
+    - {x: 135.4, y: 180, z: 0}
+    - {x: 160.9, y: 160.9, z: 0}
+    - {x: 164.1, y: 125.8, z: 0}
+    - {x: 160.9, y: 97.2, z: 0}
+    - {x: 143.4, y: 87.6, z: 0}
+    - {x: 117.9, y: 86, z: 0}
+    - {x: 100.4, y: 94, z: 0}
+    - {x: 90.8, y: 114.7, z: 0}
     HasMarkCenter: 1
-    MarkCenter: {x: 122.7, y: 119.5, z: 0}
-  - Position: {x: -370, y: 78.5, z: 0}
-    Size: {x: 66.9, y: 73.3}
+    MarkCenter: {x: 128, y: 126.2, z: 0}
+  - Position: {x: -373.8, y: 78.3, z: 0}
+    Size: {x: 78.9, y: 77}
     Outline:
     - {x: -352, y: 108.1, z: 0}
     - {x: -382.3, y: 114.5, z: 0}
@@ -54,7 +57,7 @@ MonoBehaviour:
     - {x: -348.8, y: 47.6, z: 0}
     - {x: -334.5, y: 76.3, z: 0}
     HasMarkCenter: 1
-    MarkCenter: {x: -363.2, y: 76.5, z: 0}
+    MarkCenter: {x: -373, y: 80.1, z: 0}
   - Position: {x: 121.8, y: 259.4, z: 0}
     Size: {x: 138.6, y: 87.7}
     Outline:
@@ -67,8 +70,8 @@ MonoBehaviour:
     - {x: 189.6, y: 234, z: 0}
     HasMarkCenter: 1
     MarkCenter: {x: 117.9, y: 259.6, z: 0}
-  - Position: {x: 275.9, y: 65.1, z: 0}
-    Size: {x: 79.7, y: 58.8}
+  - Position: {x: 299.2, y: 69.4, z: 0}
+    Size: {x: 100.2, y: 96.7}
     Outline:
     - {x: 301.1, y: 109.7, z: 0}
     - {x: 261.2, y: 98.6, z: 0}
@@ -78,7 +81,7 @@ MonoBehaviour:
     - {x: 325, y: 54, z: 0}
     - {x: 326.5, y: 95.4, z: 0}
     HasMarkCenter: 1
-    MarkCenter: {x: 286.7, y: 58.9, z: 0}
+    MarkCenter: {x: 287.1, y: 62.6, z: 0}
   - Position: {x: -243.9, y: 114.3, z: 0}
     Size: {x: 101.9, y: 65.3}
     Outline:
@@ -107,8 +110,8 @@ MonoBehaviour:
     - {x: -409.4, y: 286.5, z: 0}
     HasMarkCenter: 1
     MarkCenter: {x: -318.6, y: 317, z: 0}
-  - Position: {x: -443.59998, y: 173.65, z: 0}
-    Size: {x: 84.399994, y: 70.09999}
+  - Position: {x: -443, y: 170.6, z: 0}
+    Size: {x: 98.6, y: 76.2}
     Outline:
     - {x: -425.3, y: 208.7, z: 0}
     - {x: -465.1, y: 205.5, z: 0}
@@ -118,8 +121,8 @@ MonoBehaviour:
     - {x: -420.5, y: 165.7, z: 0}
     - {x: -401.4, y: 184.8, z: 0}
     HasMarkCenter: 1
-    MarkCenter: {x: -450.8, y: 175.2, z: 0}
-  - Position: {x: -344.85, y: 203.1, z: 0}
+    MarkCenter: {x: -431.8, y: 162.8, z: 0}
+  - Position: {x: -343.2, y: 219.4, z: 0}
     Size: {x: 288.3, y: 81.2}
     Outline:
     - {x: -210.3, y: 221.4, z: 0}
@@ -139,8 +142,8 @@ MonoBehaviour:
     - {x: -200.7, y: 183.2, z: 0}
     HasMarkCenter: 1
     MarkCenter: {x: -350.4, y: 213.5, z: 0}
-  - Position: {x: -133.8, y: -106.2, z: 0}
-    Size: {x: 111.5, y: 55.8}
+  - Position: {x: -133.2, y: -117.6, z: 0}
+    Size: {x: 112.8, y: 78.5}
     Outline:
     - {x: -167.3, y: -140.4, z: 0}
     - {x: -189.6, y: -114.9, z: 0}

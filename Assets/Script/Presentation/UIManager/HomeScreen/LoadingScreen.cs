@@ -30,6 +30,6 @@ public class LoadingScreen : MonoBehaviour
     { 
         yield return new WaitForSeconds(delay);
         string target = SaveGame.TutorialShown ? homeSceneName : gameplaySceneName;
-        SceneManager.LoadSceneAsync(target);
+        SceneManager.LoadScene(target);
     }
 }

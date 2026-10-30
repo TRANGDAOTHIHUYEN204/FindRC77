@@ -31,7 +31,7 @@ public class StarBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        playRoutine = null;   // Unity đã dừng coroutine khi disable
+        playRoutine = null;  
     }
 
     public void Play()

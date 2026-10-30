@@ -37,7 +37,8 @@ public class StateGame : MonoBehaviour
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private DifferentPairManagerHolder pairHolder;
     [SerializeField] private TextMeshProUGUI winTutorialText;
-    [SerializeField] private TextMeshProUGUI winTutorialLevelText;  
+    [SerializeField] private TextMeshProUGUI winTutorialLevelText; 
+    [SerializeField] private HintPresenter hintPresenter;
     private void Awake()
     {
         Instance = this;
@@ -154,6 +155,7 @@ public class StateGame : MonoBehaviour
         pairHolder.Rebuild();
         heartManager.ResetLives();
         challengeNodes.ResetNodes();
+        if (hintPresenter) hintPresenter.ResetForLevel();
 
         Init(levelManager.TimeLimit);
     }

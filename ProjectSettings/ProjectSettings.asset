@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: aduduvip
-  productName: FindRC77
+  productName: 'Find Differences: Seek It'
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -143,7 +143,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.03
+  bundleVersion: 0.0.7
   preloadedAssets:
   - {fileID: 11400000, guid: cc92d47f40a0a144288cfd25eb6096eb, type: 2}
   - {fileID: 11400000, guid: c85f9e1f21be52e4f8b3ac42c12d45d0, type: 2}
@@ -263,11 +263,11 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
-  useCustomGradleSettingsTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
+  useCustomGradleSettingsTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidAllowedArchitectures: -13
@@ -302,7 +302,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 5e87ca86ae011e341a1d2b9963bccdbb, type: 3}
+      m_Icon: {fileID: 2800000, guid: ecd9bf04b2ef97d42a5a1a672985b186, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

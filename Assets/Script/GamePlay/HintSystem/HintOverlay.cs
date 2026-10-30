@@ -50,10 +50,7 @@ public class HintOverlay : MonoBehaviour
         _holeImage.sprite = _holeSprite;
         _holeImage.raycastTarget = false;
 
-        RectTransform[] parts =
-        {
-            top, bottom, left, right
-        };
+        RectTransform[] parts = { top, bottom, left, right };
 
         foreach (RectTransform part in parts)
         {

@@ -23,14 +23,23 @@ public class SoundManagerHome : MonoBehaviour
 
     void Start()
     {
+        if (soundBackGround == null)
+        {
+            Debug.LogError("[SoundHome] soundBackGround CHUA GAN!");
+            return;
+        }
+
         soundBackGround.playOnAwake = false;
         soundBackGround.loop = true;
         soundBackGround.spatialBlend = 0f;
-
-        sfxSource.playOnAwake = false;
-        sfxSource.loop = false;
-
         soundBackGround.mute = !_musicOn;
+
+        if (sfxSource != null)
+        {
+            sfxSource.playOnAwake = false;
+            sfxSource.loop = false;
+            sfxSource.spatialBlend = 0f;
+        }
 
         if (soundBackGround.clip != null && soundBackGround.clip.loadState != AudioDataLoadState.Loaded)
             soundBackGround.clip.LoadAudioData();
@@ -43,7 +52,7 @@ public class SoundManagerHome : MonoBehaviour
     {
         _musicOn = !_musicOn;
         SaveGame.MusicOn = _musicOn;
-        soundBackGround.mute = !_musicOn;
+        if (soundBackGround != null) soundBackGround.mute = !_musicOn;
     }
 
     public void ToggleSfx()
@@ -54,7 +63,7 @@ public class SoundManagerHome : MonoBehaviour
 
     public void PlaySfx(AudioClip clip, float volume = 1f)
     {
-        if (!_sfxOn || clip == null) return;
+        if (!_sfxOn || clip == null || sfxSource == null) return;
         sfxSource.PlayOneShot(clip, volume * sfxVolume);
     }
 

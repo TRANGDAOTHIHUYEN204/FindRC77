@@ -4,7 +4,7 @@ public class MarkPresenter : MonoBehaviour
 {
     [SerializeField] private FactoryManager factoryManager;
 
-    [SerializeField, Range(0.1f, 1f)] private float visualRatio = 0.5f;
+    [SerializeField, Range(0.1f, 1f)] private float visualRatio = 0.8f;
 
     [SerializeField] private float smallThreshold = 0.05f;
     [SerializeField] private float smallLineMul = 0.7f;

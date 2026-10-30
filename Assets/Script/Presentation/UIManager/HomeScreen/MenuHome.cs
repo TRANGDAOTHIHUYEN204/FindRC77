@@ -30,7 +30,7 @@ public class MenuHome : MonoBehaviour
     private IEnumerator GamePlay(string screenName)
     {
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadSceneAsync(screenName);
+        SceneManager.LoadScene(screenName);
     }
     public void OpenSetting()
     {

@@ -52,6 +52,6 @@ public class UIManager : MonoBehaviour
     private IEnumerator ReturnHome(string sceneName)
     {
         yield return new WaitForSecondsRealtime(0.2f);
-        SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }
