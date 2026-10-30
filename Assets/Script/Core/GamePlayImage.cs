@@ -46,7 +46,11 @@ public class GamePlayImage : MonoBehaviour
         if (!inputManager.ClickedThisFrame) return;
 
         if (clickHandler.HandleClick(inputManager.ClickScreenPosition))
+        {
+            stateGame.BeginWin(); 
             StartCoroutine(Win());
+        }
+            
     }
 
     private IEnumerator Win()

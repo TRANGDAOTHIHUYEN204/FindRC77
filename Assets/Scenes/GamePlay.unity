@@ -4422,7 +4422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MarkPresenter
   factoryManager: {fileID: 987585498}
-  visualRatio: 1
+  visualRatio: 0.9
   smallThreshold: 0.05
   smallLineMul: 0.7
 --- !u!4 &962908399

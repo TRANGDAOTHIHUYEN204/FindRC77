@@ -39,6 +39,7 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI winTutorialText;
     [SerializeField] private TextMeshProUGUI winTutorialLevelText; 
     [SerializeField] private HintPresenter hintPresenter;
+    public bool IsWinning { get; private set; }
     private void Awake()
     {
         Instance = this;
@@ -48,6 +49,11 @@ public class StateGame : MonoBehaviour
     private void Start()
     {
         SetText();
+    }
+    public void BeginWin()
+    {
+        if (State != GameState.Playing) return;
+        IsWinning = true;
     }
 
     public void Init(float timeLimit)
@@ -85,7 +91,7 @@ public class StateGame : MonoBehaviour
 
     public void LoseGame()
     {
-        if (State != GameState.Playing) return;
+        if (State != GameState.Playing || IsWinning) return;
         State = GameState.Lost;
         SoundManager.Instance.PlaySfx(loseGameSound);
         SetPanels(false, false, true, false);
@@ -104,6 +110,7 @@ public class StateGame : MonoBehaviour
     private void Update()
     {
         if (State != GameState.Playing) return;
+        if (IsWinning) return;        
         if (levelManager.IsTutorial) return;
         TimeLeft -= Time.deltaTime;
 
@@ -139,7 +146,7 @@ public class StateGame : MonoBehaviour
     
     public void PauseGame()
     {
-        if (State != GameState.Playing) return;
+        if (State != GameState.Playing || IsWinning) return;
         Debug.Log("PauseGame called!\n" + System.Environment.StackTrace);
         State = GameState.Paused;
         SetPanels(true, false, false, false);
