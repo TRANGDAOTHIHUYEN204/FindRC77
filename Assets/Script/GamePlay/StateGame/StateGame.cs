@@ -39,6 +39,8 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI winTutorialText;
     [SerializeField] private TextMeshProUGUI winTutorialLevelText; 
     [SerializeField] private HintPresenter hintPresenter;
+    [SerializeField] private DifferentClickHandler clickHandler;
+    [SerializeField] private GamePlayImage gamePlay;
     public bool IsWinning { get; private set; }
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class StateGame : MonoBehaviour
 
     public void Init(float timeLimit)
     {
+        IsWinning = false;     
         TimeLimit = timeLimit;
         TimeLeft = timeLimit;
         State = GameState.Playing;
@@ -158,11 +161,14 @@ public class StateGame : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        clickHandler.OnResetBegin();
         markPresenter.ClearMarks();
         pairHolder.Rebuild();
         heartManager.ResetLives();
         challengeNodes.ResetNodes();
         if (hintPresenter) hintPresenter.ResetForLevel();
+        clickHandler.OnResetEnd();
+        gamePlay.ResetPlay();
 
         Init(levelManager.TimeLimit);
     }

@@ -24,6 +24,6 @@ public class ButtonHomeManager : MonoBehaviour
         c.a = 1f;
         infoImage.color = c;
 
-        levelDifficulty.text = level.Difficulty.ToString();
+        levelDifficulty.text =level.Difficulty.ToString().ToUpper();
     }
 }

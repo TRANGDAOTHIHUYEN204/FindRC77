@@ -8,18 +8,11 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private TextMeshProUGUI numberLevelText;
-    
- 
-
-
+  
     private void Start()
     {
         levelText.text = "Level " + (SaveGame.CurrentLevel + 1);
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
-        /*
-        PendingReward.Add(50);
-        FindFirstObjectByType<CoinPresentation>().TryClaim();
-        */
     }
 
     public void JoinGamePlay(string screenName)
@@ -42,6 +35,8 @@ public class MenuHome : MonoBehaviour
             anim.Show();
     }
 
+
+    
     public void CloseSetting()
     {
         PanelAnimation anim = settingPanel.GetComponentInChildren<PanelAnimation>(true);

@@ -24,6 +24,10 @@ public class LoadingScreen : MonoBehaviour
 #endif
     }
 
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
     private void OnEnable() => StartCoroutine(LoadNextScene());
 
     private IEnumerator LoadNextScene()

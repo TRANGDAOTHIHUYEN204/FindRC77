@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,13 +10,28 @@ public class MarkFound : MonoBehaviour
     private Coroutine _drawRoutine;
     [SerializeField] private BounceEffect bounceEffect;
     private Coroutine _bounceRoutine;
+
+    private Action _onDrawDone;
     
+    public void SetOnDrawDone(Action cb) => _onDrawDone = cb;
+
     public void Init(ShapeMark shapeMark, Vector2 center, Vector2 size, float lineWidth, Color lineColor, int segments, float duration = 0.7f)
     {
         _drawShape = CreateBehaviour(shapeMark);
 
         if (_drawRoutine != null) StopCoroutine(_drawRoutine);
-        _drawRoutine = StartCoroutine(_drawShape.Draw(center, size, lineWidth, lineColor, segments, duration));
+        _drawRoutine = StartCoroutine(DrawRoutine(center, size, lineWidth, lineColor, segments, duration));
+    }
+
+    private IEnumerator DrawRoutine(Vector2 center, Vector2 size, float lineWidth, Color lineColor, int segments, float duration)
+    {
+        yield return _drawShape.Draw(center, size, lineWidth, lineColor, segments, duration);
+
+        _drawRoutine = null;
+
+        Action cb = _onDrawDone;
+        _onDrawDone = null;
+        cb?.Invoke();
     }
 
     private IDrawShape CreateBehaviour(ShapeMark shapeMark)
@@ -28,6 +44,7 @@ public class MarkFound : MonoBehaviour
                 return new MarkCircleBehaviour(lineRenderer);
         }
     }
+
     public void PlayWinBounce()
     {
         if (!gameObject.activeInHierarchy) return;
@@ -38,7 +55,7 @@ public class MarkFound : MonoBehaviour
     private IEnumerator WidthBounce()
     {
         const float duration = 0.35f;
-        const float amount = 0.8f; 
+        const float amount = 0.8f;
         float baseMul = 1f;
         float e = 0f;
         while (e < duration)
@@ -49,6 +66,13 @@ public class MarkFound : MonoBehaviour
             yield return null;
         }
         lineRenderer.widthMultiplier = baseMul;
+        _bounceRoutine = null;
+    }
+
+    private void OnDisable()
+    {
+        _onDrawDone = null;
+        _drawRoutine = null;
         _bounceRoutine = null;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-
+using System; 
 public class SpawnChallengeNode : MonoBehaviour
 {
     private int _countSpawn;
@@ -26,7 +26,17 @@ public class SpawnChallengeNode : MonoBehaviour
     [SerializeField] private float spawnInterval = 0.08f;
 
     [SerializeField] private SpawnStarTrail spawnStarTrail;
+    public event Action OnAllChanged;
+    private int _appliedCount;
 
+    private void Apply(ChallengeNode node, Sprite s)
+    {
+        if (node != null) node.ChangeSprite(s);
+
+        _appliedCount++;
+        if (_appliedCount == nodes.Count)
+            OnAllChanged?.Invoke();
+    }
     public void Init(int countSpawn)
     {
         _countSpawn = countSpawn;
@@ -39,6 +49,7 @@ public class SpawnChallengeNode : MonoBehaviour
         StopAllCoroutines();
         Clear();
         _changedCount = 0;
+        _appliedCount = 0;
 
         if (_countSpawn <= 0 || container == null || factoryManager == null)
         {
@@ -51,7 +62,6 @@ public class SpawnChallengeNode : MonoBehaviour
             ChallengeNode node = factoryManager.CreateChallengeNode();
             if (node == null)
             {
-                Debug.LogError("[SpawnChallengeNode] CreateChallengeNode() trả về null", this);
                 continue;
             }
 
@@ -123,9 +133,7 @@ public class SpawnChallengeNode : MonoBehaviour
         ChangeNext(spriteChange, null);
     }
 
-    public void ChangeNext(
-        Sprite spriteChange,
-        RectTransform fromPoint)
+    public void ChangeNext(Sprite spriteChange, RectTransform fromPoint)
     {
         if (_changedCount >= nodes.Count)
             return;
@@ -134,13 +142,14 @@ public class SpawnChallengeNode : MonoBehaviour
         _changedCount++;
 
         if (node == null)
-            return;
-        
-        if (fromPoint == null ||
-            node.Visual == null ||
-            spawnStarTrail == null)
         {
-            node.ChangeSprite(spriteChange);
+            Apply(null, spriteChange);
+            return;
+        }
+
+        if (fromPoint == null || node.Visual == null || spawnStarTrail == null)
+        {
+            Apply(node, spriteChange);
             return;
         }
 
@@ -151,13 +160,12 @@ public class SpawnChallengeNode : MonoBehaviour
             node.Visual,
             () =>
             {
-                if (session != _session || node == null)
-                    return;
-
-                node.ChangeSprite(spriteChange);
+                if (session != _session) return; 
+                Apply(node, spriteChange);
             });
+
         if (!played)
-            node.ChangeSprite(spriteChange);
+            Apply(node, spriteChange);
     }
 
 

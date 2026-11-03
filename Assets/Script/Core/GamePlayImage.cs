@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Char.Haptic;
@@ -19,14 +20,36 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private AudioClip winSound;
     [SerializeField] private MarkPresenter markPresenter;
     private LevelData _currentLevel;
-    
-    private void OnEnable()  => levelManager.OnLevelLoaded += Build;
-    private void OnDisable() => levelManager.OnLevelLoaded -= Build;
+    [SerializeField] private float beforeBounceDelay = 0.2f;  
+    [SerializeField] private float bounceDuration = 0.8f;     
+    private bool _winStarted;
 
+    private void Start()
+    {
+        
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
+
+    private void OnEnable()
+    {
+        levelManager.OnLevelLoaded += Build;
+        spawnChallegeNode.OnAllChanged += OnAllNodesChanged;
+    }
+
+    private void OnDisable()
+    {
+        levelManager.OnLevelLoaded -= Build;
+        spawnChallegeNode.OnAllChanged -= OnAllNodesChanged;
+    }
     private void Build(LevelData level)
     {
+        StopAllCoroutines();     
+        _winStarted = false;
         _currentLevel =  level;
         _isPlaying = false;
+        clickHandler.OnResetBegin();   
+        markPresenter.ClearMarks();    
+        clickHandler.OnResetEnd();  
         clickHandler.ResetLoseState();
         hintPresenter.ResetForLevel();      
         factoryManager.ReleaseAll();
@@ -39,6 +62,12 @@ public class GamePlayImage : MonoBehaviour
         _isPlaying = true;
         
     }
+    public void ResetPlay()
+    {
+        StopAllCoroutines();
+        _winStarted = false;
+        _isPlaying = true;
+    }
 
     private void Update()
     {
@@ -47,18 +76,23 @@ public class GamePlayImage : MonoBehaviour
 
         if (clickHandler.HandleClick(inputManager.ClickScreenPosition))
         {
-            stateGame.BeginWin(); 
-            StartCoroutine(Win());
+            _isPlaying = false;    
+            stateGame.BeginWin();
         }
-            
     }
 
+    private void OnAllNodesChanged()
+    {
+        if (_winStarted) return;
+        _winStarted = true;
+        StartCoroutine(Win());
+    }
     private IEnumerator Win()
     {
         _isPlaying = false;
 
-        bool isTutorial = levelManager.IsTutorial;  
-        string textWin  = levelManager.TextWin;       
+        bool isTutorial = levelManager.IsTutorial;
+        string textWin  = levelManager.TextWin;
 
         if (!isTutorial)
         {
@@ -68,12 +102,13 @@ public class GamePlayImage : MonoBehaviour
 
         levelManager.MarkWin();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(beforeBounceDelay);
+
         Haptics.Play(HapticTypes.Success);
+        SoundManager.Instance.PlaySfx(winSound);
         markPresenter.PlayWinBounce();
         spawnChallegeNode.PlayWinBounce();
-        yield return new WaitForSeconds(1f);
-        SoundManager.Instance.PlaySfx(winSound);
+        yield return new WaitForSeconds(bounceDuration);
 
         if (isTutorial)
             stateGame.WinTutorial(textWin);

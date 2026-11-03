@@ -44,23 +44,19 @@ public class DifferentClickHandler : MonoBehaviour
 
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
-            
-            StartCoroutine(OutlineThenMark(entry.Pair, entry.Mark, markPresenter.Session));
+            Vector2? trailLocal = null;
+            if (trailStartPoint != null &&
+                trailStartPoint.parent is RectTransform canvasRect &&
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvasRect, screenPoint, uiCamera, out Vector2 lp))
+            {
+                trailLocal = lp;
+            }
+
+            StartCoroutine(OutlineThenMark(entry.Pair, entry.Mark, markPresenter.Session, trailLocal));
 
             Haptics.Light();
             SoundManager.Instance.PlaySfx(clickSuccessSound);
-
-            if (trailStartPoint != null &&
-                trailStartPoint.parent is RectTransform canvasRect &&
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, uiCamera, out Vector2 localPoint))
-            {
-                trailStartPoint.anchoredPosition = localPoint;
-                spawnChallengeNode.ChangeNext(spriteChange, trailStartPoint);
-            }
-            else
-            {
-                spawnChallengeNode.ChangeNext(spriteChange);
-            }
 
             return manager.IsComplete;
         }
@@ -94,20 +90,30 @@ public class DifferentClickHandler : MonoBehaviour
         return false;
     }
 
-    private IEnumerator OutlineThenMark(DifferentPair pair, MarkData mark, int session)
+    private IEnumerator OutlineThenMark(DifferentPair pair, MarkData mark, int session, Vector2? trailLocal)
     {
         pair.ShowOutline();
-
         yield return new WaitForSecondsRealtime(markDelay);
 
         if (session != markPresenter.Session || pair == null) yield break;
+        markPresenter.DrawPair(pair, mark, (RectTransform from) =>
+        {
+            if (session != markPresenter.Session) return;
 
-        markPresenter.DrawPair(pair, mark, session);
+            if (trailLocal.HasValue && trailStartPoint != null)
+            {
+                trailStartPoint.anchoredPosition = trailLocal.Value;
+                spawnChallengeNode.ChangeNext(spriteChange, trailStartPoint);
+            }
+            else
+            {
+                spawnChallengeNode.ChangeNext(spriteChange);
+            }
+        });
 
         yield return new WaitForSecondsRealtime(hideOutlineDelay);
 
         if (session != markPresenter.Session || pair == null) yield break;
-
         pair.HideOutline();
     }
 

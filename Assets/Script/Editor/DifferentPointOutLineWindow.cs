@@ -13,8 +13,15 @@ using UnityEngine;
 ///  3. Chế độ Outline: mỗi click trái trên ảnh = thêm 1 đỉnh vào Outline của ACTIVE POINT.
 ///     Position/Size của point tự tính theo bounding box của outline.
 ///  4. Chế độ Mark Center: click 1 điểm = tâm vẽ mark của ACTIVE POINT (chấm tím).
+///     Shift+Click = đặt BÁN KÍNH mark found (khoảng cách từ tâm tới chỗ click).
+///     Mặc định bán kính = max(Size.x, Size.y) / 2, tick "Custom radius" để chỉnh tay.
 ///  5. Xong point này -> Enter (hoặc "+ New Point") để sang point kế tiếp. Cuối cùng bấm Save.
 ///  Chế độ Center: mỗi click = 1 point mới (Position = chỗ click, Size = Point Size, Outline tuỳ chọn).
+///
+/// YÊU CẦU: DifferentPointInfo cần có thêm:
+///     public bool  OverrideMarkRadius;
+///     public float MarkRadius;
+///     public float GetMarkRadius() => OverrideMarkRadius ? MarkRadius : Mathf.Max(Size.x, Size.y) * 0.5f;
 /// </summary>
 public class DifferentPointOutLineWindow : EditorWindow
 {
@@ -336,14 +343,21 @@ public class DifferentPointOutLineWindow : EditorWindow
             Handles.DrawSolidDisc(gp, Vector3.forward, 2.5f);
             Handles.Label(gp + new Vector3(4f, -16f, 0f), "Element " + i);
 
-            // tâm mark (set tay)
-            if (s.HasMarkCenter)
+            // vòng tròn mark found (tâm = MarkCenter nếu có, không thì Position)
             {
-                Vector3 mp = ToGui(s.MarkCenter, r);
+                Vector3 mcDesign = s.HasMarkCenter ? s.MarkCenter : s.Position;
+                Vector3 mp = ToGui(mcDesign, r);
+                float radiusPx = s.GetMarkRadius() * (r.width / designSize.x);
+
                 Handles.color = MarkCenterColor;
-                Handles.DrawSolidDisc(mp, Vector3.forward, 4f);
-                Handles.DrawLine(mp + new Vector3(-8f, 0f, 0f), mp + new Vector3(8f, 0f, 0f));
-                Handles.DrawLine(mp + new Vector3(0f, -8f, 0f), mp + new Vector3(0f, 8f, 0f));
+                Handles.DrawWireDisc(mp, Vector3.forward, radiusPx);
+
+                if (s.HasMarkCenter)
+                {
+                    Handles.DrawSolidDisc(mp, Vector3.forward, 4f);
+                    Handles.DrawLine(mp + new Vector3(-8f, 0f, 0f), mp + new Vector3(8f, 0f, 0f));
+                    Handles.DrawLine(mp + new Vector3(0f, -8f, 0f), mp + new Vector3(0f, 8f, 0f));
+                }
             }
 
             // active point: vẽ từng đỉnh + số thứ tự đỉnh
@@ -408,7 +422,11 @@ public class DifferentPointOutLineWindow : EditorWindow
                 help = "Click trái: thêm đỉnh vào point đang chọn (kéo đỉnh vàng để chỉnh)\nClick phải / Backspace: xóa đỉnh cuối\nEnter: point mới   |   Esc: bỏ chọn\nCtrl+Click: chọn point tại vị trí click\nDelete: xóa point đang chọn";
                 break;
             case ClickMode.MarkCenter:
-                help = "Click trái: đặt tâm mark (chấm tím) cho point đang chọn\n(chưa chọn point thì tự chọn point gần chỗ click)\nClick phải / Backspace: xóa tâm mark (dùng lại tâm tự động)\nCtrl+Click: chọn point   |   Delete: xóa point đang chọn";
+                help = "Click trái: đặt tâm mark (chấm tím) cho point đang chọn\n"
+                     + "Shift+Click: đặt BÁN KÍNH mark (khoảng cách từ tâm tới chỗ click)\n"
+                     + "(chưa chọn point thì tự chọn point gần chỗ click)\n"
+                     + "Click phải / Backspace: xóa tâm mark (dùng lại tâm tự động)\n"
+                     + "Ctrl+Click: chọn point   |   Delete: xóa point đang chọn";
                 break;
             default:
                 help = "Click trái: tạo point mới tại chỗ click\nClick phải / Backspace: xóa point vừa tạo\nCtrl+Click: chọn point   |   Delete: xóa point đang chọn";
@@ -460,7 +478,7 @@ public class DifferentPointOutLineWindow : EditorWindow
         GUILayout.EndArea();
     }
 
-    // Danh sách từng điểm, giống Inspector: Element N -> Position / Size / Mark Center / Outline
+    // Danh sách từng điểm, giống Inspector: Element N -> Position / Size / Mark Center / Mark Radius / Outline
     private void DrawShapeList(LevelState st)
     {
         float oldLabel = EditorGUIUtility.labelWidth;
@@ -517,6 +535,28 @@ public class DifferentPointOutLineWindow : EditorWindow
                     st.dirty = true;
                 }
             }
+
+            // Mark Radius
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                EditorGUI.BeginChangeCheck();
+                bool custom = EditorGUILayout.ToggleLeft("Custom radius", s.OverrideMarkRadius, GUILayout.Width(110f));
+                float rad = custom ? s.MarkRadius : s.GetMarkRadius();
+                GUI.enabled = custom;
+                rad = EditorGUILayout.FloatField(rad);
+                GUI.enabled = true;
+                if (EditorGUI.EndChangeCheck())
+                {
+                    // vừa bật custom thì khởi tạo từ bán kính đang lấy theo Size
+                    if (custom && !s.OverrideMarkRadius) rad = s.GetMarkRadius();
+                    s.OverrideMarkRadius = custom;
+                    s.MarkRadius = Mathf.Max(0f, rad);
+                    st.dirty = true;
+                }
+            }
+            if (!s.OverrideMarkRadius)
+                EditorGUILayout.LabelField("", "Radius = max(Size.x, Size.y)/2 = " + s.GetMarkRadius().ToString("0.#"),
+                    EditorStyles.miniLabel);
 
             int n = s.Outline?.Length ?? 0;
             EditorGUILayout.LabelField("Outline", n == 0 ? "List is empty" : n + " đỉnh");
@@ -621,6 +661,12 @@ public class DifferentPointOutLineWindow : EditorWindow
                     lastClick = p; hasLastClick = true;
                     AddVertexToActive(p);
                 }
+            }
+            else if (clickMode == ClickMode.MarkCenter && e.shift)
+            {
+                // Shift+Click: đặt bán kính mark
+                lastClick = p; hasLastClick = true;
+                SetMarkRadiusByClick(p);
             }
             else if (clickMode == ClickMode.MarkCenter)
             {
@@ -766,6 +812,20 @@ public class DifferentPointOutLineWindow : EditorWindow
 
         s.MarkCenter = new Vector3(p.x, p.y, 0f);
         s.HasMarkCenter = true;
+        GetState(Level).dirty = true;
+    }
+
+    // Shift+Click: bán kính = khoảng cách từ tâm mark tới điểm click
+    private void SetMarkRadiusByClick(Vector3 p)
+    {
+        if (ActiveShape() == null) selected = FindShapeAt(p);
+
+        var s = ActiveShape();
+        if (s == null) return;
+
+        Vector3 center = s.HasMarkCenter ? s.MarkCenter : s.Position;
+        s.MarkRadius = Mathf.Round(Vector2.Distance(center, p) * 10f) / 10f;
+        s.OverrideMarkRadius = true;
         GetState(Level).dirty = true;
     }
 
@@ -935,7 +995,8 @@ public class DifferentPointOutLineWindow : EditorWindow
         }
         s.Position = new Vector3(newPos.x, newPos.y, 0f);
         s.Size = newSize;
-        // MarkCenter không đổi theo Position/Size: nó độc lập với outline
+        // MarkCenter / MarkRadius không đổi theo Position/Size: độc lập với outline
+        // (nếu không bật Custom radius thì bán kính tự theo Size mới)
     }
 
     // ------------------------------------------------------------------ Data
@@ -970,7 +1031,9 @@ public class DifferentPointOutLineWindow : EditorWindow
                 Size = d.Size,
                 Outline = outline,
                 HasMarkCenter = d.HasMarkCenter,
-                MarkCenter = d.MarkCenter
+                MarkCenter = d.MarkCenter,
+                OverrideMarkRadius = d.OverrideMarkRadius,
+                MarkRadius = d.MarkRadius
             });
         }
         return st;
@@ -1000,7 +1063,9 @@ public class DifferentPointOutLineWindow : EditorWindow
                 Size = s.Size,
                 Outline = outline,
                 HasMarkCenter = s.HasMarkCenter,
-                MarkCenter = s.MarkCenter
+                MarkCenter = s.MarkCenter,
+                OverrideMarkRadius = s.OverrideMarkRadius,
+                MarkRadius = s.MarkRadius
             });
         }
 

@@ -20,6 +20,8 @@ public class DifferentPair : MonoBehaviour
     public void SetShape(ShapeMark shape) => _shape = shape;
     private Vector2 _markCenter;
     private bool _hasMarkCenter;
+    private bool _hasCustomRadius;  
+    private float _markRadius;       
 
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
@@ -37,7 +39,11 @@ public class DifferentPair : MonoBehaviour
         _size = Vector2.Scale(data.Size, scale);
         _hasMarkCenter = data.HasMarkCenter;
         _markCenter = Vector2.Scale((Vector2)data.MarkCenter, scale);
-        Vector3[] outline = data.GetScaledOutline(Vector2.one); 
+
+        _hasCustomRadius = data.OverrideMarkRadius && data.MarkRadius > 0f;
+        _markRadius = _hasCustomRadius ? data.MarkRadius * scale.x : 0f;
+
+        Vector3[] outline = data.GetScaledOutline(Vector2.one);
 
         if (pointA != null && pointA.gameObject.scene.IsValid())
             pointA.Init(_pos, _size, outline, rootA);
@@ -88,10 +94,21 @@ public class DifferentPair : MonoBehaviour
             size = new Vector2(d, d);
         }
     }
+
     public void GetMarkWorldRect(RectTransform root, out Vector3 center, out Vector2 size)
     {
         GetShapeWorldRect(root, out center, out size);
         if (_hasMarkCenter)
             center = root.TransformPoint(_markCenter);
+    }
+
+    public bool TryGetMarkWorldRadius(RectTransform root, out float radiusWorld)
+    {
+        radiusWorld = 0f;
+        if (!_hasCustomRadius || root == null) return false;
+
+        Vector3 v = root.TransformVector(new Vector3(_markRadius, 0f, 0f));
+        radiusWorld = Mathf.Abs(v.x);
+        return radiusWorld > 0.0001f;
     }
 }

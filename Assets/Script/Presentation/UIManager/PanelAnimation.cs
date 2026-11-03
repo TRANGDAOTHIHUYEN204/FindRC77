@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PanelAnimation : MonoBehaviour
 {
-    [SerializeField] private float openDuration = 0.4f;
+    [SerializeField] private float openDuration = 0.2f;
     [SerializeField] private float closeDuration = 0.12f;
     [SerializeField] private Vector3 startScale = Vector3.zero;
 
