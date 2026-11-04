@@ -11,7 +11,7 @@ public class FindHiddenBehaviour : MonoBehaviour
 
     private Image _image;
     private RectTransform _rect;
-    private BoxCollider2D _col;
+    [SerializeField] private BoxCollider2D _col;
     private Vector3 _originalScale;
 
     public bool IsFound { get; private set; }
@@ -22,26 +22,29 @@ public class FindHiddenBehaviour : MonoBehaviour
     private void Awake()
     {
         _rect = (RectTransform)transform;
-        _col = GetComponent<BoxCollider2D>();
         _image = GetComponentInChildren<Image>(true);
         _originalScale = _rect.localScale;
     }
 
-    public void Init(Vector3 anchoredPosition, FindHiddenData data, int slotIndex)
+    public void Init(Transform parent, Vector3 anchoredPosition, FindHiddenData data, int slotIndex)
     {
         OnArrived = null;
         Data = data;
         SlotIndex = slotIndex;
         StopAllCoroutines();
-        gameObject.SetActive(true);  
+
+        if (_rect.parent != parent)
+            _rect.SetParent(parent, false);
+
+        gameObject.SetActive(true);
         _rect.anchoredPosition3D = anchoredPosition;
         _rect.localScale = _originalScale;
         IsFound = false;
 
         _image.sprite = data.SpriteItem;
-        _rect.sizeDelta = data.Size;    
+        _rect.sizeDelta = data.Size;
 
-        _col.size = data.Size;              
+        _col.size = data.Size;
         _col.offset = _rect.rect.center;
         _col.enabled = true;
     }
@@ -57,11 +60,15 @@ public class FindHiddenBehaviour : MonoBehaviour
         return _col.OverlapPoint(worldPoint);
     }
 
-    public void Collect(Vector3 targetWorldPos)
+    public void Collect(Vector3 targetWorldPos, Transform flyLayer)
     {
         if (IsFound) return;
         IsFound = true;
         _col.enabled = false;
+        
+        if (flyLayer != null)
+            _rect.SetParent(flyLayer, true);
+
         StartCoroutine(FlyRoutine(targetWorldPos));
     }
 

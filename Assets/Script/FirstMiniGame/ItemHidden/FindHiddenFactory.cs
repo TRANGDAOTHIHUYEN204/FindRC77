@@ -4,7 +4,7 @@ using UnityEngine;
 public class FindHiddenFactory : MonoBehaviour
 {
     [SerializeField] private FindHiddenBehaviour prefab;
-    [SerializeField] private RectTransform container;
+    [SerializeField] private RectTransform container; 
 
     private readonly PoolManager pool = new PoolManager();
     private readonly List<FindHiddenBehaviour> items = new();
@@ -19,7 +19,7 @@ public class FindHiddenFactory : MonoBehaviour
         go.transform.SetParent(container, false);
 
         var item = go.GetComponent<FindHiddenBehaviour>();
-        item.Init(point, data, slotIndex);
+        item.Init(container, point, data, slotIndex);
 
         item.OnArrived -= Despawn;
         item.OnArrived += Despawn;

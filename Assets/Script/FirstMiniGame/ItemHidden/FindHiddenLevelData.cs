@@ -7,7 +7,6 @@ public class HiddenEntry
 {
     public FindHiddenData data;
     public PointSpawnItem points;   
-    [Tooltip("0 = spawn tại tất cả điểm trong points")]
     public int count = 0;
 
     public int SpawnCount
@@ -27,6 +26,8 @@ public class FindHiddenLevelData : ScriptableObject
     [SerializeField] private Sprite background;
     [SerializeField] private HiddenEntry[] entries;
 
+    [SerializeField] private float time;
+
     public Sprite Background => background;
     public IReadOnlyList<HiddenEntry> Entries => entries;
 
@@ -39,6 +40,8 @@ public class FindHiddenLevelData : ScriptableObject
             return sum;
         }
     }
+
+    public float Time => time;
 
 #if UNITY_EDITOR
     private void OnValidate()

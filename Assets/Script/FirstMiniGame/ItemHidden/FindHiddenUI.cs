@@ -12,6 +12,8 @@ public class FindHiddenUI : MonoBehaviour
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private TimeManager timeManager;
+    [SerializeField] private TMP_Text timerText;
 
     private void OnEnable()
     {
@@ -21,6 +23,10 @@ public class FindHiddenUI : MonoBehaviour
         game.OnLose += ShowLose;
         levelSpawner.OnLevelLoaded += OnLevelLoaded;
         HidePanels();
+    }
+    private void Update()                            
+    {
+        timerText.text = timeManager.GetFormattedTime();
     }
 
     private void OnDisable()
@@ -48,8 +54,7 @@ public class FindHiddenUI : MonoBehaviour
         winPanel.SetActive(false);
         losePanel.SetActive(false);
     }
-
-    // Gắn vào nút Replay / Next
+    
     public void OnReplayClicked() => game.StartGame();
 
     public void OnNextLevelClicked()

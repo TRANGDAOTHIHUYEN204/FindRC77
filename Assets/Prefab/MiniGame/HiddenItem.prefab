@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab2ff0647f775547a7de39b7c38d222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FindHiddenBehaviour
+  _col: {fileID: 41602871914773052}
 --- !u!61 &41602871914773052
 BoxCollider2D:
   m_ObjectHideFlags: 0

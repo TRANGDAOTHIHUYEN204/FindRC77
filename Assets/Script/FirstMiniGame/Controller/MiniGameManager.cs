@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,7 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private FindHiddenLevelSpawner levelSpawner;
     [SerializeField] private HandleClick handleClick;
     private Sprite backgroundImage;
-    [SerializeField] private int maxLives = 5;
-
-    public int Lives { get; private set; }
+    
     public bool IsEnded { get; private set; }
 
     private int collectedCount;
@@ -18,12 +17,16 @@ public class MiniGameManager : MonoBehaviour
     public event Action<int> OnLivesChanged;
     public event Action OnWin;
     public event Action OnLose;
-
-    private void Start()
+    [SerializeField] private TimeManager timeManager;
+    private void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
+    private void Start()
+    {
         handleClick.OnHitItem += HandleHitItem;
         handleClick.OnWrongClick += HandleWrongClick;
+        timeManager.OnTimeUp += HandleTimeUp;  
         StartGame();
     }
 
@@ -31,21 +34,20 @@ public class MiniGameManager : MonoBehaviour
     {
         handleClick.OnHitItem -= HandleHitItem;
         handleClick.OnWrongClick -= HandleWrongClick;
+        timeManager.OnTimeUp -= HandleTimeUp;  
         levelSpawner.DespawnAll();
     }
 
     public void StartGame()
     {
         IsEnded = false;
-        Lives = maxLives;
         collectedCount = 0;
         handleClick.InputEnabled = true;
-
+        timeManager.ResetTimer();                      
+        timeManager.StartTimer();
         levelSpawner.SpawnAll();
         backgroundImage = levelSpawner.BackgroundImage; 
-        Debug.Log($"[Game] START | Lives={Lives} | Total={levelSpawner.Total}");
-
-        OnLivesChanged?.Invoke(Lives);
+        Debug.Log($"[Game] START | Total={levelSpawner.Total}");
         OnProgress?.Invoke(0, levelSpawner.Total);
     }
     
@@ -69,22 +71,21 @@ public class MiniGameManager : MonoBehaviour
 
     private void HandleWrongClick(Vector2 screenPoint)
     {
-        if (IsEnded) return;
-
-        Lives--;
-        Debug.Log($"[Game] WRONG CLICK | Lives={Lives}");
-
-        OnLivesChanged?.Invoke(Lives);
-
-        if (Lives <= 0)
-            EndGame(win: false);
+        Debug.Log($"[Game] WRONG CLICK");
     }
 
-    private void EndGame(bool win)
+    private void HandleTimeUp()
+    {
+        if (IsEnded) return;
+        EndGame(false);
+    }
+
+    private IEnumerator EndGame(bool win)
     {
         IsEnded = true;
         handleClick.InputEnabled = false;
-
+        timeManager.PauseTimer();                   
+        yield return new WaitForSeconds(2f);
         if (win) Debug.Log("[Game] WIN");
         else Debug.Log("[Game] LOSE");
 

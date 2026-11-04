@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6a81b5b7249da46a2da62e1bf8aa5d, type: 3}
   m_Name: FirstLevel
   m_EditorClassIdentifier: Assembly-CSharp::FindHiddenLevelData
-  background: {fileID: -2899357645234046923, guid: 0addc7f7628d92d4e9ed310f1def1290, type: 3}
+  background: {fileID: 1451721011379999049, guid: 852026edbbb95874994fe11f1ea83324, type: 3}
   entries:
   - data: {fileID: 11400000, guid: f578cd870fa770e40b253d16ef80af2d, type: 2}
     points: {fileID: 11400000, guid: 0211f898682a1934bb586df0fc89125e, type: 2}
@@ -20,3 +20,4 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: bdabb29adc255e747a7981c15c8e00d9, type: 2}
     points: {fileID: 11400000, guid: 9dc5fa2782723184884f4e81c55fce8c, type: 2}
     count: 2
+  time: 60

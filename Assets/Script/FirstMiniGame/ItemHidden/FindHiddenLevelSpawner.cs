@@ -6,7 +6,7 @@ public class FindHiddenLevelSpawner : MonoBehaviour
 {
     [SerializeField] private FindHiddenLevelData[] levels;
     [SerializeField] private FindHiddenFactory spawner;
-
+    public float Time => levels[CurrentLevel].Time;
     public Sprite BackgroundImage => levels[CurrentLevel].Background;
     public int CurrentLevel { get; private set; }
     public int Total { get; private set; }
