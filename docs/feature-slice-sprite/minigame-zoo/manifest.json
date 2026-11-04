@@ -1,0 +1,218 @@
+{
+  "concept": "docs/concept-reskin/minigame-zoo-concept.png",
+  "style_refs": [
+    "docs/target-reskin/style-level1.png",
+    "docs/target-reskin/style-level2.png"
+  ],
+  "sprites": [
+    {
+      "name": "item-monkey",
+      "type": "icon",
+      "bbox": [
+        345,
+        245,
+        420,
+        325
+      ],
+      "bbox_source": "manual",
+      "target": [
+        240,
+        256
+      ],
+      "describe_upper": "MONKEY",
+      "describe": "cute brown chibi monkey sitting, holding a banana",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-penguin",
+      "type": "icon",
+      "bbox": [
+        328,
+        690,
+        378,
+        762
+      ],
+      "bbox_source": "manual",
+      "target": [
+        176,
+        256
+      ],
+      "describe_upper": "PENGUIN",
+      "describe": "cute chibi penguin standing, black and white with orange feet",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-parrot",
+      "type": "icon",
+      "bbox": [
+        862,
+        92,
+        928,
+        192
+      ],
+      "bbox_source": "manual",
+      "target": [
+        176,
+        256
+      ],
+      "describe_upper": "PARROT",
+      "describe": "red scarlet macaw parrot perched, blue and yellow wings",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-giraffe",
+      "type": "icon",
+      "bbox": [
+        1165,
+        260,
+        1320,
+        495
+      ],
+      "bbox_source": "manual",
+      "target": [
+        176,
+        256
+      ],
+      "describe_upper": "GIRAFFE",
+      "describe": "cute standing giraffe, side view",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-lion",
+      "type": "icon",
+      "bbox": [
+        1300,
+        70,
+        1455,
+        172
+      ],
+      "bbox_source": "manual",
+      "target": [
+        256,
+        176
+      ],
+      "describe_upper": "LION",
+      "describe": "cute lion lying down, big mane",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-bucket",
+      "type": "icon",
+      "bbox": [
+        1474,
+        166,
+        1526,
+        220
+      ],
+      "bbox_source": "manual",
+      "target": [
+        240,
+        256
+      ],
+      "describe_upper": "FEEDING BUCKET",
+      "describe": "metal zoo feeding bucket filled with food pellets",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-binoculars",
+      "type": "icon",
+      "bbox": [
+        910,
+        632,
+        966,
+        672
+      ],
+      "bbox_source": "manual",
+      "target": [
+        256,
+        176
+      ],
+      "describe_upper": "BINOCULARS",
+      "describe": "small black binoculars",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-balloon",
+      "type": "icon",
+      "bbox": [
+        1012,
+        188,
+        1064,
+        300
+      ],
+      "bbox_source": "manual",
+      "target": [
+        112,
+        256
+      ],
+      "describe_upper": "RED BALLOON",
+      "describe": "shiny red balloon with string",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-teddy",
+      "type": "icon",
+      "bbox": [
+        1330,
+        720,
+        1400,
+        800
+      ],
+      "bbox_source": "manual",
+      "target": [
+        224,
+        256
+      ],
+      "describe_upper": "TEDDY BEAR",
+      "describe": "brown teddy bear plush with red bow",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-icecream",
+      "type": "icon",
+      "bbox": [
+        652,
+        704,
+        690,
+        766
+      ],
+      "bbox_source": "manual",
+      "target": [
+        160,
+        256
+      ],
+      "describe_upper": "ICE CREAM CONE",
+      "describe": "vanilla soft-serve ice cream in a waffle cone",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-banana",
+      "type": "icon",
+      "bbox": [
+        192,
+        460,
+        244,
+        498
+      ],
+      "bbox_source": "manual",
+      "target": [
+        256,
+        192
+      ],
+      "describe_upper": "BANANA",
+      "describe": "bunch of yellow bananas",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    }
+  ]
+}
