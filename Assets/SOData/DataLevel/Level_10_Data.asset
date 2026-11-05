@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Level_10_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 10
-  countDifferent: 0
-  rawSprite: {fileID: 21300000, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
-  errorSprite: {fileID: 0}
+  countDifferent: 10
+  rawSprite: {fileID: 6575024605823359188, guid: 579468eb1d26c8f4aa988ff47f5dbef7, type: 3}
+  errorSprite: {fileID: -1280167142580367855, guid: e69e81ec5bbf01f44b18a828908bac4b, type: 3}
   timeLimit: 240
   markData: []
   differentPoints: []
   textWin: Rewarded again. Can anyone even beat my level?
+  difficulty: 2

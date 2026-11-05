@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Level_07_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 7
-  countDifferent: 0
-  rawSprite: {fileID: 21300000, guid: e1ea702ed580a2f4b83748f0526bfa1b, type: 3}
-  errorSprite: {fileID: 0}
+  countDifferent: 10
+  rawSprite: {fileID: 9000218168782435848, guid: 9f6f56ad24a5f1142a24011d817af6e3, type: 3}
+  errorSprite: {fileID: 2793724452112908607, guid: 820d068a10a444040a337b0cded9c6de, type: 3}
   timeLimit: 240
   markData: []
   differentPoints: []
   textWin: Cravings satisfied, body still looking perfect.
+  difficulty: 0

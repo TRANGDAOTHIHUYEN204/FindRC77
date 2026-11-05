@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_14_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 14
+  countDifferent: 10
+  rawSprite: {fileID: 8335888041786806605, guid: 6146248a6f011e340b931aa2c6adf58f, type: 3}
+  errorSprite: {fileID: -886782280134362841, guid: dc3282cb80a713841aba0ace77072b08, type: 3}
+  timeLimit: 240
+  markData: []
+  differentPoints: []
+  textWin: 
+  difficulty: 0

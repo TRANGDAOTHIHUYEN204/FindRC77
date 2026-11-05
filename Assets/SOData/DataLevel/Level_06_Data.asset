@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level_06_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   numberLevel: 6
-  countDifferent: 0
-  rawSprite: {fileID: 0}
-  errorSprite: {fileID: 0}
+  countDifferent: 10
+  rawSprite: {fileID: -3685375819479707970, guid: 1e891a3eebd0ca7418072008f76ac3f3, type: 3}
+  errorSprite: {fileID: -800460046214747259, guid: 84fd9f182abaaab4fb8019689ead74fb, type: 3}
   timeLimit: 240
   markData: []
   differentPoints: []
