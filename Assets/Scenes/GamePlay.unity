@@ -6388,7 +6388,7 @@ MonoBehaviour:
   stateGame: {fileID: 2088011103}
   spotlight: {fileID: 1301881757}
   factory: {fileID: 987585498}
-  hintPerLevel: 1
+  hintPerLevel: 10
 --- !u!224 &1301881756
 RectTransform:
   m_ObjectHideFlags: 0

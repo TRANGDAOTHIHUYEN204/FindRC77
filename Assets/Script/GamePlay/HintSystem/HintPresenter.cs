@@ -7,7 +7,7 @@ public class HintPresenter : MonoBehaviour
     [SerializeField] private StateGame stateGame;
     [SerializeField] private HintSpotlight spotlight;
     [SerializeField] private FactoryManager factory;
-    [SerializeField, Min(0)] private int hintPerLevel = 1;
+    [SerializeField, Min(0)] private int hintPerLevel = 10;
 
     private HintHand _handA;
     private HintHand _handB;
@@ -45,27 +45,37 @@ public class HintPresenter : MonoBehaviour
 
         var manager = pairManagerHolder.Manager;
         if (manager == null || manager.IsComplete) return;
-        if (HintedPair != null && !HintedPair.IsFound) return;
+        
+        if (HintedPair != null && HintedPair.IsFound)
+            ClearHint();
+        if (HintedPair != null)
+        {
+            Present(HintedPair, tutorial);
+            return;
+        }
 
         var entry = manager.GetHintEntry();
         if (entry == null) return;
 
         HintedPair = entry.Pair;
+        Present(HintedPair, tutorial);
 
+        if (consume) SetCount(CountHint - 1);
+    }
+
+    private void Present(DifferentPair pair, bool tutorial)
+    {
         if (tutorial)
         {
-            spotlight.ShowAnimated(HintedPair);
+            spotlight.ShowAnimated(pair);
             ReleaseHands();
-
-            _handA = SpawnHand(HintedPair.RootA);
-            _handB = SpawnHand(HintedPair.RootB);
+            _handA = SpawnHand(pair.RootA);
+            _handB = SpawnHand(pair.RootB);
         }
         else
         {
-            spotlight.Show(HintedPair);
+            spotlight.Show(pair);
         }
-
-        if (consume) SetCount(CountHint - 1);
     }
 
     public void AddHint(int amount) => SetCount(CountHint + amount);

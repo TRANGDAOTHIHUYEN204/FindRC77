@@ -18,7 +18,11 @@ public class MiniGameManager : MonoBehaviour
     public event Action<int> OnLivesChanged;
     public event Action OnWin;
     public event Action OnLose;
+<<<<<<< Updated upstream
 
+=======
+    [SerializeField] private TimeManager timeManager;
+>>>>>>> Stashed changes
     private void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;

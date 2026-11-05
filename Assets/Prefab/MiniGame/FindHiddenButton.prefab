@@ -47,8 +47,9 @@ GameObject:
   - component: {fileID: 3253032367776838222}
   - component: {fileID: 3666715158494895990}
   - component: {fileID: 8628331881189449562}
+  - component: {fileID: -183555292355122474}
   m_Layer: 5
-  m_Name: FindHidden
+  m_Name: FindHiddenButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,3 +157,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-183555292355122474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457557412270668621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b66b74857967e042b61fac1d61c7ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonSound
+  soundButton: {fileID: 8300000, guid: 8c5f01645b2329a4d81552a75b37aa4a, type: 3}

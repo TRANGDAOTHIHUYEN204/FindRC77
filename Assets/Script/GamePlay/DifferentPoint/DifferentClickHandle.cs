@@ -44,6 +44,7 @@ public class DifferentClickHandler : MonoBehaviour
 
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
+            
             Vector2? trailLocal = null;
             if (trailStartPoint != null &&
                 trailStartPoint.parent is RectTransform canvasRect &&
