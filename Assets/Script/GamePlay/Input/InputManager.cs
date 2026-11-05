@@ -49,7 +49,7 @@ public class InputManager : MonoBehaviour
 
         if (pointer.press.wasReleasedThisFrame)
         {
-            if (!_cancelled)
+            if (!_cancelled && !IsOverButton(pos))
             {
                 ClickedThisFrame = true;
                 ClickScreenPosition = pos;
@@ -62,15 +62,14 @@ public class InputManager : MonoBehaviour
     {
         if (EventSystem.current == null) return false;
 
-        if (_pointerData == null)
-            _pointerData = new PointerEventData(EventSystem.current);
-
-        _pointerData.Reset();
-        _pointerData.position = screenPos;
+        var data = new PointerEventData(EventSystem.current) { position = screenPos };
         _hits.Clear();
-        EventSystem.current.RaycastAll(_pointerData, _hits);
+        EventSystem.current.RaycastAll(data, _hits);
 
-        if (_hits.Count == 0) return false;
-        return _hits[0].gameObject.GetComponentInParent<Selectable>() != null;
+        foreach (var hit in _hits)
+            if (hit.gameObject.GetComponentInParent<Selectable>() != null)
+                return true;
+
+        return false;
     }
 }
