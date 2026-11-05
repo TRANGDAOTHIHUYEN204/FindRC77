@@ -1,0 +1,199 @@
+{
+  "concept": "docs/concept-reskin/minigame-christmas-concept.png",
+  "style_refs": [
+    "docs/target-reskin/style-level1.png",
+    "docs/target-reskin/style-level2.png"
+  ],
+  "sprites": [
+    {
+      "name": "item-gift",
+      "type": "icon",
+      "bbox": [
+        722,
+        472,
+        790,
+        535
+      ],
+      "bbox_source": "manual",
+      "target": [
+        256,
+        240
+      ],
+      "describe_upper": "GIFT BOX",
+      "describe": "pink wrapped gift box with ribbon bow",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-candycane",
+      "type": "icon",
+      "bbox": [
+        52,
+        900,
+        100,
+        985
+      ],
+      "bbox_source": "manual",
+      "target": [
+        144,
+        256
+      ],
+      "describe_upper": "CANDY CANE",
+      "describe": "red and white striped candy cane",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-gingerbread",
+      "type": "icon",
+      "bbox": [
+        522,
+        868,
+        590,
+        940
+      ],
+      "bbox_source": "manual",
+      "target": [
+        240,
+        256
+      ],
+      "describe_upper": "GINGERBREAD MAN",
+      "describe": "smiling gingerbread man cookie with icing",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-ornament",
+      "type": "icon",
+      "bbox": [
+        1448,
+        632,
+        1498,
+        688
+      ],
+      "bbox_source": "manual",
+      "target": [
+        224,
+        256
+      ],
+      "describe_upper": "ORNAMENT BALL",
+      "describe": "shiny purple Christmas ornament ball with cap",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-bell",
+      "type": "icon",
+      "bbox": [
+        328,
+        138,
+        372,
+        192
+      ],
+      "bbox_source": "manual",
+      "target": [
+        208,
+        256
+      ],
+      "describe_upper": "GOLDEN BELL",
+      "describe": "golden Christmas bell with small red bow",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-stocking",
+      "type": "icon",
+      "bbox": [
+        712,
+        555,
+        765,
+        630
+      ],
+      "bbox_source": "manual",
+      "target": [
+        176,
+        256
+      ],
+      "describe_upper": "CHRISTMAS STOCKING",
+      "describe": "green Christmas stocking with white cuff and tree pattern",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-star",
+      "type": "icon",
+      "bbox": [
+        728,
+        8,
+        802,
+        88
+      ],
+      "bbox_source": "manual",
+      "target": [
+        240,
+        256
+      ],
+      "describe_upper": "GOLDEN STAR",
+      "describe": "glowing golden five-point Christmas tree star",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-santahat",
+      "type": "icon",
+      "bbox": [
+        1282,
+        752,
+        1392,
+        828
+      ],
+      "bbox_source": "manual",
+      "target": [
+        256,
+        176
+      ],
+      "describe_upper": "SANTA HAT",
+      "describe": "red Santa hat with white fur trim and pompom",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-snowman",
+      "type": "icon",
+      "bbox": [
+        1430,
+        390,
+        1510,
+        495
+      ],
+      "bbox_source": "manual",
+      "target": [
+        192,
+        256
+      ],
+      "describe_upper": "SNOWMAN",
+      "describe": "small snowman with blue scarf and carrot nose",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    },
+    {
+      "name": "item-reindeer",
+      "type": "icon",
+      "bbox": [
+        1165,
+        525,
+        1312,
+        682
+      ],
+      "bbox_source": "manual",
+      "target": [
+        240,
+        256
+      ],
+      "describe_upper": "REINDEER",
+      "describe": "cute reindeer standing with red saddle blanket and bell",
+      "empty": false,
+      "prompt_extra": "Render ONLY this single object, whole and complete (repair any part hidden by neighbours in the anchor). No ground, no shadow plate, no surrounding props."
+    }
+  ]
+}
