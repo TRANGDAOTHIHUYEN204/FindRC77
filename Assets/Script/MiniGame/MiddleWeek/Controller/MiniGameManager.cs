@@ -17,16 +17,10 @@ public class MiniGameManager : MonoBehaviour
     public event Action<int> OnLivesChanged;
     public event Action OnWin;
     public event Action OnLose;
-    [SerializeField] private TimeManager timeManager;
-    private void Awake()
-    {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-    }
     private void Start()
     {
         handleClick.OnHitItem += HandleHitItem;
         handleClick.OnWrongClick += HandleWrongClick;
-        timeManager.OnTimeUp += HandleTimeUp;  
         StartGame();
     }
 
@@ -34,7 +28,6 @@ public class MiniGameManager : MonoBehaviour
     {
         handleClick.OnHitItem -= HandleHitItem;
         handleClick.OnWrongClick -= HandleWrongClick;
-        timeManager.OnTimeUp -= HandleTimeUp;  
         levelSpawner.DespawnAll();
     }
 
@@ -43,8 +36,6 @@ public class MiniGameManager : MonoBehaviour
         IsEnded = false;
         collectedCount = 0;
         handleClick.InputEnabled = true;
-        timeManager.ResetTimer();                      
-        timeManager.StartTimer();
         levelSpawner.SpawnAll();
         backgroundImage = levelSpawner.BackgroundImage; 
         Debug.Log($"[Game] START | Total={levelSpawner.Total}");
@@ -66,26 +57,24 @@ public class MiniGameManager : MonoBehaviour
         OnProgress?.Invoke(collectedCount, levelSpawner.Total);
 
         if (collectedCount >= levelSpawner.Total)
-            EndGame(win: true);
-    }
-
-    private void HandleWrongClick(Vector2 screenPoint)
-    {
-        Debug.Log($"[Game] WRONG CLICK");
+            StartCoroutine(EndGame(true));
     }
 
     private void HandleTimeUp()
     {
         if (IsEnded) return;
-        EndGame(false);
+        StartCoroutine(EndGame(false));
     }
-
+    private void HandleWrongClick(Vector2 screenPoint)
+    {
+        Debug.Log($"[Game] WRONG CLICK");
+    }
+    
     private IEnumerator EndGame(bool win)
     {
         IsEnded = true;
         handleClick.InputEnabled = false;
-        timeManager.PauseTimer();                   
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         if (win) Debug.Log("[Game] WIN");
         else Debug.Log("[Game] LOSE");
 

@@ -11,22 +11,14 @@ public class FindHiddenUI : MonoBehaviour
     [SerializeField] private TMP_Text livesText;
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private GameObject winPanel;
-    [SerializeField] private GameObject losePanel;
-    [SerializeField] private TimeManager timeManager;
-    [SerializeField] private TMP_Text timerText;
 
     private void OnEnable()
     {
         game.OnLivesChanged += UpdateLives;
         game.OnProgress += UpdateProgress;
         game.OnWin += ShowWin;
-        game.OnLose += ShowLose;
         levelSpawner.OnLevelLoaded += OnLevelLoaded;
         HidePanels();
-    }
-    private void Update()                            
-    {
-        timerText.text = timeManager.GetFormattedTime();
     }
 
     private void OnDisable()
@@ -34,7 +26,6 @@ public class FindHiddenUI : MonoBehaviour
         game.OnLivesChanged -= UpdateLives;
         game.OnProgress -= UpdateProgress;
         game.OnWin -= ShowWin;
-        game.OnLose -= ShowLose;
         levelSpawner.OnLevelLoaded -= OnLevelLoaded;
     }
 
@@ -47,12 +38,11 @@ public class FindHiddenUI : MonoBehaviour
     private void UpdateLives(int lives) => livesText.text = lives.ToString();
     private void UpdateProgress(int c, int t) => progressText.text = $"{c}/{t}";
     private void ShowWin() => winPanel.SetActive(true);
-    private void ShowLose() => losePanel.SetActive(true);
+    
 
     private void HidePanels()
     {
         winPanel.SetActive(false);
-        losePanel.SetActive(false);
     }
     
     public void OnReplayClicked() => game.StartGame();

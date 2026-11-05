@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c39cf7857be00438fac00270c5f0b3, type: 3}
   m_Name: TypeC
   m_EditorClassIdentifier: Assembly-CSharp::PointSpawnItem
-  points: []
+  points:
+  - {x: 272, y: -577, z: 0}
+  - {x: 955, y: -239, z: 0}
+  - {x: -979, y: -1224, z: 0}
+  - {x: 387, y: -958, z: 0}
+  - {x: 1076, y: -753, z: 0}
+  - {x: -1269, y: 45, z: 0}
+  - {x: 187, y: 63, z: 0}
