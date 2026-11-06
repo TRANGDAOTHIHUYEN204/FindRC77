@@ -1,84 +1,178 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MiniGameManager : MonoBehaviour
 {
     [SerializeField] private FindHiddenLevelSpawner levelSpawner;
     [SerializeField] private HandleClick handleClick;
-    private Sprite backgroundImage;
-    
-    public bool IsEnded { get; private set; }
+    [SerializeField] private CollectTargetRegistry registry;
+    [SerializeField] private AudioClip winSound;
+    [SerializeField] private AudioClip loseSound;
+    [SerializeField] private AudioClip clickRightSound;
+    [SerializeField] private AudioClip clickWrongSound;
+    public FindHiddenGameState State { get; } = new FindHiddenGameState();
 
-    private int collectedCount;
+    [Header("Error Mark")]
+    [SerializeField] private ErrorMark errorMarkPrefab;  
+    [SerializeField] private Sprite errorSprite;
+    [SerializeField] private float markSize = 1f;
+    [SerializeField] private float markLifeTime = 0.8f;
+    [SerializeField] private Camera cam;
+
+    private readonly PoolManager _pool = new PoolManager();
+    public bool IsEnded => State.IsEnded;
 
     public event Action<int, int> OnProgress;
-    public event Action<int> OnLivesChanged;
     public event Action OnWin;
     public event Action OnLose;
+    public event Action OnWrongClick;  
     private void Start()
     {
+        if (cam == null) cam = Camera.main;
+
+        levelSpawner.OnTypeProgress += HandleTypeProgress;
         handleClick.OnHitItem += HandleHitItem;
         handleClick.OnWrongClick += HandleWrongClick;
-        StartGame();
+        State.OnProgress += HandleStateProgress;
+        State.OnPhaseChanged += HandlePhaseChanged;
+
+        levelSpawner.SetLevel(SaveMiniGame.CurrentLevel);
+        StartGame(resume: true);
     }
 
     private void OnDestroy()
     {
+        levelSpawner.OnTypeProgress -= HandleTypeProgress;
         handleClick.OnHitItem -= HandleHitItem;
         handleClick.OnWrongClick -= HandleWrongClick;
+        State.OnProgress -= HandleStateProgress;
+        State.OnPhaseChanged -= HandlePhaseChanged;
+
+        SaveProgress();
         levelSpawner.DespawnAll();
+        for (int i = _pool.ActiveGameObjects.Count - 1; i >= 0; i--)
+            _pool.ReturnObject(_pool.ActiveGameObjects[i]);
     }
 
-    public void StartGame()
+    private void OnApplicationPause(bool paused) { if (paused) SaveProgress(); }
+    private void OnApplicationQuit() => SaveProgress();
+
+
+    public void StartGame() => StartGame(false);
+
+    public void StartGame(bool resume)
     {
-        IsEnded = false;
-        collectedCount = 0;
-        handleClick.InputEnabled = true;
-        levelSpawner.SpawnAll();
-        backgroundImage = levelSpawner.BackgroundImage; 
-        Debug.Log($"[Game] START | Total={levelSpawner.Total}");
-        OnProgress?.Invoke(0, levelSpawner.Total);
+        int level = levelSpawner.CurrentLevel;
+        FindHiddenSaveData saved = null;
+        if (resume) FindHiddenSaveStore.TryLoad(level, out saved);
+        else FindHiddenSaveStore.Clear();
+
+        registry.Setup(levelSpawner.CurrentLevelData); 
+        levelSpawner.SpawnAll(saved?.foundIds);
+        State.Begin(level, levelSpawner.Total, saved?.foundIds);
+        Debug.Log($"[Game] START | Level={level} Found={State.FoundCount}/{State.Total}");
+    }
+
+    public void Pause()
+    {
+        if (State.Phase != GamePhase.Playing) return;
+        State.SetPhase(GamePhase.Paused);
+    }
+
+    public void Resume()
+    {
+        if (State.Phase != GamePhase.Paused) return;
+        State.SetPhase(GamePhase.Playing);
     }
     
+    private void HandlePhaseChanged(GamePhase phase)
+    {
+        handleClick.InputEnabled = (phase == GamePhase.Playing);
+    }
+
+    private void HandleStateProgress(int found, int total) => OnProgress?.Invoke(found, total);
+    
+
+    private void HandleTypeProgress(FindHiddenData data, int found, int total)
+        => registry.SetProgress(data.TargetId, found, total);
+
     private void HandleHitItem(FindHiddenBehaviour hit)
     {
-        if (IsEnded) return;
+        if (State.IsEnded) return;
+
+        PlaySfx(clickRightSound);
+
         hit.OnArrived += HandleItemArrived;
     }
 
     private void HandleItemArrived(FindHiddenBehaviour item)
     {
         item.OnArrived -= HandleItemArrived;
-        if (IsEnded) return;
+        if (State.IsEnded) return;
 
-        collectedCount++;
-        OnProgress?.Invoke(collectedCount, levelSpawner.Total);
+        if (!State.MarkFound(item.Id)) return;
+        levelSpawner.MarkFound(item.Data);
 
-        if (collectedCount >= levelSpawner.Total)
-            StartCoroutine(EndGame(true));
+        if (State.IsCompleted) StartCoroutine(EndGame(true));
+        else SaveProgress();
     }
 
-    private void HandleTimeUp()
+    private void HandleWrongClick(Vector2 p)
     {
-        if (IsEnded) return;
-        StartCoroutine(EndGame(false));
+        Debug.Log("[Game] WRONG CLICK");
+        PlaySfx(clickWrongSound);
+        SpawnErrorMark(p);
+        OnWrongClick?.Invoke();
     }
-    private void HandleWrongClick(Vector2 screenPoint)
+
+    private void SpawnErrorMark(Vector2 screenPos)
     {
-        Debug.Log($"[Game] WRONG CLICK");
+        if (errorMarkPrefab == null || cam == null) return;
+
+        Vector3 world = cam.ScreenToWorldPoint(screenPos);
+        world.z = 0f;
+
+        GameObject obj = _pool.CreateGameObject(errorMarkPrefab.gameObject, world, Quaternion.identity);
+        if (obj == null) return;
+
+        ErrorMark mark = obj.GetComponent<ErrorMark>();
+        mark.Init(markSize, errorSprite, markLifeTime, _pool.ReturnObject);
     }
-    
+
     private IEnumerator EndGame(bool win)
     {
-        IsEnded = true;
-        handleClick.InputEnabled = false;
-        yield return new WaitForSeconds(0.5f);
-        if (win) Debug.Log("[Game] WIN");
-        else Debug.Log("[Game] LOSE");
+        State.SetPhase(win ? GamePhase.Won : GamePhase.Lost);
+        
+        PlaySfx(win ? winSound : loseSound);
 
-        if (win) OnWin?.Invoke();
-        else OnLose?.Invoke();
+        if (win)
+        {
+            FindHiddenSaveStore.Clear();
+            bool isLastLevel = State.Level >= levelSpawner.LevelCount - 1;
+            if (isLastLevel)
+            {
+                SaveMiniGame.AllCompleted = true;
+                SaveMiniGame.CurrentLevel = levelSpawner.LevelCount - 1;
+            }
+            else
+            {
+                SaveMiniGame.CurrentLevel = State.Level + 1;
+            }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        if (win) OnWin?.Invoke(); else OnLose?.Invoke();
+    }
+
+    public void SaveProgress()
+    {
+        if (!State.IsEnded) FindHiddenSaveStore.Save(State);
+    }
+
+    private void PlaySfx(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null || SoundManager.Instance == null) return;
+        SoundManager.Instance.PlaySfx(clip, volume);
     }
 }

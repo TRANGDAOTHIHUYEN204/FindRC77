@@ -18,7 +18,13 @@ public class FindHiddenBehaviour : MonoBehaviour
     public int SlotIndex { get; private set; }
     public event Action<FindHiddenBehaviour> OnArrived;
     public FindHiddenData Data { get; private set; }
-
+    public int Id { get; set; }
+    
+    public void SetFoundInstant()
+    {
+        IsFound = true;               
+        gameObject.SetActive(false);
+    }
     private void Awake()
     {
         _rect = (RectTransform)transform;

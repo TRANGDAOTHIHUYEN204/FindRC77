@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: TypeH
   m_EditorClassIdentifier: Assembly-CSharp::PointSpawnItem
   points:
-  - {x: -242, y: 133, z: 0}
-  - {x: -272, y: 277, z: 0}
-  - {x: -464, y: 256, z: 0}
+  - {x: -768, y: 1127, z: 0}
+  - {x: -1384, y: 801, z: 0}
+  - {x: 1215, y: 1291, z: 0}
+  - {x: 1058, y: -1218, z: 0}
+  - {x: -1499, y: 160, z: 0}
+  - {x: 1324, y: -1061, z: 0}
+  - {x: 919, y: 608, z: 0}

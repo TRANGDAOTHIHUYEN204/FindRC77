@@ -29,3 +29,9 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: fb32ee29867272f48a650e6984f5f508, type: 2}
     points: {fileID: 11400000, guid: 5f9c8dd3572170c49944ad335a388570, type: 2}
     count: 6
+  listIcons:
+  - {fileID: 21300000, guid: c45bdbb46d284b845baadaeafdb727fa, type: 3}
+  - {fileID: 21300000, guid: 89799a45e97709a41bab282770686463, type: 3}
+  - {fileID: 21300000, guid: 9b40a3f6254f8d54db1034dcd5365383, type: 3}
+  - {fileID: 21300000, guid: 61fcb8c6c86eeab48b04a22dd349fefb, type: 3}
+  - {fileID: 21300000, guid: 42c8d159b878f264980c4b2f973ee190, type: 3}

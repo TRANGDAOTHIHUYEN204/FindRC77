@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamePlay.unity
     guid: 43634026ce3c5594388b9254a791e264
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/FirstMiniGame.unity
     guid: 90a1a80873e48ec4c805ea25e30e07a2
   m_configObjects:

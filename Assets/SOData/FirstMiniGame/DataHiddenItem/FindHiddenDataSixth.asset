@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FindHiddenDataSixth
   m_EditorClassIdentifier: Assembly-CSharp::FindHiddenData
   spriteItem: {fileID: 21300000, guid: 50c3c26c18ee39a4e96720fafed0686e, type: 3}
-  size: {x: 50, y: 50, z: 0}
+  size: {x: 80, y: 80, z: 0}
   targetId: 6

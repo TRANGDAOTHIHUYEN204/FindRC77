@@ -18,6 +18,8 @@ public class LoadingScreen : MonoBehaviour
             PendingReward.Clear();
             Wallets.Coin.Reset();
             SaveGame.Reset();
+            SaveMiniGame.Reset();
+            FindHiddenSaveStore.Clear();
         }
         if (resetTutorialOnStart)
             SaveGame.ResetTutorial();

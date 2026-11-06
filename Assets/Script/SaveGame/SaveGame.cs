@@ -7,7 +7,20 @@ public static class SaveGame
     private const string KeySfx = "save_sfx_on";
     private const string KeyTutorial = "isCompletedTutorial";
     private const string KeyTutorialShown = "isTutorialShown";
+    private const string KeyAllCompleted = "save_all_completed";
 
+    public static bool AllCompleted
+    {
+        get => PlayerPrefs.GetInt(KeyAllCompleted, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyAllCompleted, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static void Reset()
+    {
+        PlayerPrefs.DeleteKey(KeyLevel);
+        PlayerPrefs.DeleteKey(KeyAllCompleted); 
+        PlayerPrefs.Save();
+    }
     public static bool TutorialShown
     {
         get => PlayerPrefs.GetInt(KeyTutorialShown, 0) == 1;
@@ -33,12 +46,6 @@ public static class SaveGame
     }
 
     public static void Save() => PlayerPrefs.Save();
-
-    public static void Reset()
-    {
-        PlayerPrefs.DeleteKey(KeyLevel);
-        PlayerPrefs.Save();
-    }
     public static bool TutorialCompleted
     {
         get => PlayerPrefs.GetInt(KeyTutorial, 0) == 1;

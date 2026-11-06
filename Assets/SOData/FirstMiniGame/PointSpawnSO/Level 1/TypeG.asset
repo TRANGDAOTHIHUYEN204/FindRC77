@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: TypeG
   m_EditorClassIdentifier: Assembly-CSharp::PointSpawnItem
   points:
-  - {x: 425, y: 268, z: 0}
+  - {x: 1433, y: 837, z: 0}
+  - {x: 1233, y: 142, z: 0}
+  - {x: -1009, y: 456, z: 0}
+  - {x: 127, y: 692, z: 0}

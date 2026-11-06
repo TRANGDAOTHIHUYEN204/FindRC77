@@ -11,14 +11,33 @@ public class FindHiddenLevelSpawner : MonoBehaviour
     public int Total { get; private set; }
     public int LevelCount => levels != null ? levels.Length : 0;
     public event Action<int> OnLevelLoaded;
+    public event Action<FindHiddenData, int, int> OnTypeProgress;
+
+    private readonly Dictionary<FindHiddenData, int> _total = new();
+    private readonly Dictionary<FindHiddenData, int> _found = new();
+    public FindHiddenLevelData CurrentLevelData => levels[CurrentLevel];
+    public void MarkFound(FindHiddenData data)
+    {
+        if (data == null || !_found.ContainsKey(data)) return;
+        _found[data]++;
+        OnTypeProgress?.Invoke(data, _found[data], _total[data]);
+    }
+
+    private void RefreshProgress()
+    {
+        foreach (var kv in _total)
+            OnTypeProgress?.Invoke(kv.Key, _found[kv.Key], kv.Value);
+    }
 
     public void SetLevel(int index) =>
         CurrentLevel = Mathf.Clamp(index, 0, levels.Length - 1);
 
-    public void SpawnAll()
+    public void SpawnAll(IList<int> foundIds = null)
     {
         spawner.DespawnAll();
         Total = 0;
+        _total.Clear();
+        _found.Clear();
 
         if (levels == null || levels.Length == 0)
         {
@@ -26,21 +45,40 @@ public class FindHiddenLevelSpawner : MonoBehaviour
             return;
         }
 
+        var foundSet = foundIds != null ? new HashSet<int>(foundIds) : null;
         var level = levels[CurrentLevel];
+        int nextId = 0; 
 
         foreach (var entry in level.Entries)
         {
             if (entry.data == null || entry.points == null) continue;
 
             int n = entry.SpawnCount;
+            _total[entry.data] = 0;
+            _found[entry.data] = 0;
+
             for (int k = 0; k < n; k++)
             {
+                int id = nextId++; 
+
                 var item = spawner.Spawn(entry.data, entry.points.Points[k], k);
-                if (item != null) Total++;
+                if (item == null) continue;
+
+                item.Id = id;
+                Total++;
+                _total[entry.data]++;
+
+                if (foundSet != null && foundSet.Contains(id))
+                {
+                    item.SetFoundInstant();
+                    _found[entry.data]++; 
+                }
             }
         }
 
-        Debug.Log($"[SpawnAll] spawned={Total}/{level.TotalCount}");
+        RefreshProgress(); 
+
+        Debug.Log($"[SpawnAll] spawned={Total}/{level.TotalCount} restored={foundSet?.Count ?? 0}");
         OnLevelLoaded?.Invoke(CurrentLevel);
     }
 
@@ -48,6 +86,8 @@ public class FindHiddenLevelSpawner : MonoBehaviour
     {
         spawner.DespawnAll();
         Total = 0;
+        _total.Clear();
+        _found.Clear();
     }
 
     public bool TryGetHit(Vector2 screenPoint, Camera cam, out FindHiddenBehaviour hit)

@@ -25,7 +25,6 @@ public class FindHiddenLevelData : ScriptableObject
 {
     [SerializeField] private Sprite background;
     [SerializeField] private HiddenEntry[] entries;
-    
 
     public Sprite Background => background;
     public IReadOnlyList<HiddenEntry> Entries => entries;
@@ -39,7 +38,7 @@ public class FindHiddenLevelData : ScriptableObject
             return sum;
         }
     }
-    
+
 
 #if UNITY_EDITOR
     private void OnValidate()
