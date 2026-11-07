@@ -145,6 +145,7 @@ public class HintOverlay : MonoBehaviour
 
     public void Hide()
     {
+        if (this == null) return;
         StopHintAnimation();
         gameObject.SetActive(false);
     }
@@ -153,7 +154,7 @@ public class HintOverlay : MonoBehaviour
     {
         if (_hintRoutine != null)
         {
-            StopCoroutine(_hintRoutine);
+            if (this != null) StopCoroutine(_hintRoutine);
             _hintRoutine = null;
         }
     }

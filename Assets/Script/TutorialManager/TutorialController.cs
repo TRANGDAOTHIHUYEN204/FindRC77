@@ -13,10 +13,25 @@ public class TutorialController : MonoBehaviour
     [SerializeField, Min(0f)] private float delayBetweenHints = 0.6f;
     [SerializeField] private GameObject[] hideDuringTutorial;
     [SerializeField, Min(0f)] private float delayBeforeHome = 1f;
+    [SerializeField, Min(1)] private int maxHints = 3;
+
     public bool IsRunning { get; private set; }
-    [SerializeField, Min(1)] private int maxHints = 3; 
+
+    private bool _quitting;
+
+    private void OnEnable()
+    {
+        if (levelManager != null)
+            levelManager.OnLevelLoaded += OnLevelLoaded;
+    }
 
     private void Start() => StartCoroutine(RunTutorial());
+    
+    private void OnLevelLoaded(LevelData data)
+    {
+        if (!levelManager.IsTutorial)
+            SetUIVisible(true);
+    }
 
     private IEnumerator RunTutorial()
     {
@@ -36,7 +51,7 @@ public class TutorialController : MonoBehaviour
 
             hintPresenter.ShowTutorialHint();
             hintsShown++;
-            
+
             while (hintPresenter.HintedPair != null)
                 yield return null;
 
@@ -45,7 +60,6 @@ public class TutorialController : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(delayBetweenHints);
         }
-        
 
         yield return new WaitUntil(() =>
         {
@@ -55,22 +69,50 @@ public class TutorialController : MonoBehaviour
 
         EndTutorial(completed: true);
     }
+
     private void EndTutorial(bool completed)
     {
+        if (!IsRunning) return;
         IsRunning = false;
-        hintPresenter.ClearHint();
-        if (!completed) SetUIVisible(true); 
-        if (completed) SaveGame.TutorialCompleted = true;
+
+        if (hintPresenter != null) hintPresenter.ClearHint();
+
+        if (completed)
+        {
+            SaveGame.TutorialCompleted = true;
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            SetUIVisible(true);
+        }
     }
 
     private void SetUIVisible(bool visible)
     {
+        if (hideDuringTutorial == null) return;
+
         foreach (var go in hideDuringTutorial)
             if (go != null) go.SetActive(visible);
     }
 
     private void OnDisable()
     {
-        if (IsRunning) EndTutorial(completed: false);
+        if (levelManager != null)
+            levelManager.OnLevelLoaded -= OnLevelLoaded;
+
+        if (!IsRunning) return;
+        IsRunning = false;
+        StopAllCoroutines();
+        if (_quitting) return;
+
+        if (hintPresenter != null) hintPresenter.ClearHint();
     }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused) PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit() => _quitting = true;
 }

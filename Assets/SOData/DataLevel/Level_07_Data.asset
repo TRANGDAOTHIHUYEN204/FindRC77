@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_07_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 7
+  countDifferent: 10
+  rawSprite: {fileID: 9000218168782435848, guid: 9f6f56ad24a5f1142a24011d817af6e3, type: 3}
+  errorSprite: {fileID: 2793724452112908607, guid: 820d068a10a444040a337b0cded9c6de, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: -267.2, y: -230.9, z: 0}
+    Size: {x: 65.19998, y: 43}
+    Outline:
+    - {x: -293.5, y: -246, z: 0}
+    - {x: -299.8, y: -220.6, z: 0}
+    - {x: -285.5, y: -209.4, z: 0}
+    - {x: -261.6, y: -215.8, z: 0}
+    - {x: -239.4, y: -228.5, z: 0}
+    - {x: -234.6, y: -252.4, z: 0}
+    - {x: -253.7, y: -249.2, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -266, y: -235.8, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 40
+  - Position: {x: -418.34998, y: -24.15, z: 0}
+    Size: {x: 46.100006, y: 55.7}
+    Outline:
+    - {x: -433.4, y: -52, z: 0}
+    - {x: -441.4, y: -36.1, z: 0}
+    - {x: -431.8, y: -9, z: 0}
+    - {x: -417.5, y: 3.7, z: 0}
+    - {x: -401.6, y: 3.7, z: 0}
+    - {x: -395.3, y: -17, z: 0}
+    - {x: -396.8, y: -42.4, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -407.8, y: -17.5, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 40
+  - Position: {x: -376.2, y: 274.1, z: 0}
+    Size: {x: 197.19998, y: 114.59999}
+    Outline:
+    - {x: -277.6, y: 216.8, z: 0}
+    - {x: -474.8, y: 231.2, z: 0}
+    - {x: -473.2, y: 331.4, z: 0}
+    - {x: -283.9, y: 310.7, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -371.2, y: 270.8, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 70
+  - Position: {x: -103.4, y: -73.4, z: 0}
+    Size: {x: 144.8, y: 33.399998}
+    Outline:
+    - {x: -175.8, y: -80.6, z: 0}
+    - {x: -31, y: -90.1, z: 0}
+    - {x: -37.4, y: -64.7, z: 0}
+    - {x: -159.9, y: -56.7, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -103.5, y: -78.1, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 70
+  - Position: {x: 21.500002, y: 102.350006, z: 0}
+    Size: {x: 168.6, y: 184.5}
+    Outline:
+    - {x: 42.2, y: 10.1, z: 0}
+    - {x: -2.4, y: 24.4, z: 0}
+    - {x: -62.8, y: 41.9, z: 0}
+    - {x: -42.2, y: 88, z: 0}
+    - {x: -18.3, y: 167.5, z: 0}
+    - {x: -5.6, y: 194.6, z: 0}
+    - {x: 46.9, y: 188.2, z: 0}
+    - {x: 81.9, y: 172.3, z: 0}
+    - {x: 105.8, y: 159.6, z: 0}
+    - {x: 81.9, y: 124.6, z: 0}
+    - {x: 61.2, y: 68.9, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 23.9, y: 106.7, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 90
+  - Position: {x: 282.34998, y: -90.95, z: 0}
+    Size: {x: 85.899994, y: 90.700005}
+    Outline:
+    - {x: 261.6, y: -133.1, z: 0}
+    - {x: 239.4, y: -109.2, z: 0}
+    - {x: 255.3, y: -61.5, z: 0}
+    - {x: 276, y: -45.6, z: 0}
+    - {x: 320.5, y: -63.1, z: 0}
+    - {x: 325.3, y: -104.4, z: 0}
+    - {x: 323.7, y: -134.7, z: 0}
+    - {x: 295.1, y: -136.3, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 286.7, y: -94, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 50
+  - Position: {x: 435.05, y: -109.2, z: 0}
+    Size: {x: 146.30002, y: 111.399994}
+    Outline:
+    - {x: 361.9, y: -149, z: 0}
+    - {x: 376.2, y: -98.1, z: 0}
+    - {x: 379.4, y: -56.7, z: 0}
+    - {x: 427.1, y: -53.5, z: 0}
+    - {x: 508.2, y: -59.9, z: 0}
+    - {x: 487.5, y: -98.1, z: 0}
+    - {x: 497.1, y: -141, z: 0}
+    - {x: 498.6, y: -164.9, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 434.9, y: -65.3, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 80
+  - Position: {x: 376.15, y: 301.15, z: 0}
+    Size: {x: 152.70001, y: 104.90001}
+    Outline:
+    - {x: 387.3, y: 248.7, z: 0}
+    - {x: 420.7, y: 269.3, z: 0}
+    - {x: 428.7, y: 299.6, z: 0}
+    - {x: 444.6, y: 304.3, z: 0}
+    - {x: 452.5, y: 321.8, z: 0}
+    - {x: 433.4, y: 336.1, z: 0}
+    - {x: 417.5, y: 345.7, z: 0}
+    - {x: 379.4, y: 353.6, z: 0}
+    - {x: 368.2, y: 339.3, z: 0}
+    - {x: 344.4, y: 302.7, z: 0}
+    - {x: 325.3, y: 310.7, z: 0}
+    - {x: 309.4, y: 294.8, z: 0}
+    - {x: 299.8, y: 269.3, z: 0}
+    - {x: 315.7, y: 256.6, z: 0}
+    - {x: 336.4, y: 250.3, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 388.7, y: 289.9, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 70
+  - Position: {x: 369.85, y: 147.65, z: 0}
+    Size: {x: 254.5, y: 163.90001}
+    Outline:
+    - {x: 497.1, y: 75.3, z: 0}
+    - {x: 438.2, y: 75.3, z: 0}
+    - {x: 333.2, y: 76.9, z: 0}
+    - {x: 256.9, y: 65.7, z: 0}
+    - {x: 242.6, y: 91.2, z: 0}
+    - {x: 247.3, y: 188.2, z: 0}
+    - {x: 299.8, y: 202.5, z: 0}
+    - {x: 388.9, y: 221.6, z: 0}
+    - {x: 471.6, y: 229.6, z: 0}
+    - {x: 489.1, y: 208.9, z: 0}
+    - {x: 490.7, y: 150, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 345.7, y: 129, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 90
+  - Position: {x: 309.9, y: -268.1, z: 0}
+    Size: {x: 143.2, y: 148.1}
+    Outline: []
+    HasMarkCenter: 1
+    MarkCenter: {x: 307.4, y: -264.4, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 80
+  textWin: Cravings satisfied, body still looking perfect.
+  difficulty: 0

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c39cf7857be00438fac00270c5f0b3, type: 3}
+  m_Name: TypeA
+  m_EditorClassIdentifier: Assembly-CSharp::PointSpawnItem
+  points:
+  - {x: 580, y: -880, z: 0}
+  - {x: 683, y: -1442, z: 0}
+  - {x: -895, y: -1037, z: 0}
+  - {x: 1372, y: -565, z: 0}
+  - {x: 1656, y: -481, z: 0}
+  - {x: -514, y: 27, z: 0}
+  - {x: 598, y: -329, z: 0}
+  - {x: -278, y: 1496, z: 0}

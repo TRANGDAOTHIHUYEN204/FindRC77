@@ -412,8 +412,6 @@ public class LevelEditorWindow : EditorWindow
         {
             Rect r = ToRect(points[i].Position, points[i].Size);
             if (r.xMin < bounds.xMin - 0.5f || r.yMin < bounds.yMin - 0.5f || r.xMax > bounds.xMax + 0.5f || r.yMax > bounds.yMax + 0.5f) issues.Add($"Điểm #{i + 1} tràn ra ngoài ảnh.");
-            for (int j = i + 1; j < points.Count; j++)
-                if (r.Overlaps(ToRect(points[j].Position, points[j].Size))) issues.Add($"Điểm #{i + 1} và #{j + 1} chồng nhau.");
         }
 
         message = string.Join("\n", issues);

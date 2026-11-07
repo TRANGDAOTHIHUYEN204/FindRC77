@@ -7,13 +7,62 @@ public static class SaveGame
     private const string KeySfx = "save_sfx_on";
     private const string KeyTutorial = "isCompletedTutorial";
     private const string KeyTutorialShown = "isTutorialShown";
+    private const string KeyAllCompleted = "save_all_completed";
+    private const string KeyHintBalance = "save_hint_balance";
+    private const string KeyFindHiddenCompleted = "save_find_hidden_completed";
+
+    public static bool AllCompleted
+    {
+        get => PlayerPrefs.GetInt(KeyAllCompleted, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyAllCompleted, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static int HintBalance
+    {
+        get => PlayerPrefs.GetInt(KeyHintBalance, 0);
+        set { PlayerPrefs.SetInt(KeyHintBalance, Mathf.Max(0, value)); PlayerPrefs.Save(); }
+    }
+
+    public static bool TryClaimFindHiddenReward()
+    {
+        if (PlayerPrefs.GetInt(KeyFindHiddenCompleted, 0) == 1)
+            return false;
+
+        PlayerPrefs.SetInt(KeyFindHiddenCompleted, 1);
+        PlayerPrefs.SetInt(KeyHintBalance, HintBalance + 1);
+        PlayerPrefs.Save();
+        return true;
+    }
+
+    public static void Reset()
+    {
+        PlayerPrefs.DeleteKey(KeyLevel);
+        PlayerPrefs.DeleteKey(KeyAllCompleted);
+        PlayerPrefs.DeleteKey(KeyHintBalance);
+        PlayerPrefs.DeleteKey(KeyFindHiddenCompleted);
+        PlayerPrefs.Save();
+    }
 
     public static bool TutorialShown
     {
         get => PlayerPrefs.GetInt(KeyTutorialShown, 0) == 1;
-        set { PlayerPrefs.SetInt(KeyTutorialShown, value ? 1 : 0); PlayerPrefs.Save(); }
+        set
+        {
+            Debug.Log($"[SaveGame] TutorialShown = {value}\n{System.Environment.StackTrace}");
+            PlayerPrefs.SetInt(KeyTutorialShown, value ? 1 : 0); PlayerPrefs.Save();
+        }
     }
-    
+
+    public static bool TutorialCompleted
+    {
+        get => PlayerPrefs.GetInt(KeyTutorial, 0) == 1;
+        set
+        {
+            Debug.Log($"[SaveGame] TutorialCompleted = {value}\n{System.Environment.StackTrace}");
+            PlayerPrefs.SetInt(KeyTutorial, value ? 1 : 0); PlayerPrefs.Save();
+        }
+    }
+
     public static int CurrentLevel
     {
         get => PlayerPrefs.GetInt(KeyLevel, 0);
@@ -34,16 +83,6 @@ public static class SaveGame
 
     public static void Save() => PlayerPrefs.Save();
 
-    public static void Reset()
-    {
-        PlayerPrefs.DeleteKey(KeyLevel);
-        PlayerPrefs.Save();
-    }
-    public static bool TutorialCompleted
-    {
-        get => PlayerPrefs.GetInt(KeyTutorial, 0) == 1;
-        set { PlayerPrefs.SetInt(KeyTutorial, value ? 1 : 0); PlayerPrefs.Save(); }
-    }
     public static void ResetTutorial()
     {
         PlayerPrefs.DeleteKey(KeyTutorial);
