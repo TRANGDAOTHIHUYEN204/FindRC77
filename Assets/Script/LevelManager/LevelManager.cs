@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     public event Action OnLevelReset;
     private void Start()
     {
-        if (tutorialLevel != null && !SaveGame.TutorialShown)
+        if (tutorialLevel != null && !SaveGame.TutorialCompleted)
             LoadTutorial();
         else
             LoadLevel(SaveGame.CurrentLevel);
@@ -56,7 +56,6 @@ public class LevelManager : MonoBehaviour
     public void LoadTutorial()
     {
         IsTutorial = true;
-        SaveGame.TutorialShown = true;   
         _levelData = tutorialLevel;
         _completed = false;
         OnLevelLoaded?.Invoke(_levelData);

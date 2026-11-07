@@ -10,8 +10,9 @@ public class ZoomMiniGameManager : MonoBehaviour
     [SerializeField] private float pinchSpeed = 0.005f;
 
     [Header("References")]
-    [SerializeField] private RectTransform frame;  // khung hiển thị (có Mask / RectMask2D)
-    [SerializeField] private RectTransform image;  // ảnh gameplay (con của frame)
+    [SerializeField] private RectTransform frame;
+
+    [SerializeField] private RectTransform image;
 
     private Canvas canvas;
     private bool isDragging;
@@ -43,7 +44,6 @@ public class ZoomMiniGameManager : MonoBehaviour
         return RectTransformUtility.RectangleContainsScreenPoint(frame, screenPos, GetCamera());
     }
 
-    // ---------- KÉO ẢNH ----------
     private void HandleDrag()
     {
         var ts = Touchscreen.current;

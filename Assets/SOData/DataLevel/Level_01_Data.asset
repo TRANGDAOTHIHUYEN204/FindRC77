@@ -20,8 +20,8 @@ MonoBehaviour:
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
-  - Position: {x: -88.399994, y: 328.15, z: 0}
-    Size: {x: 93.99999, y: 57.299988}
+  - Position: {x: -81.9, y: 328.2, z: 0}
+    Size: {x: 94, y: 57.3}
     Outline:
     - {x: -84.4, y: 356.8, z: 0}
     - {x: -122.7, y: 355, z: 0}

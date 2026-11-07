@@ -19,7 +19,19 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private float markSize = 1f;
     [SerializeField] private float markLifeTime = 0.8f;
     [SerializeField] private Camera cam;
+    [SerializeField] private ZoomMiniGameManager zoom;   
 
+    public void Pause()
+    {
+        if (State.Phase != GamePhase.Playing) return;
+        State.SetPhase(GamePhase.Paused);
+    }
+
+    public void Resume()
+    {
+        if (State.Phase != GamePhase.Paused) return;
+        State.SetPhase(GamePhase.Playing);
+    }
     private readonly PoolManager _pool = new PoolManager();
     public bool IsEnded => State.IsEnded;
 
@@ -74,23 +86,15 @@ public class MiniGameManager : MonoBehaviour
         Debug.Log($"[Game] START | Level={level} Found={State.FoundCount}/{State.Total}");
     }
 
-    public void Pause()
-    {
-        if (State.Phase != GamePhase.Playing) return;
-        State.SetPhase(GamePhase.Paused);
-    }
 
-    public void Resume()
-    {
-        if (State.Phase != GamePhase.Paused) return;
-        State.SetPhase(GamePhase.Playing);
-    }
-    
     private void HandlePhaseChanged(GamePhase phase)
     {
-        handleClick.InputEnabled = (phase == GamePhase.Playing);
-    }
+        bool playing = phase == GamePhase.Playing;
 
+        handleClick.InputEnabled = playing;
+        if (zoom != null) zoom.enabled = playing;
+    }
+    
     private void HandleStateProgress(int found, int total) => OnProgress?.Invoke(found, total);
     
 
@@ -143,7 +147,7 @@ public class MiniGameManager : MonoBehaviour
     private IEnumerator EndGame(bool win)
     {
         State.SetPhase(win ? GamePhase.Won : GamePhase.Lost);
-        
+
         PlaySfx(win ? winSound : loseSound);
 
         if (win)
@@ -159,6 +163,9 @@ public class MiniGameManager : MonoBehaviour
             {
                 SaveMiniGame.CurrentLevel = State.Level + 1;
             }
+
+            if (SaveGame.TryClaimFindHiddenReward())
+                Debug.Log("[Game] WIN | Rewarded 1 hint");
         }
 
         yield return new WaitForSeconds(0.5f);

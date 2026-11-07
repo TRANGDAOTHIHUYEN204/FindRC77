@@ -14,7 +14,9 @@ public class FindHiddenUI : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private TextMeshProUGUI textLevel;
     [SerializeField] private string sceneName = "HomeScene";
-
+    [SerializeField] private PanelAnimation pausePanelAnim;
+    [SerializeField] private PanelAnimation winPanelAnim;
+    
     private void OnEnable()
     {
         game.OnWin += ShowWin;
@@ -76,19 +78,24 @@ public class FindHiddenUI : MonoBehaviour
     public void ShowPause()
     {
         game.Pause();
-        pausePanel.SetActive(true);
+        pausePanel.SetActive(true);  
     }
 
     public void ClosePause()
     {
-        pausePanel.SetActive(false);
+        var anim = pausePanel.GetComponentInChildren<PanelAnimation>(true);
+        if (anim != null && pausePanel.activeSelf)
+            anim.Close(() => pausePanel.SetActive(false));
+        else
+            pausePanel.SetActive(false);
+
         game.Resume();
     }
-
+    
     private void UpdateLevelText()
     {
         if (textLevel != null)
-            textLevel.text = "Level " +  (levelSpawner.CurrentLevel + 1).ToString();
+            textLevel.text = "Find Hidden Item";
     }
 
     private void HidePanels()

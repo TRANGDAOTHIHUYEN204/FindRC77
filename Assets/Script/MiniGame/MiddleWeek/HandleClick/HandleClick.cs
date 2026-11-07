@@ -17,7 +17,6 @@ public class HandleClick : MonoBehaviour
 
     [SerializeField] private float clickMoveThreshold = 20f;
     [SerializeField] private Transform flyLayer;
-
     public event Action<Vector2> OnWrongClick;
     public event Action<FindHiddenBehaviour> OnHitItem;
     public bool InputEnabled { get; set; } = true;

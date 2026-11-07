@@ -11,6 +11,7 @@ public class HintPresenter : MonoBehaviour
 
     private HintHand _handA;
     private HintHand _handB;
+    private int _levelHintsRemaining;
 
     public DifferentPair HintedPair { get; private set; }
     public int CountHint { get; private set; }
@@ -22,16 +23,16 @@ public class HintPresenter : MonoBehaviour
     [ContextMenu("Reset Hint For Level")]
     public void ResetForLevel()
     {
-        CountHint = hintPerLevel;
+        _levelHintsRemaining = hintPerLevel;
         ClearHint();
-        OnHintChanged?.Invoke(CountHint);
+        RefreshCount();
     }
 
     public void ShowHint()
     {
         if (CountHint <= 0)
         {
-            Debug.Log("Hết hint của màn này rồi");
+            Debug.Log("Hết hint rồi");
             return;
         }
         ShowInternal(consume: true, tutorial: false);
@@ -65,21 +66,36 @@ public class HintPresenter : MonoBehaviour
             spotlight.Show(HintedPair);
         }
 
-        if (consume) SetCount(CountHint - 1);
+        if (consume) ConsumeHint();
     }
 
-    public void AddHint(int amount) => SetCount(CountHint + amount);
-
-    private void SetCount(int value)
+    public void AddHint(int amount)
     {
-        CountHint = Mathf.Max(0, value);
+        if (amount <= 0) return;
+        SaveGame.HintBalance += amount;
+        RefreshCount();
+    }
+
+    private void ConsumeHint()
+    {
+        if (_levelHintsRemaining > 0)
+            _levelHintsRemaining--;
+        else
+            SaveGame.HintBalance--;
+
+        RefreshCount();
+    }
+
+    private void RefreshCount()
+    {
+        CountHint = _levelHintsRemaining + SaveGame.HintBalance;
         OnHintChanged?.Invoke(CountHint);
     }
 
     public void ClearHint()
     {
         HintedPair = null;
-        spotlight.Hide();
+        if (spotlight != null) spotlight.Hide();
         ReleaseHands();
     }
 
@@ -103,9 +119,14 @@ public class HintPresenter : MonoBehaviour
 
     private void ReleaseHand(ref HintHand hand)
     {
-        if (hand == null) return;
+        if (hand == null)
+        {
+            hand = null;
+            return;
+        }
+
         hand.Detach();
-        factory.Release(hand.gameObject);
+        if (factory != null) factory.Release(hand.gameObject);
         hand = null;
     }
 }

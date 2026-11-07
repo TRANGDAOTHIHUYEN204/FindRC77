@@ -318,7 +318,7 @@ MonoBehaviour:
   delay: 4
   homeSceneName: HomeScene
   gameplaySceneName: GamePlay
-  resetAllOnStart: 1
+  resetAllOnStart: 0
   resetTutorialOnStart: 0
 --- !u!1 &575401447
 GameObject:
