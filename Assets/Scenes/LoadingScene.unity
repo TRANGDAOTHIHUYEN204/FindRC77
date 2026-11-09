@@ -318,7 +318,7 @@ MonoBehaviour:
   delay: 4
   homeSceneName: HomeScene
   gameplaySceneName: GamePlay
-  resetAllOnStart: 0
+  resetAllOnStart: 1
   resetTutorialOnStart: 0
 --- !u!1 &575401447
 GameObject:
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 575401448}
   - component: {fileID: 575401450}
   - component: {fileID: 575401449}
-  - component: {fileID: 575401451}
+  - component: {fileID: 575401452}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -396,28 +396,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575401447}
   m_CullTransparentMesh: 1
---- !u!95 &575401451
-Animator:
-  serializedVersion: 7
+--- !u!114 &575401452
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575401447}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 38242f1ed9217594ba5cd34c083e1eea, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1aeb0f7c16d88f47823464ae51a0318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopInOnStart
+  target: {fileID: 575401448}
+  duration: 0.5
+  pivotY: 0.2
 --- !u!1 &666071596
 GameObject:
   m_ObjectHideFlags: 0

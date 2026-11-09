@@ -88,8 +88,8 @@ MonoBehaviour:
     MarkCenter: {x: 23.9, y: 106.7, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 90
-  - Position: {x: 282.34998, y: -90.95, z: 0}
-    Size: {x: 85.899994, y: 90.700005}
+  - Position: {x: 284.9, y: -97.8, z: 0}
+    Size: {x: 90.9, y: 77}
     Outline:
     - {x: 261.6, y: -133.1, z: 0}
     - {x: 239.4, y: -109.2, z: 0}
@@ -103,8 +103,8 @@ MonoBehaviour:
     MarkCenter: {x: 286.7, y: -94, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 50
-  - Position: {x: 435.05, y: -109.2, z: 0}
-    Size: {x: 146.30002, y: 111.399994}
+  - Position: {x: 436.3, y: -64.2, z: 0}
+    Size: {x: 148.8, y: 201.5}
     Outline:
     - {x: 361.9, y: -149, z: 0}
     - {x: 376.2, y: -98.1, z: 0}

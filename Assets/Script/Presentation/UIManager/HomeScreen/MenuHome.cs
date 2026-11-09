@@ -6,23 +6,18 @@ using UnityEngine.UI;
 
 public class MenuHome : MonoBehaviour
 {
-    [SerializeField] private TMP_Text levelText;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private TextMeshProUGUI numberLevelText;
 
     [SerializeField] private Button playButton;
-    [SerializeField] private Image playButtonImage;      
+    [SerializeField] private Image playButtonImage;
     [SerializeField] private Sprite completedSprite;
     [SerializeField] private string nameGame;
-   
     [SerializeField] private TMP_Text playButtonText;
 
     private void Start()
     {
-        string label = "Level " + (SaveGame.CurrentLevel + 1);
-        levelText.text = label;
-        numberLevelText.text = label;
-
+        numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
         RefreshPlayButton();
     }
 
@@ -32,13 +27,12 @@ public class MenuHome : MonoBehaviour
         {
             playButton.interactable = false;
             playButtonImage.sprite = completedSprite;
-            playButtonImage.color = Color.white;
             playButtonText.text = "Completed";
         }
         else
         {
-            playButtonText.text = nameGame;
             playButton.interactable = true;
+            playButtonText.text = nameGame;
         }
     }
 
@@ -46,7 +40,6 @@ public class MenuHome : MonoBehaviour
     {
         if (SaveMiniGame.AllCompleted) return;
         SceneManager.LoadScene(sceneName);
-        
     }
 
     public void JoinGamePlay(string screenName)

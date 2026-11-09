@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 8145896176263012354}
   - component: {fileID: 3727586154751694369}
   - component: {fileID: 4536679523743530129}
+  - component: {fileID: 3746500710297081098}
   m_Layer: 5
   m_Name: PauseGame
   m_TagString: Untagged
@@ -621,10 +622,10 @@ RectTransform:
   - {fileID: 6512897559721733115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2160}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3727586154751694369
 CanvasRenderer:
@@ -654,7 +655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -664,6 +665,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &3746500710297081098
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107038171627298562}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7745885797200888190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1147,7 @@ GameObject:
   - component: {fileID: 6512897559721733115}
   - component: {fileID: 4671966010561569643}
   - component: {fileID: 1710665937020802980}
-  - component: {fileID: 4618799164411708877}
+  - component: {fileID: 8680883609807193326}
   m_Layer: 5
   m_Name: SettingBackGround
   m_TagString: Untagged
@@ -1206,7 +1219,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4618799164411708877
+--- !u!114 &8680883609807193326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1218,9 +1231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268c6d8d01c998c4e9032aba7f216222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelAnimation
-  openDuration: 0.6
-  closeDuration: 0.4
-  startScale: {x: 0, y: 0, z: 0}
+  fadeGroup: {fileID: 0}
+  panel: {fileID: 0}
+  openDuration: 0.2
+  openStartScale: {x: 0.5, y: 0.5, z: 0.5}
+  closeDuration: 0.12
+  closeEndScale: {x: 0, y: 0, z: 0}
 --- !u!1 &9168094143536635985
 GameObject:
   m_ObjectHideFlags: 0
