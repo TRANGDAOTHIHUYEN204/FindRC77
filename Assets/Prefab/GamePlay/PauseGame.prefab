@@ -1237,6 +1237,8 @@ MonoBehaviour:
   openStartScale: {x: 0.5, y: 0.5, z: 0.5}
   closeDuration: 0.12
   closeEndScale: {x: 0, y: 0, z: 0}
+  blockGameInput: 1
+  blockHoldAfterClose: 0.25
 --- !u!1 &9168094143536635985
 GameObject:
   m_ObjectHideFlags: 0
