@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class PanelAnimation : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup fadeGroup; 
-    [SerializeField] private Transform panel;      
-    
+    [SerializeField] private CanvasGroup fadeGroup;
+    [SerializeField] private Transform panel;
+
     [SerializeField] private float openDuration = 0.2f;
     [SerializeField] private Vector3 openStartScale = new Vector3(0.5f, 0.5f, 0.5f);
     [SerializeField] private float closeDuration = 0.12f;
     [SerializeField] private Vector3 closeEndScale = Vector3.zero;
+    [SerializeField] private bool blockGameInput = true;
+    [SerializeField] private float blockHoldAfterClose = 0.25f;
 
     private Transform _panelTf;
     private GameObject _root;
     private Vector3 _targetScale;
     private bool _initialized;
     private bool _closing;
+    private bool _blockRegistered;
     private Coroutine _routine;
     private System.Action _onClosed;
 
@@ -28,6 +31,20 @@ public class PanelAnimation : MonoBehaviour
     private void SetRaycast(bool value)
     {
         if (fadeGroup) fadeGroup.blocksRaycasts = value;
+    }
+
+    private void RegisterBlock()
+    {
+        if (!blockGameInput || _blockRegistered) return;
+        _blockRegistered = true;
+        UIInputBlocker.RegisterOpen();
+    }
+
+    private void ReleaseBlock()
+    {
+        if (!_blockRegistered) return;
+        _blockRegistered = false;
+        UIInputBlocker.RegisterClose(blockHoldAfterClose);
     }
 
     private void Init()
@@ -46,6 +63,7 @@ public class PanelAnimation : MonoBehaviour
     {
         Init();
         _closing = false;
+        RegisterBlock();
         PlayOpen(openStartScale, 0f);
     }
 
@@ -53,6 +71,8 @@ public class PanelAnimation : MonoBehaviour
     {
         if (_routine != null) { StopCoroutine(_routine); _routine = null; }
         _closing = false;
+        ReleaseBlock();
+
         if (_initialized)
         {
             _panelTf.localScale = _targetScale;
@@ -60,7 +80,6 @@ public class PanelAnimation : MonoBehaviour
             SetRaycast(true);
         }
     }
-    
 
     public void Show()
     {
@@ -70,13 +89,14 @@ public class PanelAnimation : MonoBehaviour
         if (!_root.activeSelf || !gameObject.activeSelf)
         {
             _root.SetActive(true);
-            gameObject.SetActive(true); 
+            gameObject.SetActive(true);
             return;
         }
-        
+
         if (!_closing && _routine == null) return;
 
         _closing = false;
+        RegisterBlock();
         PlayOpen(_panelTf.localScale, Alpha);
     }
 
@@ -111,8 +131,6 @@ public class PanelAnimation : MonoBehaviour
 
     public void Close(System.Action callback)
     {
-        Debug.Log($"[PanelAnimation] Close on {name}\n{System.Environment.StackTrace}");
-        Debug.Log($"[PanelAnimation] Close on {name}, root = {_root.name}", this);
         Init();
         if (!gameObject.activeInHierarchy)
         {
@@ -122,13 +140,15 @@ public class PanelAnimation : MonoBehaviour
 
         if (_closing)
         {
-            if (callback != null) _onClosed += callback; 
+            if (callback != null) _onClosed += callback;
             return;
         }
 
         _closing = true;
         _onClosed = callback;
         if (_routine != null) StopCoroutine(_routine);
+        
+        ReleaseBlock();
         SetRaycast(false);
         _routine = StartCoroutine(CloseRoutine());
     }

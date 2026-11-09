@@ -15,12 +15,6 @@ public class InputManager : MonoBehaviour
     private Vector2 _pressStart;
 
     private readonly List<RaycastResult> _hits = new List<RaycastResult>();
-    private PointerEventData _pointerData;
-
-    private void Awake()
-    {
-        _pointerData = new PointerEventData(EventSystem.current);
-    }
 
     private void Update()
     {
@@ -30,15 +24,20 @@ public class InputManager : MonoBehaviour
         if (pointer == null) return;
 
         Vector2 pos = pointer.position.ReadValue();
+        
+        bool uiBlocked = UIInputBlocker.IsBlocked;
 
         if (pointer.press.wasPressedThisFrame)
         {
             _pressing = true;
-            _cancelled = IsOverButton(pos);
+            _cancelled = uiBlocked || IsOverButton(pos);
             _pressStart = pos;
         }
 
         if (!_pressing) return;
+
+        if (uiBlocked)
+            _cancelled = true;
 
         if (Touchscreen.current != null &&
             Touchscreen.current.touches[1].press.isPressed)
@@ -49,7 +48,7 @@ public class InputManager : MonoBehaviour
 
         if (pointer.press.wasReleasedThisFrame)
         {
-            if (!_cancelled && !IsOverButton(pos))
+            if (!_cancelled && !uiBlocked && !IsOverButton(pos))
             {
                 ClickedThisFrame = true;
                 ClickScreenPosition = pos;
