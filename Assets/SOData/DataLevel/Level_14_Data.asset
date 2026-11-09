@@ -128,8 +128,8 @@ MonoBehaviour:
     MarkCenter: {x: 132.2, y: 124.2, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 60
-  - Position: {x: 492.30002, y: -59.100002, z: 0}
-    Size: {x: 92.20001, y: 348.4}
+  - Position: {x: 492.7, y: -60.1, z: 0}
+    Size: {x: 93, y: 372.2}
     Outline:
     - {x: 446.2, y: -225.3, z: 0}
     - {x: 455.7, y: -163.3, z: 0}

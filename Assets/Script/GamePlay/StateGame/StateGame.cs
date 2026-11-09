@@ -190,10 +190,41 @@ public class StateGame : MonoBehaviour
 
     private void SetPanels(bool pause, bool win, bool lose, bool winTutorialLevel)
     {
-        SetPanel(pausePanel, pause);
-        SetPanel(winPanel, win);
-        SetPanel(losePanel, lose);
-        SetPanel(winTutorial,  winTutorialLevel);
+        var entries = new (GameObject go, bool show)[]
+        {
+            (pausePanel, pause),
+            (winPanel, win),
+            (losePanel, lose),
+            (winTutorial, winTutorialLevel),
+        };
+        
+        foreach (var e in entries)
+        {
+            if (e.show || !e.go) continue;
+            
+            bool conflict = false;
+            foreach (var o in entries)
+            {
+                if (!o.show || !o.go) continue;
+                if (o.go == e.go ||
+                    o.go.transform.IsChildOf(e.go.transform) ||
+                    e.go.transform.IsChildOf(o.go.transform))
+                {
+                    conflict = true;
+                    break;
+                }
+            }
+
+            if (conflict)
+            {
+                Debug.LogWarning($"[StateGame] '{e.go.name}' trùng/liên quan với panel đang mở, bỏ qua Close. Kiểm tra lại Inspector!", e.go);
+                continue;
+            }
+
+            SetPanel(e.go, false);
+        }
+        foreach (var e in entries)
+            if (e.show) SetPanel(e.go, true);
     }
 
     private void SetPanel(GameObject panel, bool show)
@@ -218,7 +249,6 @@ public class StateGame : MonoBehaviour
             anim.Close(() => panel.SetActive(false));
         }
     }
-
     private void OnApplicationPause(bool paused)
     {
         if (paused && !levelManager.IsTutorial) PauseGame();

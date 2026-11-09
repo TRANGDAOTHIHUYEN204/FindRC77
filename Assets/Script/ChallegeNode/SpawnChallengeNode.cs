@@ -31,7 +31,7 @@ public class SpawnChallengeNode : MonoBehaviour
 
     private void Apply(ChallengeNode node, Sprite s)
     {
-        if (node != null) node.ChangeSprite(s);
+        if (node != null) node.ChangeSpriteWithFx(s);
 
         _appliedCount++;
         if (_appliedCount == nodes.Count)

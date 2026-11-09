@@ -33,9 +33,9 @@ public class LoadingScreen : MonoBehaviour
     private void OnEnable() => StartCoroutine(LoadNextScene());
 
     private IEnumerator LoadNextScene()
-    { 
+    {
         yield return new WaitForSeconds(delay);
-        string target = SaveGame.TutorialShown ? homeSceneName : gameplaySceneName;
+        string target = SaveGame.TutorialCompleted ? homeSceneName : gameplaySceneName;
         SceneManager.LoadScene(target);
     }
 }

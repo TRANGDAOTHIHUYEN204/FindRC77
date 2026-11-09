@@ -20,8 +20,8 @@ MonoBehaviour:
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
-  - Position: {x: 342, y: 282.85, z: 0}
-    Size: {x: 65.20001, y: 62.09999}
+  - Position: {x: 340.2, y: 282.5, z: 0}
+    Size: {x: 71.3, y: 66}
     Outline:
     - {x: 309.4, y: 251.8, z: 0}
     - {x: 374.6, y: 269.3, z: 0}
@@ -42,8 +42,8 @@ MonoBehaviour:
     MarkCenter: {x: 423.7, y: -141.8, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 30
-  - Position: {x: 123.25, y: -316.75, z: 0}
-    Size: {x: 82.700005, y: 52.5}
+  - Position: {x: 119.1, y: -323.6, z: 0}
+    Size: {x: 91.1, y: 66.2}
     Outline:
     - {x: 81.9, y: -339.9, z: 0}
     - {x: 85.1, y: -290.5, z: 0}
@@ -117,8 +117,8 @@ MonoBehaviour:
     MarkCenter: {x: 387.1, y: -280.4, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 50
-  - Position: {x: -233.04999, y: -197.5, z: 0}
-    Size: {x: 79.499985, y: 43}
+  - Position: {x: -234.6, y: -197.3, z: 0}
+    Size: {x: 95.6, y: 42.6}
     Outline:
     - {x: -263.2, y: -219, z: 0}
     - {x: -193.3, y: -207.8, z: 0}
