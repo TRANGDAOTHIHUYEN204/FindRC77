@@ -1,0 +1,12 @@
+{
+  "gitUrl": "https://github.com/namtuoc91/unity-firebase-upm.git",
+  "core": {
+    "name": "com.google.firebase.app",
+    "ref": "release/app"
+  },
+  "modules": [
+    { "name": "com.google.firebase.analytics", "displayName": "Analytics", "ref": "release/analytics" },
+    { "name": "com.google.firebase.remote-config", "displayName": "Remote Config", "ref": "release/remote-config" },
+    { "name": "com.google.firebase.crashlytics", "displayName": "Crashlytics", "ref": "release/crashlytics" }
+  ]
+}

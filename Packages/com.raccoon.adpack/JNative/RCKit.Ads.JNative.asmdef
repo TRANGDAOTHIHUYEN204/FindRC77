@@ -1,0 +1,24 @@
+{
+    "name": "RCKit.Ads.JNative",
+    "rootNamespace": "RCKit.Ads.JNative",
+    "references": [
+        "RCKit.Ads",
+        "RCKit.Ads.AdMob",
+        "JNativeAds"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "ENABLE_RACCOON_JNATIVE"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

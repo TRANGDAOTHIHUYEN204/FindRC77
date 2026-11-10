@@ -1,0 +1,21 @@
+{
+    "name": "RaccoonAdsEditor",
+    "rootNamespace": "RaccoonAds",
+    "references": [
+        "RCKit.Ads.Main",
+        "RCKit.Ads.Appsflyer",
+        "RCKit.Ads.UnityAds",
+        "RCKit.Ads.TikTok"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

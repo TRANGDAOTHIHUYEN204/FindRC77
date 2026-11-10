@@ -1,0 +1,19 @@
+{
+    "name": "RCKit.Ads.Max",
+    "rootNamespace": "RCKit.Ads.Max",
+    "references": [
+        "RCKit.Ads",
+        "MaxSdk.Scripts"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "ENABLE_RACCOON_MAX"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

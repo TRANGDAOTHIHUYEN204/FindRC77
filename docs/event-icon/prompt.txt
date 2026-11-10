@@ -1,0 +1,9 @@
+$imagegen A single game UI icon, 1024x1024 pixels: the HOME SCREEN EVENT BUTTON icon for a "find hidden objects" weekend event.
+
+STYLE ANCHOR (from STYLE.md): Soft modern anime / cel-shaded illustration matching the main game's level art: clean thin dark-brown line art (no heavy black outlines), smooth soft gradient shading, warm bright lighting, pastel-but-saturated colors, cute and cheerful. Palette: cream #F3E6D8, warm peach #F6C9A8, sky blue #7FCBEB, coral pink #F08A8A, butter yellow #F7D35A, wood brown #B07A45, line art dark brown #4A3226. Also match the attached home screen mockup (purple notebook background, glossy candy-like buttons) so the icon sits well on it.
+
+SUBJECT: one chunky, cute magnifying glass tilted about 30 degrees: thick glossy golden-yellow rim with a soft highlight, a short rounded coral-pink handle with a cream grip band, and a light sky-blue glass lens with a big white glare streak. Inside the lens, slightly magnified, peek a tiny cute surprise (a small sparkle star). A few small sparkles around the rim. Bold readable silhouette that still reads clearly at 128px.
+
+OUTPUT FORMAT: PNG with TRANSPARENT BACKGROUND (RGBA). Everything outside the icon must be fully transparent (alpha 0) - no white, no backdrop, no circle plate, no button frame. Crisp alpha edges, no soft halo, no drop shadow bleeding into the transparent area. Icon centered with ~12% transparent margin. No text, no letters, no numbers.
+
+save to ./docs/event-icon/icon-event-magnifier-raw.png

@@ -1,0 +1,14 @@
+{
+  "core": {
+    "name": "com.google.ads.mobile",
+    "version": "10.5.0"
+  },
+  "mediations": [
+    { "name": "com.google.ads.mobile.mediation.applovin", "displayName": "AppLovin", "version": "8.4.1" },
+    { "name": "com.google.ads.mobile.mediation.liftoffmonetize", "displayName": "Liftoff Monetize (Vungle)", "version": "5.4.1" },
+    { "name": "com.google.ads.mobile.mediation.metaaudiencenetwork", "displayName": "Meta Audience Network", "version": "3.18.0" },
+    { "name": "com.google.ads.mobile.mediation.mintegral", "displayName": "Mintegral", "version": "1.9.8" },
+    { "name": "com.google.ads.mobile.mediation.pangle", "displayName": "Pangle", "version": "5.6.0" },
+    { "name": "com.google.ads.mobile.mediation.unity", "displayName": "Unity Ads", "version": "3.16.3" }
+  ]
+}
