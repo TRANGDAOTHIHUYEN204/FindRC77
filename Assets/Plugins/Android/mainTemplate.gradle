@@ -6,7 +6,19 @@ apply from: '../shared/common.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
+    implementation 'androidx.appcompat:appcompat:1.6.1' // Packages/com.raccoon.jnativeads/Editor/JNativeAdsDependencies.xml:3
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Packages/com.google.ads.mobile/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml:12
+    implementation 'com.google.ads.mediation:applovin:13.3.1.1' // Packages/com.google.ads.mobile.mediation.applovin/source/plugin/Assets/GoogleMobileAds/Mediation/AppLovin/Editor/AppLovinMediationDependencies.xml:24
+    implementation 'com.google.ads.mediation:facebook:6.20.0.0' // Packages/com.google.ads.mobile.mediation.metaaudiencenetwork/source/plugin/Assets/GoogleMobileAds/Mediation/MetaAudienceNetwork/Editor/MetaAudienceNetworkMediationDependencies.xml:24
+    implementation 'com.google.ads.mediation:ironsource:8.10.0.0' // Packages/com.google.ads.mobile.mediation.ironsource/source/plugin/Assets/GoogleMobileAds/Mediation/IronSource/Editor/IronSourceMediationDependencies.xml:24
+    implementation 'com.google.ads.mediation:mintegral:16.9.91.0' // Packages/com.google.ads.mobile.mediation.mintegral/source/plugin/Assets/GoogleMobileAds/Mediation/Mintegral/Editor/MintegralMediationDependencies.xml:25
+    implementation 'com.google.ads.mediation:pangle:7.3.0.5.0' // Packages/com.google.ads.mobile.mediation.pangle/source/plugin/Assets/GoogleMobileAds/Mediation/Pangle/Editor/PangleMediationDependencies.xml:25
+    implementation 'com.google.ads.mediation:unity:4.15.1.0' // Packages/com.google.ads.mobile.mediation.unity/source/plugin/Assets/GoogleMobileAds/Mediation/UnityAds/Editor/UnityMediationDependencies.xml:25
+    implementation 'com.google.ads.mediation:vungle:7.5.0.0' // Packages/com.google.ads.mobile.mediation.liftoffmonetize/GoogleMobileAds/Mediation/LiftoffMonetize/Editor/LiftoffMonetizeMediationDependencies.xml:24
+    implementation 'com.google.android.gms:play-services-ads:24.3.0' // Packages/com.google.ads.mobile/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml:7
     implementation 'com.google.android.gms:play-services-base:18.11.1' // Assets/Firebase/Editor/AppDependencies.xml:16
+    implementation 'com.google.android.material:material:1.12.0' // Packages/com.raccoon.jnativeads/Editor/JNativeAdsDependencies.xml:4
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0' // Packages/com.google.ads.mobile/GoogleMobileAds/Editor/GoogleUmpDependencies.xml:7
     implementation 'com.google.firebase:firebase-analytics:24.0.0' // Assets/Firebase/Editor/RemoteConfigDependencies.xml:14
     implementation 'com.google.firebase:firebase-analytics-unity:14.1.0' // Assets/Firebase/Editor/AnalyticsDependencies.xml:17
     implementation 'com.google.firebase:firebase-app-unity:14.1.0' // Assets/Firebase/Editor/AppDependencies.xml:21
@@ -15,6 +27,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config-unity:14.1.0' // Assets/Firebase/Editor/RemoteConfigDependencies.xml:19
     implementation 'com.google.firebase:firebase-crashlytics-ndk:21.0.1' // Assets/Firebase/Editor/CrashlyticsDependencies.xml:12
     implementation 'com.google.firebase:firebase-crashlytics-unity:14.1.0' // Assets/Firebase/Editor/CrashlyticsDependencies.xml:19
+    implementation 'com.unity3d.ads:unity-ads:4.15.1' // Packages/com.google.ads.mobile.mediation.unity/source/plugin/Assets/GoogleMobileAds/Mediation/UnityAds/Editor/UnityMediationDependencies.xml:33
 // Android Resolver Dependencies End
 **DEPS**}
 
