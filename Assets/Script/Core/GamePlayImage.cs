@@ -72,6 +72,7 @@ public class GamePlayImage : MonoBehaviour
     private void Update()
     {
         if (!_isPlaying) return;
+        if (!stateGame.IsPlaying || UIInputBlocker.IsBlocked) return;
         if (!inputManager.ClickedThisFrame) return;
 
         if (clickHandler.HandleClick(inputManager.ClickScreenPosition))

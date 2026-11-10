@@ -20,17 +20,46 @@ public class InputManager : MonoBehaviour
     {
         ClickedThisFrame = false;
 
-        Pointer pointer = Pointer.current;
-        if (pointer == null) return;
+        Touchscreen touchscreen = Touchscreen.current;
+        if (touchscreen != null)
+        {
+            var touch = touchscreen.primaryTouch;
+            if (touch.press.isPressed ||
+                touch.press.wasPressedThisFrame ||
+                touch.press.wasReleasedThisFrame)
+            {
+                bool anotherTouchPressed = touchscreen.touches[1].press.isPressed;
+                ProcessInput(
+                    touch.position.ReadValue(),
+                    touch.press.wasPressedThisFrame,
+                    touch.press.wasReleasedThisFrame,
+                    anotherTouchPressed);
+                return;
+            }
+        }
 
-        Vector2 pos = pointer.position.ReadValue();
-        
+        Pointer pointer = Pointer.current;
+        if (pointer == null)
+        {
+            _pressing = false;
+            return;
+        }
+
+        ProcessInput(
+            pointer.position.ReadValue(),
+            pointer.press.wasPressedThisFrame,
+            pointer.press.wasReleasedThisFrame,
+            touchscreen != null && touchscreen.touches[1].press.isPressed);
+    }
+
+    private void ProcessInput(Vector2 pos, bool pressedThisFrame, bool releasedThisFrame, bool anotherTouchPressed)
+    {
         bool uiBlocked = UIInputBlocker.IsBlocked;
 
-        if (pointer.press.wasPressedThisFrame)
+        if (pressedThisFrame)
         {
             _pressing = true;
-            _cancelled = uiBlocked || IsOverButton(pos);
+            _cancelled = uiBlocked || IsOverBlockingUI(pos);
             _pressStart = pos;
         }
 
@@ -39,16 +68,15 @@ public class InputManager : MonoBehaviour
         if (uiBlocked)
             _cancelled = true;
 
-        if (Touchscreen.current != null &&
-            Touchscreen.current.touches[1].press.isPressed)
+        if (anotherTouchPressed)
             _cancelled = true;
 
         if ((pos - _pressStart).sqrMagnitude > tapMaxDistance * tapMaxDistance)
             _cancelled = true;
 
-        if (pointer.press.wasReleasedThisFrame)
+        if (releasedThisFrame)
         {
-            if (!_cancelled && !uiBlocked && !IsOverButton(pos))
+            if (!_cancelled && !uiBlocked && !IsOverBlockingUI(pos))
             {
                 ClickedThisFrame = true;
                 ClickScreenPosition = pos;
@@ -57,7 +85,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private bool IsOverButton(Vector2 screenPos)
+    private bool IsOverBlockingUI(Vector2 screenPos)
     {
         if (EventSystem.current == null) return false;
 
@@ -66,8 +94,15 @@ public class InputManager : MonoBehaviour
         EventSystem.current.RaycastAll(data, _hits);
 
         foreach (var hit in _hits)
+        {
             if (hit.gameObject.GetComponentInParent<Selectable>() != null)
                 return true;
+
+            var groups = hit.gameObject.GetComponentsInParent<CanvasGroup>();
+            foreach (var group in groups)
+                if (group.blocksRaycasts)
+                    return true;
+        }
 
         return false;
     }
