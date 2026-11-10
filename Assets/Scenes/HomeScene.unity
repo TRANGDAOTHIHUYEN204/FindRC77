@@ -2512,7 +2512,7 @@ PrefabInstance:
     - target: {fileID: 6072361870124886094, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5ba7f01b2d9427a43954ab07d806f6d2, type: 2}
+      objectReference: {fileID: 9100000, guid: f5a749e19ddd7fe4a9b4bc8fe515fba3, type: 2}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_Transition
       value: 1

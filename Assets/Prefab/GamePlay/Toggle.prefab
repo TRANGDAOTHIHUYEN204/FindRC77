@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138.5, y: -2}
+  m_AnchoredPosition: {x: -138.5, y: -2.4}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4189137512469375062
@@ -257,8 +257,11 @@ MonoBehaviour:
   toggleOff: {fileID: 8133160611806063615}
   circleOn: {fileID: 8630273046291231817}
   circleMute: {fileID: 3222819181051470623}
+  autoCalculatePos: 1
+  padding: 6
   offPos: {x: 0, y: 0}
   onPos: {x: -142, y: -2}
+  logPositions: 0
   slideDuration: 0.2
   bgDuration: 0.15
 --- !u!1 &8744736159854040612

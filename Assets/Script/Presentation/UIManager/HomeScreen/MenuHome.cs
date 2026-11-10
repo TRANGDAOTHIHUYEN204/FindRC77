@@ -35,25 +35,21 @@ public class MenuHome : MonoBehaviour
             playButtonText.text = nameGame;
         }
     }
+
     public void JoinFindHidden(string sceneName)
     {
-        float t0 = Time.realtimeSinceStartup;
-        bool done = SaveMiniGame.AllCompleted;
-        Debug.Log($"[MenuHome] AllCompleted mất {(Time.realtimeSinceStartup - t0) * 1000f:F0} ms");
-        if (done) return;
+        if (SaveMiniGame.AllCompleted) return;
         StartCoroutine(GamePlay(sceneName));
+    }
+
+    public void JoinGamePlay(string screenName)
+    {
+        StartCoroutine(GamePlay(screenName));
     }
 
     private IEnumerator GamePlay(string screenName)
     {
-        yield return null;
-        yield return null;                       // bỏ qua frame đứng
-        float t = 0f;
-        while (t < 0.3f)
-        {
-            t += Mathf.Min(Time.unscaledDeltaTime, 0.05f);  // frame đứng không ăn hết thời gian
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(screenName);
     }
 

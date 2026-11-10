@@ -9,18 +9,29 @@ public class ToggleVisual : MonoBehaviour
 
     [SerializeField] private Toggle toggle;
     [SerializeField] private ToggleType type;
-    
+
     [SerializeField] private Image toggleOn;
     [SerializeField] private Image toggleOff;
-    
+
     [SerializeField] private Image circleOn;
     [SerializeField] private Image circleMute;
-    
-    [SerializeField] private Vector2 offPos;
-    [SerializeField] private Vector2 onPos;
 
+    [Header("Position")]
+    [SerializeField] private bool autoCalculatePos = true;
+    [Tooltip("Khoang cach (pixel) tu mep nut tron toi mep thanh")]
+    [SerializeField] private float padding = 4f;
+    [Tooltip("Chi dung khi tat autoCalculatePos")]
+    [SerializeField] private Vector2 offPos;
+    [Tooltip("Chi dung khi tat autoCalculatePos")]
+    [SerializeField] private Vector2 onPos;
+    [SerializeField] private bool logPositions;
+
+    [Header("Animation")]
     [SerializeField] private float slideDuration = 0.2f;
     [SerializeField] private float bgDuration = 0.15f;
+
+    private Vector2 _offPosOn, _onPosOn;
+    private Vector2 _offPosMute, _onPosMute;
 
     private Coroutine _co;
 
@@ -28,9 +39,10 @@ public class ToggleVisual : MonoBehaviour
     {
         toggle.onValueChanged.AddListener(OnToggle);
     }
-    
+
     private void OnEnable()
     {
+        CalculatePositions();
         toggle.SetIsOnWithoutNotify(ReadSavedState());
         Refresh();
     }
@@ -38,6 +50,84 @@ public class ToggleVisual : MonoBehaviour
     private void OnDestroy()
     {
         toggle.onValueChanged.RemoveListener(OnToggle);
+    }
+
+    public void RecalculateAndRefresh()
+    {
+        CalculatePositions();
+        Refresh();
+    }
+
+    private void CalculatePositions()
+    {
+        if (!autoCalculatePos)
+        {
+            _offPosOn = _offPosMute = offPos;
+            _onPosOn = _onPosMute = onPos;
+            return;
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(toggleOn.rectTransform);
+
+        RectTransform track = toggleOn.rectTransform;
+
+        _offPosOn   = CalcPos(circleOn.rectTransform,   track, false);
+        _onPosOn    = CalcPos(circleOn.rectTransform,   track, true);
+        _offPosMute = CalcPos(circleMute.rectTransform, track, false);
+        _onPosMute  = CalcPos(circleMute.rectTransform, track, true);
+
+        if (logPositions)
+        {
+            Debug.Log($"[{name}] trackRect={track.rect} circleOn={circleOn.rectTransform.rect.size} " +
+                      $"offOn={_offPosOn} onOn={_onPosOn} offMute={_offPosMute} onMute={_onPosMute}", this);
+        }
+    }
+    private Vector2 CalcPos(RectTransform circle, RectTransform track, bool right)
+    {
+        RectTransform parent = circle.parent as RectTransform;
+        
+        Vector2 tMin, tMax;
+        if (track == parent)
+        {
+            tMin = track.rect.min;
+            tMax = track.rect.max;
+        }
+        else if (track.parent == parent)
+        {
+            Vector2 p = track.localPosition;
+            Vector2 s = track.localScale;
+            tMin = p + Vector2.Scale(track.rect.min, s);
+            tMax = p + Vector2.Scale(track.rect.max, s);
+        }
+        else
+        {
+            Vector3[] c = new Vector3[4];
+            track.GetWorldCorners(c);
+            tMin = parent.InverseTransformPoint(c[0]);
+            tMax = parent.InverseTransformPoint(c[2]);
+        }
+
+        // Kich thuoc nut tron trong khong gian parent
+        Vector2 size = Vector2.Scale(circle.rect.size, circle.localScale);
+
+        // Tam mong muon cua nut tron: sat mep trai hoac phai, cach 'padding', nam giua theo chieu doc
+        float cx = right ? tMax.x - padding - size.x * 0.5f
+                         : tMin.x + padding + size.x * 0.5f;
+        float cy = (tMin.y + tMax.y) * 0.5f;
+        Vector2 desiredCenter = new Vector2(cx, cy);
+
+        // Vi tri cua pivot (tinh tu pivot cua parent) de tam nut tron nam dung cho do
+        Vector2 pivotLocal = desiredCenter - Vector2.Scale(circle.rect.center, circle.localScale);
+
+        // Doi tu localPosition sang anchoredPosition (tru diem tham chieu cua anchor)
+        Rect pr = parent.rect;
+        Vector2 aMin = new Vector2(Mathf.Lerp(pr.xMin, pr.xMax, circle.anchorMin.x),
+                                   Mathf.Lerp(pr.yMin, pr.yMax, circle.anchorMin.y));
+        Vector2 aMax = new Vector2(Mathf.Lerp(pr.xMin, pr.xMax, circle.anchorMax.x),
+                                   Mathf.Lerp(pr.yMin, pr.yMax, circle.anchorMax.y));
+        Vector2 anchorRef = aMin + Vector2.Scale(circle.pivot, aMax - aMin);
+
+        return pivotLocal - anchorRef;
     }
 
     private bool ReadSavedState()
@@ -70,8 +160,8 @@ public class ToggleVisual : MonoBehaviour
         SetAlpha(circleOn, isOn ? 1f : 0f);
         SetAlpha(circleMute, isOn ? 0f : 1f);
 
-        circleOn.rectTransform.anchoredPosition = isOn ? onPos : offPos;
-        circleMute.rectTransform.anchoredPosition = isOn ? onPos : offPos;
+        circleOn.rectTransform.anchoredPosition   = isOn ? _onPosOn   : _offPosOn;
+        circleMute.rectTransform.anchoredPosition = isOn ? _onPosMute : _offPosMute;
     }
 
     private void OnToggle(bool isOn)
@@ -88,16 +178,18 @@ public class ToggleVisual : MonoBehaviour
         Image bgIn  = isOn ? toggleOn  : toggleOff;
         Image bgOut = isOn ? toggleOff : toggleOn;
 
-        Vector2 fromPos = isOn ? offPos : onPos;
-        Vector2 toPos   = isOn ? onPos  : offPos;
+        Vector2 inFrom  = isOn ? _offPosOn   : _onPosMute;
+        Vector2 inTo    = isOn ? _onPosOn    : _offPosMute;
+        Vector2 outFrom = isOn ? _offPosMute : _onPosOn;
+        Vector2 outTo   = isOn ? _onPosMute  : _offPosOn;
 
         float inStartA    = circleIn.color.a;
         float outStartA   = circleOut.color.a;
         float bgInStartA  = bgIn.color.a;
         float bgOutStartA = bgOut.color.a;
 
-        circleIn.rectTransform.anchoredPosition  = fromPos;
-        circleOut.rectTransform.anchoredPosition = fromPos;
+        circleIn.rectTransform.anchoredPosition  = inFrom;
+        circleOut.rectTransform.anchoredPosition = outFrom;
 
         float elapsed = 0f;
         while (elapsed < slideDuration)
@@ -105,18 +197,17 @@ public class ToggleVisual : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / slideDuration);
 
-            Vector2 pos = Vector2.Lerp(fromPos, toPos, t);
-            circleIn.rectTransform.anchoredPosition = pos;
-            circleOut.rectTransform.anchoredPosition = pos;
+            circleIn.rectTransform.anchoredPosition  = Vector2.Lerp(inFrom,  inTo,  t);
+            circleOut.rectTransform.anchoredPosition = Vector2.Lerp(outFrom, outTo, t);
 
-            SetAlpha(circleIn,  Mathf.Lerp(inStartA, 1f, t));
+            SetAlpha(circleIn,  Mathf.Lerp(inStartA,  1f, t));
             SetAlpha(circleOut, Mathf.Lerp(outStartA, 0f, t));
 
             yield return null;
         }
 
-        circleIn.rectTransform.anchoredPosition  = toPos;
-        circleOut.rectTransform.anchoredPosition = toPos;
+        circleIn.rectTransform.anchoredPosition  = inTo;
+        circleOut.rectTransform.anchoredPosition = outTo;
         SetAlpha(circleIn, 1f);
         SetAlpha(circleOut, 0f);
 
@@ -126,7 +217,7 @@ public class ToggleVisual : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / bgDuration);
 
-            SetAlpha(bgIn,  Mathf.Lerp(bgInStartA, 1f, t));
+            SetAlpha(bgIn,  Mathf.Lerp(bgInStartA,  1f, t));
             SetAlpha(bgOut, Mathf.Lerp(bgOutStartA, 0f, t));
 
             yield return null;
