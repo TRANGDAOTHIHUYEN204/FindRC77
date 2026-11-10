@@ -14,7 +14,7 @@ public class ZoomManager : MonoBehaviour
     [SerializeField] private float maxZoom = 4f;
     [SerializeField] private float scrollStep = 0.1f;
     [SerializeField] private float dragThreshold = 20f;
-    
+
     [SerializeField] private float focusZoom = 2.5f;
     [SerializeField] private float focusDuration = 0.4f;
     public float Zoom { get; private set; } = 1f;
@@ -27,18 +27,35 @@ public class ZoomManager : MonoBehaviour
     private Coroutine _focusCo;
     public bool IsFocusing { get; private set; }
     public event System.Action OnViewChanged;
-    
+
     public bool Locked { get; private set; }
 
     private void Update()
     {
         if (Locked) return;
+        
+        var state = StateGame.Instance;
+        if (state != null && (!state.IsPlaying || state.IsWinning))
+        {
+            ResetInputState();
+            return;
+        }
+
         HandleScroll();
         HandlePinch();
         if (!_pinching) HandleDrag();
     }
 
+    private void ResetInputState()
+    {
+        _pinching = false;
+        _dragging = false;
+        _startedOnFrame = false;
+        _pinchBlocked = false;
+    }
+
     public void Unlock() => Locked = false;
+
     public void ResetZoomSmooth()
     {
         if (_focusCo != null) StopCoroutine(_focusCo);
@@ -48,6 +65,7 @@ public class ZoomManager : MonoBehaviour
     private void HandleScroll()
     {
         Mouse mouse = Mouse.current;
+        if (mouse == null) return; 
 
         float s = mouse.scroll.ReadValue().y;
         if (Mathf.Approximately(s, 0f)) return;
@@ -62,7 +80,7 @@ public class ZoomManager : MonoBehaviour
     private void HandlePinch()
     {
         Touchscreen ts = Touchscreen.current;
-        if (ts == null) { _pinching = false; return; }
+        if (ts == null || ts.touches.Count < 2) { _pinching = false; return; }
 
         var t0 = ts.touches[0];
         var t1 = ts.touches[1];
@@ -120,7 +138,7 @@ public class ZoomManager : MonoBehaviour
             }
         }
     }
-    
+
     private void ZoomAt(Vector2 screenPos, float newZoom)
     {
         newZoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
@@ -138,7 +156,7 @@ public class ZoomManager : MonoBehaviour
         if (!ToLocal(frameA, prevScreen, out Vector2 a) ||
             !ToLocal(frameA, curScreen, out Vector2 b)) return;
 
-        Offset += b - a; 
+        Offset += b - a;
         Apply();
     }
 
@@ -154,7 +172,7 @@ public class ZoomManager : MonoBehaviour
         contentA.anchoredPosition = contentB.anchoredPosition = Offset;
         OnViewChanged?.Invoke();
     }
-    
+
     private RectTransform GetFrameAt(Vector2 screenPos)
     {
         if (RectTransformUtility.RectangleContainsScreenPoint(frameA, screenPos, uiCamera)) return frameA;
@@ -162,13 +180,13 @@ public class ZoomManager : MonoBehaviour
         return null;
     }
 
-
     private bool ToLocal(RectTransform frame, Vector2 screenPos, out Vector2 local)
     {
         bool ok = RectTransformUtility.ScreenPointToLocalPointInRectangle(frame, screenPos, uiCamera, out local);
         local -= frame.rect.center;
         return ok;
     }
+
     public void FocusOn(RectTransform root, Vector3 worldCenter)
     {
         Locked = true;
