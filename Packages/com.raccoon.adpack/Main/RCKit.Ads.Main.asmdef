@@ -1,0 +1,22 @@
+{
+    "name": "RCKit.Ads.Main",
+    "rootNamespace": "RCKit.Ads.Main",
+    "references": [
+        "RCKit.Ads",
+        "RCKit.Ads.JNative",
+        "RCKit.Ads.AdMob",
+        "RCKit.Ads.Appsflyer",
+        "RCKit.Ads.UnityAds",
+        "RCKit.Ads.TikTok",
+        "Unity.Advertisement.IosSupport"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

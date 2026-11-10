@@ -722,7 +722,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN
+    Android: DOTWEEN;ENABLE_RACCOON_ADMOB;ENABLE_RACCOON_JNATIVE
     EmbeddedLinux: DOTWEEN
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
@@ -738,7 +738,7 @@ PlayerSettings:
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN
     XboxOne: DOTWEEN
-    iPhone: DOTWEEN
+    iPhone: DOTWEEN;ENABLE_RACCOON_ADMOB;ENABLE_RACCOON_JNATIVE
     tvOS: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}

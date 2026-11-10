@@ -1,0 +1,17 @@
+{
+    "name": "RCKit.Ads.Appsflyer",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2a37df438292d4903b4e5159c5de3bf9",
+        "GUID:d008146f00dea44d38752b4289e5f65b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
