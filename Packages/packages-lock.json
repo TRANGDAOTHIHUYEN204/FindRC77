@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "appsflyer-unity-plugin": {
+      "version": "https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#v6.18.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8adb2350ad1076de02a8acf63e2048efa07cf9ba"
+    },
     "com.coffee.ui-effect": {
       "version": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
       "depth": 0,
@@ -20,17 +27,17 @@
       "hash": "eec288e2a5cfd43743b70e9a8c397d5e5300e80a"
     },
     "com.google.ads.mobile": {
-      "version": "10.2.0",
+      "version": "10.5.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.google.external-dependency-manager": "1.2.185",
+        "com.google.external-dependency-manager": "1.2.186",
         "com.unity.modules.androidjni": "1.0.0"
       },
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.applovin": {
-      "version": "8.3.2",
+      "version": "8.4.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -48,7 +55,7 @@
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.liftoffmonetize": {
-      "version": "5.3.3",
+      "version": "5.4.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -57,7 +64,7 @@
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.metaaudiencenetwork": {
-      "version": "3.17.0",
+      "version": "3.18.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -66,7 +73,7 @@
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.mintegral": {
-      "version": "1.9.5",
+      "version": "1.9.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -75,7 +82,7 @@
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.pangle": {
-      "version": "5.2.2",
+      "version": "5.6.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -84,7 +91,7 @@
       "url": "https://package.openupm.com"
     },
     "com.google.ads.mobile.mediation.unity": {
-      "version": "3.15.1",
+      "version": "3.16.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -93,8 +100,8 @@
       "url": "https://package.openupm.com"
     },
     "com.google.external-dependency-manager": {
-      "version": "1.2.185",
-      "depth": 0,
+      "version": "1.2.186",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://package.openupm.com"

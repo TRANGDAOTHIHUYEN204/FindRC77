@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/RaccoonAds.meta
 guid: 3e893a3adb57f9f4a8cc38c801423d04
 folderAsset: yes
 DefaultImporter:
+========
+guid: 1b1f63ef58dbf9c4eb2a20f76012261f
+PrefabImporter:
+>>>>>>>> 8caa0143e017e8327203b095f54424a52fb8e2bf:Assets/Prefab/GameAds.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

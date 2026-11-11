@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/RaccoonAds/Resources.meta
 guid: caed0f162fb1c5942b16fb9bf332be93
+========
+guid: 2a0c00e785954283b58dbcabbf408c4f
+>>>>>>>> 8caa0143e017e8327203b095f54424a52fb8e2bf:Assets/RaccoonAds.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

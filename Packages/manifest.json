@@ -2,14 +2,14 @@
   "dependencies": {
     "com.coffee.ui-effect": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
-    "com.google.ads.mobile": "10.2.0",
-    "com.google.ads.mobile.mediation.applovin": "8.3.2",
+    "com.google.ads.mobile": "10.5.0",
+    "com.google.ads.mobile.mediation.applovin": "8.4.1",
     "com.google.ads.mobile.mediation.ironsource": "3.10.0",
-    "com.google.ads.mobile.mediation.liftoffmonetize": "5.3.3",
-    "com.google.ads.mobile.mediation.metaaudiencenetwork": "3.17.0",
-    "com.google.ads.mobile.mediation.mintegral": "1.9.5",
-    "com.google.ads.mobile.mediation.pangle": "5.2.2",
-    "com.google.ads.mobile.mediation.unity": "3.15.1",
+    "com.google.ads.mobile.mediation.liftoffmonetize": "5.4.1",
+    "com.google.ads.mobile.mediation.metaaudiencenetwork": "3.18.0",
+    "com.google.ads.mobile.mediation.mintegral": "1.9.8",
+    "com.google.ads.mobile.mediation.pangle": "5.6.0",
+    "com.google.ads.mobile.mediation.unity": "3.16.3",
     "com.google.external-dependency-manager": "1.2.185",
     "com.unity.ads.ios-support": "1.2.0",
     "com.unity.collab-proxy": "2.11.2",
@@ -57,14 +57,26 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.raccoon.jnativeads": "git@github.com:raccoon-studio-tripglobal/jnativeadsplugin.git#release",
+    "appsflyer-unity-plugin": "https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#v6.18.1"
   },
   "scopedRegistries": [
     {
-      "name": "Open UPM",
-      "url": "https://package.openupm.com/",
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
       "scopes": [
-        "com.google"
+        "com.google",
+        "com.google.external-dependency-manager"
+      ]
+    },
+    {
+      "name": "AppLovin MAX Unity",
+      "url": "https://unity.packages.applovin.com/",
+      "scopes": [
+        "com.applovin.mediation.ads",
+        "com.applovin.mediation.adapters",
+        "com.applovin.mediation.dsp"
       ]
     }
   ]
