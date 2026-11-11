@@ -4,7 +4,6 @@ using System.Collections;
 
 public class LoadingScreen : MonoBehaviour
 {
-    [SerializeField] private float delay = 3f;
     [SerializeField] private string homeSceneName = "HomeScene";
     [SerializeField] private string gameplaySceneName = "GamePlay";
     [SerializeField] private bool resetAllOnStart = false;
@@ -26,15 +25,8 @@ public class LoadingScreen : MonoBehaviour
 #endif
     }
 
-    private void Start()
+    public void LoadNextSceneA()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
-    }
-    private void OnEnable() => StartCoroutine(LoadNextScene());
-
-    private IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(delay);
         string target = SaveGame.TutorialCompleted ? homeSceneName : gameplaySceneName;
         SceneManager.LoadScene(target);
     }
