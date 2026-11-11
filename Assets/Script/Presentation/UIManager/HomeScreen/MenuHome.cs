@@ -39,7 +39,7 @@ public class MenuHome : MonoBehaviour
     public void JoinFindHidden(string sceneName)
     {
         if (SaveMiniGame.AllCompleted) return;
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(GamePlay(sceneName));
     }
 
     public void JoinGamePlay(string screenName)

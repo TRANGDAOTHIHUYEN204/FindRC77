@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class PanelAnimation : MonoBehaviour
 {
+
     [SerializeField] private CanvasGroup fadeGroup;
     [SerializeField] private Transform panel;
-
     [SerializeField] private float openDuration = 0.2f;
     [SerializeField] private Vector3 openStartScale = new Vector3(0.5f, 0.5f, 0.5f);
     [SerializeField] private float closeDuration = 0.12f;
     [SerializeField] private Vector3 closeEndScale = Vector3.zero;
+    
     [SerializeField] private bool blockGameInput = true;
     [SerializeField] private float blockHoldAfterClose = 0.25f;
 
-    private Transform _panelTf;
-    private GameObject _root;
-    private Vector3 _targetScale;
+    private Vector3 _targetScale = Vector3.one;
+    private float _targetAlpha = 1f;
     private bool _initialized;
     private bool _closing;
     private bool _blockRegistered;
@@ -33,6 +33,13 @@ public class PanelAnimation : MonoBehaviour
         if (fadeGroup) fadeGroup.blocksRaycasts = value;
     }
 
+    private void SetScale(Vector3 s)
+    {
+        if (panel) panel.localScale = s;
+    }
+
+    private Vector3 GetScale() => panel ? panel.localScale : Vector3.one;
+
     private void RegisterBlock()
     {
         if (!blockGameInput || _blockRegistered) return;
@@ -46,14 +53,23 @@ public class PanelAnimation : MonoBehaviour
         _blockRegistered = false;
         UIInputBlocker.RegisterClose(blockHoldAfterClose);
     }
+    
 
     private void Init()
     {
         if (_initialized) return;
-        _panelTf = panel ? panel : transform;
-        _root = fadeGroup ? fadeGroup.gameObject : gameObject;
-        _targetScale = _panelTf.localScale;
-        if (_targetScale == Vector3.zero) _targetScale = Vector3.one;
+
+        if (panel)
+        {
+            _targetScale = panel.localScale;
+            if (_targetScale == Vector3.zero) _targetScale = Vector3.one;
+        }
+
+        if (fadeGroup)
+        {
+            _targetAlpha = fadeGroup.alpha > 0f ? fadeGroup.alpha : 1f;
+        }
+
         _initialized = true;
     }
 
@@ -71,33 +87,33 @@ public class PanelAnimation : MonoBehaviour
     {
         if (_routine != null) { StopCoroutine(_routine); _routine = null; }
         _closing = false;
+        _onClosed = null;
         ReleaseBlock();
 
         if (_initialized)
         {
-            _panelTf.localScale = _targetScale;
-            Alpha = 1f;
+            SetScale(_targetScale);
+            Alpha = _targetAlpha;
             SetRaycast(true);
         }
     }
+    
 
     public void Show()
     {
         Init();
         _onClosed = null;
 
-        if (!_root.activeSelf || !gameObject.activeSelf)
+        if (!gameObject.activeSelf)
         {
-            _root.SetActive(true);
-            gameObject.SetActive(true);
+            gameObject.SetActive(true); 
             return;
         }
 
         if (!_closing && _routine == null) return;
-
         _closing = false;
         RegisterBlock();
-        PlayOpen(_panelTf.localScale, Alpha);
+        PlayOpen(GetScale(), Alpha);
     }
 
     private void PlayOpen(Vector3 fromScale, float fromAlpha)
@@ -110,23 +126,23 @@ public class PanelAnimation : MonoBehaviour
     private IEnumerator OpenRoutine(Vector3 fromScale, float fromAlpha)
     {
         float t = 0f;
-        _panelTf.localScale = fromScale;
+        SetScale(fromScale);
         Alpha = fromAlpha;
 
         while (t < openDuration)
         {
             t += Time.unscaledDeltaTime;
             float p = Mathf.Clamp01(t / openDuration);
-            _panelTf.localScale = Vector3.LerpUnclamped(fromScale, _targetScale, EaseOutBack(p));
-            Alpha = Mathf.Lerp(fromAlpha, 1f, p);
+            SetScale(Vector3.LerpUnclamped(fromScale, _targetScale, EaseOutBack(p)));
+            Alpha = Mathf.Lerp(fromAlpha, _targetAlpha, p);
+
             yield return null;
         }
 
-        _panelTf.localScale = _targetScale;
-        Alpha = 1f;
+        SetScale(_targetScale);
+        Alpha = _targetAlpha;
         _routine = null;
     }
-
     public void Close() => Close(null);
 
     public void Close(System.Action callback)
@@ -147,7 +163,7 @@ public class PanelAnimation : MonoBehaviour
         _closing = true;
         _onClosed = callback;
         if (_routine != null) StopCoroutine(_routine);
-        
+
         ReleaseBlock();
         SetRaycast(false);
         _routine = StartCoroutine(CloseRoutine());
@@ -156,19 +172,21 @@ public class PanelAnimation : MonoBehaviour
     private IEnumerator CloseRoutine()
     {
         float t = 0f;
-        Vector3 fromScale = _panelTf.localScale;
-        float fromAlpha = Alpha;
+        Vector3 fromScale = GetScale();
+        float fromAlpha = Alpha; 
 
         while (t < closeDuration)
         {
             t += Time.unscaledDeltaTime;
             float p = Mathf.Clamp01(t / closeDuration);
-            _panelTf.localScale = Vector3.LerpUnclamped(fromScale, closeEndScale, EaseInCubic(p));
+            
+            SetScale(Vector3.LerpUnclamped(fromScale, closeEndScale, EaseInCubic(p)));
             Alpha = Mathf.Lerp(fromAlpha, 0f, p);
+
             yield return null;
         }
 
-        _panelTf.localScale = closeEndScale;
+        SetScale(closeEndScale);
         Alpha = 0f;
         _routine = null;
         _closing = false;
@@ -176,9 +194,10 @@ public class PanelAnimation : MonoBehaviour
         var cb = _onClosed;
         _onClosed = null;
         cb?.Invoke();
-
-        if (_root.activeSelf) _root.SetActive(false);
+        
+        if (gameObject.activeSelf) gameObject.SetActive(false);
     }
+    
 
     private static float EaseInCubic(float x) => x * x * x;
 
