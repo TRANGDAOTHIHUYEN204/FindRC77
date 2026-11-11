@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: RCKit.Ads.Main::RCKit.Ads.Main.AdsScriptableObj
   use_test_ad: 1
   AdUnitConfigs:
-  - ad_type: 110
+  - ad_type: 100
     ad_id_android: 
     ad_id_ios: 
     is_multi_ad: 0

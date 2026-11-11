@@ -1140,13 +1140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4296c559fdcb14e90b812a1af1b838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdsController
-  firstAd: 110
+  firstAd: 100
   secondAd: 0
   interAd: 0
   rewardAd: 0
   interCooldown: 60
   showTimeout: 30
-  firstReadyTimeout: 40
+  firstReadyTimeout: 32
   sdkInitTimeout: 60
 --- !u!1 &2054509022
 GameObject:
