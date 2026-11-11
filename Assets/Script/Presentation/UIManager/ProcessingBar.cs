@@ -12,10 +12,10 @@ public class ProcessingBar : MonoBehaviour
     [SerializeField] private bool playOnStart = true;
 
     [SerializeField] private string baseText = "Loading";
-    [SerializeField] private float dotInterval = 0.4f;   
+    [SerializeField] private float dotInterval = 0.4f;
     [SerializeField] private int maxDots = 3;
-    [SerializeField] private bool keepTextWidth = true;  
-    [SerializeField] private bool animateAfterComplete = false; 
+    [SerializeField] private bool keepTextWidth = true;
+    [SerializeField] private bool animateAfterComplete = false;
     [SerializeField] private float startOffset = 750f;
 
     [SerializeField, Range(0f, 1f)] private float adsAt = 0.8f;
@@ -34,7 +34,7 @@ public class ProcessingBar : MonoBehaviour
 
     private float _dotTimer;
     private int _dotCount = -1;
-    private string[] _dotStrings; 
+    private string[] _dotStrings;
 
     private int SafeMaxDots => Mathf.Max(1, maxDots);
     private float SafeDotInterval => Mathf.Max(0.01f, dotInterval);
@@ -74,6 +74,9 @@ public class ProcessingBar : MonoBehaviour
         Canvas.ForceUpdateCanvases();
 
         SetProgress(0f);
+
+        AdsController.Instance?.PrepareFirst();
+
         if (playOnStart) Play();
     }
 
@@ -95,17 +98,17 @@ public class ProcessingBar : MonoBehaviour
 
         SetProgress(0f);
     }
-    
+
     public void Pause()
     {
         _paused = true;
     }
-    
+
     public void Resume()
     {
         _paused = false;
     }
-    
+
     public void SetBaseText(string text)
     {
         baseText = text ?? string.Empty;
@@ -118,7 +121,7 @@ public class ProcessingBar : MonoBehaviour
 
     private void Update()
     {
-        UpdateDots(); 
+        UpdateDots();
 
         if (!_playing || _paused) return;
 
@@ -126,18 +129,20 @@ public class ProcessingBar : MonoBehaviour
         float t = duration > 0f ? Mathf.Clamp01(_elapsed / duration) : 1f;
         float p = curve != null ? curve.Evaluate(t) : t;
         SetProgress(p);
-        
+
         if (!_adsTriggered && (p >= adsAt || t >= 1f))
         {
             _adsTriggered = true;
             OnReachAds();
-            if (_paused) return; 
+            if (_paused) return;
         }
 
         if (t < 1f) return;
         _playing = false;
 
-        if (!animateAfterComplete) SetDots(SafeMaxDots); 
+        if (!animateAfterComplete) SetDots(SafeMaxDots);
+
+        AdsController.Instance?.OnLoadingFinished();
 
         var cb = _onComplete;
         _onComplete = null;
@@ -146,7 +151,11 @@ public class ProcessingBar : MonoBehaviour
 
     private void OnReachAds()
     {
-        // ads
+        var ads = AdsController.Instance;
+        if (ads == null) return;    
+
+        Pause();
+        ads.RequestFirst(Resume);  
     }
 
     private void UpdateDots()
@@ -191,7 +200,7 @@ public class ProcessingBar : MonoBehaviour
         if (_dotStrings == null || _dotStrings.Length != max + 1) BuildDotStrings();
 
         _dotCount = count;
-        label.text = _dotStrings[count]; 
+        label.text = _dotStrings[count];
     }
 
     public void SetProgress(float p)

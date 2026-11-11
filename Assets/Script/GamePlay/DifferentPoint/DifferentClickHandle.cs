@@ -30,6 +30,7 @@ public class DifferentClickHandler : MonoBehaviour
     {
         if (_isResetting) return false;
         if (_isLosing) return false;
+        if (stateGame.IsWinning) return false;  
         if (!stateGame.IsPlaying) return false;
         if (!levelImageView.IsInsideImages(screenPoint)) return false;
 

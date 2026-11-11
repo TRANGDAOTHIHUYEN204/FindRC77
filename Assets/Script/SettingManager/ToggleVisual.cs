@@ -15,18 +15,11 @@ public class ToggleVisual : MonoBehaviour
 
     [SerializeField] private Image circleOn;
     [SerializeField] private Image circleMute;
-
-    [Header("Position")]
     [SerializeField] private bool autoCalculatePos = true;
-    [Tooltip("Khoang cach (pixel) tu mep nut tron toi mep thanh")]
     [SerializeField] private float padding = 4f;
-    [Tooltip("Chi dung khi tat autoCalculatePos")]
     [SerializeField] private Vector2 offPos;
-    [Tooltip("Chi dung khi tat autoCalculatePos")]
     [SerializeField] private Vector2 onPos;
     [SerializeField] private bool logPositions;
-
-    [Header("Animation")]
     [SerializeField] private float slideDuration = 0.2f;
     [SerializeField] private float bgDuration = 0.15f;
 
@@ -106,20 +99,14 @@ public class ToggleVisual : MonoBehaviour
             tMin = parent.InverseTransformPoint(c[0]);
             tMax = parent.InverseTransformPoint(c[2]);
         }
-
-        // Kich thuoc nut tron trong khong gian parent
         Vector2 size = Vector2.Scale(circle.rect.size, circle.localScale);
-
-        // Tam mong muon cua nut tron: sat mep trai hoac phai, cach 'padding', nam giua theo chieu doc
         float cx = right ? tMax.x - padding - size.x * 0.5f
                          : tMin.x + padding + size.x * 0.5f;
         float cy = (tMin.y + tMax.y) * 0.5f;
         Vector2 desiredCenter = new Vector2(cx, cy);
-
-        // Vi tri cua pivot (tinh tu pivot cua parent) de tam nut tron nam dung cho do
+        
         Vector2 pivotLocal = desiredCenter - Vector2.Scale(circle.rect.center, circle.localScale);
-
-        // Doi tu localPosition sang anchoredPosition (tru diem tham chieu cua anchor)
+        
         Rect pr = parent.rect;
         Vector2 aMin = new Vector2(Mathf.Lerp(pr.xMin, pr.xMax, circle.anchorMin.x),
                                    Mathf.Lerp(pr.yMin, pr.yMax, circle.anchorMin.y));
