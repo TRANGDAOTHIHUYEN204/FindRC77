@@ -546,7 +546,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7321d8b6c76938e438a0b10f7d3ef853, type: 2}
   - {fileID: 11400000, guid: fb9f19a9c1559fe4180346ecbff354cf, type: 2}
   - {fileID: 11400000, guid: e8e9901d08bc257429a9ffd6889654b2, type: 2}
-  tutorialLevel: {fileID: 11400000, guid: 9c076e535524169458ba4fc5ce6a89a5, type: 2}
+  tutorialLevel: {fileID: 11400000, guid: f3d9e60e12b02274c993a6abf23f8474, type: 2}
 --- !u!4 &153753068
 Transform:
   m_ObjectHideFlags: 0

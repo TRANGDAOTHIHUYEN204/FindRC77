@@ -2078,6 +2078,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 269856858}
     - target: {fileID: 8680883609807193326, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+      propertyPath: openDuration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680883609807193326, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
       propertyPath: closeDuration
       value: 0.25
       objectReference: {fileID: 0}

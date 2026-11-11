@@ -111,4 +111,9 @@ public class DifferentPair : MonoBehaviour
         radiusWorld = Mathf.Abs(v.x);
         return radiusWorld > 0.0001f;
     }
+    public void ResetFound()
+    {
+        IsFound = false;
+        HideOutline(0f);  
+    }
 }

@@ -161,16 +161,15 @@ public class StateGame : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        clickHandler.OnResetBegin();
-        markPresenter.ClearMarks();
+        clickHandler.OnResetBegin(); 
+        markPresenter.ClearMarks();       
         pairHolder.Rebuild();
         heartManager.ResetLives();
-        challengeNodes.ResetNodes();
+        challengeNodes.ResetNodes();      
         if (hintPresenter) hintPresenter.ResetForLevel();
-        clickHandler.OnResetEnd();
         gamePlay.ResetPlay();
-
         Init(levelManager.TimeLimit);
+        clickHandler.OnResetEnd();       
     }
 
     public void ResumeGame()

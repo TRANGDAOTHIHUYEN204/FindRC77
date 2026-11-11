@@ -30,6 +30,7 @@ public class DifferentClickHandler : MonoBehaviour
     {
         if (_isResetting) return false;
         if (_isLosing) return false;
+        if (stateGame.IsWinning) return false;  
         if (!stateGame.IsPlaying) return false;
         if (!levelImageView.IsInsideImages(screenPoint)) return false;
 
@@ -44,6 +45,7 @@ public class DifferentClickHandler : MonoBehaviour
 
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
+            
             Vector2? trailLocal = null;
             if (trailStartPoint != null &&
                 trailStartPoint.parent is RectTransform canvasRect &&

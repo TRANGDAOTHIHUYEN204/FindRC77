@@ -118,13 +118,20 @@ public class SpawnChallengeNode : MonoBehaviour
     }
     public void ResetNodes()
     {
-        _session++;                 
+        _session++;         
         _changedCount = 0;
+        _appliedCount = 0;   
+
+        StopAllCoroutines();  
 
         for (int i = 0; i < nodes.Count; i++)
         {
             if (nodes[i] == null) continue;
-            nodes[i].ChangeSprite(sprite);   
+
+            if (nodes[i].Visual != null)
+                nodes[i].Visual.anchoredPosition = Vector2.zero;
+
+            nodes[i].ChangeSprite(sprite); 
         }
     }
     

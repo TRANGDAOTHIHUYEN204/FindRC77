@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Replay");
         StartCoroutine(ReplayGame());
     }
-
+    
     private IEnumerator ReplayGame()
     {
         yield return new WaitForSecondsRealtime(0.5f);

@@ -62,5 +62,14 @@ public class DifferentPairManager
 
         if (remaining.Count == 0) return null;
         return remaining[Random.Range(0, remaining.Count)];
+        
     }
+    public void ResetAll()
+    {
+        for (int i = 0; i < entries.Count; i++)
+            entries[i].Pair.ResetFound();
+
+        FoundCount = 0;
+    }
+
 }
