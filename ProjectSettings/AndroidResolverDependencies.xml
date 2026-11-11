@@ -2,14 +2,19 @@
   <packages>
     <package>androidx.appcompat:appcompat:1.6.1</package>
     <package>androidx.constraintlayout:constraintlayout:2.1.4</package>
-    <package>com.google.ads.mediation:applovin:13.3.1.1</package>
-    <package>com.google.ads.mediation:facebook:6.20.0.0</package>
+    <package>androidx.lifecycle:lifecycle-process:2.6.2</package>
+    <package>com.android.installreferrer:installreferrer:2.1</package>
+    <package>com.appsflyer:af-android-sdk:6.18.1</package>
+    <package>com.appsflyer:purchase-connector:2.2.0</package>
+    <package>com.appsflyer:unity-wrapper:6.18.1</package>
+    <package>com.google.ads.mediation:applovin:13.4.0.1</package>
+    <package>com.google.ads.mediation:facebook:6.21.0.0</package>
     <package>com.google.ads.mediation:ironsource:8.10.0.0</package>
-    <package>com.google.ads.mediation:mintegral:16.9.91.0</package>
-    <package>com.google.ads.mediation:pangle:7.3.0.5.0</package>
-    <package>com.google.ads.mediation:unity:4.15.1.0</package>
-    <package>com.google.ads.mediation:vungle:7.5.0.0</package>
-    <package>com.google.android.gms:play-services-ads:24.3.0</package>
+    <package>com.google.ads.mediation:mintegral:16.9.91.2</package>
+    <package>com.google.ads.mediation:pangle:7.7.0.2.0</package>
+    <package>com.google.ads.mediation:unity:4.16.3.0</package>
+    <package>com.google.ads.mediation:vungle:7.5.1.1</package>
+    <package>com.google.android.gms:play-services-ads:24.5.0</package>
     <package>com.google.android.gms:play-services-base:18.11.1</package>
     <package>com.google.android.material:material:1.12.0</package>
     <package>com.google.android.ump:user-messaging-platform:3.2.0</package>
@@ -21,7 +26,7 @@
     <package>com.google.firebase:firebase-config-unity:14.1.0</package>
     <package>com.google.firebase:firebase-crashlytics-ndk:21.0.1</package>
     <package>com.google.firebase:firebase-crashlytics-unity:14.1.0</package>
-    <package>com.unity3d.ads:unity-ads:4.15.1</package>
+    <package>com.unity3d.ads:unity-ads:4.16.3</package>
   </packages>
   <files>
     <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/14.1.0/firebase-analytics-unity-14.1.0.aar</file>
