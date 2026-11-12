@@ -7,27 +7,31 @@ public class AdsController : MonoBehaviour
 {
     public static AdsController Instance { get; private set; }
 
-    [SerializeField] private AD_TYPE firstAd;
     [SerializeField] private AD_TYPE secondAd;
     [SerializeField] private AD_TYPE interAd;
     [SerializeField] private AD_TYPE rewardAd;
 
     [SerializeField] private float interCooldown = 60f;
     [SerializeField] private float showTimeout = 30f;
-    [SerializeField] private float firstReadyTimeout = 40f;
-    [SerializeField] private float sdkInitTimeout = 60f;
+
+    [Header("Resume Ad (ẩn app rồi vào lại)")]
+    [SerializeField] private AD_TYPE resumeAd;
+    [Tooltip("Loading panel hiện trước ad, tắt sau khi ad đóng (nên là con của AdsController hoặc Canvas DontDestroyOnLoad, sorting cao nhất)")]
+    [SerializeField] private GameObject resumeLoadingPanel;
+
+    /// <summary>StateGame set vào để chặn resume ad (vd: đang tutorial).</summary>
+    public Func<bool> CanShowResumeAd;
 
     private float _interTimer;
     private bool _gameplayStarted;
     private bool _secondShown;
     private bool _isShowing;
+    private bool _sdkInitRequested;
 
-    private bool _firstPrepared;
-    private bool _firstRequested;
-    private bool _firstFinished;
-    private bool _firstPreloadRequested;
-
-    private Coroutine _preloadCoroutine;
+    private bool _wasBackgrounded;
+    private bool _resumeLoading;
+    private float _prevTimeScale = 1f;
+    private Coroutine _resumeRoutine;
 
     private void Awake()
     {
@@ -45,6 +49,8 @@ public class AdsController : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_resumeRoutine != null) StopCoroutine(_resumeRoutine);
+        if (_resumeLoading) SetResumeLoading(false);
         if (Instance == this) Instance = null;
     }
 
@@ -63,16 +69,14 @@ public class AdsController : MonoBehaviour
         Debug.Log("[Ads] First gameplay started. Inter timer = 0.");
     }
 
-    #region FIRST AD
+    #region SDK INIT
 
-    public void PrepareFirst()
+    public void InitializeSdk()
     {
-        Debug.Log("[Ads] PrepareFirst CALLED.");
-
 #if ENABLE_RACCOON_ADMOB
-        if (_firstPrepared)
+        if (_sdkInitRequested)
         {
-            Debug.Log("[Ads] First already prepared. Skip duplicate.");
+            Debug.Log("[Ads] SDK init already requested. Skip.");
             return;
         }
 
@@ -83,59 +87,11 @@ public class AdsController : MonoBehaviour
             return;
         }
 
-        _firstPrepared = true;
-        Debug.Log($"[Ads] Initialize SDK. FirstAd = {firstAd}");
-
+        _sdkInitRequested = true;
+        Debug.Log("[Ads] Initialize SDK.");
         mgr.Initialize(null);
-        _preloadCoroutine = StartCoroutine(CoPreloadFirst());
 #else
         Debug.LogError("[Ads] ENABLE_RACCOON_ADMOB is NOT defined!");
-#endif
-    }
-
-    public void RequestFirst(Action onDone)
-    {
-        Debug.Log("[Ads] RequestFirst CALLED.");
-
-#if ENABLE_RACCOON_ADMOB
-        if (_firstFinished)
-        {
-            Debug.Log("[Ads] First already finished. Skip.");
-            onDone?.Invoke();
-            return;
-        }
-
-        if (_firstRequested)
-        {
-            Debug.LogWarning("[Ads] First request already running.");
-            return;
-        }
-
-        var mgr = RaccoonAdsManager.Instance;
-        if (mgr == null)
-        {
-            Debug.LogError("[Ads] RequestFirst: Manager NULL.");
-            _firstFinished = true;
-            onDone?.Invoke();
-            return;
-        }
-
-        if (mgr.IsAdsRemoved)
-        {
-            Debug.Log("[Ads] Ads removed. Skip First.");
-            _firstFinished = true;
-            onDone?.Invoke();
-            return;
-        }
-
-        if (!_firstPrepared) PrepareFirst();
-
-        _firstRequested = true;
-        StartCoroutine(CoShowFirst(mgr, onDone));
-#else
-        Debug.LogError("[Ads] ENABLE_RACCOON_ADMOB is NOT defined.");
-        _firstFinished = true;
-        onDone?.Invoke();
 #endif
     }
 
@@ -151,183 +107,9 @@ public class AdsController : MonoBehaviour
             return;
         }
 
-        if (_firstRequested && !_firstFinished)
-        {
-            Debug.LogWarning("[Ads] First still processing. Do not finish loading yet.");
-            return;
-        }
-
         mgr.OnLoadingSceneLoaded();
-        mgr.StopLoadingAd(firstAd);
-        Debug.Log($"[Ads] StopLoadingAd: {firstAd}");
 #endif
     }
-
-#if ENABLE_RACCOON_ADMOB
-
-    private IEnumerator CoPreloadFirst()
-    {
-        Debug.Log("[Ads] CoPreloadFirst START.");
-
-        float waited = 0f;
-
-        while (waited < sdkInitTimeout)
-        {
-            var mgr = RaccoonAdsManager.Instance;
-            if (mgr == null)
-            {
-                Debug.LogError("[Ads] Manager NULL during initialization.");
-                _preloadCoroutine = null;
-                yield break;
-            }
-
-            if (mgr.Initialized) break;
-
-            waited += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        var manager = RaccoonAdsManager.Instance;
-        if (manager == null || !manager.Initialized)
-        {
-            Debug.LogWarning($"[Ads] SDK initialization timeout after {waited:F1}s.");
-            _preloadCoroutine = null;
-            yield break;
-        }
-
-        Debug.Log($"[Ads] SDK Initialized: {manager.Initialized}");
-        Debug.Log($"[Ads] SDK initialization took {waited:F2}s.");
-
-        if (_firstFinished)
-        {
-            Debug.Log("[Ads] First already finished. Skip preload.");
-            _preloadCoroutine = null;
-            yield break;
-        }
-
-        bool ready = manager.AdsIsReady(firstAd);
-        Debug.Log($"[Ads] First ready before preload: {ready}");
-
-        if (!ready && !_firstPreloadRequested)
-        {
-            _firstPreloadRequested = true;
-
-            bool autoPreload = manager.IsPreloadAd(firstAd);
-            Debug.Log($"[Ads] First auto preload config: {autoPreload}");
-
-            if (!autoPreload)
-            {
-                Debug.Log($"[Ads] Starting preload: {firstAd}");
-                manager.PreloadAdsWaitShow(firstAd, success => Debug.Log($"[Ads] First preload result: {success}"));
-            }
-            else
-            {
-                Debug.Log("[Ads] First configured for SDK auto preload.");
-            }
-        }
-
-        Debug.Log("[Ads] CoPreloadFirst FINISHED.");
-        _preloadCoroutine = null;
-    }
-
-    private IEnumerator CoShowFirst(RaccoonAdsManager mgr, Action onDone)
-    {
-        Debug.Log("[Ads] CoShowFirst START.");
-
-        float waited = 0f;
-        float nextLogTime = 0f;
-
-        while (waited < firstReadyTimeout)
-        {
-            if (mgr == null)
-            {
-                Debug.LogError("[Ads] Manager NULL while waiting First.");
-                break;
-            }
-
-            if (mgr.IsAdsRemoved)
-            {
-                Debug.Log("[Ads] Ads removed while waiting.");
-                break;
-            }
-
-            if (mgr.Initialized && mgr.AdsIsReady(firstAd))
-            {
-                Debug.Log($"[Ads] First READY after {waited:F2}s.");
-                break;
-            }
-
-            if (waited >= nextLogTime)
-            {
-                Debug.Log($"[Ads] Waiting First... SDK={mgr.Initialized}, Ready={(mgr.Initialized && mgr.AdsIsReady(firstAd))}, Waited={waited:F1}s");
-                nextLogTime += 2f;
-            }
-
-            waited += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        bool isReady = mgr != null && mgr.Initialized && !mgr.IsAdsRemoved && mgr.AdsIsReady(firstAd);
-        Debug.Log($"[Ads] First final ready: {isReady}");
-        Debug.Log($"[Ads] First waited: {waited:F2}s");
-
-        if (!isReady)
-        {
-            Debug.LogWarning("[Ads] First NOT READY. Skip.");
-            FinishFirst(onDone);
-            yield break;
-        }
-
-        Debug.Log($"[Ads] SHOW FIRST AD: {firstAd}");
-
-        _isShowing = true;
-
-        bool done = false;
-        bool showResult = false;
-
-        try
-        {
-            mgr.ShowAdUntilLoaded(firstAd, false, success =>
-            {
-                Debug.Log($"[Ads] First callback: {success}");
-                showResult = success;
-                done = true;
-            });
-        }
-        catch (Exception ex)
-        {
-            Debug.LogException(ex);
-            done = true;
-        }
-
-        float showWaited = 0f;
-
-        while (!done && showWaited < showTimeout)
-        {
-            showWaited += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        if (!done) Debug.LogWarning("[Ads] First SHOW TIMEOUT!");
-        else Debug.Log($"[Ads] First show result: {showResult}");
-
-        _isShowing = false;
-        FinishFirst(onDone);
-    }
-
-    private void FinishFirst(Action onDone)
-    {
-        if (_firstFinished) return;
-
-        _firstFinished = true;
-        _firstRequested = false;
-        _isShowing = false;
-
-        Debug.Log("[Ads] CoShowFirst FINISHED.");
-        onDone?.Invoke();
-    }
-
-#endif
 
     #endregion
 
@@ -382,6 +164,87 @@ public class AdsController : MonoBehaviour
             else onFailed?.Invoke();
         });
     }
+
+    #endregion
+
+    #region RESUME AD
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused)
+        {
+            // Pause do chính ad overlay / loading gây ra -> không tính là player thoát app
+            _wasBackgrounded = !(_isShowing || _resumeLoading || IsGateShowing());
+            return;
+        }
+
+        // Player quay lại app
+        if (!_wasBackgrounded) return;
+        _wasBackgrounded = false;
+
+        if (!_gameplayStarted) return;
+        if (_resumeRoutine != null) return;
+        if (CanShowResumeAd != null && !CanShowResumeAd()) return;
+
+        _resumeRoutine = StartCoroutine(CoShowResumeAd());
+    }
+
+    private IEnumerator CoShowResumeAd()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+
+#if ENABLE_RACCOON_ADMOB
+        var mgr = RaccoonAdsManager.Instance;
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        {
+            _resumeRoutine = null;
+            yield break;
+        }
+
+        // Ad chưa sẵn sàng -> không hiện loading, preload cho lần sau
+        if (!mgr.AdsIsReady(resumeAd))
+        {
+            Debug.Log("[Ads] Resume ad not ready. Preload.");
+            mgr.PreloadAdsWaitShow(resumeAd);
+            _resumeRoutine = null;
+            yield break;
+        }
+#endif
+
+        SetResumeLoading(true);
+
+        Debug.Log("[Ads] Show resume ad.");
+        TryShow(resumeAd, shown =>
+        {
+            Debug.Log($"[Ads] Resume Ad Result: {shown}");
+            if (shown) _interTimer = 0f; // tránh inter hiện ngay sau resume ad
+            SetResumeLoading(false);
+            _resumeRoutine = null;
+        });
+    }
+
+    private void SetResumeLoading(bool show)
+    {
+        if (show == _resumeLoading) return;
+        _resumeLoading = show;
+
+        if (resumeLoadingPanel) resumeLoadingPanel.SetActive(show);
+
+        // Đứng game trong lúc loading + ad để không bị mất thời gian / thua
+        if (show)
+        {
+            _prevTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = _prevTimeScale;
+        }
+    }
+
+    #endregion
+
+    #region CORE
 
     private void TryShow(AD_TYPE type, Action<bool> onDone)
     {

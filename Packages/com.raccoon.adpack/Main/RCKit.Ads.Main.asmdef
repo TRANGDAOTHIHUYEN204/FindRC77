@@ -8,7 +8,8 @@
         "RCKit.Ads.Appsflyer",
         "RCKit.Ads.UnityAds",
         "RCKit.Ads.TikTok",
-        "Unity.Advertisement.IosSupport"
+        "Unity.Advertisement.IosSupport",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

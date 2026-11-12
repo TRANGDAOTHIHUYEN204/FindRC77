@@ -10,9 +10,6 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private TextMeshProUGUI numberLevelText;
 
     [SerializeField] private Button playButton;
-    [SerializeField] private Image playButtonImage;
-    [SerializeField] private Sprite completedSprite;
-    [SerializeField] private string nameGame;
     [SerializeField] private TMP_Text playButtonText;
 
     private void Start()
@@ -26,13 +23,11 @@ public class MenuHome : MonoBehaviour
         if (SaveMiniGame.AllCompleted)
         {
             playButton.interactable = false;
-            playButtonImage.sprite = completedSprite;
             playButtonText.text = "Completed";
         }
         else
         {
             playButton.interactable = true;
-            playButtonText.text = nameGame;
         }
     }
 

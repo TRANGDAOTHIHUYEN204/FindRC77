@@ -51,7 +51,11 @@ public class StateGame : MonoBehaviour
     private void Start()
     {
         SetText();
+        if (AdsController.Instance != null)
+            AdsController.Instance.CanShowResumeAd = () => !levelManager.IsTutorial;
     }
+
+    
     public void BeginWin()
     {
         if (State != GameState.Playing) return;
@@ -248,13 +252,11 @@ public class StateGame : MonoBehaviour
             anim.Close(() => panel.SetActive(false));
         }
     }
-    private void OnApplicationPause(bool paused)
-    {
-        if (paused && !levelManager.IsTutorial) PauseGame();
-    }
 
     private void OnDestroy()
     {
         Time.timeScale = 1f;
+        if (AdsController.Instance != null)
+            AdsController.Instance.CanShowResumeAd = null;
     }
 }
