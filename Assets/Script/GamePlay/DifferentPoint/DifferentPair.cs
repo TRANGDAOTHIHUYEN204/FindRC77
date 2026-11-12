@@ -20,8 +20,8 @@ public class DifferentPair : MonoBehaviour
     public void SetShape(ShapeMark shape) => _shape = shape;
     private Vector2 _markCenter;
     private bool _hasMarkCenter;
-    private bool _hasCustomRadius;  
-    private float _markRadius;       
+    private bool _hasCustomRadius;
+    private float _markRadius;
 
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
@@ -61,6 +61,10 @@ public class DifferentPair : MonoBehaviour
     {
         if (IsFound) return false;
         IsFound = true;
+
+        // Tắt box collider của cả 2 point khi đã tìm thấy
+        if (pointA != null) pointA.SetColliderEnabled(false);
+        if (pointB != null) pointB.SetColliderEnabled(false);
         return true;
     }
 
@@ -111,9 +115,14 @@ public class DifferentPair : MonoBehaviour
         radiusWorld = Mathf.Abs(v.x);
         return radiusWorld > 0.0001f;
     }
+
     public void ResetFound()
     {
         IsFound = false;
-        HideOutline(0f);  
+        
+        if (pointA != null) pointA.SetColliderEnabled(true);
+        if (pointB != null) pointB.SetColliderEnabled(true);
+
+        HideOutline(0f);
     }
 }

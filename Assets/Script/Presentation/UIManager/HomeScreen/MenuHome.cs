@@ -11,11 +11,20 @@ public class MenuHome : MonoBehaviour
 
     [SerializeField] private Button playButton;
     [SerializeField] private TMP_Text playButtonText;
+    [SerializeField] private GameObject cafeTimePanel;
+    [SerializeField] private float cafeTimeDuration = 1.5f;
+
+    private bool _isStarting;
+    [SerializeField] private float adTimeout = 20f;
 
     private void Start()
     {
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
         RefreshPlayButton();
+
+        if (cafeTimePanel) cafeTimePanel.SetActive(false);
+        if (AdsController.Instance != null)
+            AdsController.Instance.PreloadSecond();
     }
 
     private void RefreshPlayButton()
@@ -31,21 +40,55 @@ public class MenuHome : MonoBehaviour
         }
     }
 
+    private IEnumerator GamePlay(string sceneName)
+    {
+        var op = SceneManager.LoadSceneAsync(sceneName);
+        op.allowSceneActivation = false;
+
+        var ads = AdsController.Instance;
+        if (ads != null && ads.ConsumeFirstStart())
+        {
+            bool done = false;
+            ads.RequestSecond(() => done = true);
+
+            float t = 0f;
+            while (!done && t < adTimeout)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+
+        op.allowSceneActivation = true;
+    }
+    
     public void JoinFindHidden(string sceneName)
     {
         if (SaveMiniGame.AllCompleted) return;
-        StartCoroutine(GamePlay(sceneName));
+        StartGame(sceneName, false);
     }
 
-    public void JoinGamePlay(string screenName)
+    public void JoinGamePlay(string sceneName)
     {
-        StartCoroutine(GamePlay(screenName));
+        StartGame(sceneName, true);
     }
 
-    private IEnumerator GamePlay(string screenName)
+    private void StartGame(string sceneName, bool isGamePlay)
+    {
+        if (_isStarting) return;
+
+        _isStarting = true;
+
+        if (isGamePlay)
+            StartCoroutine(GamePlay(sceneName));
+        else
+            StartCoroutine(EventGame(sceneName));
+    }
+
+    private IEnumerator EventGame(string sceneName)
     {
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadScene(screenName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void OpenSetting()

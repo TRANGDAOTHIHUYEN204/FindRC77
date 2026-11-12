@@ -37,6 +37,9 @@ public class TutorialController : MonoBehaviour
     {
         yield return null;
         if (!levelManager.IsTutorial) yield break;
+        SaveGame.TutorialCompleted = true;
+        PlayerPrefs.Save();
+
         yield return new WaitUntil(() => pairManagerHolder.Manager != null);
 
         IsRunning = true;
@@ -79,7 +82,7 @@ public class TutorialController : MonoBehaviour
 
         if (completed)
         {
-            SaveGame.TutorialCompleted = true;
+            SaveGame.TutorialCompleted = true; 
             PlayerPrefs.Save();
         }
         else

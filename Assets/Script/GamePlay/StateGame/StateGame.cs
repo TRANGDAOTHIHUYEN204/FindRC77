@@ -37,11 +37,14 @@ public class StateGame : MonoBehaviour
     [SerializeField] private MarkPresenter markPresenter;
     [SerializeField] private DifferentPairManagerHolder pairHolder;
     [SerializeField] private TextMeshProUGUI winTutorialText;
-    [SerializeField] private TextMeshProUGUI winTutorialLevelText; 
+    [SerializeField] private TextMeshProUGUI winTutorialLevelText;
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private DifferentClickHandler clickHandler;
     [SerializeField] private GamePlayImage gamePlay;
+    [SerializeField] private SpawnChallengeNode challengeNodes;
+
     public bool IsWinning { get; private set; }
+
     private void Awake()
     {
         Instance = this;
@@ -51,11 +54,8 @@ public class StateGame : MonoBehaviour
     private void Start()
     {
         SetText();
-        if (AdsController.Instance != null)
-            AdsController.Instance.CanShowResumeAd = () => !levelManager.IsTutorial;
     }
 
-    
     public void BeginWin()
     {
         if (State != GameState.Playing) return;
@@ -64,7 +64,7 @@ public class StateGame : MonoBehaviour
 
     public void Init(float timeLimit)
     {
-        IsWinning = false;     
+        IsWinning = false;
         TimeLimit = timeLimit;
         TimeLeft = timeLimit;
         State = GameState.Playing;
@@ -77,7 +77,12 @@ public class StateGame : MonoBehaviour
         _levelLabel = GetLevelLabel();
         SetText();
         UpdateTimeText();
+        if (!levelManager.IsTutorial && AdsController.Instance != null)
+        {
+            AdsController.Instance.OnFirstGameplayStarted();
+        }
     }
+
     public void WinTutorial(string textWin)
     {
         if (State != GameState.Playing) return;
@@ -86,11 +91,12 @@ public class StateGame : MonoBehaviour
         if (winTutorialText) winTutorialText.text = textWin;
         Time.timeScale = 0f;
     }
-    
+
     public void WinGame(string textWin)
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
+        levelManager.CommitProgress(); 
         SetPanels(false, true, false, false);
         winText.text = textWin;
         Time.timeScale = 0f;
@@ -117,7 +123,7 @@ public class StateGame : MonoBehaviour
     private void Update()
     {
         if (State != GameState.Playing) return;
-        if (IsWinning) return;        
+        if (IsWinning) return;
         if (levelManager.IsTutorial) return;
         TimeLeft -= Time.deltaTime;
 
@@ -150,7 +156,7 @@ public class StateGame : MonoBehaviour
         _lastShownSecond = sec;
         currentTimeText.text = $"{sec / 60}:{sec % 60:00}";
     }
-    
+
     public void PauseGame()
     {
         if (State != GameState.Playing || IsWinning) return;
@@ -159,21 +165,29 @@ public class StateGame : MonoBehaviour
         SetPanels(true, false, false, false);
         Time.timeScale = 0f;
     }
-    [SerializeField] private SpawnChallengeNode challengeNodes;
 
     public void ResetGame()
     {
         Time.timeScale = 1f;
 
-        clickHandler.OnResetBegin(); 
-        markPresenter.ClearMarks();       
+        clickHandler.OnResetBegin();
+        markPresenter.ClearMarks();
         pairHolder.Rebuild();
         heartManager.ResetLives();
-        challengeNodes.ResetNodes();      
+        challengeNodes.ResetNodes();
         if (hintPresenter) hintPresenter.ResetForLevel();
         gamePlay.ResetPlay();
         Init(levelManager.TimeLimit);
-        clickHandler.OnResetEnd();       
+        clickHandler.OnResetEnd();
+    }
+
+    public void CloseWinPopup()
+    {
+        if (State != GameState.Won) return;
+
+        levelManager.CommitProgress(); 
+        Time.timeScale = 1f;
+        levelManager.LoadNextLevel();
     }
 
     public void ResumeGame()
@@ -200,11 +214,11 @@ public class StateGame : MonoBehaviour
             (losePanel, lose),
             (winTutorial, winTutorialLevel),
         };
-        
+
         foreach (var e in entries)
         {
             if (e.show || !e.go) continue;
-            
+
             bool conflict = false;
             foreach (var o in entries)
             {
@@ -256,7 +270,8 @@ public class StateGame : MonoBehaviour
     private void OnDestroy()
     {
         Time.timeScale = 1f;
-        if (AdsController.Instance != null)
-            AdsController.Instance.CanShowResumeAd = null;
+
+        if (Instance == this)
+            Instance = null;
     }
 }

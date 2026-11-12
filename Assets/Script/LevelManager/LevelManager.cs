@@ -4,7 +4,7 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] levels;
-    [SerializeField] private LevelData tutorialLevel; 
+    [SerializeField] private LevelData tutorialLevel;
 
     private int _currentIndex;
     private LevelData _levelData;
@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
     public int CountLevel => levels.Length;
     public bool IsLastLevel => !IsTutorial && CurrentIndex >= levels.Length - 1;
     public event Action OnLevelReset;
+
     private void Start()
     {
         if (tutorialLevel != null && !SaveGame.TutorialCompleted)
@@ -32,20 +33,19 @@ public class LevelManager : MonoBehaviour
         else
             LoadLevel(SaveGame.CurrentLevel);
     }
+    
     public void MarkWin()
     {
         LastWinWasTutorial = IsTutorial;
-        _completed = true;          
+        _completed = true;
     }
-
-
-    private void CommitProgress()
+    public void CommitProgress()
     {
         if (!_completed || IsTutorial) return;
         int next = Mathf.Min(_currentIndex + 1, levels.Length - 1);
         SaveGame.CurrentLevel = Mathf.Max(SaveGame.CurrentLevel, next);
     }
-    
+
     public void LoadNextLevel()
     {
         CommitProgress();
@@ -61,12 +61,12 @@ public class LevelManager : MonoBehaviour
         OnLevelLoaded?.Invoke(_levelData);
     }
 
-
     public void ResetLevel()
     {
         _completed = false;
         OnLevelReset?.Invoke();
     }
+
     public void LoadLevel(int index)
     {
         if (levels == null || levels.Length == 0) return;
@@ -81,10 +81,8 @@ public class LevelManager : MonoBehaviour
     {
         if (_completed) return;
         _completed = true;
-        if (IsTutorial) return;   
-        SaveGame.CurrentLevel = Mathf.Min(_currentIndex + 1, levels.Length - 1) ;
+        CommitProgress();
     }
-    
 
     public void ReloadLevel()
     {

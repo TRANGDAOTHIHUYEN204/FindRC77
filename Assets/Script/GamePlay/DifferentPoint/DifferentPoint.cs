@@ -28,6 +28,7 @@ public class DifferentPoint : MonoBehaviour
 
         boxCollider.offset = Vector2.zero;
         boxCollider.size = size;
+        boxCollider.enabled = true;   // bật lại collider khi init
 
         if (outline != null)
         {
@@ -39,7 +40,7 @@ public class DifferentPoint : MonoBehaviour
             rt.sizeDelta = Vector2.zero;
             rt.localScale = Vector3.one;
             rt.localRotation = Quaternion.identity;
-            rt.SetAsLastSibling(); 
+            rt.SetAsLastSibling();
 
             outline.Clear();
         }
@@ -48,6 +49,11 @@ public class DifferentPoint : MonoBehaviour
     private void OnDestroy()
     {
         if (outline != null) Destroy(outline.gameObject);
+    }
+
+    public void SetColliderEnabled(bool enabled)
+    {
+        if (boxCollider != null) boxCollider.enabled = enabled;
     }
 
     public bool IsHit(Vector2 screenPoint, Camera cam)

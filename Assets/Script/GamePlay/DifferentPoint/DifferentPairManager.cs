@@ -25,25 +25,29 @@ public class DifferentPairManager
             entries.Add(new Entry { Pair = pairs[i], Mark = mark });
         }
     }
-    private Entry FindOwner(Vector2 screenPoint, Camera cam)
-    {
-        for (int i = 0; i < entries.Count; i++)
-            if (entries[i].Pair.ContainsPoint(screenPoint, cam)) return entries[i];
-        return null;
-    }
-
+    
     public Entry FindRemaining(Vector2 screenPoint, Camera cam)
     {
-        Entry owner = FindOwner(screenPoint, cam);
-        return (owner != null && !owner.Pair.IsFound) ? owner : null;
-    }
-
-    public bool IsInFoundArea(Vector2 screenPoint, Camera cam)
-    {
-        Entry owner = FindOwner(screenPoint, cam);
-        return owner != null && owner.Pair.IsFound;
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var pair = entries[i].Pair;
+            if (pair.IsFound) continue;
+            if (pair.ContainsPoint(screenPoint, cam)) return entries[i];
+        }
+        return null;
     }
     
+    public bool IsInFoundArea(Vector2 screenPoint, Camera cam)
+    {
+        if (FindRemaining(screenPoint, cam) != null) return false;
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var pair = entries[i].Pair;
+            if (pair.IsFound && pair.ContainsPoint(screenPoint, cam)) return true;
+        }
+        return false;
+    }
     public bool MarkFound(Entry entry)
     {
         if (entry == null || !entry.Pair.MarkFound()) return false;
