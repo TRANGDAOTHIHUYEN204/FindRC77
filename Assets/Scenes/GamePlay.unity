@@ -4055,7 +4055,7 @@ MonoBehaviour:
   stateGame: {fileID: 2088011103}
   spotlight: {fileID: 1301881757}
   factory: {fileID: 987585498}
-  hintPerLevel: 10
+  hintPerLevel: 1
 --- !u!224 &1301881756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7380,5 +7380,5 @@ SceneRoots:
   - {fileID: 1934019890}
   - {fileID: 879632246}
   - {fileID: 1301881756}
-  - {fileID: 786714006}
   - {fileID: 1551937417}
+  - {fileID: 786714006}

@@ -1164,9 +1164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AdsController
   secondAd: 0
   interAd: 0
-  rewardAd: 0
+  rewardAd: 50
   interCooldown: 60
   showTimeout: 30
+  rewardShowTimeout: 120
   resumeAd: 30
   resumeLoadingPanel: {fileID: 353312553}
 --- !u!4 &1956718200

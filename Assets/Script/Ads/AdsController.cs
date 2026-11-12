@@ -13,13 +13,11 @@ public class AdsController : MonoBehaviour
 
     [SerializeField] private float interCooldown = 60f;
     [SerializeField] private float showTimeout = 30f;
-
-    [Header("Resume Ad (ẩn app rồi vào lại)")]
+    [Tooltip("Timeout riêng cho rewarded ad (dài hơn vì gồm cả thời gian loading gate + người chơi xem hết video)")]
+    [SerializeField] private float rewardShowTimeout = 120f;
     [SerializeField] private AD_TYPE resumeAd;
     [Tooltip("Loading panel hiện trước ad, tắt sau khi ad đóng (nên là con của AdsController hoặc Canvas DontDestroyOnLoad, sorting cao nhất)")]
     [SerializeField] private GameObject resumeLoadingPanel;
-
-    /// <summary>StateGame set vào để chặn resume ad (vd: đang tutorial).</summary>
     public Func<bool> CanShowResumeAd;
 
     private float _interTimer;
@@ -67,6 +65,20 @@ public class AdsController : MonoBehaviour
         _gameplayStarted = true;
         _interTimer = 0f;
         Debug.Log("[Ads] First gameplay started. Inter timer = 0.");
+
+        PreloadReward();
+    }
+    
+    public void PreloadReward()
+    {
+#if ENABLE_RACCOON_ADMOB
+        var mgr = RaccoonAdsManager.Instance;
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved) return;
+        if (mgr.AdsIsReady(rewardAd)) return;
+
+        Debug.Log("[Ads] Preload reward ad.");
+        mgr.PreloadAdsWaitShow(rewardAd);
+#endif
     }
 
     #region SDK INIT
@@ -157,12 +169,26 @@ public class AdsController : MonoBehaviour
     {
         Debug.Log("[Ads] RequestReward CALLED.");
 
+#if ENABLE_RACCOON_ADMOB
+        var mgr = RaccoonAdsManager.Instance;
+        if (mgr != null && mgr.Initialized && mgr.IsAdsRemoved)
+        {
+            Debug.Log("[Ads] Ads removed -> grant reward directly.");
+            onRewarded?.Invoke();
+            return;
+        }
+#endif
+
         TryShow(rewardAd, ok =>
         {
             Debug.Log($"[Ads] Reward Ad Result: {ok}");
+
             if (ok) onRewarded?.Invoke();
             else onFailed?.Invoke();
-        });
+
+            // Load sẵn ad cho lần sau
+            PreloadReward();
+        }, rewardShowTimeout, allowLoad: true);
     }
 
     #endregion
@@ -173,12 +199,10 @@ public class AdsController : MonoBehaviour
     {
         if (paused)
         {
-            // Pause do chính ad overlay / loading gây ra -> không tính là player thoát app
             _wasBackgrounded = !(_isShowing || _resumeLoading || IsGateShowing());
             return;
         }
 
-        // Player quay lại app
         if (!_wasBackgrounded) return;
         _wasBackgrounded = false;
 
@@ -200,8 +224,6 @@ public class AdsController : MonoBehaviour
             _resumeRoutine = null;
             yield break;
         }
-
-        // Ad chưa sẵn sàng -> không hiện loading, preload cho lần sau
         if (!mgr.AdsIsReady(resumeAd))
         {
             Debug.Log("[Ads] Resume ad not ready. Preload.");
@@ -229,8 +251,7 @@ public class AdsController : MonoBehaviour
         _resumeLoading = show;
 
         if (resumeLoadingPanel) resumeLoadingPanel.SetActive(show);
-
-        // Đứng game trong lúc loading + ad để không bị mất thời gian / thua
+        
         if (show)
         {
             _prevTimeScale = Time.timeScale;
@@ -245,8 +266,8 @@ public class AdsController : MonoBehaviour
     #endregion
 
     #region CORE
-
-    private void TryShow(AD_TYPE type, Action<bool> onDone)
+    
+    private void TryShow(AD_TYPE type, Action<bool> onDone, float timeout = -1f, bool allowLoad = false)
     {
         Debug.Log($"[Ads] TryShow CALLED: {type}");
 
@@ -290,10 +311,15 @@ public class AdsController : MonoBehaviour
 
         if (!mgr.AdsIsReady(type))
         {
-            Debug.LogWarning($"[Ads] Ad NOT READY: {type}");
-            mgr.PreloadAdsWaitShow(type);
-            onDone?.Invoke(false);
-            return;
+            if (!allowLoad)
+            {
+                Debug.LogWarning($"[Ads] Ad NOT READY: {type}");
+                mgr.PreloadAdsWaitShow(type);
+                onDone?.Invoke(false);
+                return;
+            }
+
+            Debug.Log($"[Ads] Ad not ready, let AdLoadingGate load: {type}");
         }
 
         Debug.Log($"[Ads] SHOW AD: {type}");
@@ -316,7 +342,10 @@ public class AdsController : MonoBehaviour
         try
         {
             mgr.ShowAd(type, Finish);
-            StartCoroutine(CoWatchdog(() => finished, () => Finish(false)));
+            StartCoroutine(CoWatchdog(
+                () => finished,
+                () => Finish(false),
+                timeout > 0f ? timeout : showTimeout));
         }
         catch (Exception ex)
         {
@@ -340,11 +369,11 @@ public class AdsController : MonoBehaviour
 #endif
     }
 
-    private IEnumerator CoWatchdog(Func<bool> isDone, Action onTimeout)
+    private IEnumerator CoWatchdog(Func<bool> isDone, Action onTimeout, float timeout)
     {
         float t = 0f;
 
-        while (!isDone() && t < showTimeout)
+        while (!isDone() && t < timeout)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
