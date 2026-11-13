@@ -18,6 +18,11 @@ public class ButtonAdsController : MonoBehaviour
         _button.onClick.AddListener(OnClick);
     }
 
+    private void OnEnable()
+    {
+        _processing = false;
+    }
+
     private void OnClick()
     {
         if (_processing) return;

@@ -11,18 +11,14 @@ public class MenuHome : MonoBehaviour
 
     [SerializeField] private Button playButton;
     [SerializeField] private TMP_Text playButtonText;
-    [SerializeField] private GameObject cafeTimePanel;
-    [SerializeField] private float cafeTimeDuration = 1.5f;
 
     private bool _isStarting;
-    [SerializeField] private float adTimeout = 20f;
 
     private void Start()
     {
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
         RefreshPlayButton();
 
-        if (cafeTimePanel) cafeTimePanel.SetActive(false);
         if (AdsController.Instance != null)
             AdsController.Instance.PreloadSecond();
     }
@@ -40,28 +36,26 @@ public class MenuHome : MonoBehaviour
         }
     }
 
-    private IEnumerator GamePlay(string sceneName)
+    private IEnumerator GamePlay(string sceneName, bool showSecond)
     {
         var op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
 
         var ads = AdsController.Instance;
-        if (ads != null && ads.ConsumeFirstStart())
+
+        if (showSecond && ads != null)
         {
             bool done = false;
+
             ads.RequestSecond(() => done = true);
 
-            float t = 0f;
-            while (!done && t < adTimeout)
-            {
-                t += Time.unscaledDeltaTime;
+            while (!done)
                 yield return null;
-            }
         }
 
         op.allowSceneActivation = true;
     }
-    
+
     public void JoinFindHidden(string sceneName)
     {
         if (SaveMiniGame.AllCompleted) return;
@@ -80,9 +74,20 @@ public class MenuHome : MonoBehaviour
         _isStarting = true;
 
         if (isGamePlay)
-            StartCoroutine(GamePlay(sceneName));
+        {
+            var ads = AdsController.Instance;
+
+            bool showSecond =
+                SaveGame.TutorialCompleted &&
+                ads != null &&
+                ads.ConsumeFirstStart();
+
+            StartCoroutine(GamePlay(sceneName, showSecond));
+        }
         else
+        {
             StartCoroutine(EventGame(sceneName));
+        }
     }
 
     private IEnumerator EventGame(string sceneName)

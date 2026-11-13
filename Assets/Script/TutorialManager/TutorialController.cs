@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour
 {
@@ -8,25 +7,29 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
-    [SerializeField] private string homeSceneName = "HomeScene";
 
     [SerializeField, Min(0f)] private float delayBetweenHints = 0.6f;
     [SerializeField] private GameObject[] hideDuringTutorial;
-    [SerializeField, Min(0f)] private float delayBeforeHome = 1f;
     [SerializeField, Min(1)] private int maxHints = 3;
 
     public bool IsRunning { get; private set; }
 
     private bool _quitting;
+    private System.Func<bool> _blockAdsFunc;
 
     private void OnEnable()
     {
         if (levelManager != null)
             levelManager.OnLevelLoaded += OnLevelLoaded;
+
+        // Chặn inter ad trong lúc tutorial đang chạy
+        _blockAdsFunc = () => IsRunning;
+        if (AdsController.Instance != null)
+            AdsController.Instance.IsBlocked = _blockAdsFunc;
     }
 
     private void Start() => StartCoroutine(RunTutorial());
-    
+
     private void OnLevelLoaded(LevelData data)
     {
         if (!levelManager.IsTutorial)
@@ -37,10 +40,11 @@ public class TutorialController : MonoBehaviour
     {
         yield return null;
         if (!levelManager.IsTutorial) yield break;
+        
+        yield return new WaitUntil(() => pairManagerHolder.Manager != null);
+
         SaveGame.TutorialCompleted = true;
         PlayerPrefs.Save();
-
-        yield return new WaitUntil(() => pairManagerHolder.Manager != null);
 
         IsRunning = true;
         SetUIVisible(false);
@@ -80,15 +84,8 @@ public class TutorialController : MonoBehaviour
 
         if (hintPresenter != null) hintPresenter.ClearHint();
 
-        if (completed)
-        {
-            SaveGame.TutorialCompleted = true; 
-            PlayerPrefs.Save();
-        }
-        else
-        {
+        if (!completed)
             SetUIVisible(true);
-        }
     }
 
     private void SetUIVisible(bool visible)
@@ -103,6 +100,10 @@ public class TutorialController : MonoBehaviour
     {
         if (levelManager != null)
             levelManager.OnLevelLoaded -= OnLevelLoaded;
+
+        var ads = AdsController.Instance;
+        if (ads != null && ads.IsBlocked == _blockAdsFunc)
+            ads.IsBlocked = null;
 
         if (!IsRunning) return;
         IsRunning = false;

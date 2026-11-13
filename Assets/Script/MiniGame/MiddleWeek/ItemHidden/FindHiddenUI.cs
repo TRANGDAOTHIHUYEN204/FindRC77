@@ -19,13 +19,17 @@ public class FindHiddenUI : MonoBehaviour
     [SerializeField] private string sceneName = "HomeScene";
     [SerializeField] private ScrollRect[] scrollRects;
     [SerializeField] private TextMeshProUGUI numberFiddenHide;
+    [SerializeField] private TextMeshProUGUI textWinEvent;
+    [SerializeField] private Button doubleRewardButton;
 
     private bool _transitioning;
-    
+    private bool _adPending;
+    private bool _doubleClaimed;
+
     private readonly Dictionary<FindHiddenData, (int found, int total)> _progress = new();
     private int _foundTotal;
     private int _needTotal;
-
+    private int _currentLevel;
     private void OnEnable()
     {
         game.OnWin += ShowWin;
@@ -36,7 +40,84 @@ public class FindHiddenUI : MonoBehaviour
         HidePanels();
         SetScrollEnabled(true);
     }
+    private void OnLevelLoaded(int level)
+    {
+        _currentLevel = level;
+        background.sprite = levelSpawner.BackgroundImage;
+        UpdateLevelText();
 
+        RecalculateProgress();
+        UpdateProgressText();
+
+        RefreshDoubleButton();
+        HidePanels();
+        SetScrollEnabled(true);
+    }
+
+    private void ShowWin()
+    {
+        HidePanels();
+        SetScrollEnabled(false);
+
+        Debug.Log($"[Event] Before reward: {SaveGame.HintBalance}");
+
+        bool claimed = SaveGame.TryClaimFindHiddenWin(_currentLevel);
+
+        Debug.Log(
+            $"[Event] Claimed: {claimed}, After reward: {SaveGame.HintBalance}"
+        );
+
+        RefreshDoubleButton();
+        SetPanel(winPanel, true);
+
+        Haptics.Light();
+    }
+
+    public void OnDoubleRewardClicked()
+    {
+        if (_adPending || SaveGame.IsFindHiddenDoubleClaimed(_currentLevel)) return;
+
+        var ads = AdsController.Instance;
+        if (ads == null)
+        {
+            Debug.LogWarning("[FindHidden] AdsController null.");
+            return;
+        }
+
+        int level = _currentLevel;
+        _adPending = true;
+        SetDoubleButtonInteractable(false);
+
+        ads.RequestReward(
+            onRewarded: () =>
+            {
+                if (this == null) return;
+                _adPending = false;
+
+                if (SaveGame.TryClaimFindHiddenDouble(level))
+                    Debug.Log($"[FindHidden] Double reward level {level} | +1 hint");
+
+                RefreshDoubleButton();
+            },
+            onFailed: () =>
+            {
+                if (this == null) return;
+                _adPending = false;
+                SetDoubleButtonInteractable(true);
+                Debug.Log("[FindHidden] Reward ad not ready / cancelled.");
+            });
+    }
+    
+    private void RefreshDoubleButton()
+    {
+        if (doubleRewardButton == null) return;
+
+        bool claimed = SaveGame.IsFindHiddenDoubleClaimed(_currentLevel);
+
+        doubleRewardButton.gameObject.SetActive(true);
+        doubleRewardButton.interactable = !claimed && !_adPending;
+    }
+    
     private void OnDisable()
     {
         game.OnWin -= ShowWin;
@@ -46,19 +127,7 @@ public class FindHiddenUI : MonoBehaviour
 
         SetScrollEnabled(true);
     }
-
-    private void OnLevelLoaded(int _)
-    {
-        background.sprite = levelSpawner.BackgroundImage;
-        UpdateLevelText();
-
-        RecalculateProgress();
-        UpdateProgressText();
-
-        HidePanels();
-        SetScrollEnabled(true);
-    }
-
+    
     private void OnTypeProgress(FindHiddenData data, int found, int total)
     {
         if (data == null) return;
@@ -100,16 +169,6 @@ public class FindHiddenUI : MonoBehaviour
             numberFiddenHide.text = $"{_foundTotal}/{_needTotal}";
     }
     
-
-    private void ShowWin()
-    {
-        HidePanels();
-        SetScrollEnabled(false);
-
-        SetPanel(winPanel, true);
-
-        Haptics.Light();
-    }
 
     private void HandleWrongClick()
     {
@@ -157,6 +216,26 @@ public class FindHiddenUI : MonoBehaviour
             game.StartGame(false);
         });
     }
+    
+    
+
+    private void SetDoubleButtonInteractable(bool value)
+    {
+        if (doubleRewardButton != null)
+            doubleRewardButton.interactable = value;
+    }
+
+    private void ResetDoubleReward()
+    {
+        _adPending = false;
+        _doubleClaimed = false;
+
+        if (doubleRewardButton != null)
+        {
+            doubleRewardButton.gameObject.SetActive(true);
+            doubleRewardButton.interactable = true;
+        }
+    }
 
     public void ShowPause()
     {
@@ -191,8 +270,7 @@ public class FindHiddenUI : MonoBehaviour
             return;
         }
 
-        PanelAnimation anim =
-            panel.GetComponentInChildren<PanelAnimation>(true);
+        PanelAnimation anim = panel.GetComponentInChildren<PanelAnimation>(true);
 
         if (anim == null)
         {
@@ -253,6 +331,8 @@ public class FindHiddenUI : MonoBehaviour
     private void UpdateLevelText()
     {
         if (textLevel != null)
-            textLevel.text = "Find Hidden Item";
+            textLevel.text = "Zoo tour completed!";
+        if (textWinEvent != null)
+            textWinEvent.text = "You have completed your zoo tour. Thanks for visiting our friendly animals!";
     }
 }

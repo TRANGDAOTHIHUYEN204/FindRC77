@@ -153,7 +153,9 @@ public class MiniGameManager : MonoBehaviour
         if (win)
         {
             FindHiddenSaveStore.Clear();
+
             bool isLastLevel = State.Level >= levelSpawner.LevelCount - 1;
+
             if (isLastLevel)
             {
                 SaveMiniGame.AllCompleted = true;
@@ -163,13 +165,14 @@ public class MiniGameManager : MonoBehaviour
             {
                 SaveMiniGame.CurrentLevel = State.Level + 1;
             }
-
-            if (SaveGame.TryClaimFindHiddenReward())
-                Debug.Log("[Game] WIN | Rewarded 1 hint");
         }
 
         yield return new WaitForSeconds(0.5f);
-        if (win) OnWin?.Invoke(); else OnLose?.Invoke();
+
+        if (win)
+            OnWin?.Invoke();
+        else
+            OnLose?.Invoke();
     }
 
     public void SaveProgress()

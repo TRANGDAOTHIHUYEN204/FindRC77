@@ -10,7 +10,47 @@ public static class SaveGame
     private const string KeyAllCompleted = "save_all_completed";
     private const string KeyHintBalance = "save_hint_balance";
     private const string KeyFindHiddenCompleted = "save_find_hidden_completed";
+    private const int MaxEventLevels = 1;
+    
+    
+    private static string WinKey(int level) => $"save_fh_win_{level}";
+    private static string DoubleKey(int level) => $"save_fh_double_{level}";
 
+    public static bool TryClaimFindHiddenWin(int level)
+    {
+        string key = WinKey(level);
+        if (PlayerPrefs.GetInt(key, 0) == 1) return false;
+
+        PlayerPrefs.SetInt(key, 1);
+        HintBalance += 1; 
+        return true;
+    }
+
+    public static bool IsFindHiddenDoubleClaimed(int level)
+        => PlayerPrefs.GetInt(DoubleKey(level), 0) == 1;
+
+    public static bool TryClaimFindHiddenDouble(int level)
+    {
+        string key = DoubleKey(level);
+        if (PlayerPrefs.GetInt(key, 0) == 1) return false;
+
+        PlayerPrefs.SetInt(key, 1);
+        HintBalance += 1;
+        return true;
+    }
+
+    public static void Reset()
+    {
+        PlayerPrefs.DeleteKey(KeyLevel);
+        PlayerPrefs.DeleteKey(KeyAllCompleted);
+        PlayerPrefs.DeleteKey(KeyHintBalance);
+        for (int i = 0; i < MaxEventLevels; i++)
+        {
+            PlayerPrefs.DeleteKey(WinKey(i));
+            PlayerPrefs.DeleteKey(DoubleKey(i));
+        }
+        PlayerPrefs.Save();
+    }
     public static bool AllCompleted
     {
         get => PlayerPrefs.GetInt(KeyAllCompleted, 0) == 1;
@@ -32,15 +72,6 @@ public static class SaveGame
         PlayerPrefs.SetInt(KeyHintBalance, HintBalance + 1);
         PlayerPrefs.Save();
         return true;
-    }
-
-    public static void Reset()
-    {
-        PlayerPrefs.DeleteKey(KeyLevel);
-        PlayerPrefs.DeleteKey(KeyAllCompleted);
-        PlayerPrefs.DeleteKey(KeyHintBalance);
-        PlayerPrefs.DeleteKey(KeyFindHiddenCompleted);
-        PlayerPrefs.Save();
     }
 
     public static bool TutorialShown

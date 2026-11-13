@@ -41,8 +41,7 @@ public class SpawnStarTrail : MonoBehaviour
 
             if (trail == null)
             {
-                Debug.LogError(
-                    "[SpawnStarTrail] Không tạo được StarTrail.", this);
+                Debug.LogError("[SpawnStarTrail] Không tạo được StarTrail.", this);
                 continue;
             }
 
@@ -58,10 +57,7 @@ public class SpawnStarTrail : MonoBehaviour
         }
     }
 
-    public bool Play(
-        RectTransform startPoint,
-        RectTransform endPoint,
-        Action onComplete)
+    public bool Play(RectTransform startPoint, RectTransform endPoint, Action onComplete)
     {
         if (startPoint == null || endPoint == null)
             return false;
@@ -96,12 +92,22 @@ public class SpawnStarTrail : MonoBehaviour
 
         return -1;
     }
+    public void ResetTrails()
+    {
+        if (_trails == null) return;
 
-    private void StartTrail(
-        int index,
-        RectTransform startPoint,
-        RectTransform endPoint,
-        Action onComplete)
+        for (int i = 0; i < _trails.Length; i++)
+        {
+            _callbacks[i] = null;
+            _isUsing[i] = false;
+
+            StarTrailEffect trail = _trails[i];
+            if (trail == null) continue;
+            trail.PrepareInactive();
+            trail.gameObject.SetActive(false);
+        }
+    }
+    private void StartTrail(int index, RectTransform startPoint, RectTransform endPoint, Action onComplete)
     {
         StarTrailEffect trail = _trails[index];
 

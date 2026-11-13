@@ -116,24 +116,6 @@ public class SpawnChallengeNode : MonoBehaviour
         if (visual != null)
             visual.anchoredPosition = Vector2.zero;
     }
-    public void ResetNodes()
-    {
-        _session++;         
-        _changedCount = 0;
-        _appliedCount = 0;   
-
-        StopAllCoroutines();  
-
-        for (int i = 0; i < nodes.Count; i++)
-        {
-            if (nodes[i] == null) continue;
-
-            if (nodes[i].Visual != null)
-                nodes[i].Visual.anchoredPosition = Vector2.zero;
-
-            nodes[i].ChangeSprite(sprite); 
-        }
-    }
     
     public void ChangeNext(Sprite spriteChange)
     {
@@ -174,8 +156,28 @@ public class SpawnChallengeNode : MonoBehaviour
         if (!played)
             Apply(node, spriteChange);
     }
+    
+    public void ResetNodes()
+    {
+        _session++;
+        _changedCount = 0;
+        _appliedCount = 0;
 
+        StopAllCoroutines();
+        if (spawnStarTrail != null)
+            spawnStarTrail.ResetTrails();
 
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            if (nodes[i] == null) continue;
+
+            if (nodes[i].Visual != null)
+                nodes[i].Visual.anchoredPosition = Vector2.zero;
+
+            nodes[i].ChangeSprite(sprite);
+        }
+    }
+    
     public void Clear()
     {
         for (int i = nodes.Count - 1; i >= 0; i--)

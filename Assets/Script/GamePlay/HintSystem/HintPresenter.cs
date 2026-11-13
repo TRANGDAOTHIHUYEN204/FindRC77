@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class HintPresenter : MonoBehaviour
 {
+    private const int AdRewardHints = 2;
+
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private HintSpotlight spotlight;
@@ -15,7 +17,7 @@ public class HintPresenter : MonoBehaviour
     private bool _adPending;
 
     public DifferentPair HintedPair { get; private set; }
-    
+
     public int CountHint { get; private set; }
 
     public bool NeedAdForHint => CountHint <= 0;
@@ -23,8 +25,6 @@ public class HintPresenter : MonoBehaviour
     public event Action<int> OnHintChanged;
 
     private void Start() => ResetForLevel();
-
-    [ContextMenu("Reset Hint For Level")]
     public void ResetForLevel()
     {
         _levelHintsRemaining = hintPerLevel;
@@ -32,17 +32,15 @@ public class HintPresenter : MonoBehaviour
         ClearHint();
         RefreshCount();
     }
-    
+
     public void ShowHint()
     {
         if (!CanShowHint())
         {
-            Debug.Log($"[Hint] Blocked. playing={stateGame != null && stateGame.IsPlaying}, " +
-                      $"hinted={(HintedPair != null)}, found={(HintedPair != null && HintedPair.IsFound)}");
             return;
         }
 
-        Debug.Log($"[Hint] ShowHint. CountHint={CountHint}, level={_levelHintsRemaining}, balance={SaveGame.HintBalance}");
+        RefreshCount();
 
         if (CountHint > 0)
         {
@@ -54,12 +52,18 @@ public class HintPresenter : MonoBehaviour
     }
 
     public void ShowTutorialHint() => ShowInternal(consume: false, tutorial: true);
-
+    
     public void AddHint(int amount)
     {
         if (amount <= 0) return;
         SaveGame.HintBalance += amount;
         RefreshCount();
+    }
+    
+    public void ClaimMiniGameReward()
+    {
+        if (SaveGame.TryClaimFindHiddenReward())
+            RefreshCount();
     }
 
     public void ClearHint()
@@ -68,7 +72,6 @@ public class HintPresenter : MonoBehaviour
         if (spotlight != null) spotlight.Hide();
         ReleaseHands();
     }
-
 
     private void RequestHintByAd()
     {
@@ -85,7 +88,6 @@ public class HintPresenter : MonoBehaviour
             return;
         }
 
-        Debug.Log("[Hint] Hết hint -> request rewarded ad.");
         _adPending = true;
 
         ads.RequestReward(
@@ -93,11 +95,9 @@ public class HintPresenter : MonoBehaviour
             {
                 if (this == null) return;
                 _adPending = false;
+                
                 if (!ShowInternal(consume: false, tutorial: false))
-                {
-                    Debug.Log("[Hint] Không hiện được hint sau ad -> cộng bù 1 hint.");
-                    AddHint(1);
-                }
+                    Debug.Log("[Hint] Không hiện được hint sau khi xem ad.");
             },
             onFailed: () =>
             {
@@ -106,6 +106,7 @@ public class HintPresenter : MonoBehaviour
                 Debug.Log("[Hint] Ad chưa sẵn sàng / bị hủy.");
             });
     }
+
     private bool CanShowHint()
     {
         if (stateGame == null || !stateGame.IsPlaying) return false;
@@ -116,6 +117,7 @@ public class HintPresenter : MonoBehaviour
         if (HintedPair != null && !HintedPair.IsFound) return false;
         return true;
     }
+
     private bool ShowInternal(bool consume, bool tutorial)
     {
         if (!CanShowHint()) return false;
@@ -145,10 +147,14 @@ public class HintPresenter : MonoBehaviour
 
     private void ConsumeHint()
     {
-        if (_levelHintsRemaining > 0)
-            _levelHintsRemaining--;
-        else
+        if (SaveGame.HintBalance > 0)
+        {
             SaveGame.HintBalance--;
+        }
+        else if (_levelHintsRemaining > 0)
+        {
+            _levelHintsRemaining--;
+        }
 
         RefreshCount();
     }

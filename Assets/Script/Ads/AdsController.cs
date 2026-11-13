@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using RCKit.Ads.Main;
 
@@ -15,8 +16,12 @@ public class AdsController : MonoBehaviour
     [SerializeField] private GameObject resumeLoadingPanel;
     [SerializeField] private float showTimeout = 60f;
     [SerializeField] private float rewardShowTimeout = 120f;
+    [SerializeField] private float resumeGuardAfterAd = 3f;
+    [SerializeField] private float minGapBetweenAds = 5f;
 
     public Func<bool> CanShowResumeAd;
+
+    public Func<bool> IsBlocked;
 
     private float _interTimer;
     private bool _gameplayStarted;
@@ -31,6 +36,9 @@ public class AdsController : MonoBehaviour
     private bool _resumeLoading;
     private float _prevTimeScale = 1f;
     private Coroutine _resumeRoutine;
+    
+    private float _lastAdClosedTime = -999f;
+    private const float MinHardTimeout = 300f;
 
     public float InterTimer => _interTimer;
     public bool GameplayStarted => _gameplayStarted;
@@ -69,10 +77,12 @@ public class AdsController : MonoBehaviour
 
         if (_showingCount > 0 || _interPending)
             return;
+        if (IsBlocked != null && IsBlocked())
+            return;
 
         _interTimer += Time.unscaledDeltaTime;
     }
-    
+
     public void OnFirstGameplayStarted()
     {
         if (_gameplayStarted)
@@ -198,23 +208,28 @@ public class AdsController : MonoBehaviour
         mgr.PreloadAdsWaitShow(secondAd);
 #endif
     }
-    
+
     public bool ConsumeFirstStart()
     {
         if (_startPressed)
             return false;
 
-        bool can = CanShowSecond();
-        if (can) _startPressed = true;
+        _startPressed = true;
 
-        Debug.Log($"[Ads] First Start pressed. Can show second: {can}");
-        return can;
+        Debug.Log("[Ads] First Start level pressed.");
+
+        return true;
     }
 
     public bool CanShowSecond()
     {
 #if ENABLE_RACCOON_ADMOB
         if (_secondShown)
+            return false;
+        if (_showingCount > 0)
+            return false;
+
+        if (Time.unscaledTime - _lastAdClosedTime < minGapBetweenAds)
             return false;
 
         var mgr = RaccoonAdsManager.Instance;
@@ -239,23 +254,35 @@ public class AdsController : MonoBehaviour
             return;
         }
 
-        TryShow(secondAd, true, shown =>
+        if (_showingCount > 0)
         {
-            Debug.Log($"[Ads] Second Ad Result: {shown}");
-
-            if (shown)
-                _secondShown = true;
-
+            Debug.LogWarning("[Ads] Another ad is showing. Skip Second.");
             onContinue?.Invoke();
-        }, showTimeout);
+            return;
+        }
+
+        TryShow(
+            secondAd,
+            true,
+            shown =>
+            {
+                Debug.Log($"[Ads] Second Ad Result: {shown}");
+                onContinue?.Invoke();
+            },
+            showTimeout,
+            onStart: () => _secondShown = true);
     }
 
     public bool CanRequestInter()
     {
         if (!_gameplayStarted)
             return false;
-#if  TEST_FAST_INTERVAL_INTER
-          if (_interTimer < 10)
+        
+        if (IsBlocked != null && IsBlocked())
+            return false;
+
+#if TEST_FAST_INTERVAL_INTER
+        if (_interTimer < 10)
             return false;
 #else
         if (_interTimer < interCooldown)
@@ -282,7 +309,7 @@ public class AdsController : MonoBehaviour
 
         if (_interPending)
         {
-            Debug.LogWarning("[Ads] Inter already pending. Skip duplicate.");
+            Debug.LogWarning("[Ads] Inter already pending.");
             onContinue?.Invoke();
             return;
         }
@@ -298,28 +325,39 @@ public class AdsController : MonoBehaviour
 
         _interPending = true;
 
-        TryShow(interAd, true, shown =>
-        {
-            Debug.Log($"[Ads] Inter Ad Result: {shown}");
-
-            if (shown)
+        TryShow(
+            interAd,
+            true,
+            shown =>
             {
-                _interTimer = 0f;
-                Debug.Log("[Ads] Inter completed. Timer reset = 0.");
-            }
+                Debug.Log($"[Ads] Inter Ad Result: {shown}");
 
-            _interPending = false;
+                _interPending = false;
 
-            PreloadInter();
+                if (shown)
+                {
+                    _interTimer = 0f;
+                    Debug.Log("[Ads] Inter closed. Timer reset = 0.");
+                }
 
-            onContinue?.Invoke();
-        }, showTimeout);
+                PreloadInter();
+
+                onContinue?.Invoke();
+            },
+            showTimeout
+        );
     }
-    
 
     public void RequestReward(Action onRewarded, Action onFailed = null)
     {
         Debug.Log("[Ads] RequestReward CALLED.");
+
+        if (_showingCount > 0)
+        {
+            Debug.LogWarning("[Ads] Another ad is showing. Skip Reward.");
+            onFailed?.Invoke();
+            return;
+        }
 
         TryShow(rewardAd, false, ok =>
         {
@@ -352,6 +390,14 @@ public class AdsController : MonoBehaviour
         _wasBackgrounded = false;
 
         if (_resumeRoutine != null)
+            return;
+        if (Time.unscaledTime - _lastAdClosedTime < resumeGuardAfterAd)
+        {
+            Debug.Log("[Ads] Resume skipped: an ad just closed.");
+            return;
+        }
+
+        if (_showingCount > 0 || _interPending)
             return;
 
         if (CanShowResumeAd != null && !CanShowResumeAd())
@@ -416,13 +462,13 @@ public class AdsController : MonoBehaviour
             Time.timeScale = _prevTimeScale;
         }
     }
-    
 
     private void TryShow(
         AD_TYPE type,
         bool requireReady,
         Action<bool> onDone,
-        float timeout = 60f)
+        float timeout = 60f,
+        Action onStart = null)
     {
         Debug.Log($"[Ads] TryShow: {type}");
 
@@ -464,17 +510,21 @@ public class AdsController : MonoBehaviour
             }
 
             _showingCount = Mathf.Max(0, _showingCount - 1);
+            _lastAdClosedTime = Time.unscaledTime;
 
             Debug.Log($"[Ads] Show result: {type} = {ok}");
 
             onDone?.Invoke(ok);
         }
-        
-        if (timeout > 0f)
-            watchdog = StartCoroutine(CoWatchdog(timeout, type, () => Finish(false)));
+        float hardTimeout = timeout > 0f ? Mathf.Max(timeout, MinHardTimeout) : 0f;
+
+        if (hardTimeout > 0f)
+            watchdog = StartCoroutine(CoWatchdog(hardTimeout, type, () => finished, () => Finish(false)));
 
         try
         {
+            onStart?.Invoke();
+
             mgr.ShowAd(type, Finish);
         }
         catch (Exception ex)
@@ -487,10 +537,23 @@ public class AdsController : MonoBehaviour
         onDone?.Invoke(false);
 #endif
     }
-
-    private IEnumerator CoWatchdog(float seconds, AD_TYPE type, Action onTimeout)
+    
+    private IEnumerator CoWatchdog(float seconds, AD_TYPE type, Func<bool> isFinished, Action onTimeout)
     {
         yield return new WaitForSecondsRealtime(seconds);
+
+        while (!isFinished() && IsGateShowing())
+        {
+            Debug.Log($"[Ads] Watchdog: {type} still showing, keep waiting.");
+            yield return new WaitForSecondsRealtime(1f);
+        }
+
+        if (isFinished())
+            yield break;
+        yield return new WaitForSecondsRealtime(1f);
+
+        if (isFinished())
+            yield break;
 
         Debug.LogWarning($"[Ads] Watchdog timeout ({seconds}s): {type}. Force finish.");
         onTimeout?.Invoke();

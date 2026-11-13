@@ -100,13 +100,13 @@ MonoBehaviour:
   m_SamplingWidth: 1
   m_SamplingScale: 1
   m_TransitionFilter: 4
-  m_TransitionRate: 0
+  m_TransitionRate: 0.16888432
   m_TransitionReverse: 0
   m_TransitionTex: {fileID: 2800000, guid: 242ced0b0a24b475d9571071bb8e6b6a, type: 3}
   m_TransitionTexScale: {x: 1, y: 1}
   m_TransitionTexOffset: {x: 0, y: 0}
   m_TransitionTexSpeed: {x: 0, y: 0}
-  m_TransitionRotation: 0
+  m_TransitionRotation: 180
   m_TransitionKeepAspectRatio: 1
   m_TransitionWidth: 0.25
   m_TransitionSoftness: 0.5

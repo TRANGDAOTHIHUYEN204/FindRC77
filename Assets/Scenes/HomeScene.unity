@@ -3508,8 +3508,6 @@ MonoBehaviour:
   numberLevelText: {fileID: 3927028483542673051}
   playButton: {fileID: 1644671572}
   playButtonText: {fileID: 262320621}
-  cafeTimePanel: {fileID: 0}
-  cafeTimeDuration: 1.5
 --- !u!114 &1976955155
 MonoBehaviour:
   m_ObjectHideFlags: 0

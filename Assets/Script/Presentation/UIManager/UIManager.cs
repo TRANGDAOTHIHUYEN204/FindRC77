@@ -29,8 +29,9 @@ public class UIManager : MonoBehaviour
     private IEnumerator ReplayGame()
     {
         yield return new WaitForSecondsRealtime(0.5f);
-        Debug.Log("Load Scene");
-        leveManager.ReloadLevel();
+
+        Debug.Log("Reset Game");
+        StateGame.Instance.ResetGame();
     }
 
     private IEnumerator Continue()
