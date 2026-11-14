@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Char.Haptic;
-using MoreMountains.NiceVibrations;   
+using MoreMountains.NiceVibrations;
 
 public class GamePlayImage : MonoBehaviour
 {
@@ -20,13 +20,12 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private AudioClip winSound;
     [SerializeField] private MarkPresenter markPresenter;
     private LevelData _currentLevel;
-    [SerializeField] private float beforeBounceDelay = 0.2f;  
-    [SerializeField] private float bounceDuration = 0.8f;     
+    [SerializeField] private float beforeBounceDelay = 0.2f;
+    [SerializeField] private float bounceDuration = 0.8f;
     private bool _winStarted;
 
     private void Start()
     {
-        
         Screen.orientation = ScreenOrientation.Portrait;
     }
 
@@ -41,27 +40,28 @@ public class GamePlayImage : MonoBehaviour
         levelManager.OnLevelLoaded -= Build;
         spawnChallegeNode.OnAllChanged -= OnAllNodesChanged;
     }
+
     private void Build(LevelData level)
     {
-        StopAllCoroutines();     
+        StopAllCoroutines();
         _winStarted = false;
-        _currentLevel =  level;
+        _currentLevel = level;
         _isPlaying = false;
-        clickHandler.OnResetBegin();   
-        markPresenter.ClearMarks();    
-        clickHandler.OnResetEnd();  
+        clickHandler.OnResetBegin();
+        markPresenter.ClearMarks();
+        clickHandler.OnResetEnd();
         clickHandler.ResetLoseState();
-        hintPresenter.ResetForLevel();      
+        hintPresenter.ResetForLevel();
         factoryManager.ReleaseAll();
         heartManager.ReleaseHearts();
-        heartManager.ResetLives(); 
+        heartManager.ResetLives();
         levelImageView.ShowLevel(level);
         pairManagerHolder.Build(level, levelImageView.RootA, levelImageView.RootB);
         stateGame.Init(level.TimeLimit);
         spawnChallegeNode.Init(level.CountDifferent);
         _isPlaying = true;
-        
     }
+
     public void ResetPlay()
     {
         StopAllCoroutines();
@@ -77,7 +77,7 @@ public class GamePlayImage : MonoBehaviour
 
         if (clickHandler.HandleClick(inputManager.ClickScreenPosition))
         {
-            _isPlaying = false;    
+            _isPlaying = false;
             stateGame.BeginWin();
         }
     }
@@ -88,12 +88,13 @@ public class GamePlayImage : MonoBehaviour
         _winStarted = true;
         StartCoroutine(Win());
     }
+
     private IEnumerator Win()
     {
         _isPlaying = false;
 
         bool isTutorial = levelManager.IsTutorial;
-        string textWin  = levelManager.TextWin;
+        string textWin = levelManager.TextWin;
 
         if (!isTutorial)
         {
@@ -112,8 +113,18 @@ public class GamePlayImage : MonoBehaviour
         yield return new WaitForSeconds(bounceDuration);
 
         if (isTutorial)
+        {
+            Debug.Log("[Review] Win TUTORIAL in GamePlay -> mark pending");
+
+            if (GameReviewManager.Instance != null)
+                GameReviewManager.Instance.MarkTutorialCompleted();
+            else
+                Debug.LogWarning("[Review] Manager null at tutorial win");
+
             stateGame.WinTutorial(textWin);
-        else
-            stateGame.WinGame(textWin);
+            yield break;
+        }
+
+        stateGame.WinGame(textWin);
     }
 }

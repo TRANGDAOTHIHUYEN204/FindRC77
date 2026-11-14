@@ -23,6 +23,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:24.5.0' // Packages/com.google.ads.mobile/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml:7
     implementation 'com.google.android.gms:play-services-base:18.11.1' // Assets/Firebase/Editor/AppDependencies.xml:16
     implementation 'com.google.android.material:material:1.12.0' // Packages/com.raccoon.jnativeads/Editor/JNativeAdsDependencies.xml:4
+    implementation 'com.google.android.play:core-common:2.0.4' // Assets/GooglePlayPlugins/com.google.play.core/Editor/Dependencies.xml:3
+    implementation 'com.google.android.play:review:2.0.2' // Assets/GooglePlayPlugins/com.google.play.review/Editor/Dependencies.xml:3
     implementation 'com.google.android.ump:user-messaging-platform:3.2.0' // Packages/com.google.ads.mobile/GoogleMobileAds/Editor/GoogleUmpDependencies.xml:7
     implementation 'com.google.firebase:firebase-analytics:24.0.0' // Assets/Firebase/Editor/RemoteConfigDependencies.xml:14
     implementation 'com.google.firebase:firebase-analytics-unity:14.1.0' // Assets/Firebase/Editor/AnalyticsDependencies.xml:17

@@ -11,15 +11,10 @@ public class AdsController : MonoBehaviour
     [SerializeField] private AD_TYPE secondAd;
     [SerializeField] private AD_TYPE interAd;
     [SerializeField] private AD_TYPE rewardAd;
-    [SerializeField] private AD_TYPE resumeAd;
     [SerializeField] private float interCooldown = 60f;
-    [SerializeField] private GameObject resumeLoadingPanel;
     [SerializeField] private float showTimeout = 60f;
     [SerializeField] private float rewardShowTimeout = 120f;
-    [SerializeField] private float resumeGuardAfterAd = 3f;
     [SerializeField] private float minGapBetweenAds = 5f;
-
-    public Func<bool> CanShowResumeAd;
 
     public Func<bool> IsBlocked;
 
@@ -32,11 +27,6 @@ public class AdsController : MonoBehaviour
     private bool _interPending;
     private int _showingCount;
 
-    private bool _wasBackgrounded;
-    private bool _resumeLoading;
-    private float _prevTimeScale = 1f;
-    private Coroutine _resumeRoutine;
-    
     private float _lastAdClosedTime = -999f;
     private const float MinHardTimeout = 300f;
 
@@ -60,12 +50,6 @@ public class AdsController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_resumeRoutine != null)
-            StopCoroutine(_resumeRoutine);
-
-        if (_resumeLoading)
-            SetResumeLoading(false);
-
         if (Instance == this)
             Instance = null;
     }
@@ -370,97 +354,6 @@ public class AdsController : MonoBehaviour
 
             PreloadReward();
         }, rewardShowTimeout);
-    }
-
-    private void OnApplicationPause(bool paused)
-    {
-        if (paused)
-        {
-            _wasBackgrounded = !(
-                _showingCount > 0 ||
-                _resumeLoading ||
-                IsGateShowing()
-            );
-            return;
-        }
-
-        if (!_wasBackgrounded)
-            return;
-
-        _wasBackgrounded = false;
-
-        if (_resumeRoutine != null)
-            return;
-        if (Time.unscaledTime - _lastAdClosedTime < resumeGuardAfterAd)
-        {
-            Debug.Log("[Ads] Resume skipped: an ad just closed.");
-            return;
-        }
-
-        if (_showingCount > 0 || _interPending)
-            return;
-
-        if (CanShowResumeAd != null && !CanShowResumeAd())
-            return;
-
-        _resumeRoutine = StartCoroutine(CoShowResumeAd());
-    }
-
-    private IEnumerator CoShowResumeAd()
-    {
-        yield return new WaitForSecondsRealtime(0.1f);
-
-#if ENABLE_RACCOON_ADMOB
-        var mgr = RaccoonAdsManager.Instance;
-
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
-        {
-            _resumeRoutine = null;
-            yield break;
-        }
-
-        if (!mgr.AdsIsReady(resumeAd))
-        {
-            Debug.Log("[Ads] Resume ad not ready. Preload.");
-
-            mgr.PreloadAdsWaitShow(resumeAd);
-            _resumeRoutine = null;
-            yield break;
-        }
-#endif
-
-        SetResumeLoading(true);
-
-        Debug.Log("[Ads] Show Resume Ad.");
-
-        TryShow(resumeAd, true, shown =>
-        {
-            Debug.Log($"[Ads] Resume Ad Result: {shown}");
-
-            SetResumeLoading(false);
-            _resumeRoutine = null;
-        }, showTimeout);
-    }
-
-    private void SetResumeLoading(bool show)
-    {
-        if (show == _resumeLoading)
-            return;
-
-        _resumeLoading = show;
-
-        if (resumeLoadingPanel)
-            resumeLoadingPanel.SetActive(show);
-
-        if (show)
-        {
-            _prevTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = _prevTimeScale;
-        }
     }
 
     private void TryShow(

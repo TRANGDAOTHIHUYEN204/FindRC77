@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "appsflyer-unity-plugin": "https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#v6.18.1",
     "com.coffee.ui-effect": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.google.ads.mobile": "10.5.0",
@@ -11,6 +12,7 @@
     "com.google.ads.mobile.mediation.pangle": "5.6.0",
     "com.google.ads.mobile.mediation.unity": "3.16.3",
     "com.google.external-dependency-manager": "1.2.185",
+    "com.raccoon.jnativeads": "git@github.com:raccoon-studio-tripglobal/jnativeadsplugin.git#release",
     "com.unity.ads.ios-support": "1.2.0",
     "com.unity.collab-proxy": "2.11.2",
     "com.unity.device-simulator.devices": "1.0.1",
@@ -57,26 +59,24 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.raccoon.jnativeads": "git@github.com:raccoon-studio-tripglobal/jnativeadsplugin.git#release",
-    "appsflyer-unity-plugin": "https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#v6.18.1"
+    "com.unity.modules.xr": "1.0.0"
   },
   "scopedRegistries": [
     {
-      "name": "package.openupm.com",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.google",
-        "com.google.external-dependency-manager"
-      ]
-    },
-    {
       "name": "AppLovin MAX Unity",
-      "url": "https://unity.packages.applovin.com/",
+      "url": "https://unity.packages.applovin.com",
       "scopes": [
         "com.applovin.mediation.ads",
         "com.applovin.mediation.adapters",
         "com.applovin.mediation.dsp"
+      ]
+    },
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.google.external-dependency-manager",
+        "com.google"
       ]
     }
   ]

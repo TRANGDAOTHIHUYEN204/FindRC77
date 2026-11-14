@@ -11,14 +11,18 @@ public class MenuHome : MonoBehaviour
 
     [SerializeField] private Button playButton;
     [SerializeField] private TMP_Text playButtonText;
+    [SerializeField] private GameObject cafeTimePanel;
+    [SerializeField] private float cafeTimeDuration = 1.5f;
 
     private bool _isStarting;
+    [SerializeField] private float adTimeout = 20f;
 
     private void Start()
     {
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
         RefreshPlayButton();
 
+        if (cafeTimePanel) cafeTimePanel.SetActive(false);
         if (AdsController.Instance != null)
             AdsController.Instance.PreloadSecond();
     }
@@ -36,21 +40,23 @@ public class MenuHome : MonoBehaviour
         }
     }
 
-    private IEnumerator GamePlay(string sceneName, bool showSecond)
+    private IEnumerator GamePlay(string sceneName)
     {
         var op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
-
+        
         var ads = AdsController.Instance;
-
-        if (showSecond && ads != null)
+        if (SaveGame.TutorialCompleted && ads != null && ads.ConsumeFirstStart())
         {
             bool done = false;
-
             ads.RequestSecond(() => done = true);
 
-            while (!done)
+            float t = 0f;
+            while (!done && t < adTimeout)
+            {
+                t += Time.unscaledDeltaTime;
                 yield return null;
+            }
         }
 
         op.allowSceneActivation = true;
@@ -74,20 +80,9 @@ public class MenuHome : MonoBehaviour
         _isStarting = true;
 
         if (isGamePlay)
-        {
-            var ads = AdsController.Instance;
-
-            bool showSecond =
-                SaveGame.TutorialCompleted &&
-                ads != null &&
-                ads.ConsumeFirstStart();
-
-            StartCoroutine(GamePlay(sceneName, showSecond));
-        }
+            StartCoroutine(GamePlay(sceneName));
         else
-        {
             StartCoroutine(EventGame(sceneName));
-        }
     }
 
     private IEnumerator EventGame(string sceneName)

@@ -3394,6 +3394,7 @@ GameObject:
   - component: {fileID: 1976955149}
   - component: {fileID: 1976955154}
   - component: {fileID: 1976955155}
+  - component: {fileID: 1976955156}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3508,6 +3509,9 @@ MonoBehaviour:
   numberLevelText: {fileID: 3927028483542673051}
   playButton: {fileID: 1644671572}
   playButtonText: {fileID: 262320621}
+  cafeTimePanel: {fileID: 0}
+  cafeTimeDuration: 1.5
+  adTimeout: 20
 --- !u!114 &1976955155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3520,6 +3524,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d235717b75e82242a69a7de84e4b080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingController
+--- !u!114 &1976955156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976955148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285c4ac039233994aaaab3e5f710a489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReviewTrigger
+  safeScreen: {fileID: 1976955148}
+  delay: 0.5
 --- !u!224 &2032449750 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2285682133234833643, guid: 7b6d5cc34efa3a7498a4bf0a133dca02, type: 3}

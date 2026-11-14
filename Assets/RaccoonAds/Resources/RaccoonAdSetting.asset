@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bb8c1bdd93f4b98848b406803dd9cd, type: 3}
   m_Name: RaccoonAdSetting
   m_EditorClassIdentifier: 
-  use_test_ad: 1
+  use_test_ad: 0
   AdUnitConfigs:
   - ad_type: 110
     ad_id_android: ca-app-pub-8190506959251235/6779860792
