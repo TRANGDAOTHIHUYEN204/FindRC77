@@ -666,11 +666,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823647039}
   m_CullTransparentMesh: 1
---- !u!1 &1068859492 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7811872574138959639, guid: 1b1f63ef58dbf9c4eb2a20f76012261f, type: 3}
-  m_PrefabInstance: {fileID: 1825095634}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1408120944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,12 +1164,9 @@ MonoBehaviour:
   secondAd: 11
   interAd: 10
   rewardAd: 50
-  resumeAd: 30
   interCooldown: 60
-  resumeLoadingPanel: {fileID: 1068859492}
   showTimeout: 60
   rewardShowTimeout: 120
-  resumeGuardAfterAd: 3
   minGapBetweenAds: 5
 --- !u!4 &1956718200
 Transform:
@@ -1379,9 +1371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4502ff457fce3348820b60c5a36db4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameReviewManager
-  minCompletedLevels: 5
-  minLaunches: 2
-  cooldownDays: 60
   iosAppId: 
 --- !u!4 &2084621122
 Transform:

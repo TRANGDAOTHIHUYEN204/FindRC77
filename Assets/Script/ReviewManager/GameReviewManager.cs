@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if ENABLE_RACCOON_ADMOB
+using RCKit.Ads.Main;
+#endif
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 using Google.Play.Review;
@@ -92,6 +95,7 @@ public sealed class GameReviewManager : MonoBehaviour
         StartCoroutine(RequestAndroidReview(safeScreen));
 
 #elif UNITY_IOS
+        SuppressAppOpenForReview();
         bool apiAvailable = UnityEngine.iOS.Device.RequestStoreReview();
         Debug.Log("[Review] iOS request sent, api available = " + apiAvailable);
 
@@ -131,6 +135,7 @@ public sealed class GameReviewManager : MonoBehaviour
         var reviewInfo = preparation.GetResult();
         Debug.Log("[Review] Android: LaunchReviewFlow (popup should show if Google allows)");
 
+        SuppressAppOpenForReview();
         var launch = manager.LaunchReviewFlow(reviewInfo);
         yield return launch;
 
@@ -150,6 +155,7 @@ public sealed class GameReviewManager : MonoBehaviour
         Debug.Log("[Review] Open store page on a device.");
 
 #elif UNITY_ANDROID
+        SuppressAppOpenForReview();
         Application.OpenURL(
             "https://play.google.com/store/apps/details?id=" + Application.identifier);
 
@@ -160,11 +166,19 @@ public sealed class GameReviewManager : MonoBehaviour
             return;
         }
 
+        SuppressAppOpenForReview();
         Application.OpenURL(
             "https://apps.apple.com/app/id" + iosAppId.Trim() + "?action=write-review");
 
 #else
         Debug.Log("[Review] Unsupported platform.");
+#endif
+    }
+
+    private static void SuppressAppOpenForReview()
+    {
+#if ENABLE_RACCOON_ADMOB
+        RaccoonAdsManager.Instance?.SetStopTrackingPaused();
 #endif
     }
 }
