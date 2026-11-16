@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnDifferentPoint : MonoBehaviour
 {
-    [SerializeField] private FactoryManager factoryManager;
+    [SerializeField] private FactoryGameplay factoryGameplay;
     private Transform _pairContainer; 
     
     private readonly List<DifferentPair> pairs = new List<DifferentPair>();
@@ -16,7 +16,7 @@ public class SpawnDifferentPoint : MonoBehaviour
         int idx = 0;
         foreach (DifferentPointInfo info in levelData.DifferentPoints)
         {
-            DifferentPair pair = factoryManager.CreateDifferentPair();
+            DifferentPair pair = factoryGameplay.CreateDifferentPair();
 
             if (pair == null) continue;
 
@@ -33,7 +33,7 @@ public class SpawnDifferentPoint : MonoBehaviour
         for (int i = 0; i < pairs.Count; i++)
         {
             if (pairs[i] != null && pairs[i].gameObject.activeInHierarchy)
-                factoryManager.Release(pairs[i].gameObject);
+                factoryGameplay.Release(pairs[i].gameObject);
         }
         pairs.Clear();
     }

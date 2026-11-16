@@ -8,7 +8,7 @@ public class HintPresenter : MonoBehaviour
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private HintSpotlight spotlight;
-    [SerializeField] private FactoryManager factory;
+    [SerializeField] private FactoryGameplay factoryGameplay;
     [SerializeField, Min(0)] private int hintPerLevel = 1;
 
     private HintHand _handA;
@@ -169,7 +169,7 @@ public class HintPresenter : MonoBehaviour
     {
         if (root == null) return null;
 
-        var hand = factory.CreateHand();
+        var hand = factoryGameplay.CreateHand();
         if (hand == null) return null;
 
         HintedPair.GetWorldRect(root, out Vector3 center, out _);
@@ -188,7 +188,7 @@ public class HintPresenter : MonoBehaviour
         if (hand == null) return;
 
         hand.Detach();
-        if (factory != null) factory.Release(hand.gameObject);
+        if (factoryGameplay != null) factoryGameplay.Release(hand.gameObject);
         hand = null;
     }
 }

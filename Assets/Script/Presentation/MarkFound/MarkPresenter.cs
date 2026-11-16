@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MarkPresenter : MonoBehaviour
 {
-    [SerializeField] private FactoryManager factoryManager;
+    [SerializeField] private FactoryGameplay factoryGameplay;
 
     [SerializeField] private float smallRel = 0.04f;
     [SerializeField] private float bigRel   = 0.15f;
@@ -83,7 +83,7 @@ public class MarkPresenter : MonoBehaviour
 
     private void DrawMark(DifferentPair pair, RectTransform root, MarkData data, Action<RectTransform> onDone)
     {
-        MarkFound mark = factoryManager.Create();
+        MarkFound mark = factoryGameplay.Create();
         if (mark == null) return;
         _marks.Add(mark);
 
@@ -142,7 +142,7 @@ public class MarkPresenter : MonoBehaviour
             if (m == null) continue;
 
             m.StopAllCoroutines();
-            factoryManager.Release(m.gameObject);
+            factoryGameplay.Release(m.gameObject);
         }
         _marks.Clear();
     }

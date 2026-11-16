@@ -9,16 +9,12 @@ public class SpawnChallengeNode : MonoBehaviour
     private int _changedCount;
     private int _session;
 
-    [SerializeField] private FactoryManager factoryManager;
-
-    [Header("UI")]
+    [SerializeField] private FactoryGameplay factoryGameplay;
     [SerializeField] private RectTransform container;
     [SerializeField] private Canvas canvas;
 
     [SerializeField] private List<ChallengeNode> nodes = new List<ChallengeNode>();
     [SerializeField] private Sprite sprite;
-
-    [Header("Animation")]
     [SerializeField] private float slideDistance = 100f;
     [SerializeField] private float slideDuration = 0.3f;
     [SerializeField] private float bounceHeight = 20f;
@@ -51,15 +47,15 @@ public class SpawnChallengeNode : MonoBehaviour
         _changedCount = 0;
         _appliedCount = 0;
 
-        if (_countSpawn <= 0 || container == null || factoryManager == null)
+        if (_countSpawn <= 0 || container == null || factoryGameplay == null)
         {
-            Debug.LogWarning($"[SpawnChallengeNode] Bỏ qua spawn: count={_countSpawn}, container={container}, factory={factoryManager}", this);
+            Debug.LogWarning($"[SpawnChallengeNode] Bỏ qua spawn: count={_countSpawn}, container={container}, factory={factoryGameplay}", this);
             return;
         }
 
         for (int i = 0; i < _countSpawn; i++)
         {
-            ChallengeNode node = factoryManager.CreateChallengeNode();
+            ChallengeNode node = factoryGameplay.CreateChallengeNode();
             if (node == null)
             {
                 continue;
@@ -185,7 +181,7 @@ public class SpawnChallengeNode : MonoBehaviour
             if (nodes[i] == null) continue;
             if (nodes[i].Visual != null)
                 nodes[i].Visual.anchoredPosition = Vector2.zero;
-            factoryManager.Release(nodes[i].gameObject);
+            factoryGameplay.Release(nodes[i].gameObject);
         }
         nodes.Clear();
     }

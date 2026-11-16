@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ProcessBar : MonoBehaviour
 {
-    [SerializeField] private MiniGameManager gameManager;
     [SerializeField] private RectTransform fillMask;
     [SerializeField] private RectTransform fill;
     [SerializeField] private float fillDuration = 0.25f;
@@ -13,27 +12,10 @@ public class ProcessBar : MonoBehaviour
     private Coroutine fillRoutine;
     private bool initialized;
 
-    private void Awake()
-    {
-        if (gameManager == null)
-            gameManager = FindFirstObjectByType<MiniGameManager>();
-    }
-
-    private void OnEnable()
-    {
-        if (gameManager == null) return;
-        gameManager.OnProgress += HandleProgress;
-        
-        Init();
-        var state = gameManager.State;
-        SetProgress(state.FoundCount, state.Total, false);
-    }
+    public float Ratio => currentRatio;
 
     private void OnDisable()
     {
-        if (gameManager != null)
-            gameManager.OnProgress -= HandleProgress;
-
         if (fillRoutine != null)
         {
             StopCoroutine(fillRoutine);
@@ -41,19 +23,42 @@ public class ProcessBar : MonoBehaviour
         }
     }
 
+    public void SetProgress(int current, int total, bool animate = true)
+    {
+        float ratio = total <= 0 ? 0f : (float)current / total;
+        SetProgress(ratio, animate);
+    }
+
+    public void SetProgress(float ratio, bool animate = true)
+    {
+        Init();
+        ratio = Mathf.Clamp01(ratio);
+
+        if (fillRoutine != null)
+        {
+            StopCoroutine(fillRoutine);
+            fillRoutine = null;
+        }
+
+        if (animate && isActiveAndEnabled)
+            fillRoutine = StartCoroutine(FillTo(ratio));
+        else
+            ApplyRatio(ratio);
+    }
+
     private void Init()
     {
         if (initialized) return;
 
-        Canvas.ForceUpdateCanvases(); 
-        
+        Canvas.ForceUpdateCanvases();
+
         fillMask.anchorMin = new Vector2(0, fillMask.anchorMin.y);
         fillMask.anchorMax = new Vector2(0, fillMask.anchorMax.y);
         fillMask.pivot     = new Vector2(0, fillMask.pivot.y);
 
         fullWidth = fill.rect.width;
-        if (fullWidth <= 0f) fullWidth = fillMask.rect.width; 
-        
+        if (fullWidth <= 0f) fullWidth = fillMask.rect.width;
+
         fill.anchorMin = new Vector2(0, fill.anchorMin.y);
         fill.anchorMax = new Vector2(0, fill.anchorMax.y);
         fill.pivot     = new Vector2(0, fill.pivot.y);
@@ -61,21 +66,6 @@ public class ProcessBar : MonoBehaviour
         fill.sizeDelta = new Vector2(fullWidth, fill.sizeDelta.y);
 
         initialized = true;
-    }
-
-    private void HandleProgress(int found, int total) => SetProgress(found, total, true);
-
-    private void SetProgress(int found, int total, bool animate)
-    {
-        Init();
-        float target = total <= 0 ? 0f : Mathf.Clamp01((float)found / total);
-
-        if (fillRoutine != null) StopCoroutine(fillRoutine);
-
-        if (animate && isActiveAndEnabled)
-            fillRoutine = StartCoroutine(FillTo(target));
-        else
-            ApplyRatio(target);
     }
 
     private IEnumerator FillTo(float target)

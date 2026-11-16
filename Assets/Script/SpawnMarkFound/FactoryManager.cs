@@ -1,81 +1,43 @@
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class FactoryManager : MonoBehaviour
+public class FactoryManager
 {
-    [SerializeField] private MarkFound prefabMarkFound;
-    [SerializeField] private ChallengeNode challengeNodePrefab;
-    [SerializeField] private DifferentPair differentPairPrefab;
-    [SerializeField] private ErrorMark errorMark;
     private readonly PoolManager _pool = new PoolManager();
-    [SerializeField] private HeartLives heartPrefab;
-    [SerializeField] private HintHand handPrefab;
-    [SerializeField] private StarTrailEffect starTrailPrefab;
 
-    public StarTrailEffect CreateStarTrail()
+    public T Create<T>(T prefab) where T : Component
     {
-        return CreateObject(starTrailPrefab);
-    }
-    public HintHand CreateHand()
-    {
-        return CreateObject(handPrefab);
-    }
-    public MarkFound Create()
-    {
-        return CreateObject(prefabMarkFound);
+        return Create(prefab, Vector3.zero, Quaternion.identity);
     }
 
-    public ChallengeNode CreateChallengeNode()
+    public T Create<T>(T prefab, Vector3 position) where T : Component
     {
-        return CreateObject(challengeNodePrefab);
-    }
-    
-    public DifferentPair CreateDifferentPair()
-    {
-        return CreateObject(differentPairPrefab);
-    }
-    public ErrorMark CreateErrorManager()
-    {
-        return CreateObject(errorMark);
+        return Create(prefab, position, Quaternion.identity);
     }
 
-    public HeartLives CreateHeart()
-    {
-        return CreateObject(heartPrefab);
-    }
-    
-    
-    private T CreateObject<T>(T prefab) where T : Component
+    public T Create<T>(T prefab, Vector3 position, Quaternion rotation) where T : Component
     {
         if (prefab == null) return null;
 
-        GameObject obj = _pool.CreateGameObject(prefab.gameObject, Vector3.zero, Quaternion.identity);
-
-        return obj.GetComponent<T>();
+        GameObject obj = _pool.CreateGameObject(prefab.gameObject, position, rotation);
+        return obj != null ? obj.GetComponent<T>() : null;
     }
-
+    
     public void Release(GameObject obj)
     {
         if (obj == null) return;
-
         _pool.ReturnObject(obj);
     }
 
     public void Detach(GameObject obj)
     {
         if (obj == null) return;
-
         _pool.Detach(obj);
     }
-
 
     public void ReleaseAll()
     {
         var active = _pool.ActiveGameObjects;
-
         for (int i = active.Count - 1; i >= 0; i--)
-        {
             _pool.ReturnObject(active[i]);
-        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HeartLiveManager : MonoBehaviour
 {
-    [SerializeField] private FactoryManager factory;
+    [SerializeField] private FactoryGameplay factoryGameplay;
     [SerializeField] private RectTransform container;
     [SerializeField] private RectTransform spawnPoint;
     [SerializeField] private float gap = 0.1f;
@@ -47,7 +47,7 @@ public class HeartLiveManager : MonoBehaviour
         for (int i = _hearts.Count - 1; i >= 0; i--)
         {
             if (_hearts[i] != null)
-                factory.Release(_hearts[i].gameObject);
+                factoryGameplay.Release(_hearts[i].gameObject);
         }
 
         _hearts.Clear();
@@ -60,7 +60,7 @@ public class HeartLiveManager : MonoBehaviour
 
         for (int i = 0; i < maxLives; i++)
         {
-            HeartLives heart = factory.CreateHeart();
+            HeartLives heart = factoryGameplay.CreateHeart();
             if (heart == null) continue;
 
             RectTransform rt = (RectTransform)heart.transform;

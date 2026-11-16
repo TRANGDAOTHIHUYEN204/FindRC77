@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnStarTrail : MonoBehaviour
 {
-    [SerializeField] private FactoryManager factoryManager;
+    [SerializeField] private FactoryGameplay factoryGameplay;
     [SerializeField] private RectTransform container;
     [SerializeField] private int initialCount = 2;
 
@@ -28,7 +28,7 @@ public class SpawnStarTrail : MonoBehaviour
         _isUsing = new bool[count];
         _callbacks = new Action[count];
 
-        if (factoryManager == null)
+        if (factoryGameplay == null)
         {
             Debug.LogError(
                 "[SpawnStarTrail] FactoryManager chưa được gán.", this);
@@ -37,7 +37,7 @@ public class SpawnStarTrail : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            StarTrailEffect trail = factoryManager.CreateStarTrail();
+            StarTrailEffect trail = factoryGameplay.CreateStarTrail();
 
             if (trail == null)
             {
@@ -46,7 +46,7 @@ public class SpawnStarTrail : MonoBehaviour
             }
 
             _trails[i] = trail;
-            factoryManager.Detach(trail.gameObject);
+            factoryGameplay.Detach(trail.gameObject);
 
             if (container != null)
                 trail.transform.SetParent(container, false);

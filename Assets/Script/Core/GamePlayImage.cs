@@ -10,7 +10,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private LevelImageView levelImageView;
     [SerializeField] private DifferentClickHandler clickHandler;
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
-    [SerializeField] private FactoryManager factoryManager;
+    [SerializeField] private FactoryGameplay factoryManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallengeNode spawnChallegeNode;

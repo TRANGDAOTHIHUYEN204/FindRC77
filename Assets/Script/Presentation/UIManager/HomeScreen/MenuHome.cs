@@ -11,40 +11,33 @@ public class MenuHome : MonoBehaviour
 
     [SerializeField] private Button playButton;
     [SerializeField] private TMP_Text playButtonText;
-    [SerializeField] private GameObject cafeTimePanel;
-    [SerializeField] private float cafeTimeDuration = 1.5f;
+    [SerializeField] private float adTimeout = 20f;
 
     private bool _isStarting;
-    [SerializeField] private float adTimeout = 20f;
 
     private void Start()
     {
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
-        RefreshPlayButton();
-
-        if (cafeTimePanel) cafeTimePanel.SetActive(false);
+        RefreshSecondButton();
         if (AdsController.Instance != null)
             AdsController.Instance.PreloadSecond();
     }
 
-    private void RefreshPlayButton()
+    // Mini game đầu tuần
+    private void RefreshSecondButton()
     {
-        if (SaveMiniGame.AllCompleted)
-        {
-            playButton.interactable = false;
+        bool completed = SaveSecondMiniGame.Completed;
+
+        playButton.interactable = !completed;
+        if (completed)
             playButtonText.text = "Completed";
-        }
-        else
-        {
-            playButton.interactable = true;
-        }
     }
 
     private IEnumerator GamePlay(string sceneName)
     {
         var op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
-        
+
         var ads = AdsController.Instance;
         if (SaveGame.TutorialCompleted && ads != null && ads.ConsumeFirstStart())
         {
@@ -62,9 +55,9 @@ public class MenuHome : MonoBehaviour
         op.allowSceneActivation = true;
     }
 
-    public void JoinFindHidden(string sceneName)
+    public void JoinSecondMiniGame(string sceneName)
     {
-        if (SaveMiniGame.AllCompleted) return;
+        if (SaveSecondMiniGame.Completed) return;
         StartGame(sceneName, false);
     }
 
@@ -76,7 +69,6 @@ public class MenuHome : MonoBehaviour
     private void StartGame(string sceneName, bool isGamePlay)
     {
         if (_isStarting) return;
-
         _isStarting = true;
 
         if (isGamePlay)

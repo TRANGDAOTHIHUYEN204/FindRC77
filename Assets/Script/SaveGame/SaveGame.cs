@@ -10,9 +10,10 @@ public static class SaveGame
     private const string KeyAllCompleted = "save_all_completed";
     private const string KeyHintBalance = "save_hint_balance";
     private const string KeyFindHiddenCompleted = "save_find_hidden_completed";
+    private const string KeyCatchWin = "save_catch_win";
+    private const string KeyCatchDouble = "save_catch_double";
     private const int MaxEventLevels = 1;
-    
-    
+
     private static string WinKey(int level) => $"save_fh_win_{level}";
     private static string DoubleKey(int level) => $"save_fh_double_{level}";
 
@@ -22,7 +23,7 @@ public static class SaveGame
         if (PlayerPrefs.GetInt(key, 0) == 1) return false;
 
         PlayerPrefs.SetInt(key, 1);
-        HintBalance += 1; 
+        HintBalance += 1;
         return true;
     }
 
@@ -38,12 +39,35 @@ public static class SaveGame
         HintBalance += 1;
         return true;
     }
+    
+    public static bool TryClaimCatchWin()
+    {
+        if (PlayerPrefs.GetInt(KeyCatchWin, 0) == 1) return false;
+
+        PlayerPrefs.SetInt(KeyCatchWin, 1);
+        HintBalance += 1;
+        return true;
+    }
+
+    public static bool IsCatchDoubleClaimed()
+        => PlayerPrefs.GetInt(KeyCatchDouble, 0) == 1;
+
+    public static bool TryClaimCatchDouble()
+    {
+        if (IsCatchDoubleClaimed()) return false;
+
+        PlayerPrefs.SetInt(KeyCatchDouble, 1);
+        HintBalance += 1;
+        return true;
+    }
 
     public static void Reset()
     {
         PlayerPrefs.DeleteKey(KeyLevel);
         PlayerPrefs.DeleteKey(KeyAllCompleted);
         PlayerPrefs.DeleteKey(KeyHintBalance);
+        PlayerPrefs.DeleteKey(KeyCatchWin);
+        PlayerPrefs.DeleteKey(KeyCatchDouble);
         for (int i = 0; i < MaxEventLevels; i++)
         {
             PlayerPrefs.DeleteKey(WinKey(i));
@@ -51,6 +75,7 @@ public static class SaveGame
         }
         PlayerPrefs.Save();
     }
+
     public static bool AllCompleted
     {
         get => PlayerPrefs.GetInt(KeyAllCompleted, 0) == 1;
