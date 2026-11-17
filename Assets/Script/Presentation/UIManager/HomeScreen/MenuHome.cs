@@ -29,10 +29,11 @@ public class MenuHome : MonoBehaviour
 
     private void RefreshEventButtons()
     {
+        Debug.Log($"[Home] SecondCompleted={SaveSecondMiniGame.Completed}, MidCompleted={SaveMiniGame.AllCompleted}");
         SetCompleted(firstWeekButton, firstWeekText, SaveSecondMiniGame.Completed);
         SetCompleted(midWeekButton, midWeekText, SaveMiniGame.AllCompleted);
     }
-
+    
     private static void SetCompleted(Button btn, TMP_Text label, bool completed)
     {
         if (btn == null) return;

@@ -14,8 +14,15 @@ public class CatchItemUI : MonoBehaviour
     [SerializeField] private GameObject losePanel;
     [SerializeField] private Button doubleRewardButton;
     [SerializeField] private string sceneName = "HomeScene";
+
+    [SerializeField] private AudioClip winClip;
+    [SerializeField] private AudioClip loseClip;
+    [Range(0f, 1f)] [SerializeField] private float winVolume = 1f;
+    [Range(0f, 1f)] [SerializeField] private float loseVolume = 1f;
+
     private MiniSecondStateGame state;
     private Color _normalTimerColor;
+    private MiniSecondPhase _lastPhase;
 
     private void Awake() => _normalTimerColor = timerText.color;
 
@@ -49,6 +56,7 @@ public class CatchItemUI : MonoBehaviour
     }
 
     private void OnDestroy() => Unbind();
+
     public void SetDoubleButtonInteractable(bool value)
     {
         if (doubleRewardButton != null)
@@ -61,26 +69,52 @@ public class CatchItemUI : MonoBehaviour
         doubleRewardButton.gameObject.SetActive(true);
         doubleRewardButton.interactable = !SaveGame.IsCatchDoubleClaimed();
     }
+
     public void ResetUI()
     {
         timerText.color = _normalTimerColor;
+        _lastPhase = default;
     }
 
     private void OnScoreChanged(int total, int delta) => textScore.text = total.ToString();
 
     private void OnPhaseChanged(MiniSecondPhase phase)
     {
+        Debug.Log($"[CatchUI] Phase={phase}, last={_lastPhase}, completedBefore={SaveSecondMiniGame.Completed}");
         pausePanel.SetActive(phase == MiniSecondPhase.Paused);
         winPanel.SetActive(phase == MiniSecondPhase.Won);
         losePanel.SetActive(phase == MiniSecondPhase.Lost);
+
         if (phase == MiniSecondPhase.Won)
             RefreshDoubleButton();
+        
+        if (phase != _lastPhase)
+        {
+            if (phase == MiniSecondPhase.Won)
+            {
+                PlaySfx(winClip, winVolume);
+                SaveSecondMiniGame.Completed = true;
+            }
+            else if (phase == MiniSecondPhase.Lost)
+            {
+                PlaySfx(loseClip, loseVolume);
+                SaveSecondMiniGame.Completed = true;
+            }
+        }
+        _lastPhase = phase;
+    }
+
+    private void PlaySfx(AudioClip clip, float volume)
+    {
+        if (clip == null || SoundManager.Instance == null) return;
+        SoundManager.Instance.PlaySfx(clip, volume);
     }
 
     public void LoadSceneHome()
     {
         SceneManager.LoadScene(sceneName);
     }
+
     private void UpdateText(float t) => timerText.text = TimeManager.Format(t);
 
     private void OnWarning() => timerText.color = warningColor;

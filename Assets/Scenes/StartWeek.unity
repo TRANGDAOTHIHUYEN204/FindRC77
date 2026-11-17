@@ -835,7 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d4a2eb4995db44094becc5f8e6ac18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
-  totalTime: 240
+  totalTime: 100
   warningTime: 10
   autoStart: 1
   warningClip: {fileID: 8300000, guid: 93d1fc60e6bd8334bb5a5e35861022e4, type: 3}
@@ -1927,6 +1927,10 @@ MonoBehaviour:
   losePanel: {fileID: 1427883775}
   doubleRewardButton: {fileID: 909410073}
   sceneName: HomeScene
+  winClip: {fileID: 8300000, guid: a9aff9d9b3d522d47af2d42535e81b6c, type: 3}
+  loseClip: {fileID: 8300000, guid: 2e7a68f44bc15b04786607f4e4ac6b96, type: 3}
+  winVolume: 1
+  loseVolume: 1
 --- !u!1 &1377016597
 GameObject:
   m_ObjectHideFlags: 0
