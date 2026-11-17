@@ -8,9 +8,13 @@ public class MenuHome : MonoBehaviour
 {
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private TextMeshProUGUI numberLevelText;
+    [SerializeField] private Button firstWeekButton;
+    [SerializeField] private TMP_Text firstWeekText;
+    [SerializeField] private Button midWeekButton;
+    [SerializeField] private TMP_Text midWeekText;
+    [SerializeField] private Button endWeekButton;
+    [SerializeField] private TMP_Text endWeekText;
 
-    [SerializeField] private Button playButton;
-    [SerializeField] private TMP_Text playButtonText;
     [SerializeField] private float adTimeout = 20f;
 
     private bool _isStarting;
@@ -18,19 +22,24 @@ public class MenuHome : MonoBehaviour
     private void Start()
     {
         numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
-        RefreshSecondButton();
+        RefreshEventButtons();
         if (AdsController.Instance != null)
             AdsController.Instance.PreloadSecond();
     }
 
-    // Mini game đầu tuần
-    private void RefreshSecondButton()
+    private void RefreshEventButtons()
     {
-        bool completed = SaveSecondMiniGame.Completed;
+        SetCompleted(firstWeekButton, firstWeekText, SaveSecondMiniGame.Completed);
+        SetCompleted(midWeekButton, midWeekText, SaveMiniGame.AllCompleted);
+    }
 
-        playButton.interactable = !completed;
-        if (completed)
-            playButtonText.text = "Completed";
+    private static void SetCompleted(Button btn, TMP_Text label, bool completed)
+    {
+        if (btn == null) return;
+
+        btn.interactable = !completed;
+        if (completed && label != null)
+            label.text = "Completed";
     }
 
     private IEnumerator GamePlay(string sceneName)
@@ -55,10 +64,23 @@ public class MenuHome : MonoBehaviour
         op.allowSceneActivation = true;
     }
 
+    // Mini game
     public void JoinSecondMiniGame(string sceneName)
     {
         if (SaveSecondMiniGame.Completed) return;
         StartGame(sceneName, false);
+    }
+
+    // Giữa tuần
+    public void JoinFindHidden(string sceneName)
+    {
+        if (SaveMiniGame.AllCompleted) return;
+        StartGame(sceneName, false);
+    }
+
+    // Cuối tuần 
+    public void Join(string sceneName)
+    {
     }
 
     public void JoinGamePlay(string sceneName)

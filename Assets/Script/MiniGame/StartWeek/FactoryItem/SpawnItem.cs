@@ -13,7 +13,6 @@ public class SpawnItem : MonoBehaviour
     [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private float despawnOffsetBelow = 1f;
     [SerializeField] private HandlePlayerCollisionItem checker;
-
     private Coroutine spawnRoutine;
     private bool paused;
     private readonly List<Item> _spawned = new List<Item>();

@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private Image spriteItem;
     [SerializeField] private ItemMoveMent mover;
-    [SerializeField] private float halfWidth = 40f;  
+    [SerializeField] private float halfWidth = 40f;
     [SerializeField] private float halfHeight = 40f;
 
     private FactoryItem factory;
@@ -35,10 +35,16 @@ public class Item : MonoBehaviour
     }
 
     public void StartMove(float killY, float speedOverride = -1f)
-        => mover.Init(killY, ReturnToPool, speedOverride);
+        => mover.Init(killY, OnFellOut, speedOverride);
 
     public void StopMove() => mover.Stop();
-
+    
+    private void OnFellOut()
+    {
+        if (released) return;
+        checker.NotifyMissed(this);
+        ReturnToPool();
+    }
     public void ReturnToPool()
     {
         if (released) return;

@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
   homeSceneName: HomeScene
   gameplaySceneName: GamePlay
-  resetAllOnStart: 0
+  resetAllOnStart: 1
   resetTutorialOnStart: 0
 --- !u!1 &353312553
 GameObject:
