@@ -15,8 +15,7 @@ public class IconSpawner : MonoBehaviour
     private readonly Queue<ItemEntry> pendingEntries = new();
     private readonly Dictionary<IconCollectionBehaviour, int> slotOfIcon = new();
     private bool[] slotOccupied;
-
-    private void Start() => Spawn();
+    
 
     public void Spawn()
     {
@@ -98,5 +97,10 @@ public class IconSpawner : MonoBehaviour
             int j = Random.Range(0, i + 1);
             (list[i], list[j]) = (list[j], list[i]);
         }
+    }
+    public void Restart()
+    {
+        factory.DespawnAll();
+        Spawn(); 
     }
 }

@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5093178010093312913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -19440}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 353.74753, y: 189.55728}
-  m_SizeDelta: {x: 0.3, y: 0.3}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7295095873431605742
 MonoBehaviour:
@@ -50,9 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b82637d2d30a64e940ca9a9188e90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeartLives
-  image: {fileID: 7820469679620972450}
-  aliveSprite: {fileID: -4608901566476905878, guid: 514c92c24420a904390a0c0a19d8e3f3, type: 3}
-  deadSprite: {fileID: -4803371626618953921, guid: 028c7fe7b6629a94bb40f69fb8894c35, type: 3}
 --- !u!222 &2588746828701561288
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -81,7 +78,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -4608901566476905878, guid: 514c92c24420a904390a0c0a19d8e3f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

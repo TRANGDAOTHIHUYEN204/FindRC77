@@ -20,6 +20,7 @@ public class LoadingScreen : MonoBehaviour
             SaveSecondMiniGame.Reset();
             SaveMiniGame.Reset();
             FindHiddenSaveStore.Clear();
+            SaveThirdMiniGame.Reset();
         }
         if (resetTutorialOnStart)
             SaveGame.ResetTutorial();

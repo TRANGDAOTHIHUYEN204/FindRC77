@@ -12,5 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa43916d62dd79e448af741ffb9c4efb, type: 3}
   m_Name: Item1
   m_EditorClassIdentifier: Assembly-CSharp::ItemDataThirdMiniGame
-  groups: []
-  sprites: []
+  groups:
+  - type: 1
+    count: 5
+  - type: 2
+    count: 3
+  - type: 3
+    count: 5
+  - type: 4
+    count: 7
+  sprites:
+  - {fileID: 21300000, guid: 42c8d159b878f264980c4b2f973ee190, type: 3}
+  - {fileID: 21300000, guid: 35405ff5199bc364c8508cf86115e64d, type: 3}
+  - {fileID: 21300000, guid: 7a23b7876c5a72e4ebd9b629603c0e54, type: 3}
+  - {fileID: 21300000, guid: 50f35890084f4b24da564a25c10572e9, type: 3}
+  - {fileID: 21300000, guid: c45bdbb46d284b845baadaeafdb727fa, type: 3}
+  - {fileID: 21300000, guid: c63c2a1e5ecdbd1428ab5336c6500c7e, type: 3}
+  - {fileID: 495367587157968522, guid: 6d4dba8ba7ab6034d926c67017551d4c, type: 3}
+  - {fileID: 21300000, guid: 0502b869fbbf5ed4f814f970e9a99201, type: 3}
+  - {fileID: 21300000, guid: 89799a45e97709a41bab282770686463, type: 3}
+  - {fileID: 21300000, guid: 89799a45e97709a41bab282770686463, type: 3}
+  - {fileID: 21300000, guid: 50c3c26c18ee39a4e96720fafed0686e, type: 3}
+  - {fileID: 21300000, guid: 41ac37fb5686b5d4f9eb24cab37999bb, type: 3}
+  - {fileID: 21300000, guid: 61fcb8c6c86eeab48b04a22dd349fefb, type: 3}
+  - {fileID: 21300000, guid: b8a46a58c3dc1bf4fa155cd7d2112692, type: 3}
+  - {fileID: 21300000, guid: 5dd8d36e82ae9024eaf156bf157fb952, type: 3}
+  - {fileID: 21300000, guid: bb738ca1168c86c48a1b714cdd1664d3, type: 3}
+  - {fileID: -1336633934, guid: f3db8abaa9c0a634d8bc8ec8555e85c3, type: 3}
+  - {fileID: 21300000, guid: 499e236fc10d6be4d832c1a4245f6238, type: 3}
+  - {fileID: 21300000, guid: c964227df94a51047ba7b1690c221cb1, type: 3}
+  - {fileID: 21300000, guid: 97e255705719168479743ba3691587fe, type: 3}

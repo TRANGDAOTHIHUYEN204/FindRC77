@@ -19,14 +19,8 @@ public class HeartLiveManager : MonoBehaviour
     {
         if (_currentLives <= 0) return true;
 
-        for (int i = _hearts.Count - 1; i >= 0; i--)
-        {
-            if (!_hearts[i].IsAlive) continue;
-
-            _hearts[i].Lose();
-            _currentLives--;
-            break;
-        }
+        _currentLives--;
+        _hearts[_currentLives].Hide();
 
         return _currentLives == 0;
     }
@@ -37,11 +31,10 @@ public class HeartLiveManager : MonoBehaviour
             SpawnHearts();
 
         for (int i = 0; i < _hearts.Count; i++)
-            _hearts[i].Init();
+            _hearts[i].Show();
 
         _currentLives = _hearts.Count;
     }
-
     public void ReleaseHearts()
     {
         for (int i = _hearts.Count - 1; i >= 0; i--)

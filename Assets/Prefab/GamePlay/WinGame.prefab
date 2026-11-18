@@ -103,6 +103,8 @@ MonoBehaviour:
   openStartScale: {x: 0.5, y: 0.5, z: 0.5}
   closeDuration: 0.12
   closeEndScale: {x: 0, y: 0, z: 0}
+  blockGameInput: 1
+  blockHoldAfterClose: 0.25
 --- !u!1 &171373721310905376
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1861020840677319427, guid: c1d8b0c1a24b04c488e672da11089dc9, type: 3}
+  m_Sprite: {fileID: 5657102512987013693, guid: 74e0d756e6456fc44872f30b4718d6e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1056,7 +1058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4356054341670995156
 RectTransform:
   m_ObjectHideFlags: 0

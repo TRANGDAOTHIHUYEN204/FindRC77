@@ -32,6 +32,7 @@ public class MenuHome : MonoBehaviour
         Debug.Log($"[Home] SecondCompleted={SaveSecondMiniGame.Completed}, MidCompleted={SaveMiniGame.AllCompleted}");
         SetCompleted(firstWeekButton, firstWeekText, SaveSecondMiniGame.Completed);
         SetCompleted(midWeekButton, midWeekText, SaveMiniGame.AllCompleted);
+        SetCompleted(endWeekButton, endWeekText, SaveThirdMiniGame.HasPlayed);
     }
     
     private static void SetCompleted(Button btn, TMP_Text label, bool completed)
@@ -82,6 +83,8 @@ public class MenuHome : MonoBehaviour
     // Cuối tuần 
     public void Join(string sceneName)
     {
+        if (SaveThirdMiniGame.HasPlayed) return;
+        StartGame(sceneName, false);
     }
 
     public void JoinGamePlay(string sceneName)

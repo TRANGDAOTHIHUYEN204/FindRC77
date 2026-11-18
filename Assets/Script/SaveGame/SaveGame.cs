@@ -13,9 +13,29 @@ public static class SaveGame
     private const string KeyCatchWin = "save_catch_win";
     private const string KeyCatchDouble = "save_catch_double";
     private const int MaxEventLevels = 1;
-
     private static string WinKey(int level) => $"save_fh_win_{level}";
     private static string DoubleKey(int level) => $"save_fh_double_{level}";
+    private const string KeyCleanWin = "save_clean_win";
+    private const string KeyCleanDouble = "save_clean_double";
+
+    public static bool TryClaimCleanWin()
+    {
+        if (PlayerPrefs.GetInt(KeyCleanWin, 0) == 1) return false;
+        PlayerPrefs.SetInt(KeyCleanWin, 1);
+        HintBalance += 1;
+        return true;
+    }
+
+    public static bool IsCleanDoubleClaimed()
+        => PlayerPrefs.GetInt(KeyCleanDouble, 0) == 1;
+
+    public static bool TryClaimCleanDouble()
+    {
+        if (IsCleanDoubleClaimed()) return false;
+        PlayerPrefs.SetInt(KeyCleanDouble, 1);
+        HintBalance += 1;
+        return true;
+    }
 
     public static bool TryClaimFindHiddenWin(int level)
     {
@@ -68,6 +88,9 @@ public static class SaveGame
         PlayerPrefs.DeleteKey(KeyHintBalance);
         PlayerPrefs.DeleteKey(KeyCatchWin);
         PlayerPrefs.DeleteKey(KeyCatchDouble);
+        PlayerPrefs.DeleteKey(KeyCleanWin);
+        PlayerPrefs.DeleteKey(KeyCleanDouble);
+        SaveThirdMiniGame.Reset();
         for (int i = 0; i < MaxEventLevels; i++)
         {
             PlayerPrefs.DeleteKey(WinKey(i));

@@ -16,6 +16,7 @@ public class DragHandler2D : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private RectTransform parentRect;
     private Vector2 offset;
     private bool dragging;
+    public static bool Locked { get; set; } 
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class DragHandler2D : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerDown(PointerEventData e)
     {
-        if (!CanDrag) return;
+        if (!CanDrag || Locked) return;  
         if (!Pointer(e, out var local, out _)) return;
 
         dragging = true;
@@ -60,6 +61,7 @@ public class DragHandler2D : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnDrag(PointerEventData e)
     {
         if (!dragging) return;
+        if (Locked) { CancelDrag(); return; }
         if (!Pointer(e, out var local, out var world)) return;
 
         if (Boundaries != null && !Boundaries.IsInside(world))

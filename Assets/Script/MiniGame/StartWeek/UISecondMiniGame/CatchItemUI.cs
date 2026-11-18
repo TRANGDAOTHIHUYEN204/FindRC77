@@ -19,7 +19,14 @@ public class CatchItemUI : MonoBehaviour
     [SerializeField] private AudioClip loseClip;
     [Range(0f, 1f)] [SerializeField] private float winVolume = 1f;
     [Range(0f, 1f)] [SerializeField] private float loseVolume = 1f;
-
+    [SerializeField] private TextMeshProUGUI textWin;
+    [SerializeField] private TextMeshProUGUI textLose;
+    [SerializeField] private TextMeshProUGUI titleWin;
+    [SerializeField] private TextMeshProUGUI titleLose;
+    [SerializeField] private string stringWin;
+    [SerializeField] private string stringLose;
+    [SerializeField] private string stringTitleWin;
+    [SerializeField] private string stringTitleLose;
     private MiniSecondStateGame state;
     private Color _normalTimerColor;
     private MiniSecondPhase _lastPhase;
@@ -77,17 +84,19 @@ public class CatchItemUI : MonoBehaviour
     }
 
     private void OnScoreChanged(int total, int delta) => textScore.text = total.ToString();
-
     private void OnPhaseChanged(MiniSecondPhase phase)
     {
         Debug.Log($"[CatchUI] Phase={phase}, last={_lastPhase}, completedBefore={SaveSecondMiniGame.Completed}");
+
         pausePanel.SetActive(phase == MiniSecondPhase.Paused);
         winPanel.SetActive(phase == MiniSecondPhase.Won);
         losePanel.SetActive(phase == MiniSecondPhase.Lost);
 
+        UpdateResultText(phase);
+
         if (phase == MiniSecondPhase.Won)
             RefreshDoubleButton();
-        
+
         if (phase != _lastPhase)
         {
             if (phase == MiniSecondPhase.Won)
@@ -101,6 +110,7 @@ public class CatchItemUI : MonoBehaviour
                 SaveSecondMiniGame.Completed = true;
             }
         }
+
         _lastPhase = phase;
     }
 
@@ -116,6 +126,24 @@ public class CatchItemUI : MonoBehaviour
     }
 
     private void UpdateText(float t) => timerText.text = TimeManager.Format(t);
+    private void UpdateResultText(MiniSecondPhase phase)
+    {
+        if (phase == MiniSecondPhase.Won)
+        {
+            if (textWin != null)
+                textWin.text = stringWin;
 
+            if (titleWin != null)
+                titleWin.text = stringTitleWin;
+        }
+        else if (phase == MiniSecondPhase.Lost)
+        {
+            if (textLose != null)
+                textLose.text = stringLose;
+
+            if (titleLose != null)
+                titleLose.text = stringTitleLose;
+        }
+    }
     private void OnWarning() => timerText.color = warningColor;
 }

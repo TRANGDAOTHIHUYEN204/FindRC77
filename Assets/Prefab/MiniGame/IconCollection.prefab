@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1753749985954026022
 CanvasRenderer:
@@ -126,10 +126,26 @@ MonoBehaviour:
   anim: {fileID: 2406087118577297676}
   breath: {fileID: 3288645202748164763}
   image: {fileID: 2575756463430226743}
-  snapDuration: 0.2
-  returnDuration: 0.15
   drag: {fileID: 8700874591314937925}
   mover: {fileID: 7693306717922709806}
+  jumpPower: 1
+  jumpDuration: 0.5
+  jumpEase: 6
+  endScale: 0
+  scaleEase: 5
+  returnDuration: 0.5
+  sideDistance: 30
+  sideHopHeight: 25
+  sideHops: 4
+  sideHopDuration: 0.18
+  sideDecay: 0.6
+  returnJumpPower: 30
+  returnJumpDuration: 0.35
+  bounceHeight: 18
+  bounceCount: 3
+  bounceDuration: 0.3
+  bounceDecay: 0.45
+  allowDragDuringFx: 1
 --- !u!114 &8700874591314937925
 MonoBehaviour:
   m_ObjectHideFlags: 0
