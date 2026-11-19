@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -13,12 +12,9 @@ public class ZoomWhenTrue : MonoBehaviour
     [SerializeField] private float bounceDuration = 0.5f;
     [SerializeField, Range(0f, 1f)]
     private float volumeKeep = 0.5f;
-    [SerializeField] private bool keepBottomFixed = true;
 
     private DropTarget _drop;
-    private RectTransform _rect;
     private Vector3 _baseScale;
-    private Vector2 _basePos;
     private Coroutine _bounceRoutine;
 
     private void Awake()
@@ -28,11 +24,7 @@ public class ZoomWhenTrue : MonoBehaviour
         if (zoomTarget == null)
             zoomTarget = transform;
 
-        _rect = zoomTarget as RectTransform;
         _baseScale = zoomTarget.localScale;
-
-        if (_rect != null)
-            _basePos = _rect.anchoredPosition;
     }
 
     private void OnEnable()
@@ -101,24 +93,11 @@ public class ZoomWhenTrue : MonoBehaviour
 
     private void ApplyBounce(float yMul, float xMul)
     {
-        float sy = _baseScale.y * yMul;
-
         zoomTarget.localScale = new Vector3(
             _baseScale.x * xMul,
-            sy,
+            _baseScale.y * yMul,
             _baseScale.z
         );
-
-        if (keepBottomFixed && _rect != null)
-        {
-            float h = _rect.rect.height;
-
-            _rect.anchoredPosition = new Vector2(
-                _basePos.x,
-                _basePos.y +
-                _rect.pivot.y * h * (sy - _baseScale.y)
-            );
-        }
     }
 
     private void ResetTarget()
@@ -126,8 +105,5 @@ public class ZoomWhenTrue : MonoBehaviour
         if (zoomTarget == null) return;
 
         zoomTarget.localScale = _baseScale;
-
-        if (_rect != null)
-            _rect.anchoredPosition = _basePos;
     }
 }

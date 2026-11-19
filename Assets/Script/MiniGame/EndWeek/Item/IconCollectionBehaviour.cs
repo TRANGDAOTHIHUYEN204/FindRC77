@@ -127,8 +127,7 @@ public class IconCollectionBehaviour : MonoBehaviour
         if (CurrentState != State.Dragging) return;
 
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(UICamera, transform.position);
-        DropTarget target = DropTarget.FindAt(screenPoint, UICamera);
-
+        DropTarget target = DropTarget.FindAt(screenPoint, UICamera, ItemType);
         if (target != null && target.Accepts(ItemType))
             Accept(target);
         else
@@ -146,8 +145,7 @@ public class IconCollectionBehaviour : MonoBehaviour
         SetState(State.Completing);
         breath.StopBreathing();
 
-        mover.JumpAndScaleTo(target.SnapPosition, jumpPower, jumpDuration, jumpEase,
-            Vector3.one * endScale, scaleEase, () =>
+        mover.JumpAndScaleTo(target.SnapPosition, jumpPower, jumpDuration, jumpEase, Vector3.one * endScale, scaleEase, () =>
             {
                 target.NotifyAccepted();
                 Complete();

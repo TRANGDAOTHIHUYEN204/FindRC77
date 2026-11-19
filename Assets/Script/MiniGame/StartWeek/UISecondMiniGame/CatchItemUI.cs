@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,9 +29,13 @@ public class CatchItemUI : MonoBehaviour
     [SerializeField] private string stringLose;
     [SerializeField] private string stringTitleWin;
     [SerializeField] private string stringTitleLose;
+    [SerializeField] private float winDelay = 1.5f;
+    [SerializeField] private float loseDelay = 1.5f;
+
     private MiniSecondStateGame state;
     private Color _normalTimerColor;
     private MiniSecondPhase _lastPhase;
+    private Coroutine _showRoutine;
 
     private void Awake() => _normalTimerColor = timerText.color;
 
@@ -60,9 +66,14 @@ public class CatchItemUI : MonoBehaviour
     {
         timeManager.OnTimeChanged -= UpdateText;
         timeManager.OnWarningStart -= OnWarning;
+        StopShowRoutine();
     }
 
-    private void OnDestroy() => Unbind();
+    private void OnDestroy()
+    {
+        Unbind();
+        StopShowRoutine();
+    }
 
     public void SetDoubleButtonInteractable(bool value)
     {
@@ -79,23 +90,51 @@ public class CatchItemUI : MonoBehaviour
 
     public void ResetUI()
     {
+        StopShowRoutine();
         timerText.color = _normalTimerColor;
         _lastPhase = default;
+        HideAllPanels(true); 
+    }
+    public void ClosePause()
+    {
+        SetPanel(pausePanel, false);
     }
 
     private void OnScoreChanged(int total, int delta) => textScore.text = total.ToString();
+
     private void OnPhaseChanged(MiniSecondPhase phase)
     {
-        Debug.Log($"[CatchUI] Phase={phase}, last={_lastPhase}, completedBefore={SaveSecondMiniGame.Completed}");
+        StopShowRoutine();
+        _showRoutine = StartCoroutine(ShowPanelRoutine(phase));
+    }
 
-        pausePanel.SetActive(phase == MiniSecondPhase.Paused);
-        winPanel.SetActive(phase == MiniSecondPhase.Won);
-        losePanel.SetActive(phase == MiniSecondPhase.Lost);
+    private IEnumerator ShowPanelRoutine(MiniSecondPhase phase)
+    {
+        if (phase != MiniSecondPhase.Paused) SetPanel(pausePanel, false);
+        if (phase != MiniSecondPhase.Won)    SetPanel(winPanel, false);
+        if (phase != MiniSecondPhase.Lost)   SetPanel(losePanel, false);
+
+        float delay = phase == MiniSecondPhase.Won ? winDelay
+                    : phase == MiniSecondPhase.Lost ? loseDelay : 0f;
+
+        if (delay > 0f)
+            yield return new WaitForSecondsRealtime(delay);
 
         UpdateResultText(phase);
 
-        if (phase == MiniSecondPhase.Won)
+        if (phase == MiniSecondPhase.Paused)
+        {
+            SetPanel(pausePanel, true);
+        }
+        else if (phase == MiniSecondPhase.Won)
+        {
             RefreshDoubleButton();
+            SetPanel(winPanel, true);
+        }
+        else if (phase == MiniSecondPhase.Lost)
+        {
+            SetPanel(losePanel, true);
+        }
 
         if (phase != _lastPhase)
         {
@@ -112,6 +151,69 @@ public class CatchItemUI : MonoBehaviour
         }
 
         _lastPhase = phase;
+        _showRoutine = null;
+    }
+
+    private void StopShowRoutine()
+    {
+        if (_showRoutine != null)
+        {
+            StopCoroutine(_showRoutine);
+            _showRoutine = null;
+        }
+    }
+    private void SetPanel(GameObject panel, bool show, Action onClosed = null)
+    {
+        if (!panel)
+        {
+            if (!show) onClosed?.Invoke();
+            return;
+        }
+
+        PanelAnimation anim = panel.GetComponentInChildren<PanelAnimation>(true);
+
+        if (anim == null)
+        {
+            panel.SetActive(show);
+            if (!show) onClosed?.Invoke();
+            return;
+        }
+
+        if (show)
+        {
+            panel.SetActive(true);
+            anim.Show();
+        }
+        else
+        {
+            if (!panel.activeSelf)
+            {
+                onClosed?.Invoke();
+                return;
+            }
+
+            anim.Close(() =>
+            {
+                panel.SetActive(false);
+                onClosed?.Invoke();
+            });
+        }
+    }
+
+    private void HideAllPanels(bool animated)
+    {
+        if (animated)
+        {
+            SetPanel(pausePanel, false);
+            SetPanel(winPanel, false);
+            SetPanel(losePanel, false);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+            winPanel.SetActive(false);
+            losePanel.SetActive(false);
+        }
     }
 
     private void PlaySfx(AudioClip clip, float volume)
@@ -126,24 +228,20 @@ public class CatchItemUI : MonoBehaviour
     }
 
     private void UpdateText(float t) => timerText.text = TimeManager.Format(t);
+
     private void UpdateResultText(MiniSecondPhase phase)
     {
         if (phase == MiniSecondPhase.Won)
         {
-            if (textWin != null)
-                textWin.text = stringWin;
-
-            if (titleWin != null)
-                titleWin.text = stringTitleWin;
+            if (textWin != null) textWin.text = stringWin;
+            if (titleWin != null) titleWin.text = stringTitleWin;
         }
         else if (phase == MiniSecondPhase.Lost)
         {
-            if (textLose != null)
-                textLose.text = stringLose;
-
-            if (titleLose != null)
-                titleLose.text = stringTitleLose;
+            if (textLose != null) textLose.text = stringLose;
+            if (titleLose != null) titleLose.text = stringTitleLose;
         }
     }
+
     private void OnWarning() => timerText.color = warningColor;
 }

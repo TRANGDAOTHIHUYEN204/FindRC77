@@ -7,17 +7,24 @@ public class HandlePlayerCollisionItem : MonoBehaviour
 {
     [SerializeField] private RectTransform spawnParent;
     [SerializeField] private Transform catchPoint;
-    [SerializeField] private float catchHalfWidth = 100f;
+    [SerializeField] private float catchHalfWidth = 150f;
     [SerializeField] private float catchHalfHeight = 30f;
     [SerializeField] private AudioClip catchTrue;
-    [SerializeField] private AudioClip notCatch;
+    [SerializeField] private AudioClip catchFalse;
     [Range(0f, 1f)] [SerializeField] private float catchVolume = 1f;
-    [Range(0f, 1f)] [SerializeField] private float missVolume = 1f;
+    [Range(0f, 1f)] [SerializeField] private float falseVolume = 1f;
+    [SerializeField] private List<ItemType> catchFalseItems;
 
     public event Action<Item> Caught;
     public event Action<Item> Missed;
 
     private readonly List<Item> active = new List<Item>(64);
+    private HashSet<ItemType> catchFalseSet;
+
+    private void Awake()
+    {
+        catchFalseSet = new HashSet<ItemType>(catchFalseItems);
+    }
 
     public void Register(Item item)
     {
@@ -37,10 +44,9 @@ public class HandlePlayerCollisionItem : MonoBehaviour
         active.RemoveAt(last);
         item.ActiveIndex = -1;
     }
+    
     public void NotifyMissed(Item item)
     {
-        PlaySfx(notCatch, missVolume);
-        Haptics.Heavy();
         Missed?.Invoke(item);
     }
 
@@ -60,8 +66,17 @@ public class HandlePlayerCollisionItem : MonoBehaviour
             if (x + it.HalfWidth < minX || x - it.HalfWidth > maxX) continue;
             if (y + it.HalfHeight < minY || y - it.HalfHeight > maxY) continue;
 
-            PlaySfx(catchTrue, catchVolume);
-            Haptics.Light();
+            if (catchFalseSet.Contains(it.Type))
+            {
+                PlaySfx(catchFalse, falseVolume);
+                Haptics.Heavy();
+            }
+            else
+            {
+                PlaySfx(catchTrue, catchVolume);
+                Haptics.Light();
+            }
+
             Caught?.Invoke(it);
             it.ReturnToPool();
         }
@@ -69,7 +84,7 @@ public class HandlePlayerCollisionItem : MonoBehaviour
 
     private void PlaySfx(AudioClip clip, float volume)
     {
-        if (clip == null || SoundManager.Instance == null) return;
+        if (clip is null || SoundManager.Instance is null) return;
         SoundManager.Instance.PlaySfx(clip, volume);
     }
 

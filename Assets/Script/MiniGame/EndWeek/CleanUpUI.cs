@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,14 +23,18 @@ public class CleanUpUI : MonoBehaviour
     [SerializeField] private string stringLose;
     [SerializeField] private string stringTitleWin;
     [SerializeField] private string stringTitleLose;
-    
+    [SerializeField] private float winDelay = 1.5f;
+    [SerializeField] private float loseDelay = 1.5f;
+    [SerializeField] private float pauseDelay = 0f;
+
     private Color _normalTimerColor;
     private MiniThirdStateGame _state;
+    private Coroutine _showRoutine;
 
     private void Awake()
     {
         _normalTimerColor = timerText.color;
-        HideAllPanels();
+        HideAllPanels(false);
     }
 
     private void OnEnable()
@@ -42,6 +48,7 @@ public class CleanUpUI : MonoBehaviour
         timeManager.OnTimeChanged -= UpdateText;
         timeManager.OnWarningStart -= OnWarning;
         if (_state != null) _state.OnPhaseChanged -= HandlePhaseChanged;
+        StopShowRoutine();
     }
 
     public void Bind(MiniThirdStateGame state)
@@ -53,15 +60,17 @@ public class CleanUpUI : MonoBehaviour
 
     public void ResetUI()
     {
+        StopShowRoutine();
         timerText.color = _normalTimerColor;
-        HideAllPanels();
+        HideAllPanels(true); // fade out
     }
 
     public void ShowSavedResult(ThirdResult result)
     {
-        winPanel.SetActive(result == ThirdResult.Won);
-        losePanel.SetActive(result == ThirdResult.Lost);
-        pauseGame.SetActive(false);
+        StopShowRoutine();
+        SetPanel(winPanel, result == ThirdResult.Won);
+        SetPanel(losePanel, result == ThirdResult.Lost);
+        SetPanel(pauseGame, false);
         RefreshDoubleButton();
     }
 
@@ -75,14 +84,113 @@ public class CleanUpUI : MonoBehaviour
         if (doubleButton != null)
             doubleButton.interactable = !SaveGame.IsCleanDoubleClaimed();
     }
+    public void ClosePause()
+    {
+        SetPanel(pauseGame, false);
+    }
 
     private void HandlePhaseChanged(MiniThirdPhase phase)
     {
-        winPanel.SetActive(phase == MiniThirdPhase.Won);
-        losePanel.SetActive(phase == MiniThirdPhase.Lost);
-        pauseGame.SetActive(phase == MiniThirdPhase.Paused);
+        StopShowRoutine();
+        _showRoutine = StartCoroutine(ShowPanelRoutine(phase));
+    }
+
+    private IEnumerator ShowPanelRoutine(MiniThirdPhase phase)
+    {
+        if (phase != MiniThirdPhase.Won)    SetPanel(winPanel, false);
+        if (phase != MiniThirdPhase.Lost)   SetPanel(losePanel, false);
+        if (phase != MiniThirdPhase.Paused) SetPanel(pauseGame, false);
+
+        float delay = phase switch
+        {
+            MiniThirdPhase.Won => winDelay,
+            MiniThirdPhase.Lost => loseDelay,
+            MiniThirdPhase.Paused => pauseDelay,
+            _ => 0f
+        };
+
+        if (delay > 0f)
+            yield return new WaitForSecondsRealtime(delay);
+
         UpdateResultText(phase);
-        if (phase == MiniThirdPhase.Won) RefreshDoubleButton();
+
+        if (phase == MiniThirdPhase.Won)
+        {
+            RefreshDoubleButton();
+            SetPanel(winPanel, true);
+        }
+        else if (phase == MiniThirdPhase.Lost)
+        {
+            SetPanel(losePanel, true);
+        }
+        else if (phase == MiniThirdPhase.Paused)
+        {
+            SetPanel(pauseGame, true);
+        }
+
+        _showRoutine = null;
+    }
+
+    private void StopShowRoutine()
+    {
+        if (_showRoutine != null)
+        {
+            StopCoroutine(_showRoutine);
+            _showRoutine = null;
+        }
+    }
+    private void SetPanel(GameObject panel, bool show, Action onClosed = null)
+    {
+        if (!panel)
+        {
+            if (!show) onClosed?.Invoke();
+            return;
+        }
+
+        PanelAnimation anim = panel.GetComponentInChildren<PanelAnimation>(true);
+
+        if (anim == null)
+        {
+            panel.SetActive(show);
+            if (!show) onClosed?.Invoke();
+            return;
+        }
+
+        if (show)
+        {
+            panel.SetActive(true);
+            anim.Show();
+        }
+        else
+        {
+            if (!panel.activeSelf)
+            {
+                onClosed?.Invoke();
+                return;
+            }
+
+            anim.Close(() =>
+            {
+                panel.SetActive(false);
+                onClosed?.Invoke();
+            });
+        }
+    }
+
+    private void HideAllPanels(bool animated)
+    {
+        if (animated)
+        {
+            SetPanel(winPanel, false);
+            SetPanel(losePanel, false);
+            SetPanel(pauseGame, false);
+        }
+        else
+        {
+            winPanel.SetActive(false);
+            losePanel.SetActive(false);
+            pauseGame.SetActive(false);
+        }
     }
 
     public void LoadHome()
@@ -90,29 +198,17 @@ public class CleanUpUI : MonoBehaviour
         SceneManager.LoadScene(nameScene);
     }
 
-    private void HideAllPanels()
-    {
-        winPanel.SetActive(false);
-        losePanel.SetActive(false);
-        pauseGame.SetActive(false);
-    }
     private void UpdateResultText(MiniThirdPhase phase)
     {
         if (phase == MiniThirdPhase.Won)
         {
-            if (textWin != null)
-                textWin.text = stringWin;
-
-            if (titleWin != null)
-                titleWin.text = stringTitleWin;
+            if (textWin != null) textWin.text = stringWin;
+            if (titleWin != null) titleWin.text = stringTitleWin;
         }
         else if (phase == MiniThirdPhase.Lost)
         {
-            if (textLose != null)
-                textLose.text = stringLose;
-
-            if (titleLose != null)
-                titleLose.text = stringTitleLose;
+            if (textLose != null) textLose.text = stringLose;
+            if (titleLose != null) titleLose.text = stringTitleLose;
         }
     }
 

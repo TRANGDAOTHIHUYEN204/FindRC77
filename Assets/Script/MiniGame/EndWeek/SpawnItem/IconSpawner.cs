@@ -66,6 +66,7 @@ public class IconSpawner : MonoBehaviour
         if (pendingEntries.Count == 0) return;
 
         ItemEntry entry = pendingEntries.Dequeue();
+        Debug.Log($"[Spawn] sprite={entry.Sprite.name}, type='{entry.Type}'", this);
         Vector3 pos = spawnPoints[slotIndex].position;
 
         IconCollectionBehaviour icon = factory.Spawn(entry, pos, delay);

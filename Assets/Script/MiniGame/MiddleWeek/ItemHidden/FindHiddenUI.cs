@@ -259,10 +259,7 @@ public class FindHiddenUI : MonoBehaviour
         });
     }
 
-    private void SetPanel(
-        GameObject panel,
-        bool show,
-        Action onClosed = null)
+    private void SetPanel(GameObject panel, bool show, Action onClosed = null)
     {
         if (!panel)
         {
