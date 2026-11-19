@@ -60,3 +60,6 @@ crashlytics-build.properties
 Assets/Front/Montserrat-Bold SDF.asset.meta
 Assets/Front/Montserrat-Bold SDF.asset
 Assets/Front/Montserrat-Bold SDF.asset.meta
+
+# Tài liệu / ảnh gen tạm, không đưa lên git
+/docs/
