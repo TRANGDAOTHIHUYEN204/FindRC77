@@ -331,7 +331,7 @@ public class FindHiddenUI : MonoBehaviour
     private void UpdateLevelText()
     {
         if (textLevel != null)
-            textLevel.text = "Zoo tour completed!";
+            textLevel.text = "Events Completed!";
         if (textWinEvent != null)
             textWinEvent.text = "You have completed your zoo tour. Thanks for visiting our friendly animals!";
     }

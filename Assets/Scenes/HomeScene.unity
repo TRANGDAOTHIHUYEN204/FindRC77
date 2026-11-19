@@ -3053,7 +3053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: JoinFindHidden
+      value: Join
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -4578,7 +4578,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 00010101000000
     forceOn: 0
     forceOff: 0
@@ -4588,7 +4588,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 00000000010100
     forceOn: 0
     forceOff: 0
@@ -4598,7 +4598,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 01000000000001
     forceOn: 0
     forceOff: 0

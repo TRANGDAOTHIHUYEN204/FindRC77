@@ -6,12 +6,11 @@ public class ThirdMiniGameManager : MonoBehaviour
     [SerializeField] private CompletionCounter counter;
     [SerializeField] private IconSpawner spawner;
     [SerializeField] private CleanUpUI ui;
-    [SerializeField] private bool blockReplay = true;   // đã win/lose thì không cho chơi lại
-
+ 
     public MiniThirdStateGame State { get; private set; }
 
     private bool _adPending;
-    private bool _blocked;   // vào scene mà đã chơi rồi
+    private bool _blocked;   
 
     private void Awake()
     {
@@ -35,12 +34,12 @@ public class ThirdMiniGameManager : MonoBehaviour
         State.OnPhaseChanged -= HandlePhaseChanged;
 
         DragHandler2D.Locked = false;
-        Time.timeScale = 1f;   // quan trọng: tránh kẹt timeScale = 0 khi đổi scene
+        Time.timeScale = 1f;
     }
 
     private void Start()
     {
-        if (blockReplay && SaveThirdMiniGame.HasPlayed)
+        if ( SaveThirdMiniGame.HasPlayed)
         {
             _blocked = true;
             DragHandler2D.Locked = true;
@@ -104,7 +103,6 @@ public class ThirdMiniGameManager : MonoBehaviour
     public void RestartGame()
     {
         if (_blocked) return;
-        if (blockReplay && State.IsEnded) return;  
 
         _adPending = false;
         Time.timeScale = 1f;
@@ -122,7 +120,6 @@ public class ThirdMiniGameManager : MonoBehaviour
         var ads = AdsController.Instance;
         if (ads == null)
         {
-            Debug.LogWarning("[CleanUp] AdsController null.");
             return;
         }
 
