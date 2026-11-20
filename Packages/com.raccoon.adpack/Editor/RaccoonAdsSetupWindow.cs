@@ -1332,7 +1332,8 @@ namespace RCKit.Ads.Main.Editor
                 "Setup GameAppsFlyer trên scene: tìm GameObject chứa RaccoonAdsManager trong scene hiện tại, " +
                 "add (hoặc lấy nếu đã có) component GameAppsFlyer, rồi set AppID.\n" +
                 "- Nếu nhập AppID bên dưới: dùng đúng giá trị đã nhập.\n" +
-                "- Nếu để trống: Android tự lấy package name (Player Settings); iOS sẽ yêu cầu nhập AppID.",
+                "- Nếu để trống: Android tự lấy package name (Player Settings); iOS sẽ yêu cầu nhập AppID.\n" +
+                "- Giá trị được ghi vào appIdAndroid hoặc appIdIOS theo build target hiện tại (đổi target để setup platform còn lại).",
                 MessageType.Info);
             EditorGUILayout.Space(4);
 
@@ -1367,29 +1368,31 @@ namespace RCKit.Ads.Main.Editor
             if (appsFlyer == null)
                 appsFlyer = Undo.AddComponent<GameAppsFlyer>(go);
 
-            if (!string.IsNullOrWhiteSpace(_appsflyerAppIdInput))
+            var isIOS = EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS;
+            var input = _appsflyerAppIdInput?.Trim();
+            if (isIOS)
             {
+                if (!GameAppsFlyer.IsValidIOSAppId(input))
+                {
+                    EditorUtility.DisplayDialog("Raccoon Ads Setup",
+                        "Target hiện tại là iOS: cần nhập App Store ID dạng số (ví dụ 6759906257) vào ô AppID rồi bấm lại Setup AppsFlyer.",
+                        "OK");
+                    return;
+                }
                 Undo.RecordObject(appsFlyer, "Set AppsFlyer AppID");
-                appsFlyer.appID = _appsflyerAppIdInput.Trim();
-            }
-            else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS)
-            {
-                EditorUtility.DisplayDialog("Raccoon Ads Setup",
-                    "Target hiện tại là iOS: cần nhập AppID (App Store ID) vào ô AppID rồi bấm lại Setup AppsFlyer.",
-                    "OK");
-                return;
+                appsFlyer.appIdIOS = input;
             }
             else
             {
                 Undo.RecordObject(appsFlyer, "Set AppsFlyer AppID");
-                appsFlyer.appID = PlayerSettings.applicationIdentifier;
+                appsFlyer.appIdAndroid = string.IsNullOrEmpty(input) ? PlayerSettings.applicationIdentifier : input;
             }
 
             EditorUtility.SetDirty(appsFlyer);
             EditorSceneManager.MarkSceneDirty(go.scene);
 
             EditorUtility.DisplayDialog("Raccoon Ads Setup",
-                $"Đã setup GameAppsFlyer trên GameObject '{go.name}'.\nAppID: {appsFlyer.appID}",
+                $"Đã setup GameAppsFlyer trên GameObject '{go.name}'.\nAppID Android: {appsFlyer.appIdAndroid}\nAppID iOS: {appsFlyer.appIdIOS}",
                 "OK");
 #else
             EditorUtility.DisplayDialog("Raccoon Ads Setup",

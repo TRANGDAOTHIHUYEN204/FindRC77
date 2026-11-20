@@ -1,6 +1,6 @@
 {
   "name": "com.raccoon.adpack",
-  "version": "0.0.105",
+  "version": "0.0.111",
   "displayName": "Raccoon Ads Package Test",
   "description": "Android & iOS overlay ads integration for Unity, built on Google Mobile Ads SDK.",
   "unity": "2023.1",
@@ -13,5 +13,6 @@
       "description": "Basic ads sample scene.",
       "path": "Samples~"
     }
-  ]
+  ],
+  "_fingerprint": "5e4d3f6a71e281c4ac5d7183ed5b3980d8d0538d"
 }

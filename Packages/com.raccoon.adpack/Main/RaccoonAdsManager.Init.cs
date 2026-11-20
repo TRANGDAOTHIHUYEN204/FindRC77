@@ -268,7 +268,8 @@ namespace RCKit.Ads.Main
                 }
                 else if (isNative)
                 {
-                    var isMultiAd = unitConfig.is_multi_ad && !string.IsNullOrEmpty(unitConfig.ad_id_2);
+                    var multiAdExtraIds = unitConfig.GetMultiAdExtraIds();
+                    var isMultiAd = multiAdExtraIds.Count > 0;
                     var layoutQuit = GetQuitLayoutNative(unitConfig.layout_quit_native, isMultiAd);
                     var layoutTemp = GetLayoutTemplateNative(unitConfig.layout_template_native, unitConfig.use_only_portrait);
 #if RACCOON_DEBUG_LAYOUT_NATIVE
@@ -283,7 +284,7 @@ namespace RCKit.Ads.Main
                     if (close_ad_on_click)
                         native.SetCloseAdAfterClickAd();
                     if (isMultiAd)
-                        native.SetMultiAd(unitConfig.ad_id_2);
+                        native.SetMultiAd(multiAdExtraIds.ToArray());
                     var temp = new RaccoonAdsInterstitial(native);
                     if(unitConfig.preload_ad)
                         temp.SetReloadAfterShow(unitConfig.preload_ad);

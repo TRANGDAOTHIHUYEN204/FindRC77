@@ -133,7 +133,7 @@ namespace RCKit.Ads.JNative
             _overlay = overlay;
             _overlay.OnClosed += OnAdClosed;
             if (!_registeredOnPaid)
-                _overlay.OnAdPaid += OnAdsPaid;
+                SubscribePaid(_overlay);
 
             if (_showOnLoad)
             {
@@ -153,11 +153,6 @@ namespace RCKit.Ads.JNative
                 _overlay.Show();
             }
 #endif
-        }
-
-        private void OnAdsPaid(AdValue adValue)
-        {
-            GoogleAdsMediation.RaisePaid(adValue, adUnitId, AdPaidInfo.FormatNative);
         }
 
         private void OnAdClosed()

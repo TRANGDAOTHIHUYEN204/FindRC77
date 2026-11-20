@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GoogleMobileAds.Api;
 using JKit.Monetize.Ads;
 using RCKit.Ads.AdMob;
@@ -29,7 +30,7 @@ namespace RCKit.Ads.JNative
         private bool _closeAdOnClick = false;
         private bool _forceAdPortrait = false;
         private bool _isMultiAd;
-        private string _adUnitId2;
+        private List<string> _extraAdUnitIds;
 
         public JNativeAdsInterstitial(string adUnitId, bool supportMedia = true, string quitLayout = "inter", string template = "", bool reloadOnClick = true) : base(adUnitId, supportMedia)
         {
@@ -53,7 +54,7 @@ namespace RCKit.Ads.JNative
 #else
             // NativeOverlay.Load(adUnitId, -1, supportMedia, _layoutQuit, _template, OnOverlayLoaded, timeClose, _reloadOnClick);
             var padding = NativeOverlay.GetPadding();
-            var buildAdUnitId = _isMultiAd ? $"{adUnitId}_{_adUnitId2}" : adUnitId;
+            var buildAdUnitId = BuildAdUnitId();
             var builder = new NativeOptions.Builder()
                 .SetForceAdPortrait(_forceAdPortrait)
                 .SetOptionFullScreen(_template)
@@ -87,18 +88,13 @@ namespace RCKit.Ads.JNative
 
             _overlay = overlay;
             if (!_registeredOnPaid)
-                _overlay.OnAdPaid += OnAdsPaid;
+                SubscribePaid(_overlay);
             // _overlay.Hide();
             OnLoadSucceed();
             if (AdsManager.IsPlatformIOS)
                 _registeredOnPaid = true;
 
             OnFinishClickAd();
-        }
-
-        private void OnAdsPaid(AdValue adValue)
-        {
-            GoogleAdsMediation.RaisePaid(adValue, adUnitId, AdPaidInfo.FormatNative);
         }
 
         public bool IsReady()
@@ -184,11 +180,28 @@ namespace RCKit.Ads.JNative
             _closeAdOnClick = true;
         }
 
-        public void SetMultiAd(string adUnitId2)
+        /// <summary>
+        /// Bật multi ad với 1 hoặc nhiều ad id phụ (vd SetMultiAd(id2) hoặc SetMultiAd(id2, id3)).
+        /// Id rỗng/null bị bỏ qua; nếu không còn id hợp lệ nào thì không đổi trạng thái (giữ hành vi cũ).
+        /// </summary>
+        public void SetMultiAd(params string[] extraAdUnitIds)
         {
-            if (string.IsNullOrEmpty(adUnitId2)) return;
+            if (extraAdUnitIds == null) return;
+            var ids = new List<string>(extraAdUnitIds.Length);
+            foreach (var id in extraAdUnitIds)
+            {
+                if (!string.IsNullOrEmpty(id)) ids.Add(id);
+            }
+            if (ids.Count == 0) return;
             _isMultiAd = true;
-            _adUnitId2 = adUnitId2;
+            _extraAdUnitIds = ids;
+        }
+
+        // Ghép ad id chính + các id phụ bằng "_" (format native SDK đang dùng: "id1_id2" hoặc "id1_id2_id3").
+        private string BuildAdUnitId()
+        {
+            if (!_isMultiAd || _extraAdUnitIds == null || _extraAdUnitIds.Count == 0) return adUnitId;
+            return adUnitId + "_" + string.Join("_", _extraAdUnitIds);
         }
 
         private void OnFinishClickAd()

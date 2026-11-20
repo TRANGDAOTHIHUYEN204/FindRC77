@@ -105,7 +105,7 @@ namespace RCKit.Ads.JNative
             _overlay.SetScaleButtonQuit(_quitButtonScale);
             _overlay.SetScaleButtonQuitCover(_quitButtonCoverScale);
             if (!_registeredOnPaid)
-                _overlay.OnAdPaid += OnAdsPaid;
+                SubscribePaid(_overlay);
             // Áp trạng thái show/hide hiện tại lên overlay vừa load
             if (_isShowed) _overlay.Show();
             else _overlay.Hide();
@@ -137,11 +137,6 @@ namespace RCKit.Ads.JNative
             _overlay?.Hide();
 #endif
             OnHidden();
-        }
-
-        private void OnAdsPaid(AdValue adValue)
-        {
-            GoogleAdsMediation.RaisePaid(adValue, adUnitId, AdPaidInfo.FormatNative);
         }
 
         public void Destroy()

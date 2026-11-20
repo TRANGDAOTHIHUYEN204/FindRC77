@@ -11,7 +11,9 @@
 - (void)onClosed;
 - (void)onClicked;
 - (void)onImpression;
-- (void)onAdPaidWithValue:(GADAdValue *)value;
+// adSourceInfo: ad_source_name/id, instance, adapter class, mediation group/ab test (all NSString).
+- (void)onAdPaidWithValue:(GADAdValue *)value
+             adSourceInfo:(NSDictionary<NSString *, NSString *> *)adSourceInfo;
 
 @end
 

@@ -486,10 +486,33 @@
 - (void)attachDelegateAndPaidHandlerToNativeAd:(GADNativeAd *)nativeAd {
   nativeAd.delegate = self;
   __weak typeof(self) weakSelf = self;
+  // Read from the paid ad itself: in multi-ad mode it may not be the one on screen.
+  __weak GADNativeAd *weakAd = nativeAd;
   nativeAd.paidEventHandler = ^(GADAdValue *value) {
-    if ([weakSelf.callback respondsToSelector:@selector(onAdPaidWithValue:)]) {
-      [weakSelf.callback onAdPaidWithValue:value];
+    if ([weakSelf.callback respondsToSelector:@selector(onAdPaidWithValue:adSourceInfo:)]) {
+      [weakSelf.callback onAdPaidWithValue:value
+                              adSourceInfo:[JNativeOverlay adSourceInfoForNativeAd:weakAd]];
     }
+  };
+}
+
++ (NSDictionary<NSString *, NSString *> *)adSourceInfoForNativeAd:(GADNativeAd *)nativeAd {
+  GADResponseInfo *info = nativeAd.responseInfo;
+  GADAdNetworkResponseInfo *adapter = info.loadedAdNetworkResponseInfo;
+  NSDictionary *extras = info.extrasDictionary;
+  NSString * (^str)(id) = ^NSString *(id v) {
+    return [v isKindOfClass:[NSString class]] ? v : (v ? [v description] : @"");
+  };
+  return @{
+    @"ad_source_name" : str(adapter.adSourceName),
+    @"ad_source_id" : str(adapter.adSourceID),
+    @"ad_source_instance_name" : str(adapter.adSourceInstanceName),
+    @"ad_source_instance_id" : str(adapter.adSourceInstanceID),
+    @"adapter_class_name" : str(adapter.adNetworkClassName),
+    @"response_id" : str(info.responseIdentifier),
+    @"mediation_group_name" : str(extras[@"mediation_group_name"]),
+    @"mediation_ab_test_name" : str(extras[@"mediation_ab_test_name"]),
+    @"mediation_ab_test_variant" : str(extras[@"mediation_ab_test_variant"]),
   };
 }
 

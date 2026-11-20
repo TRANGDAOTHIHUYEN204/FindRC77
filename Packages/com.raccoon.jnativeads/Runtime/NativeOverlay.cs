@@ -11,6 +11,8 @@ namespace JKit.Monetize.Ads
         public event Action OnClicked;
         public event Action OnClosed;
         public event Action<AdValue> OnAdPaid;
+        // Like OnAdPaid plus the ad source of the paid ad (empty fields if the SDK did not report it).
+        public event Action<AdValue, NativeAdSourceInfo> OnAdPaidInfo;
         
         private bool isPauseOnShow = false;
         private float _timeScale = 1;
@@ -45,10 +47,11 @@ namespace JKit.Monetize.Ads
                 OnClosed?.Invoke();
             };
 
-            _client.OnAdPaid += async (adValue) =>
+            _client.OnAdPaidInfo += async (adValue, sourceInfo) =>
             {
                 await Awaitable.MainThreadAsync();
                 OnAdPaid?.Invoke(adValue);
+                OnAdPaidInfo?.Invoke(adValue, sourceInfo ?? NativeAdSourceInfo.Empty);
             };
 
             AdsLifecycle.AdsOnApplicationPause += _client.OnApplicationPause;
@@ -198,6 +201,7 @@ namespace JKit.Monetize.Ads
             OnClicked = null;
             OnClosed = null;
             OnAdPaid = null;
+            OnAdPaidInfo = null;
         }
 
         public static Vector2 GetPadding()
@@ -444,13 +448,44 @@ namespace JKit.Monetize.Ads
         }
     }
 
+    // Field names match the JSON keys sent by the Android/iOS plugin (JsonUtility).
+    [Serializable]
+    public class NativeAdSourceInfo
+    {
+        public static readonly NativeAdSourceInfo Empty = new NativeAdSourceInfo();
+
+        public string ad_source_name = string.Empty;
+        public string ad_source_id = string.Empty;
+        public string ad_source_instance_name = string.Empty;
+        public string ad_source_instance_id = string.Empty;
+        public string adapter_class_name = string.Empty;
+        public string response_id = string.Empty;
+        public string mediation_group_name = string.Empty;
+        public string mediation_ab_test_name = string.Empty;
+        public string mediation_ab_test_variant = string.Empty;
+
+        public static NativeAdSourceInfo FromJson(string json)
+        {
+            if (string.IsNullOrEmpty(json)) return Empty;
+            try
+            {
+                return JsonUtility.FromJson<NativeAdSourceInfo>(json) ?? Empty;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[NativeAdSourceInfo] Parse failed: {e.Message}");
+                return Empty;
+            }
+        }
+    }
+
     public interface INativeOverlay
     {
         event Action OnImpression;
         event Action OnClicked;
         event Action OnClosed;
         event Action OnLoadSucceed;
-        event Action<AdValue> OnAdPaid;
+        event Action<AdValue, NativeAdSourceInfo> OnAdPaidInfo;
         event Action<LoadAdError> OnLoadFailed;
 
         void Load();
