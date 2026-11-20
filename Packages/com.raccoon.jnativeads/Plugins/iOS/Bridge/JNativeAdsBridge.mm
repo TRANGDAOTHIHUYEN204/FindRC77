@@ -58,15 +58,16 @@
   [self sendMessageToUnity:@"OnImpression" message:nil];
 }
 
-- (void)onAdPaidWithValue:(GADAdValue *)value {
-  // Gửi ad value dưới dạng JSON
+- (void)onAdPaidWithValue:(GADAdValue *)value
+             adSourceInfo:(NSDictionary<NSString *, NSString *> *)adSourceInfo {
   NSDecimalNumber *micros =
       [value.value decimalNumberByMultiplyingByPowerOf10:6];
-  NSDictionary *adValueDict = @{
+  NSMutableDictionary *adValueDict = [NSMutableDictionary dictionaryWithDictionary:@{
     @"currencyCode" : value.currencyCode ?: @"",
     @"valueMicros" : @(micros.longLongValue), // send as number, not string
     @"precision" : @(value.precision)
-  };
+  }];
+  if (adSourceInfo) [adValueDict addEntriesFromDictionary:adSourceInfo];
 
   NSError *jsonError;
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:adValueDict

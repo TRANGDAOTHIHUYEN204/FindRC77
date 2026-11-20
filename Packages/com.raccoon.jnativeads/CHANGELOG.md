@@ -5,6 +5,30 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.124] - 2026-11-20
+
+### Changed
+- Alpha đồng bộ toàn bộ plugin từ `dev_beta_test` (0.0.110): thêm multi-ad iOS, OnAdPaidInfo/NativeAdSourceInfo, fix OOM. Các thay đổi riêng của alpha trước đó (0.0.111–0.0.123) bị thay thế.
+- AAR build từ branch Android `fix_policy` (gồm toàn bộ `dev_beta_test` Android + chỉnh layout non-FAN: quit tap 15dp, media dưới quit bar, `media_view` hiện mặc định).
+
+### Added
+- Scripting define `JNATIVE_HAS_ADSOURCE`, plugin tự thêm vào Player Settings (Android/iOS/Standalone) qua `JNativeFeatureDefines` (Editor). Package khác nên dùng `#if JNATIVE_HAS_ADSOURCE` thay vì đoán theo version.
+
+## [0.0.110] - 2026-11-11
+
+### Fixed
+- Android (multi-ad `inter2`): click vào ad cuối (hoặc khi ad sau chưa sẵn sàng) mà app không rời sang Store/web — hoặc `onAdClicked` đến sau khi app đã resume — khiến thanh loading dừng và mất nút X, kẹt ad. Giờ sau 0,25s thanh loading fill đầy + hiện lại X, ~1s sau tự đóng nếu app không bị pause.
+- Android: `onAdClicked` đến muộn sau khi overlay đã hide/destroy chỉ báo `OnClicked`, không kích hoạt logic chuyển/đóng ad.
+
+## [0.0.109] - 2026-11-10
+
+### Added
+- Paid event kèm ad source của đúng ad vừa trả tiền (kể cả multi-ad): `NativeOverlay.OnAdPaidInfo` (`AdValue`, `NativeAdSourceInfo`) với `ad_source_name`, `ad_source_id`, `ad_source_instance_name`, `ad_source_instance_id`, `adapter_class_name`, `response_id`, `mediation_group_name`, `mediation_ab_test_name`, `mediation_ab_test_variant`. `OnAdPaid` cũ vẫn giữ nguyên.
+- Android: callback Java đổi `onAdPaid(AdValue)` → `onAdPaidWithInfo(AdValue, String json)` (AAR mới). iOS: `onAdPaidWithValue:adSourceInfo:`, ad source được ghép vào JSON `OnAdPaid`.
+
+### Changed
+- `INativeOverlay.OnAdPaid` thay bằng `OnAdPaidInfo`. Code ngoài subscribe trực tiếp client (`GetClient()`) cần đổi sang event mới.
+
 ## [0.0.108] - 2026-11-09
 
 ### Changed

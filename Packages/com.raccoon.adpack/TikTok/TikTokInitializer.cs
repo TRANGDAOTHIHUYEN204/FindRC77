@@ -1,5 +1,4 @@
 #if ENABLE_TIKTOK_SDK && ENABLE_RACCOON_ADMOB
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using RCKit.Ads.AdMob;
@@ -35,56 +34,30 @@ namespace RCKit.Ads.TikTok
         #region Ad revenue
 
         // Schema "admob_sdk" theo doc TikTok In-app ad revenue reporting; không field nào được null.
+        // null khi thiếu AdValue => bỏ event (không gửi revenue 0/sai cho TikTok).
         private static string BuildAdMobRevenueJson(AdPaidInfo info)
         {
-            var adSourceName = string.Empty;
-            var adSourceId = string.Empty;
-            var adSourceInstanceName = string.Empty;
-            var adSourceInstanceId = string.Empty;
-            var mediationGroupName = string.Empty;
-            var mediationAbTestName = string.Empty;
-            var mediationAbTestVariant = string.Empty;
-
-            var adapterInfo = info.ResponseInfo?.GetLoadedAdapterResponseInfo();
-            if (adapterInfo != null)
-            {
-                adSourceName = adapterInfo.AdSourceName ?? string.Empty;
-                adSourceId = adapterInfo.AdSourceId ?? string.Empty;
-                adSourceInstanceName = adapterInfo.AdSourceInstanceName ?? string.Empty;
-                adSourceInstanceId = adapterInfo.AdSourceInstanceId ?? string.Empty;
-            }
-
-            var extras = info.ResponseInfo?.GetResponseExtras();
-            if (extras != null)
-            {
-                mediationGroupName = GetOrEmpty(extras, "mediation_group_name");
-                mediationAbTestName = GetOrEmpty(extras, "mediation_ab_test_name");
-                mediationAbTestVariant = GetOrEmpty(extras, "mediation_ab_test_variant");
-            }
-
+            if (info.AdValue == null) return null;
+            var source = info.Source;
             var sb = new StringBuilder("{");
             AppendString(sb, "device_ad_mediation_platform", "admob_sdk");
             AppendRaw(sb, "value", info.AdValue.Value.ToString(CultureInfo.InvariantCulture));
             AppendString(sb, "currency_code", info.AdValue.CurrencyCode ?? string.Empty);
             AppendRaw(sb, "precision", ((int)info.AdValue.Precision).ToString(CultureInfo.InvariantCulture));
             AppendString(sb, "ad_unit_id", info.AdUnitId);
-            AppendString(sb, "ad_source_name", adSourceName);
-            AppendString(sb, "ad_source_id", adSourceId);
-            AppendString(sb, "ad_source_instance_name", adSourceInstanceName);
-            AppendString(sb, "ad_source_instance_id", adSourceInstanceId);
-            AppendString(sb, "mediation_group_name", mediationGroupName);
-            AppendString(sb, "mediation_ab_test_name", mediationAbTestName);
-            AppendString(sb, "mediation_ab_test_variant", mediationAbTestVariant);
+            AppendString(sb, "ad_source_name", source.Name);
+            AppendString(sb, "ad_source_id", source.Id);
+            AppendString(sb, "ad_source_instance_name", source.InstanceName);
+            AppendString(sb, "ad_source_instance_id", source.InstanceId);
+            AppendString(sb, "mediation_group_name", source.MediationGroupName);
+            AppendString(sb, "mediation_ab_test_name", source.MediationAbTestName);
+            AppendString(sb, "mediation_ab_test_variant", source.MediationAbTestVariant);
             AppendString(sb, "ad_format", info.AdFormat);
             sb.Length--; // bỏ dấu phẩy cuối
             sb.Append('}');
             return sb.ToString();
         }
 
-        private static string GetOrEmpty(Dictionary<string, string> dict, string key)
-        {
-            return dict.TryGetValue(key, out var value) && value != null ? value : string.Empty;
-        }
 
         private static void AppendRaw(StringBuilder sb, string key, string rawValue)
         {
@@ -94,7 +67,8 @@ namespace RCKit.Ads.TikTok
         private static void AppendString(StringBuilder sb, string key, string value)
         {
             sb.Append('"').Append(key).Append("\":\"");
-            foreach (var c in value)
+            // AdSource/AdPaidInfo dạng default(...) có field null.
+            foreach (var c in value ?? string.Empty)
             {
                 switch (c)
                 {
@@ -153,7 +127,22 @@ namespace RCKit.Ads.TikTok
 
         private static void OnAdPaid(AdPaidInfo info)
         {
-            var json = BuildAdMobRevenueJson(info);
+            string json;
+            try
+            {
+                json = BuildAdMobRevenueJson(info);
+            }
+            catch (System.Exception e)
+            {
+                // Không để exception lan ra RaisePaid làm hỏng các handler paid khác.
+                Debug.LogWarning($"{LogTag} Build ad_revenue json failed: {e.Message}");
+                return;
+            }
+            if (json == null)
+            {
+                Debug.LogWarning($"{LogTag} AdValue null, skip ad_revenue");
+                return;
+            }
             // SDK không log payload, in ra để đối chiếu với Events Manager khi test.
             if (debugMode) Debug.Log($"{LogTag} ad_revenue: {json}");
             RunOnUiThread(() => TrackAdRevenue(json));

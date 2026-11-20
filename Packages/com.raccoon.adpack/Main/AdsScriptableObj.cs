@@ -40,6 +40,9 @@ namespace RCKit.Ads.Main
                     is_multi_ad = config.is_multi_ad,
                     ad_id_android_2 = config.is_multi_ad ? testAdId : config.ad_id_android_2,
                     ad_id_ios_2 = config.is_multi_ad ? testAdId : config.ad_id_ios_2,
+                    is_multi_ad_3 = config.is_multi_ad_3,
+                    ad_id_android_3 = config.is_multi_ad && config.is_multi_ad_3 ? testAdId : config.ad_id_android_3,
+                    ad_id_ios_3 = config.is_multi_ad && config.is_multi_ad_3 ? testAdId : config.ad_id_ios_3,
                     removable = config.removable,
                     preload_ad = config.preload_ad,
                     reload_on_fail = config.reload_on_fail,
@@ -81,6 +84,11 @@ namespace RCKit.Ads.Main
         public bool is_multi_ad; // bật thêm 1 ad id thứ 2 cho cùng ad_type (ad_id_android_2/ad_id_ios_2)
         public string ad_id_android_2;
         public string ad_id_ios_2;
+        // Chỉ có tác dụng khi is_multi_ad bật: thêm ad id thứ 3 (ad_id_android_3/ad_id_ios_3).
+        // Field mới -> asset cũ không có key này sẽ mặc định false/null, giữ nguyên hành vi 2 id.
+        public bool is_multi_ad_3;
+        public string ad_id_android_3;
+        public string ad_id_ios_3;
         public bool removable;
         public bool preload_ad;
         public bool reload_on_fail = true;
@@ -113,6 +121,32 @@ namespace RCKit.Ads.Main
                 return ad_id_android_2;
 #endif
             }
+        }
+
+        public string ad_id_3
+        {
+            get
+            {
+#if UNITY_IOS
+                return ad_id_ios_3;
+#else
+                return ad_id_android_3;
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Danh sách ad id phụ (ngoài ad_id chính) dùng cho multi ad, theo platform hiện tại.
+        /// Rỗng nếu tắt is_multi_ad hoặc ad_id_2 trống. Có thêm ad_id_3 khi bật is_multi_ad_3 và ad_id_3 không trống.
+        /// </summary>
+        public List<string> GetMultiAdExtraIds()
+        {
+            var result = new List<string>(2);
+            if (!is_multi_ad || string.IsNullOrEmpty(ad_id_2)) return result;
+            result.Add(ad_id_2);
+            if (is_multi_ad_3 && !string.IsNullOrEmpty(ad_id_3))
+                result.Add(ad_id_3);
+            return result;
         }
     }
 

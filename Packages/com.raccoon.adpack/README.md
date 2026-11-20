@@ -37,6 +37,10 @@ Dùng module TikTok trong Pangle/TikTok Combined SDK (`pag-sdk` >= 7.7) để g�
 
 Event chỉ được gửi sau khi UMP xong và user có consent (ngoài vùng GDPR luôn gửi); nếu user từ chối, event chỉ nằm local.
 
+## Cảnh báo "tính năng phần cứng bắt buộc" trên Play Console
+
+Permission của SDK (vd. `ACCESS_WIFI_STATE`) và màn hình khóa dọc/ngang khiến Google Play suy ra tính năng bắt buộc (`android.hardware.wifi`, `android.hardware.screen.portrait`...), app bị ẩn trên một số máy, Google Play Games trên PC, Android XR. Kit tự xử lý khi build Android: thêm `<uses-feature android:required="false">` vào manifest của app. Không cần làm gì thêm. Menu `Raccoon > Fix Android Manifest` ghi các khai báo này vào manifest tùy chỉnh trong `Assets/Plugins/Android` (nếu có) để thấy trong git. Kiểm tra lại bằng mục "Tính năng" của bản AAB trong App bundle explorer.
+
 ## License
 
 Proprietary — Raccoon.

@@ -1,6 +1,6 @@
 {
   "name": "com.raccoon.jnativeads",
-  "version": "0.0.108",
+  "version": "0.0.124",
   "displayName": "JNative Ads",
   "description": "Native Android & iOS overlay ads integration for Unity, built on Google Mobile Ads SDK.",
   "unity": "2021.3",
@@ -13,5 +13,6 @@
       "description": "Basic native overlay ads sample scene.",
       "path": "Samples~"
     }
-  ]
+  ],
+  "_fingerprint": "d0379274069801791d47fdf958e6ee0d2c36c7bb"
 }

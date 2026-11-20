@@ -86,6 +86,9 @@ namespace RCKit.Ads.Main.Editor
             var isMultiAdProp = element.FindPropertyRelative("is_multi_ad");
             var adIdAndroid2Prop = element.FindPropertyRelative("ad_id_android_2");
             var adIdIos2Prop = element.FindPropertyRelative("ad_id_ios_2");
+            var isMultiAd3Prop = element.FindPropertyRelative("is_multi_ad_3");
+            var adIdAndroid3Prop = element.FindPropertyRelative("ad_id_android_3");
+            var adIdIos3Prop = element.FindPropertyRelative("ad_id_ios_3");
             var removableProp = element.FindPropertyRelative("removable");
             var preloadAdProp = element.FindPropertyRelative("preload_ad");
             var reloadOnFailProp = element.FindPropertyRelative("reload_on_fail");
@@ -141,6 +144,28 @@ namespace RCKit.Ads.Main.Editor
                             if (string.IsNullOrEmpty(adIdIos2Prop.stringValue))
                                 EditorGUILayout.HelpBox("Ad Id 2 (iOS) không được để trống khi bật Is Multi Ad.",
                                     MessageType.Error);
+                        }
+
+                        EditorGUILayout.PropertyField(isMultiAd3Prop, new GUIContent("Is Multi Ad 3",
+                            "Bật thêm ad id thứ 3 (ghép id1_id2_id3). Chỉ có tác dụng khi Is Multi Ad bật."));
+                        if (isMultiAd3Prop.boolValue)
+                        {
+                            EditorGUI.indentLevel++;
+                            if (_platformView is AdIdPlatformView.All or AdIdPlatformView.Android)
+                            {
+                                EditorGUILayout.PropertyField(adIdAndroid3Prop, new GUIContent("Ad Id 3 (Android)"));
+                                if (string.IsNullOrEmpty(adIdAndroid3Prop.stringValue))
+                                    EditorGUILayout.HelpBox("Ad Id 3 (Android) không được để trống khi bật Is Multi Ad 3.",
+                                        MessageType.Error);
+                            }
+                            if (_platformView is AdIdPlatformView.All or AdIdPlatformView.iOS)
+                            {
+                                EditorGUILayout.PropertyField(adIdIos3Prop, new GUIContent("Ad Id 3 (iOS)"));
+                                if (string.IsNullOrEmpty(adIdIos3Prop.stringValue))
+                                    EditorGUILayout.HelpBox("Ad Id 3 (iOS) không được để trống khi bật Is Multi Ad 3.",
+                                        MessageType.Error);
+                            }
+                            EditorGUI.indentLevel--;
                         }
                         EditorGUI.indentLevel--;
                     }

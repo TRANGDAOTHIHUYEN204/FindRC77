@@ -30,7 +30,7 @@ namespace JKit.Monetize.Ads
         public event Action OnClicked;
         public event Action OnClosed;
         public event Action OnLoadSucceed;
-        public event Action<AdValue> OnAdPaid;
+        public event Action<AdValue, NativeAdSourceInfo> OnAdPaidInfo;
         public event Action<LoadAdError> OnLoadFailed;
 
         public void Load() => nativeOverlayAd?.Call("load");
@@ -91,7 +91,7 @@ namespace JKit.Monetize.Ads
             OnImpression?.Invoke();
         }
 
-        private async void onAdPaid(AndroidJavaObject adValueObject)
+        private async void onAdPaidWithInfo(AndroidJavaObject adValueObject, string adSourceInfo)
         {
             await Awaitable.MainThreadAsync();
 
@@ -102,7 +102,7 @@ namespace JKit.Monetize.Ads
                 adValue.Value = adValueObject.Call<long>("getValueMicros");
                 adValue.Precision = (AdValue.PrecisionType)adValueObject.Call<int>("getPrecisionType");
 
-                OnAdPaid?.Invoke(adValue);
+                OnAdPaidInfo?.Invoke(adValue, NativeAdSourceInfo.FromJson(adSourceInfo));
             }
             catch (Exception e)
             {

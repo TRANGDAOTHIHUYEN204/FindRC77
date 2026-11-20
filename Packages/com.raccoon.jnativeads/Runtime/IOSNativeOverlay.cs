@@ -101,7 +101,7 @@ namespace JKit. Monetize.Ads
         public event Action OnClicked;
         public event Action OnClosed;
         public event Action OnLoadSucceed;
-        public event Action<AdValue> OnAdPaid;
+        public event Action<AdValue, NativeAdSourceInfo> OnAdPaidInfo;
         public event Action<LoadAdError> OnLoadFailed;
 
         #endregion
@@ -250,7 +250,7 @@ namespace JKit. Monetize.Ads
                     Value = micros,
                     Precision = (AdValue.PrecisionType)adValueData.precision
                 };
-                OnAdPaid?. Invoke(adValue);
+                OnAdPaidInfo?.Invoke(adValue, NativeAdSourceInfo.FromJson(jsonData));
             }
             catch (Exception e)
             {

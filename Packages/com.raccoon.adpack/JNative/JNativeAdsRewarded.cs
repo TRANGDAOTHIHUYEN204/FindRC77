@@ -57,16 +57,11 @@ namespace RCKit.Ads.JNative
 
             _overlay = overlay;
             if (!_registeredOnPaid)
-                _overlay.OnAdPaid += OnAdsPaid;
+                SubscribePaid(_overlay);
             _overlay.Hide();
             OnLoadSucceed();
             if (AdsManager.IsPlatformIOS)
                 _registeredOnPaid = true;
-        }
-
-        private void OnAdsPaid(AdValue adValue)
-        {
-            GoogleAdsMediation.RaisePaid(adValue, adUnitId, AdPaidInfo.FormatNative);
         }
 
         public bool IsReady()
