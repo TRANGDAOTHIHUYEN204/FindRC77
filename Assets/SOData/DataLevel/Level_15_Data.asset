@@ -20,13 +20,13 @@ MonoBehaviour:
   markData:
   - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
   differentPoints:
-  - Position: {x: 340.2, y: 282.5, z: 0}
-    Size: {x: 71.3, y: 66}
+  - Position: {x: 338.65002, y: 285.15, z: 0}
+    Size: {x: 71.899994, y: 60.5}
     Outline:
-    - {x: 309.4, y: 251.8, z: 0}
+    - {x: 321.8, y: 254.9, z: 0}
     - {x: 374.6, y: 269.3, z: 0}
-    - {x: 357.1, y: 313.9, z: 0}
-    - {x: 314.1, y: 298, z: 0}
+    - {x: 360, y: 315.4, z: 0}
+    - {x: 302.7, y: 296.3, z: 0}
     HasMarkCenter: 1
     MarkCenter: {x: 344.1, y: 283.5, z: 0}
     OverrideMarkRadius: 1

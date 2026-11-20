@@ -25,7 +25,7 @@ MonoBehaviour:
     count: 8
   - data: {fileID: 11400000, guid: 8f8ae8f4c68cecf43a1f2bb33a88ade2, type: 2}
     points: {fileID: 11400000, guid: 909366a8e60541c4f9ebd1d688f41c5b, type: 2}
-    count: 10
+    count: 8
   - data: {fileID: 11400000, guid: fb32ee29867272f48a650e6984f5f508, type: 2}
     points: {fileID: 11400000, guid: 5f9c8dd3572170c49944ad335a388570, type: 2}
     count: 7

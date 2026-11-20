@@ -18,7 +18,7 @@ public class HandlePlayerCollisionItem : MonoBehaviour
     public event Action<Item> Caught;
     public event Action<Item> Missed;
 
-    private readonly List<Item> active = new List<Item>(64);
+    private readonly List<Item> active = new List<Item>(100);
     private HashSet<ItemType> catchFalseSet;
 
     private void Awake()

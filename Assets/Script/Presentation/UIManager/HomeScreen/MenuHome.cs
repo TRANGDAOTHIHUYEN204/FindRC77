@@ -29,7 +29,6 @@ public class MenuHome : MonoBehaviour
 
     private void RefreshEventButtons()
     {
-        Debug.Log($"[Home] SecondCompleted={SaveSecondMiniGame.Completed}, MidCompleted={SaveMiniGame.AllCompleted}");
         SetCompleted(firstWeekButton, firstWeekText, SaveSecondMiniGame.Completed);
         SetCompleted(midWeekButton, midWeekText, SaveMiniGame.AllCompleted);
         SetCompleted(endWeekButton, endWeekText, SaveThirdMiniGame.HasPlayed);
@@ -65,23 +64,19 @@ public class MenuHome : MonoBehaviour
 
         op.allowSceneActivation = true;
     }
-
-    // Mini game
-    public void JoinSecondMiniGame(string sceneName)
+    
+    public void JoinStartWeek(string sceneName)
     {
         if (SaveSecondMiniGame.Completed) return;
         StartGame(sceneName, false);
     }
-
-    // Giữa tuần
-    public void JoinFindHidden(string sceneName)
+    public void JoinMidWeek(string sceneName)
     {
         if (SaveMiniGame.AllCompleted) return;
         StartGame(sceneName, false);
     }
-
-    // Cuối tuần 
-    public void Join(string sceneName)
+    
+    public void JoinEndWeek(string sceneName)
     {
         if (SaveThirdMiniGame.HasPlayed) return;
         StartGame(sceneName, false);

@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 234831377}
   - component: {fileID: 234831376}
   m_Layer: 5
-  m_Name: txtMiniGame
+  m_Name: txtMiniGameEndWeek
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 262320622}
   - component: {fileID: 262320621}
   m_Layer: 5
-  m_Name: txtMiniGame
+  m_Name: txtMiniGameStartWeek
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1902,7 +1902,7 @@ GameObject:
   - component: {fileID: 1139002921}
   - component: {fileID: 1139002920}
   m_Layer: 5
-  m_Name: txtMiniGame
+  m_Name: txtMiniGameMidWeek
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2709,7 +2709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: JoinFindHidden
+      value: JoinMidWeek
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3056,7 +3056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Join
+      value: JoinEndWeek
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3574,7 +3574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: JoinFindHidden
+      value: JoinStartWeek
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

@@ -1026,8 +1026,8 @@ MonoBehaviour:
   stringLose: Not everything found its place, but every effort matters!
   stringTitleWin: Event Completed!
   stringTitleLose: Not Quite There!
-  winDelay: 1.5
-  loseDelay: 1.5
+  winDelay: 0.5
+  loseDelay: 0.5
   pauseDelay: 0
 --- !u!1 &268737272
 GameObject:
