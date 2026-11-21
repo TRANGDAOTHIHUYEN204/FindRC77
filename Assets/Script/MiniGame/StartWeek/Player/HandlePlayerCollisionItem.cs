@@ -17,8 +17,8 @@ public class HandlePlayerCollisionItem : MonoBehaviour
     [SerializeField] private FactoryTextScore textFactory;
     [SerializeField] private int maxTextCount = 3;
     [SerializeField] private float textDuration = 0.5f;
+    [SerializeField] private float textOffsetX = 0f;
     [SerializeField] private float textOffsetY = 20f;
-
     public event Action<Item> Caught;
     public event Action<Item> Missed;
 
@@ -100,7 +100,7 @@ public class HandlePlayerCollisionItem : MonoBehaviour
         texts.Remove(t);
         texts.Add(t);
 
-        t.ShowScore(item.Score, new Vector2(item.X, item.Y + textOffsetY), textDuration);
+        t.ShowScore(item.Score, new Vector2(item.X + textOffsetX, item.Y + textOffsetY), textDuration);
     }
 
     private TextScoreBehaviour GetText()

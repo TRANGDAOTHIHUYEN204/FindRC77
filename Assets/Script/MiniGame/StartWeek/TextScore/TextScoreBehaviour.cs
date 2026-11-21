@@ -27,7 +27,7 @@ public class TextScoreBehaviour : MonoBehaviour
 
         gameObject.SetActive(true);
         scoreText.text = score > 0 ? $"+{score}" : score.ToString();
-        rect.anchoredPosition = pos;
+        rect.localPosition = new Vector3(pos.x, pos.y, 0f);
         rect.localScale = Vector3.zero;
         scoreText.alpha = 0f;
 

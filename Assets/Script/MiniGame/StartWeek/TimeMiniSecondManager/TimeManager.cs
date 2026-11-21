@@ -12,11 +12,13 @@ public class TimeManager : MonoBehaviour
     public event Action<float> OnTimeChanged;
     public event Action OnWarningStart;
     public event Action OnTimeUp;
+    public event Action<int> OnMinutePassed;
 
     private float _timeLeft;
     private bool _running;
     private bool _warningStarted;
     private int _lastWarningSecond = -1;
+    private int _lastMinutePassed;
 
     public float TimeLeft => _timeLeft;
     public bool IsRunning => _running;
@@ -25,6 +27,7 @@ public class TimeManager : MonoBehaviour
     void Awake()
     {
         _timeLeft = totalTime;
+        _lastMinutePassed = 0;
     }
 
     void Start()
@@ -44,12 +47,24 @@ public class TimeManager : MonoBehaviour
             _timeLeft = 0f;
             _running = false;
             OnTimeChanged?.Invoke(_timeLeft);
+            HandleMinutePassed();
             OnTimeUp?.Invoke();
             return;
         }
 
         OnTimeChanged?.Invoke(_timeLeft);
+        HandleMinutePassed();
         HandleWarning();
+    }
+
+    private void HandleMinutePassed()
+    {
+        int elapsedMinutes = Mathf.FloorToInt((totalTime - _timeLeft) / 60f);
+        while (_lastMinutePassed < elapsedMinutes)
+        {
+            _lastMinutePassed++;
+            OnMinutePassed?.Invoke(_lastMinutePassed);
+        }
     }
 
     private void HandleWarning()
@@ -86,6 +101,7 @@ public class TimeManager : MonoBehaviour
         _running = false;
         _warningStarted = false;
         _lastWarningSecond = -1;
+        _lastMinutePassed = 0;
         OnTimeChanged?.Invoke(_timeLeft);
     }
 
@@ -97,6 +113,9 @@ public class TimeManager : MonoBehaviour
             _warningStarted = false;
             _lastWarningSecond = -1;
         }
+        int elapsedMinutes = Mathf.Max(0, Mathf.FloorToInt((totalTime - _timeLeft) / 60f));
+        _lastMinutePassed = Mathf.Min(_lastMinutePassed, elapsedMinutes);
+
         OnTimeChanged?.Invoke(_timeLeft);
     }
 

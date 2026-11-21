@@ -10,17 +10,45 @@ public class SpawnItem : MonoBehaviour
     [SerializeField] private float spawnHeightAboveScreen = 300f;
     [SerializeField] private float horizontalPadding = 80f;
 
-    [SerializeField] private float spawnInterval = 5f;
+    [SerializeField] private TimeManager timeManager;
+    [SerializeField] private float[] intervalPerMinute = { 2f, 1.5f, 0.75f };
+
+    [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float despawnOffsetBelow = 1f;
     [SerializeField] private HandlePlayerCollisionItem checker;
     private Coroutine spawnRoutine;
     private bool paused;
     private readonly List<Item> _spawned = new List<Item>();
 
+    private void OnEnable()
+    {
+        if (timeManager != null) timeManager.OnMinutePassed += HandleMinutePassed;
+    }
+
+    private void OnDisable()
+    {
+        if (timeManager != null) timeManager.OnMinutePassed -= HandleMinutePassed;
+        StopSpawn();
+    }
+
+    private void HandleMinutePassed(int minute)
+    {
+        ApplyIntervalForMinute(minute);
+    }
+
+    private void ApplyIntervalForMinute(int minute)
+    {
+        if (intervalPerMinute == null || intervalPerMinute.Length == 0) return;
+
+        int index = Mathf.Clamp(minute, 0, intervalPerMinute.Length - 1);
+        spawnInterval = intervalPerMinute[index];
+    }
+
     public void StartSpawn()
     {
         StopSpawn();
         paused = false;
+        ApplyIntervalForMinute(0);
         spawnRoutine = StartCoroutine(SpawnLoop());
     }
 
@@ -87,11 +115,6 @@ public class SpawnItem : MonoBehaviour
 
             item.ReturnToPool();
         }
-    }
-
-    private void OnDisable()
-    {
-        StopSpawn();
     }
 
     private void OnDrawGizmosSelected()
