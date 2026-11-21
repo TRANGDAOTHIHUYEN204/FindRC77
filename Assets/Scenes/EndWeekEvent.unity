@@ -2748,10 +2748,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
-  m_sharedMaterial: {fileID: -1189415696643958039, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 7e73e8ccb8f3a374981069fabd16b336, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

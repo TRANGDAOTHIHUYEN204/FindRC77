@@ -20,6 +20,8 @@ public class HandlePlayerCollisionItem : MonoBehaviour
     [SerializeField] private float textOffsetX = 0f;
     [SerializeField] private float textOffsetY = 20f;
     public event Action<Item> Caught;
+    [SerializeField] private RectTransform textContainer; 
+    public RectTransform TextContainer => textContainer;
     public event Action<Item> Missed;
 
     private readonly List<Item> active = new List<Item>(100);
@@ -100,22 +102,33 @@ public class HandlePlayerCollisionItem : MonoBehaviour
         texts.Remove(t);
         texts.Add(t);
 
-        t.ShowScore(item.Score, new Vector2(item.X + textOffsetX, item.Y + textOffsetY), textDuration);
+        t.ShowScore(item.Score, GetTextPos(item), textDuration);
     }
 
     private TextScoreBehaviour GetText()
     {
         for (int i = 0; i < texts.Count; i++)
             if (!texts[i].IsPlaying) return texts[i];
+
         if (texts.Count < maxTextCount)
         {
-            TextScoreBehaviour t = textFactory.Create(spawnParent);
+            RectTransform parent = textContainer != null ? textContainer : spawnParent;
+            TextScoreBehaviour t = textFactory.Create(parent);
             if (t != null) texts.Add(t);
             return t;
         }
         return texts[0];
     }
+    
+    private Vector2 GetTextPos(Item item)
+    {
+        Vector2 local = new Vector2(item.X + textOffsetX, item.Y + textOffsetY);
+        if (textContainer == null || textContainer == spawnParent) return local;
 
+        Vector3 world = spawnParent.TransformPoint(local.x, local.y, 0f);
+        Vector3 inContainer = textContainer.InverseTransformPoint(world);
+        return new Vector2(inContainer.x, inContainer.y);
+    }
     public void ClearTexts()
     {
         if (textFactory != null)

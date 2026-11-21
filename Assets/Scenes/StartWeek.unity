@@ -710,6 +710,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MuteHaptic
       objectReference: {fileID: 0}
+    - target: {fileID: 4536679523743530129, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5084602170689679420, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -818,6 +822,14 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleMusic
       objectReference: {fileID: 0}
+    - target: {fileID: 8680883609807193326, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 386278418}
+    - target: {fileID: 8680883609807193326, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+      propertyPath: fadeGroup
+      value: 
+      objectReference: {fileID: 386278417}
     - target: {fileID: 9215730704937847159, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -864,6 +876,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8b8ab290126b84ab60bc9671f83057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonAdsController
+--- !u!225 &386278417 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 3746500710297081098, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+  m_PrefabInstance: {fileID: 386278413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &386278418 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6512897559721733115, guid: 61daed67a3c0369409da96cb6777c9a8, type: 3}
+  m_PrefabInstance: {fileID: 386278413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &514869814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2147,7 +2169,6 @@ RectTransform:
   - {fileID: 712532068}
   - {fileID: 1099969875}
   - {fileID: 1102064630}
-  - {fileID: 1030157574}
   - {fileID: 2092706121}
   - {fileID: 352850675}
   - {fileID: 948074643}
@@ -2156,6 +2177,7 @@ RectTransform:
   - {fileID: 1894202722}
   - {fileID: 1502375023}
   - {fileID: 1933088031}
+  - {fileID: 1030157574}
   - {fileID: 167756800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2874,7 +2896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3042,6 +3064,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SecondMiniGameManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 7384987272283799023, guid: cc515e984ef063a468ccbdd87db09449, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3197,14 +3223,14 @@ MonoBehaviour:
   m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
-  m_sharedMaterial: {fileID: -1189415696643958039, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 7e73e8ccb8f3a374981069fabd16b336, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286027961
-  m_fontColor: {r: 0.7254902, g: 0.59607846, b: 0.46666667, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3658,8 +3684,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandlePlayerCollisionItem
   spawnParent: {fileID: 1102064630}
   catchPoint: {fileID: 1377016598}
-  catchHalfWidth: 250
-  catchHalfHeight: 300
+  catchHalfWidth: 200
+  catchHalfHeight: 280
   catchTrue: {fileID: 8300000, guid: 87f61c98b5aa45948af20835f99add98, type: 3}
   catchFalse: {fileID: 8300000, guid: 1a876cb5adc90a546832f99b734c575e, type: 3}
   catchVolume: 1
@@ -3670,6 +3696,7 @@ MonoBehaviour:
   textDuration: 0.5
   textOffsetX: 100
   textOffsetY: 30
+  textContainer: {fileID: 1030157574}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

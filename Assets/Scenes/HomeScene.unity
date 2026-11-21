@@ -4648,7 +4648,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 00010101000000
     forceOn: 0
     forceOff: 0
@@ -4658,7 +4658,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 00000000010100
     forceOn: 0
     forceOff: 0
@@ -4668,7 +4668,7 @@ MonoBehaviour:
     startMinute: 0
     endHour: 0
     endMinute: 0
-    everyDay: 1
+    everyDay: 0
     days: 01000000000001
     forceOn: 0
     forceOff: 0
