@@ -246,14 +246,15 @@ public class AdsController : MonoBehaviour
 
         TryShow(
             secondAd,
-            true,
+            false,
             shown =>
             {
                 Debug.Log($"[Ads] Second Ad Result: {shown}");
+                if (shown)
+                    _secondShown = true;
                 onContinue?.Invoke();
             },
-            showTimeout,
-            onStart: () => _secondShown = true);
+            showTimeout);
     }
 
     public bool CanRequestInter()
@@ -308,10 +309,7 @@ public class AdsController : MonoBehaviour
 
         _interPending = true;
 
-        TryShow(
-            interAd,
-            true,
-            shown =>
+        TryShow(interAd, true, shown =>
             {
                 Debug.Log($"[Ads] Inter Ad Result: {shown}");
 
@@ -355,12 +353,7 @@ public class AdsController : MonoBehaviour
         }, rewardShowTimeout);
     }
 
-    private void TryShow(
-        AD_TYPE type,
-        bool requireReady,
-        Action<bool> onDone,
-        float timeout = 60f,
-        Action onStart = null)
+    private void TryShow(AD_TYPE type, bool requireReady, Action<bool> onDone, float timeout = 60f, Action onStart = null)
     {
         Debug.Log($"[Ads] TryShow: {type}");
 
