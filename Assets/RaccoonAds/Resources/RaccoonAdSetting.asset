@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bb8c1bdd93f4b98848b406803dd9cd, type: 3}
   m_Name: RaccoonAdSetting
   m_EditorClassIdentifier: 
-  use_test_ad: 0
+  use_test_ad: 1
   AdUnitConfigs:
   - ad_type: 110
     ad_id_android: ca-app-pub-8190506959251235/6779860792
@@ -20,6 +20,9 @@ MonoBehaviour:
     is_multi_ad: 0
     ad_id_android_2: 
     ad_id_ios_2: 
+    is_multi_ad_3: 0
+    ad_id_android_3: 
+    ad_id_ios_3: 
     removable: 0
     preload_ad: 0
     reload_on_fail: 1
@@ -35,6 +38,9 @@ MonoBehaviour:
     is_multi_ad: 0
     ad_id_android_2: 
     ad_id_ios_2: 
+    is_multi_ad_3: 0
+    ad_id_android_3: 
+    ad_id_ios_3: 
     removable: 0
     preload_ad: 0
     reload_on_fail: 1
@@ -50,6 +56,9 @@ MonoBehaviour:
     is_multi_ad: 0
     ad_id_android_2: 
     ad_id_ios_2: 
+    is_multi_ad_3: 0
+    ad_id_android_3: 
+    ad_id_ios_3: 
     removable: 0
     preload_ad: 0
     reload_on_fail: 1
@@ -65,6 +74,9 @@ MonoBehaviour:
     is_multi_ad: 0
     ad_id_android_2: 
     ad_id_ios_2: 
+    is_multi_ad_3: 0
+    ad_id_android_3: 
+    ad_id_ios_3: 
     removable: 0
     preload_ad: 0
     reload_on_fail: 1
@@ -80,6 +92,9 @@ MonoBehaviour:
     is_multi_ad: 0
     ad_id_android_2: 
     ad_id_ios_2: 
+    is_multi_ad_3: 0
+    ad_id_android_3: 
+    ad_id_ios_3: 
     removable: 0
     preload_ad: 0
     reload_on_fail: 1

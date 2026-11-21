@@ -14,17 +14,24 @@ public class HandlePlayerCollisionItem : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] private float catchVolume = 1f;
     [Range(0f, 1f)] [SerializeField] private float falseVolume = 1f;
     [SerializeField] private List<ItemType> catchFalseItems;
+    [SerializeField] private FactoryTextScore textFactory;
+    [SerializeField] private int maxTextCount = 3;
+    [SerializeField] private float textDuration = 0.5f;
+    [SerializeField] private float textOffsetY = 20f;
 
     public event Action<Item> Caught;
     public event Action<Item> Missed;
 
     private readonly List<Item> active = new List<Item>(100);
+    private readonly List<TextScoreBehaviour> texts = new List<TextScoreBehaviour>();
     private HashSet<ItemType> catchFalseSet;
 
     private void Awake()
     {
         catchFalseSet = new HashSet<ItemType>(catchFalseItems);
     }
+
+    private void OnDestroy() => ClearTexts();
 
     public void Register(Item item)
     {
@@ -44,7 +51,7 @@ public class HandlePlayerCollisionItem : MonoBehaviour
         active.RemoveAt(last);
         item.ActiveIndex = -1;
     }
-    
+
     public void NotifyMissed(Item item)
     {
         Missed?.Invoke(item);
@@ -78,8 +85,43 @@ public class HandlePlayerCollisionItem : MonoBehaviour
             }
 
             Caught?.Invoke(it);
+            ShowScoreText(it);
             it.ReturnToPool();
         }
+    }
+
+    private void ShowScoreText(Item item)
+    {
+        if (textFactory == null) return;
+
+        TextScoreBehaviour t = GetText();
+        if (t == null) return;
+
+        texts.Remove(t);
+        texts.Add(t);
+
+        t.ShowScore(item.Score, new Vector2(item.X, item.Y + textOffsetY), textDuration);
+    }
+
+    private TextScoreBehaviour GetText()
+    {
+        for (int i = 0; i < texts.Count; i++)
+            if (!texts[i].IsPlaying) return texts[i];
+        if (texts.Count < maxTextCount)
+        {
+            TextScoreBehaviour t = textFactory.Create(spawnParent);
+            if (t != null) texts.Add(t);
+            return t;
+        }
+        return texts[0];
+    }
+
+    public void ClearTexts()
+    {
+        if (textFactory != null)
+            for (int i = texts.Count - 1; i >= 0; i--)
+                textFactory.Release(texts[i]);
+        texts.Clear();
     }
 
     private void PlaySfx(AudioClip clip, float volume)
