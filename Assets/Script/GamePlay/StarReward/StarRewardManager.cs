@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,6 @@ public class StarRewardManager : MonoBehaviour
     [SerializeField] private int[] heartsRequired = { 1, 2, 3 };
     [SerializeField] private bool tutorialAlwaysFullStars = true;
 
-    [SerializeField] private bool showOnEnable = true;
     [SerializeField] private float startDelay = 0.3f;
     [SerializeField] private float delayBetweenStars = 0.35f;
     public UnityEvent<int> onRewardFinished;
@@ -31,26 +31,26 @@ public class StarRewardManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        if (showOnEnable) ShowRewards();
-    }
-
     private void OnDisable()
     {
-        routine = null;
+        Stop();
     }
-
-    public void ShowRewards()
+    
+    public void Play(Action<int> onDone = null)
     {
         int hearts = heartManager != null ? heartManager.CurrentLives : 0;
-        ShowRewards(hearts);
+        Play(hearts, onDone);
     }
 
-    public void ShowRewards(int heartsLeft)
+    public void Play(int heartsLeft, Action<int> onDone = null)
     {
-        if (routine != null) StopCoroutine(routine);
-        routine = StartCoroutine(ShowRoutine(heartsLeft));
+        Stop();
+        routine = StartCoroutine(ShowRoutine(heartsLeft, onDone));
+    }
+
+    public void Stop()
+    {
+        if (routine != null) { StopCoroutine(routine); routine = null; }
     }
 
     public bool CanActivateStar(int index, int heartsLeft)
@@ -68,9 +68,9 @@ public class StarRewardManager : MonoBehaviour
         return count;
     }
 
-    private IEnumerator ShowRoutine(int heartsLeft)
+    private IEnumerator ShowRoutine(int heartsLeft, Action<int> onDone)
     {
-        yield return null;  
+        yield return null;
         ResetStars();
 
         if (startDelay > 0f) yield return new WaitForSecondsRealtime(startDelay);
@@ -86,8 +86,9 @@ public class StarRewardManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(delayBetweenStars);
         }
 
-        onRewardFinished?.Invoke(earned);
         routine = null;
+        onRewardFinished?.Invoke(earned);
+        onDone?.Invoke(earned);
     }
 
     public void ResetStars()

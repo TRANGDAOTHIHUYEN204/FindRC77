@@ -24,6 +24,8 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private float bounceDuration = 0.8f;
     private bool _winStarted;
 
+    [SerializeField] private RewardIntervalWin rewardIntervalWin;
+
     private void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -95,6 +97,7 @@ public class GamePlayImage : MonoBehaviour
 
         bool isTutorial = levelManager.IsTutorial;
         string textWin = levelManager.TextWin;
+        int levelNumber = levelManager.CurrentIndex + 1; 
 
         if (!isTutorial)
         {
@@ -124,7 +127,11 @@ public class GamePlayImage : MonoBehaviour
             stateGame.WinTutorial(textWin);
             yield break;
         }
-
         stateGame.WinGame(textWin);
+        yield return null;
+
+        bool rewardDone = false;
+        rewardIntervalWin.Play(levelNumber, () => rewardDone = true);
+        yield return new WaitUntil(() => rewardDone);
     }
 }
