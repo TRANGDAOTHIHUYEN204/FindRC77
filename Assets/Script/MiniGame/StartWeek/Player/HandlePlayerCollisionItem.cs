@@ -24,6 +24,13 @@ public class HandlePlayerCollisionItem : MonoBehaviour
     public RectTransform TextContainer => textContainer;
     public event Action<Item> Missed;
 
+    [Header("Particle nổ khi ăn được điểm")]
+    [SerializeField] private ParticleSystem catchBurstPrefab;
+    [SerializeField] private float catchBurstScale = 0.6f;
+    [Tooltip("Phải lớn hơn sortingOrder của CanvasGame để vẽ đè lên UI.")]
+    [SerializeField] private int catchBurstSortingOrder = 150;
+    private readonly List<ParticleSystem> bursts = new List<ParticleSystem>();
+
     private readonly List<Item> active = new List<Item>(100);
     private readonly List<TextScoreBehaviour> texts = new List<TextScoreBehaviour>();
     private HashSet<ItemType> catchFalseSet;
@@ -33,7 +40,13 @@ public class HandlePlayerCollisionItem : MonoBehaviour
         catchFalseSet = new HashSet<ItemType>(catchFalseItems);
     }
 
-    private void OnDestroy() => ClearTexts();
+    private void OnDestroy()
+    {
+        ClearTexts();
+        for (int i = 0; i < bursts.Count; i++)
+            if (bursts[i] != null) Destroy(bursts[i].gameObject);
+        bursts.Clear();
+    }
 
     public void Register(Item item)
     {
@@ -84,6 +97,7 @@ public class HandlePlayerCollisionItem : MonoBehaviour
             {
                 PlaySfx(catchTrue, catchVolume);
                 Haptics.Light();
+                if (it.Score > 0) PlayCatchBurst(it);
             }
 
             Caught?.Invoke(it);
@@ -135,6 +149,40 @@ public class HandlePlayerCollisionItem : MonoBehaviour
             for (int i = texts.Count - 1; i >= 0; i--)
                 textFactory.Release(texts[i]);
         texts.Clear();
+    }
+
+    private void PlayCatchBurst(Item item)
+    {
+        if (catchBurstPrefab == null) return;
+
+        ParticleSystem ps = null;
+        for (int i = 0; i < bursts.Count; i++)
+        {
+            if (bursts[i] != null && !bursts[i].IsAlive(true)) { ps = bursts[i]; break; }
+        }
+
+        if (ps == null)
+        {
+            // Không đặt làm con của Canvas để khỏi bị scale theo canvas.
+            ps = Instantiate(catchBurstPrefab);
+            ps.name = catchBurstPrefab.name + "_Pool";
+            ps.transform.localScale = Vector3.one * catchBurstScale;
+            foreach (var r in ps.GetComponentsInChildren<ParticleSystemRenderer>(true))
+                r.sortingOrder = catchBurstSortingOrder;
+            bursts.Add(ps);
+        }
+
+        Vector3 world = spawnParent.TransformPoint(item.X, item.Y, 0f);
+        world.z = catchPoint.position.z - 1f; // ngay trước mặt phẳng canvas
+        ps.transform.position = world;
+        ps.Clear(true);
+        ps.Play(true);
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < bursts.Count; i++)
+            if (bursts[i] != null) bursts[i].Clear(true);
     }
 
     private void PlaySfx(AudioClip clip, float volume)

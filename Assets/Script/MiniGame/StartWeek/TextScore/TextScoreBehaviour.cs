@@ -9,6 +9,12 @@ public class TextScoreBehaviour : MonoBehaviour
     [SerializeField] private float hideTime = 0.3f;
     [SerializeField] private Ease ease = Ease.InOutCirc;
 
+    [Header("Bay lên + phóng to rồi mờ dần")]
+    [SerializeField] private float riseDistance = 160f;
+    [SerializeField] private float startScale = 0.4f;
+    [SerializeField] private float popScale = 1.35f;
+    [SerializeField] private float endScale = 1.7f;
+
     private RectTransform rect;
     private Sequence seq;
 
@@ -28,15 +34,18 @@ public class TextScoreBehaviour : MonoBehaviour
         gameObject.SetActive(true);
         scoreText.text = score > 0 ? $"+{score}" : score.ToString();
         rect.localPosition = new Vector3(pos.x, pos.y, 0f);
-        rect.localScale = Vector3.zero;
-        scoreText.alpha = 0f;
+        rect.localScale = Vector3.one * startScale;
+        scoreText.alpha = 1f;
 
+        float rest = duration + hideTime;
+
+        // Nảy to ra + bay lên nhanh, rồi tiếp tục bay lên, to dần và mờ dần.
         seq = DOTween.Sequence();
-        seq.Append(rect.DOScale(1f, showTime).SetEase(ease));
-        seq.Join(scoreText.DOFade(1f, showTime));
-        seq.AppendInterval(duration);
-        seq.Append(rect.DOScale(0f, hideTime).SetEase(ease));
-        seq.Join(scoreText.DOFade(0f, hideTime));
+        seq.Append(rect.DOScale(popScale, showTime).SetEase(Ease.OutBack));
+        seq.Join(rect.DOLocalMoveY(pos.y + riseDistance * 0.35f, showTime).SetEase(Ease.OutQuad));
+        seq.Append(rect.DOLocalMoveY(pos.y + riseDistance, rest).SetEase(Ease.OutSine));
+        seq.Join(rect.DOScale(endScale, rest).SetEase(Ease.OutSine));
+        seq.Insert(showTime + duration * 0.5f, scoreText.DOFade(0f, rest - duration * 0.5f).SetEase(Ease.InQuad));
         seq.OnComplete(() => gameObject.SetActive(false));
     }
 
