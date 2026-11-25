@@ -62,3 +62,6 @@ Assets/Front/Montserrat-Bold SDF.asset
 Assets/Front/Montserrat-Bold SDF.asset.meta
 Assets/Script/Editor/FindRawImages.cs
 Assets/Script/Editor/FindRawImages.cs.meta
+
+# Tài liệu, ảnh nháp, mockup (không đưa vào repo)
+/docs/
