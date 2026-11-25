@@ -3,6 +3,7 @@
     "appsflyer-unity-plugin": "https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#v6.18.1",
     "com.coffee.ui-effect": "https://github.com/mob-sakai/UIEffect.git?path=Packages/src",
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
+    "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
     "com.google.ads.mobile": "10.5.0",
     "com.google.ads.mobile.mediation.applovin": "8.4.1",
     "com.google.ads.mobile.mediation.ironsource": "3.10.0",
