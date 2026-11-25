@@ -20,6 +20,7 @@ public static class SaveGame
     private const string KeyTitle = "save_title_unlocked";
     private const string KeyStroke = "save_stroke_unlocked";
     private const string KeyRewardChainDone = "save_reward_chain_done";
+    private const string KeyTutorialHint = "save_tutorial_hint_claimed";
 
     public static bool TitleUnlocked
     {
@@ -37,6 +38,16 @@ public static class SaveGame
     {
         get => PlayerPrefs.GetInt(KeyRewardChainDone, 0) == 1;
         set { PlayerPrefs.SetInt(KeyRewardChainDone, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    /// <summary>Tặng 1 hint duy nhất sau khi xong tutorial. Hint nằm trong HintBalance nên dùng được ở level khác.</summary>
+    public static bool TryClaimTutorialHint()
+    {
+        if (PlayerPrefs.GetInt(KeyTutorialHint, 0) == 1) return false;
+
+        PlayerPrefs.SetInt(KeyTutorialHint, 1);
+        HintBalance += 1; // setter đã tự Save
+        return true;
     }
 
     public static bool TryClaimCleanWin()
@@ -114,6 +125,7 @@ public static class SaveGame
         PlayerPrefs.DeleteKey(KeyTitle);
         PlayerPrefs.DeleteKey(KeyStroke);
         PlayerPrefs.DeleteKey(KeyRewardChainDone);
+        PlayerPrefs.DeleteKey(KeyTutorialHint);
         SaveThirdMiniGame.Reset();
         for (int i = 0; i < MaxEventLevels; i++)
         {
