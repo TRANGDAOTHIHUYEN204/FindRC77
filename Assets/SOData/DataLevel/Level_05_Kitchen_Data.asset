@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -343.12, y: -169.8, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 36.74
-  textWin: "Oven: 1, Me: 0. Ordering pizza."
+  textWin: 'Oven: 1, Me: 0. Ordering pizza.'
   difficulty: 0
   interactables:
   - Name: kitchen
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 86.48, y: -10.55}
       Size: {x: 237.66, y: 645.47}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 573c06b1e0b9966428bdd690b8a45200, type: 3}

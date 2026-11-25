@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -362.46, y: -75.94, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 40.08
-  textWin: "Lunch thief caught. Cutest crime ever."
+  textWin: Lunch thief caught. Cutest crime ever.
   difficulty: 0
   interactables:
   - Name: picnic
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 83.32, y: 25.66}
       Size: {x: 513.98, y: 556.17}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: a8d4422cb72eb204a87f12d783d992fd, type: 3}

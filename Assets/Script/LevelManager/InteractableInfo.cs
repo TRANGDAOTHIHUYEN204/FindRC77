@@ -23,4 +23,6 @@ public class InteractableInfo
     public InteractableLayer[] ClosedLayers;
     public InteractableLayer[] OpenLayers;
     public int[] HiddenPointIndices;
+    /// Âm thanh phát khi bấm mở (cửa kẽo kẹt, nắp hộp, lò nướng...).
+    public AudioClip OpenSound;
 }

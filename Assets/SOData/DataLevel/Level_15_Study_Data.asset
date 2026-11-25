@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -322.03, y: -119.88, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 35.07
-  textWin: "Studying... for the comic exam. Totally."
+  textWin: Studying... for the comic exam. Totally.
   difficulty: 0
   interactables:
   - Name: study
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 123.75, y: 5.27}
       Size: {x: 191.25, y: 648.98}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 96a74981530bbb44e87bd2b1e699c6f4, type: 3}

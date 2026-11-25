@@ -125,27 +125,28 @@ MonoBehaviour:
     MarkCenter: {x: -453.52, y: 246.09, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 63.28
-  textWin: "Star pajamas? Nobody saw that. Right?"
+  textWin: Star pajamas? Nobody saw that. Right?
   difficulty: 0
   interactables:
   - Name: Wardrobe
     HotspotPosition: {x: -385.31, y: 20.74}
     HotspotSize: {x: 309.38, y: 636.33}
     ClosedLayers:
-      - Sprite: {fileID: 21300000, guid: 5bcaf45026874c33818c951ea0969b41, type: 3}
-        Position: {x: -382.5, y: 33.05}
-        Size: {x: 272.81, y: 572.34}
-      - Sprite: {fileID: 21300000, guid: 2651f275417e4840bcf2c6e1adb1d9c7, type: 3}
-        Position: {x: -33.4, y: -40.78}
-        Size: {x: 187.73, y: 548.44}
+    - Sprite: {fileID: 21300000, guid: 5bcaf45026874c33818c951ea0969b41, type: 3}
+      Position: {x: -382.5, y: 33.05}
+      Size: {x: 272.81, y: 572.34}
+    - Sprite: {fileID: 21300000, guid: 2651f275417e4840bcf2c6e1adb1d9c7, type: 3}
+      Position: {x: -33.4, y: -40.78}
+      Size: {x: 187.73, y: 548.44}
     OpenLayers:
-      - Sprite: {fileID: 21300000, guid: 2dc2c9a75c8b454ca718dc649b36e98b, type: 3}
-        Position: {x: -524.53, y: 16.88}
-        Size: {x: 30.94, y: 686.25}
-      - Sprite: {fileID: 21300000, guid: f08466416db34fdca16650e181ac7293, type: 3}
-        Position: {x: -204.96, y: 16.88}
-        Size: {x: 103.36, y: 686.25}
-      - Sprite: {fileID: 21300000, guid: ae150fe3e2e54f5fad8d1620e602d24b, type: 3}
-        Position: {x: -33.4, y: -40.78}
-        Size: {x: 196.17, y: 548.44}
+    - Sprite: {fileID: 21300000, guid: 2dc2c9a75c8b454ca718dc649b36e98b, type: 3}
+      Position: {x: -524.53, y: 16.88}
+      Size: {x: 30.94, y: 686.25}
+    - Sprite: {fileID: 21300000, guid: f08466416db34fdca16650e181ac7293, type: 3}
+      Position: {x: -204.96, y: 16.88}
+      Size: {x: 103.36, y: 686.25}
+    - Sprite: {fileID: 21300000, guid: ae150fe3e2e54f5fad8d1620e602d24b, type: 3}
+      Position: {x: -33.4, y: -40.78}
+      Size: {x: 196.17, y: 548.44}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 614cae800a5d5db48870f90f0e9d3209, type: 3}

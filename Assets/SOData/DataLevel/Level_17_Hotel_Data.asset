@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -273.16, y: 38.67, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 105.47
-  textWin: "Packed light. Very, very light."
+  textWin: Packed light. Very, very light.
   difficulty: 0
   interactables:
   - Name: hotel
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 68.91, y: -166.29}
       Size: {x: 317.81, y: 370.55}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: c2d1311b27b173e4fac88218ffa54a93, type: 3}

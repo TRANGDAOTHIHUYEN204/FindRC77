@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -271.05, y: -88.95, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 29.06
-  textWin: "Grandpa's diary... my 20 stories start today."
+  textWin: Grandpa's diary... my 20 stories start today.
   difficulty: 0
   interactables:
   - Name: bday
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 92.11, y: 3.52}
       Size: {x: 189.84, y: 615.94}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 6cfaa4e43abb37a4f988bf119c5a23d2, type: 3}

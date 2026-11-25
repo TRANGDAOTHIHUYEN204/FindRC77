@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -386.37, y: 28.12, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 39.74
-  textWin: "Who sent this?! ...I'm not smiling. You're smiling."
+  textWin: Who sent this?! ...I'm not smiling. You're smiling.
   difficulty: 0
   interactables:
   - Name: mailbox
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 142.73, y: -18.28}
       Size: {x: 225, y: 644.06}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 34f82df5aa0d5264c9109fc06b322211, type: 3}

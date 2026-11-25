@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -262.97, y: -196.17, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 105.47
-  textWin: "First try! (It was the 27th try.)"
+  textWin: First try! (It was the 27th try.)
   difficulty: 0
   interactables:
   - Name: arcade
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: -72.07, y: -29.88}
       Size: {x: 255.23, y: 636.33}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 3472717348714f34cb6f86cc0f11983c, type: 3}

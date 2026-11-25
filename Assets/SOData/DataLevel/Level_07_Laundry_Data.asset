@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -289.34, y: -205.66, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 31.73
-  textWin: "Pink is my color now. Totally on purpose."
+  textWin: Pink is my color now. Totally on purpose.
   difficulty: 0
   interactables:
   - Name: laundry
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 101.25, y: 10.55}
       Size: {x: 195.47, y: 656.72}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: f7df59be8c16e6b469dcc21fa68ace39, type: 3}

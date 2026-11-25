@@ -125,7 +125,7 @@ MonoBehaviour:
     MarkCenter: {x: -429.61, y: -154.69, z: 0}
     OverrideMarkRadius: 1
     MarkRadius: 54.11
-  textWin: "Grandpa, why do you keep a clown in a box?!"
+  textWin: Grandpa, why do you keep a clown in a box?!
   difficulty: 0
   interactables:
   - Name: attic
@@ -143,3 +143,4 @@ MonoBehaviour:
       Position: {x: 154.34, y: 69.26}
       Size: {x: 317.11, y: 446.48}
     HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 8b9d51f1e16df96419d356d4ca7b661f, type: 3}

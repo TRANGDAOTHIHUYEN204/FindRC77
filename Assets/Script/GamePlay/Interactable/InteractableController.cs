@@ -86,6 +86,8 @@ public class InteractableController : MonoBehaviour
                 !IsInHotspot(rt.Info, _rootB, screenPoint, cam)) continue;
 
             SetState(rt, true, true);
+            if (rt.Info.OpenSound != null && SoundManager.Instance != null)
+                SoundManager.Instance.PlaySfx(rt.Info.OpenSound);
             return true;
         }
         return false;
