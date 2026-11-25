@@ -82,7 +82,9 @@ public class AdsController : MonoBehaviour
 
     public void InitializeSdk()
     {
-#if ENABLE_RACCOON_ADMOB
+#if CREATIVE
+        return;
+#elif ENABLE_RACCOON_ADMOB
         if (_sdkInitRequested)
         {
             Debug.Log("[Ads] SDK init already requested. Skip.");
@@ -120,6 +122,9 @@ public class AdsController : MonoBehaviour
 
     public void OnLoadingFinished()
     {
+#if CREATIVE
+        return;
+#else
         Debug.Log("[Ads] OnLoadingFinished CALLED.");
 
 #if ENABLE_RACCOON_ADMOB
@@ -133,11 +138,14 @@ public class AdsController : MonoBehaviour
 
         mgr.OnLoadingSceneLoaded();
 #endif
+#endif
     }
 
     public void PreloadInter()
     {
-#if ENABLE_RACCOON_ADMOB
+#if CREATIVE
+        return;
+#elif ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
         if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
@@ -157,7 +165,9 @@ public class AdsController : MonoBehaviour
 
     public void PreloadReward()
     {
-#if ENABLE_RACCOON_ADMOB
+#if CREATIVE
+        return;
+#elif ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
         if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
@@ -174,7 +184,9 @@ public class AdsController : MonoBehaviour
 
     public void PreloadSecond()
     {
-#if ENABLE_RACCOON_ADMOB
+#if CREATIVE
+        return;
+#elif ENABLE_RACCOON_ADMOB
         if (_secondShown)
             return;
 
@@ -206,7 +218,9 @@ public class AdsController : MonoBehaviour
 
     public bool CanShowSecond()
     {
-#if ENABLE_RACCOON_ADMOB
+#if CREATIVE
+        return false;
+#elif ENABLE_RACCOON_ADMOB
         if (_secondShown)
             return false;
         if (_showingCount > 0)
@@ -228,6 +242,9 @@ public class AdsController : MonoBehaviour
 
     public void RequestSecond(Action onContinue)
     {
+#if CREATIVE
+        onContinue?.Invoke();
+#else
         Debug.Log("[Ads] RequestSecond CALLED.");
 
         if (_secondShown)
@@ -255,13 +272,17 @@ public class AdsController : MonoBehaviour
                 onContinue?.Invoke();
             },
             showTimeout);
+#endif
     }
 
     public bool CanRequestInter()
     {
+#if CREATIVE
+        return false;
+#else
         if (!_gameplayStarted)
             return false;
-        
+
         if (IsBlocked != null && IsBlocked())
             return false;
 
@@ -285,10 +306,14 @@ public class AdsController : MonoBehaviour
 #else
         return false;
 #endif
+#endif
     }
 
     public void RequestInter(Action onContinue)
     {
+#if CREATIVE
+        onContinue?.Invoke();
+#else
         Debug.Log($"[Ads] RequestInter. Timer = {_interTimer:F1}s");
 
         if (_interPending)
@@ -327,10 +352,14 @@ public class AdsController : MonoBehaviour
             },
             showTimeout
         );
+#endif
     }
 
     public void RequestReward(Action onRewarded, Action onFailed = null)
     {
+#if CREATIVE
+        onRewarded?.Invoke();
+#else
         Debug.Log("[Ads] RequestReward CALLED.");
 
         if (_showingCount > 0)
@@ -351,10 +380,14 @@ public class AdsController : MonoBehaviour
 
             PreloadReward();
         }, rewardShowTimeout);
+#endif
     }
 
     private void TryShow(AD_TYPE type, bool requireReady, Action<bool> onDone, float timeout = 60f, Action onStart = null)
     {
+#if CREATIVE
+        onDone?.Invoke(false);
+#else
         Debug.Log($"[Ads] TryShow: {type}");
 
 #if ENABLE_RACCOON_ADMOB
@@ -421,8 +454,9 @@ public class AdsController : MonoBehaviour
         Debug.LogError("[Ads] ENABLE_RACCOON_ADMOB is NOT defined.");
         onDone?.Invoke(false);
 #endif
+#endif
     }
-    
+
     private IEnumerator CoWatchdog(float seconds, AD_TYPE type, Func<bool> isFinished, Action onTimeout)
     {
         yield return new WaitForSecondsRealtime(seconds);
@@ -446,7 +480,7 @@ public class AdsController : MonoBehaviour
 
     private bool IsGateShowing()
     {
-#if ENABLE_RACCOON_ADMOB
+#if ENABLE_RACCOON_ADMOB && !CREATIVE
         return AdLoadingGate.Instance != null &&
                AdLoadingGate.Instance.IsAdShowing;
 #else

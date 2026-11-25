@@ -14,14 +14,21 @@ public class ButtonHomeManager : MonoBehaviour
 
     private static readonly Color[] difficultyColors =
     {
-        HexToColor("#085712"), 
-        HexToColor("#4D1406"), 
-        HexToColor("#500C07"), 
+        HexToColor("#085712"),
+        HexToColor("#4D1406"),
+        HexToColor("#500C07"),
     };
 
-    void Start()
+    private void Start()
     {
-        int index = Mathf.Min(SaveGame.CurrentLevel, levels.Length - 1);
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        if (levels == null || levels.Length == 0) return;
+
+        int index = Mathf.Clamp(SaveGame.CurrentLevel, 0, levels.Length - 1);
         var level = levels[index];
         int d = (int)level.Difficulty;
 

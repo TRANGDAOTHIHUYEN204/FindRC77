@@ -14,17 +14,33 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private TMP_Text midWeekText;
     [SerializeField] private Button endWeekButton;
     [SerializeField] private TMP_Text endWeekText;
-
+    [SerializeField] private GameObject testObject; 
     [SerializeField] private float adTimeout = 20f;
 
     private bool _isStarting;
 
     private void Start()
     {
-        numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
+        RefreshLevelText();
         RefreshEventButtons();
+        SetupTestObject();
         if (AdsController.Instance != null)
             AdsController.Instance.PreloadSecond();
+    }
+
+    private void SetupTestObject()
+    {
+        if (testObject == null) return;
+#if CREATIVE
+    testObject.SetActive(true);
+#else
+        testObject.SetActive(false);
+#endif
+    }
+
+    public void RefreshLevelText()
+    {
+        numberLevelText.text = "Level " + (SaveGame.CurrentLevel + 1);
     }
 
     private void RefreshEventButtons()

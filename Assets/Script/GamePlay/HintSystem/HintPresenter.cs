@@ -75,36 +75,40 @@ public class HintPresenter : MonoBehaviour
 
     private void RequestHintByAd()
     {
-        if (_adPending)
+#if CREATIVE
+        ShowInternal(consume: false, tutorial: false);
+#else
+    if (_adPending)
+    {
+        Debug.Log("[Hint] Ad đang pending, bỏ qua.");
+        return;
+    }
+
+    var ads = AdsController.Instance;
+    if (ads == null)
+    {
+        Debug.LogWarning("[Hint] AdsController null.");
+        return;
+    }
+
+    _adPending = true;
+
+    ads.RequestReward(
+        onRewarded: () =>
         {
-            Debug.Log("[Hint] Ad đang pending, bỏ qua.");
-            return;
-        }
+            if (this == null) return;
+            _adPending = false;
 
-        var ads = AdsController.Instance;
-        if (ads == null)
+            if (!ShowInternal(consume: false, tutorial: false))
+                Debug.Log("[Hint] Không hiện được hint sau khi xem ad.");
+        },
+        onFailed: () =>
         {
-            Debug.LogWarning("[Hint] AdsController null.");
-            return;
-        }
-
-        _adPending = true;
-
-        ads.RequestReward(
-            onRewarded: () =>
-            {
-                if (this == null) return;
-                _adPending = false;
-                
-                if (!ShowInternal(consume: false, tutorial: false))
-                    Debug.Log("[Hint] Không hiện được hint sau khi xem ad.");
-            },
-            onFailed: () =>
-            {
-                if (this == null) return;
-                _adPending = false;
-                Debug.Log("[Hint] Ad chưa sẵn sàng / bị hủy.");
-            });
+            if (this == null) return;
+            _adPending = false;
+            Debug.Log("[Hint] Ad chưa sẵn sàng / bị hủy.");
+        });
+#endif
     }
 
     private bool CanShowHint()

@@ -10,12 +10,16 @@ public class ButtonAdsController : MonoBehaviour
 
     private void Awake()
     {
+#if CREATIVE
+        return;
+#else
         _button = GetComponent<Button>();
 
         _originalClick = _button.onClick;
 
         _button.onClick = new Button.ButtonClickedEvent();
         _button.onClick.AddListener(OnClick);
+#endif
     }
 
     private void OnEnable()
