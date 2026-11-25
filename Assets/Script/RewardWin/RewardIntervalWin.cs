@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
-public enum RewardType { Hint = 1, Coin = 2 }
 
 public class RewardIntervalWin : MonoBehaviour
 {
@@ -17,40 +15,63 @@ public class RewardIntervalWin : MonoBehaviour
     [SerializeField] private GameObject coinObject;
     [SerializeField] private GameObject hintObject;
     [SerializeField] private GameObject openGift;
-    [SerializeField] private RectTransform targetPoint;
     [SerializeField] private RectTransform closedGift;
-    
-    [SerializeField] private float jumpDuration = 0.7f;
-    [SerializeField, Range(0.1f, 1.5f)] private float jumpHeightRatio = 0.5f; 
-    [SerializeField] private Ease moveEase = Ease.OutSine; 
+
+    [SerializeField] private RectTransform giftTarget;
+    [SerializeField] private RectTransform rewardTarget;
     [SerializeField] private float anticipationTime = 0.12f;
-    [SerializeField] private float landSquashTime = 0.08f; 
-    [SerializeField] private float airStretch = 0.15f; 
-    [SerializeField] private float airTilt = 10f;  
-    
     [SerializeField] private float bounceDuration = 0.4f;
     [SerializeField] private float bounceStrength = 0.3f;
     [SerializeField] private int bounceVibrato = 6;
     [SerializeField, Range(0f, 1f)] private float bounceElasticity = 0.5f;
-    [SerializeField] private float revealDuration = 1f;
-
+    [SerializeField] private float rewardStartScale = 0.5f;
+    [SerializeField] private float rewardEndScale = 1f;
+    [SerializeField] private Ease rewardScaleEase = Ease.OutBack;
+    [SerializeField] private float revealDuration = 0.5f;
+    [SerializeField] private RectTransform rewardStart;
     public event Action<RewardType, int> OnRewardGranted;
 
     private Coroutine routine;
+
+    private MoveToTarget giftMover, coinMover, hintMover;
+
     private Vector3 openGiftBaseScale = Vector3.one;
-    private Vector3 closedGiftBaseLocalPos;
-    private Vector3 closedGiftBaseScale = Vector3.one;
+    private Vector3 closedGiftBaseLocalPos, closedGiftBaseScale = Vector3.one;
     private Quaternion closedGiftBaseRot = Quaternion.identity;
+    private Vector3 coinBasePos, coinBaseScale = Vector3.one;
+    private Vector3 hintBasePos, hintBaseScale = Vector3.one;
 
     private void Awake()
     {
-        if (openGift != null) openGiftBaseScale = openGift.transform.localScale;
         if (closedGift != null)
         {
+            giftMover = GetOrAddMover(closedGift.gameObject);
             closedGiftBaseLocalPos = closedGift.localPosition;
             closedGiftBaseScale = closedGift.localScale;
             closedGiftBaseRot = closedGift.localRotation;
         }
+
+        if (openGift != null) openGiftBaseScale = openGift.transform.localScale;
+
+        if (coinObject != null)
+        {
+            coinMover = GetOrAddMover(coinObject);
+            coinBasePos = coinObject.transform.position;
+            coinBaseScale = coinObject.transform.localScale;
+        }
+
+        if (hintObject != null)
+        {
+            hintMover = GetOrAddMover(hintObject);
+            hintBasePos = hintObject.transform.position;
+            hintBaseScale = hintObject.transform.localScale;
+        }
+    }
+
+    private static MoveToTarget GetOrAddMover(GameObject go)
+    {
+        var m = go.GetComponent<MoveToTarget>();
+        return m != null ? m : go.AddComponent<MoveToTarget>();
     }
 
     private void OnDisable()
@@ -79,28 +100,39 @@ public class RewardIntervalWin : MonoBehaviour
         processReward.Fill(levelNumber, () => done = true);
         yield return new WaitUntil(() => done);
 
-        if (RewardRule.IsGiftLevel(levelNumber))
+        if (rewardData.IsGiftLevel(levelNumber))
         {
-            Transform gift = closedGift != null ? closedGift : giftReward.transform;
-            
-            if (targetPoint != null)
-                yield return JumpTo(gift, targetPoint.position);
-            
-            yield return gift
-                .DOPunchScale(Vector3.one * bounceStrength, bounceDuration, bounceVibrato, bounceElasticity)
-                .SetUpdate(true)
-                .SetTarget(gift)
-                .WaitForCompletion();
-            
+            if (giftMover != null && giftTarget != null)
+            {
+                yield return closedGift
+                    .DOScale(new Vector3(closedGiftBaseScale.x * 1.12f, closedGiftBaseScale.y * 0.85f, closedGiftBaseScale.z), anticipationTime)
+                    .SetEase(Ease.OutQuad).SetUpdate(true).SetTarget(closedGift)
+                    .WaitForCompletion();
+
+                yield return giftMover.Play(closedGift.position, giftTarget).WaitForCompletion();
+            }
+
+            if (closedGift != null)
+            {
+                closedGift.localScale = closedGiftBaseScale;
+                yield return closedGift
+                    .DOPunchScale(Vector3.one * bounceStrength, bounceDuration, bounceVibrato, bounceElasticity)
+                    .SetUpdate(true).SetTarget(closedGift)
+                    .WaitForCompletion();
+            }
+
             giftReward.Hide();
             if (openGift != null)
             {
-                if (targetPoint != null) openGift.transform.position = targetPoint.position;
+                if (giftTarget != null) openGift.transform.position = giftTarget.position;
                 openGift.transform.localScale = openGiftBaseScale;
                 openGift.SetActive(true);
             }
-            RewardType type = GrantRandomReward();
-            ShowRewardObject(type);
+
+            // Loop đầu: coin + hint. Loop sau: random coin hoặc hint.
+            List<RewardType> granted = GrantRewards(levelNumber);
+            foreach (RewardType type in granted)
+                yield return PlayRewardObject(type);
 
             if (revealDuration > 0f)
                 yield return new WaitForSecondsRealtime(revealDuration);
@@ -110,52 +142,77 @@ public class RewardIntervalWin : MonoBehaviour
         onDone?.Invoke();
     }
 
-    private IEnumerator JumpTo(Transform gift, Vector3 end)
+    private List<RewardType> GrantRewards(int levelNumber)
     {
-        Vector3 baseScale = gift.localScale;
-        Vector3 start = gift.position;
-        float height = Vector3.Distance(start, end) * jumpHeightRatio;
-        yield return gift
-            .DOScale(new Vector3(baseScale.x * 1.12f, baseScale.y * 0.85f, baseScale.z), anticipationTime)
-            .SetEase(Ease.OutQuad)
-            .SetUpdate(true)
-            .SetTarget(gift)
-            .WaitForCompletion();
-        yield return DOVirtual.Float(0f, 1f, jumpDuration, p =>
-            {
-                float px = DOVirtual.EasedValue(0f, 1f, p, moveEase);
-                Vector3 pos = Vector3.Lerp(start, end, px);
-                pos.y += 4f * height * p * (1f - p);
-                gift.position = pos;
+        var result = new List<RewardType>();
 
-                float air = Mathf.Sin(p * Mathf.PI);           
-                float sx = Mathf.Lerp(1.12f, 1f - airStretch * 0.5f, air);
-                float sy = Mathf.Lerp(0.85f, 1f + airStretch, air);
-                gift.localScale = new Vector3(baseScale.x * sx, baseScale.y * sy, baseScale.z);
+        if (rewardData.IsFirstLoop(levelNumber))
+        {
+            GrantCoin(rewardData.FirstLoopCoin);
+            result.Add(RewardType.Coin);
 
-                gift.localRotation = Quaternion.Euler(0f, 0f,
-                    closedGiftBaseRot.eulerAngles.z + Mathf.Sin(p * Mathf.PI * 2f) * airTilt);
-            })
-            .SetEase(Ease.Linear)
-            .SetUpdate(true)
-            .SetTarget(gift)
-            .WaitForCompletion();
+            GrantHint(rewardData.FirstLoopHint);
+            result.Add(RewardType.Hint);
+        }
+        else if (rewardData.RollIsHint())
+        {
+            GrantHint(rewardData.OtherLoopHint);
+            result.Add(RewardType.Hint);
+        }
+        else
+        {
+            GrantCoin(rewardData.RollOtherLoopCoin());
+            result.Add(RewardType.Coin);
+        }
 
-        gift.position = end;
-        gift.localRotation = closedGiftBaseRot;
-        yield return gift
-            .DOScale(new Vector3(baseScale.x * 1.15f, baseScale.y * 0.82f, baseScale.z), landSquashTime)
-            .SetEase(Ease.OutQuad)
-            .SetUpdate(true)
-            .SetTarget(gift)
-            .WaitForCompletion();
+        return result;
+    }
 
-        yield return gift
-            .DOScale(baseScale, landSquashTime * 1.5f)
-            .SetEase(Ease.OutBack)
+    private void GrantCoin(int amount)
+    {
+        AddCoin(amount);
+        Debug.Log($"[Reward] Coin +{amount}");
+        OnRewardGranted?.Invoke(RewardType.Coin, amount);
+    }
+
+    private void GrantHint(int amount)
+    {
+        AddHint(amount);
+        Debug.Log($"[Reward] Hint +{amount}");
+        OnRewardGranted?.Invoke(RewardType.Hint, amount);
+    }
+
+    private IEnumerator PlayRewardObject(RewardType type)
+    {
+        bool isCoin = type == RewardType.Coin;
+
+        GameObject obj = isCoin ? coinObject : hintObject;
+        MoveToTarget mover = isCoin ? coinMover : hintMover;
+        Vector3 baseScale = isCoin ? coinBaseScale : hintBaseScale;
+
+        if (coinObject != null) coinObject.SetActive(isCoin);
+        if (hintObject != null) hintObject.SetActive(!isCoin);
+
+        if (obj == null || mover == null || rewardTarget == null) yield break;
+
+        Transform t = obj.transform;
+
+        RectTransform startRt = rewardStart != null ? rewardStart : giftTarget;
+        Vector3 startPos = startRt != null ? startRt.position : t.position;
+
+        if (Vector3.Distance(startPos, rewardTarget.position) < 1f)
+            Debug.LogWarning("[Reward] Điểm bắt đầu và Reward Target trùng nhau nên sẽ không thấy di chuyển!", this);
+
+        t.position = startPos;
+        t.localScale = baseScale * rewardStartScale;
+
+        Tween move = mover.Play(startPos, rewardTarget);
+        t.DOScale(baseScale * rewardEndScale, mover.Duration)
+            .SetEase(rewardScaleEase)
             .SetUpdate(true)
-            .SetTarget(gift)
-            .WaitForCompletion();
+            .SetTarget(t);
+
+        yield return move.WaitForCompletion();
     }
 
     public void ResetState()
@@ -181,6 +238,18 @@ public class RewardIntervalWin : MonoBehaviour
             openGift.transform.localScale = openGiftBaseScale;
             openGift.SetActive(false);
         }
+
+        if (coinObject != null)
+        {
+            coinObject.transform.position = coinBasePos;
+            coinObject.transform.localScale = coinBaseScale;
+        }
+
+        if (hintObject != null)
+        {
+            hintObject.transform.position = hintBasePos;
+            hintObject.transform.localScale = hintBaseScale;
+        }
     }
 
     private void KillTweens()
@@ -188,32 +257,8 @@ public class RewardIntervalWin : MonoBehaviour
         if (closedGift != null) closedGift.DOKill();
         if (giftReward != null) giftReward.transform.DOKill();
         if (openGift != null) openGift.transform.DOKill();
-    }
-
-    private RewardType GrantRandomReward()
-    {
-        if (Random.Range(1, 3) == 1)
-        {
-            int amount = rewardData.RewardHint;
-            AddHint(amount);
-            Debug.Log($"[Reward] Hint +{amount}");
-            OnRewardGranted?.Invoke(RewardType.Hint, amount);
-            return RewardType.Hint;
-        }
-        else
-        {
-            int amount = rewardData.RewardCoin;
-            AddCoin(amount);
-            Debug.Log($"[Reward] Coin +{amount}");
-            OnRewardGranted?.Invoke(RewardType.Coin, amount);
-            return RewardType.Coin;
-        }
-    }
-
-    private void ShowRewardObject(RewardType type)
-    {
-        if (coinObject != null) coinObject.SetActive(type == RewardType.Coin);
-        if (hintObject != null) hintObject.SetActive(type == RewardType.Hint);
+        if (coinObject != null) coinObject.transform.DOKill();
+        if (hintObject != null) hintObject.transform.DOKill();
     }
 
     private void HideRewardObjects()
@@ -222,7 +267,11 @@ public class RewardIntervalWin : MonoBehaviour
         if (hintObject != null) hintObject.SetActive(false);
     }
 
-    private void AddCoin(int amount) => PendingReward.Add(amount);
+    private void AddCoin(int amount)
+    {
+        if (amount <= 0) return;
+        PendingReward.Add(amount);
+    }
 
     private void AddHint(int amount)
     {

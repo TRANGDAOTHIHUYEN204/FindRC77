@@ -13,8 +13,7 @@ public class MarkPresenter : MonoBehaviour
     [SerializeField] private float bigRatio    = 0.6f;
     [SerializeField] private float minInnerPercent = 0.08f;
     [SerializeField] private float maxInnerPercent = 0.22f;
-
-    [Header("Nét")]
+    [SerializeField] private MarkData rewardStrokeData;
     [SerializeField, Range(0.7f, 1f)] private float smallLineMul = 0.75f;
 
     private int _session;
@@ -32,6 +31,9 @@ public class MarkPresenter : MonoBehaviour
 
     public void DrawPair(DifferentPair pair, MarkData data, Action<RectTransform> onFinished = null)
     {
+        if (SaveGame.StrokeRewardUnlocked && rewardStrokeData != null)
+            data = rewardStrokeData;
+
         if (data == null)
         {
             Debug.LogError("MarkData null", this);

@@ -17,6 +17,27 @@ public static class SaveGame
     private static string DoubleKey(int level) => $"save_fh_double_{level}";
     private const string KeyCleanWin = "save_clean_win";
     private const string KeyCleanDouble = "save_clean_double";
+    private const string KeyTitle = "save_title_unlocked";
+    private const string KeyStroke = "save_stroke_unlocked";
+    private const string KeyRewardChainDone = "save_reward_chain_done";
+
+    public static bool TitleUnlocked
+    {
+        get => PlayerPrefs.GetInt(KeyTitle, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyTitle, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static bool StrokeRewardUnlocked
+    {
+        get => PlayerPrefs.GetInt(KeyStroke, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyStroke, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static bool RewardChainDone
+    {
+        get => PlayerPrefs.GetInt(KeyRewardChainDone, 0) == 1;
+        set { PlayerPrefs.SetInt(KeyRewardChainDone, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
 
     public static bool TryClaimCleanWin()
     {
@@ -59,7 +80,7 @@ public static class SaveGame
         HintBalance += 1;
         return true;
     }
-    
+
     public static bool TryClaimCatchWin()
     {
         if (PlayerPrefs.GetInt(KeyCatchWin, 0) == 1) return false;
@@ -90,6 +111,9 @@ public static class SaveGame
         PlayerPrefs.DeleteKey(KeyCatchDouble);
         PlayerPrefs.DeleteKey(KeyCleanWin);
         PlayerPrefs.DeleteKey(KeyCleanDouble);
+        PlayerPrefs.DeleteKey(KeyTitle);
+        PlayerPrefs.DeleteKey(KeyStroke);
+        PlayerPrefs.DeleteKey(KeyRewardChainDone);
         SaveThirdMiniGame.Reset();
         for (int i = 0; i < MaxEventLevels; i++)
         {

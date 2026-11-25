@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class ProcessReward : MonoBehaviour
 {
+    [SerializeField] private RewardWin rewardData;
     [SerializeField] private GameObject processPanel;
     [SerializeField] private ProcessBar processBar;
-    [SerializeField] private int levelsPerReward = 3;
     [SerializeField] private float waitAfterFill = 0.5f;
 
     private Coroutine routine;
 
-    private int GetCurrent(int levelNumber)
-    {
-        int current = levelNumber % levelsPerReward;
-        return current == 0 ? levelsPerReward : current;
-    }
-    
     public void Show(int levelNumber)
     {
+        rewardData.GetLoop(levelNumber, out int current, out int total);
         processPanel.SetActive(true);
-        processBar.SetProgress(GetCurrent(levelNumber) - 1, levelsPerReward, false);
+        processBar.SetProgress(current - 1, total, false);
     }
 
     public void Fill(int levelNumber, Action onDone = null)
@@ -37,7 +32,8 @@ public class ProcessReward : MonoBehaviour
 
     private IEnumerator FillRoutine(int levelNumber, Action onDone)
     {
-        processBar.SetProgress(GetCurrent(levelNumber), levelsPerReward, true);
+        rewardData.GetLoop(levelNumber, out int current, out int total);
+        processBar.SetProgress(current, total, true);
         yield return new WaitForSecondsRealtime(waitAfterFill);
         routine = null;
         onDone?.Invoke();
