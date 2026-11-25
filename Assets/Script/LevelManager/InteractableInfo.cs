@@ -9,6 +9,9 @@ public class InteractableLayer
     public Sprite Sprite;
     public Vector2 Position;
     public Vector2 Size;
+    /// Góc lắc nhẹ (độ) theo nhịp khi đồ vật còn đóng, gợi ý cho người chơi là bấm được. 0 = tắt.
+    /// Chỉ có tác dụng với layer trong ClosedLayers.
+    public float IdleWiggleAngle;
 }
 
 /// Đồ vật bấm vào được (vd: tủ quần áo). Lúc đóng hiện ClosedLayers,

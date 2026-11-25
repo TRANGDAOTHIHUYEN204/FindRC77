@@ -51,7 +51,32 @@ public class HintPresenter : MonoBehaviour
         RequestHintByAd();
     }
 
-    public void ShowTutorialHint() => ShowInternal(consume: false, tutorial: true);
+    public void ShowTutorialHint() => ShowTutorialHint(-1f);
+
+    /// zoomLevel &lt;= 0 → zoom mặc định; tutorial truyền mức zoom nhẹ hơn.
+    public void ShowTutorialHint(float zoomLevel)
+    {
+        _tutorialZoom = zoomLevel;
+        ShowInternal(consume: false, tutorial: true);
+    }
+
+    /// Tutorial bật cờ này để khi người chơi bấm trúng, chỉ ẩn lớp gợi ý,
+    /// giữ nguyên khung zoom cho tới khi hiệu ứng khoanh tròn / dấu tích chạy xong.
+    public bool KeepZoomOnClear { get; set; }
+
+    /// Ẩn gợi ý và zoom về như cũ.
+    public void ResetView()
+    {
+        HintedPair = null;
+        _hintOnArea = false;
+        if (spotlight != null) spotlight.Hide();
+        ReleaseHands();
+    }
+
+    private float _tutorialZoom = -1f;
+    private bool _lastTutorial;
+    private bool _hintOnArea;
+    private Vector2 _areaCenter;
     
     public void AddHint(int amount)
     {
@@ -69,7 +94,12 @@ public class HintPresenter : MonoBehaviour
     public void ClearHint()
     {
         HintedPair = null;
-        if (spotlight != null) spotlight.Hide();
+        _hintOnArea = false;
+        if (spotlight != null)
+        {
+            if (KeepZoomOnClear) spotlight.HideOverlay();
+            else spotlight.Hide();
+        }
         ReleaseHands();
     }
 
@@ -127,22 +157,50 @@ public class HintPresenter : MonoBehaviour
         if (entry == null) return false;
 
         HintedPair = entry.Pair;
+        _lastTutorial = tutorial;
+        ShowTarget(tutorial);
 
-        if (tutorial)
+        if (consume) ConsumeHint();
+        return true;
+    }
+
+    /// Hiện gợi ý cho HintedPair. Nếu điểm đó đang bị giấu trong đồ vật còn đóng (tủ, hộp quà...)
+    /// thì khoanh + zoom vào cả đồ vật để người chơi biết phải bấm mở nó trước.
+    private void ShowTarget(bool tutorial)
+    {
+        _hintOnArea = false;
+        var interactables = pairManagerHolder.Interactables;
+        if (HintedPair.IsLocked && interactables != null &&
+            interactables.TryGetHotspotFor(HintedPair, out Vector2 areaCenter, out Vector2 areaSize))
         {
-            spotlight.ShowAnimated(HintedPair);
-            ReleaseHands();
-
-            _handA = SpawnHand(HintedPair.RootA);
-            _handB = SpawnHand(HintedPair.RootB);
+            _hintOnArea = true;
+            _areaCenter = areaCenter;
+            spotlight.ShowArea(HintedPair.RootA, HintedPair.RootB, areaCenter, areaSize,
+                tutorial, tutorial ? _tutorialZoom : -1f);
+        }
+        else if (tutorial)
+        {
+            spotlight.ShowAnimated(HintedPair, _tutorialZoom);
         }
         else
         {
             spotlight.Show(HintedPair);
         }
 
-        if (consume) ConsumeHint();
-        return true;
+        if (tutorial)
+        {
+            ReleaseHands();
+            _handA = SpawnHand(HintedPair.RootA);
+            _handB = SpawnHand(HintedPair.RootB);
+        }
+    }
+
+    /// Gọi khi người chơi vừa mở một đồ vật tương tác: nếu hint đang chỉ vào đồ vật đó
+    /// thì chuyển sang khoanh đúng điểm khác bên trong (không tốn thêm lượt hint).
+    public void OnInteractableOpened()
+    {
+        if (!_hintOnArea || HintedPair == null || HintedPair.IsFound || HintedPair.IsLocked) return;
+        ShowTarget(_lastTutorial);
     }
 
     private void ConsumeHint()
@@ -172,7 +230,9 @@ public class HintPresenter : MonoBehaviour
         var hand = factoryGameplay.CreateHand();
         if (hand == null) return null;
 
-        HintedPair.GetWorldRect(root, out Vector3 center, out _);
+        Vector3 center;
+        if (_hintOnArea) center = root.TransformPoint(_areaCenter);
+        else HintedPair.GetWorldRect(root, out center, out _);
         hand.PointAt(root, center);
         return hand;
     }

@@ -47,5 +47,14 @@ public static class FrameMaskUtil
             lr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             lr.sortingOrder = lr.name == "Outline" ? order - 1 : order;
         }
+
+        // Ngôi sao chạy ở đầu nét vẽ: cùng order với nét (order + 1 = front của mask thì bị cắt mất),
+        // được đặt gần camera hơn nét một chút nên vẽ đè lên nét.
+        foreach (var sr in mark.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            sr.sortingLayerID = layerId;
+            sr.sortingOrder = order;
+            sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        }
     }
 }

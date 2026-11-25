@@ -24,6 +24,8 @@ public class SpawnChallengeNode : MonoBehaviour
     [SerializeField] private SpawnStarTrail spawnStarTrail;
     public event Action OnAllChanged;
     private int _appliedCount;
+    /// Số node đã đổi sang dấu tích (particle đã bay tới nơi).
+    public int AppliedCount => _appliedCount;
 
     private void Apply(ChallengeNode node, Sprite s)
     {

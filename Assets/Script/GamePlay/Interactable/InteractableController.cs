@@ -11,6 +11,9 @@ public class InteractableController : MonoBehaviour
     private static readonly Vector2 DesignSize = new Vector2(1080f, 720f);
     private const float OpenDuration = 0.3f;
 
+    // Nhịp lắc gợi ý khi đồ vật còn đóng: nghỉ rồi lắc nhẹ một nhịp.
+    private const float WiggleRest = 1.8f;
+
     private class Runtime
     {
         public InteractableInfo Info;
@@ -18,6 +21,7 @@ public class InteractableController : MonoBehaviour
         public readonly List<Image> Closed = new List<Image>();
         public readonly List<Image> Open = new List<Image>();
         public readonly List<DifferentPair> HiddenPairs = new List<DifferentPair>();
+        public readonly List<KeyValuePair<Image, float>> Wiggle = new List<KeyValuePair<Image, float>>();
     }
 
     private readonly List<Runtime> _items = new List<Runtime>();
@@ -41,10 +45,10 @@ public class InteractableController : MonoBehaviour
             if (info == null) continue;
             var rt = new Runtime { Info = info };
 
-            CreateLayers(info.ClosedLayers, containerA, rootA, rt.Closed);
-            CreateLayers(info.ClosedLayers, containerB, rootB, rt.Closed);
-            CreateLayers(info.OpenLayers, containerA, rootA, rt.Open);
-            CreateLayers(info.OpenLayers, containerB, rootB, rt.Open);
+            CreateLayers(info.ClosedLayers, containerA, rootA, rt.Closed, rt.Wiggle);
+            CreateLayers(info.ClosedLayers, containerB, rootB, rt.Closed, rt.Wiggle);
+            CreateLayers(info.OpenLayers, containerA, rootA, rt.Open, null);
+            CreateLayers(info.OpenLayers, containerB, rootB, rt.Open, null);
 
             if (info.HiddenPointIndices != null && pairs != null)
             {
@@ -73,6 +77,24 @@ public class InteractableController : MonoBehaviour
         foreach (var go in _containers)
             if (go != null) Destroy(go);
         _containers.Clear();
+    }
+
+    /// Nếu điểm khác này đang bị giấu trong một đồ vật còn đóng, trả về vùng bấm của đồ vật đó
+    /// (toạ độ local của ảnh A/B, gốc ở pivot) để hint chỉ vào đồ vật thay vì chỗ bị che.
+    public bool TryGetHotspotFor(DifferentPair pair, out Vector2 localCenter, out Vector2 localSize)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            var rt = _items[i];
+            if (rt.IsOpen || !rt.HiddenPairs.Contains(pair)) continue;
+
+            Vector2 scale = GetScale(_rootA);
+            localCenter = Vector2.Scale(rt.Info.HotspotPosition, scale);
+            localSize = Vector2.Scale(rt.Info.HotspotSize, scale);
+            return true;
+        }
+        localCenter = localSize = Vector2.zero;
+        return false;
     }
 
     /// Bấm vào vùng hotspot của đồ vật đang đóng → mở ra. Trả về true nếu đã xử lý click.
@@ -104,12 +126,38 @@ public class InteractableController : MonoBehaviour
 
         foreach (var img in rt.Closed) Show(img, !open, animate);
         foreach (var img in rt.Open) Show(img, open, animate);
+
+        if (!open) StartWiggle(rt);
+    }
+
+    /// Lắc nhẹ layer đồ vật (cánh tủ, nắp hộp...) theo nhịp để gợi ý là bấm được.
+    /// Các layer ảnh A và B dùng chung nhịp nên lắc đồng bộ.
+    private static void StartWiggle(Runtime rt)
+    {
+        foreach (var kv in rt.Wiggle)
+        {
+            Image img = kv.Key;
+            float a = kv.Value;
+            if (img == null || a <= 0f) continue;
+
+            Transform t = img.transform;
+            t.localRotation = Quaternion.identity;
+
+            Sequence seq = DOTween.Sequence().SetTarget(t);
+            seq.AppendInterval(WiggleRest);
+            seq.Append(t.DOLocalRotate(new Vector3(0f, 0f, a), 0.12f).SetEase(Ease.OutSine));
+            seq.Append(t.DOLocalRotate(new Vector3(0f, 0f, -a), 0.2f).SetEase(Ease.InOutSine));
+            seq.Append(t.DOLocalRotate(new Vector3(0f, 0f, a * 0.5f), 0.16f).SetEase(Ease.InOutSine));
+            seq.Append(t.DOLocalRotate(Vector3.zero, 0.14f).SetEase(Ease.OutSine));
+            seq.SetLoops(-1);
+        }
     }
 
     private static void Show(Image img, bool visible, bool animate)
     {
         if (img == null) return;
         img.transform.localScale = Vector3.one;
+        img.transform.localRotation = Quaternion.identity;
         img.color = Color.white;
 
         if (!visible)
@@ -159,7 +207,8 @@ public class InteractableController : MonoBehaviour
         return rt;
     }
 
-    private static void CreateLayers(InteractableLayer[] layers, Transform container, RectTransform root, List<Image> output)
+    private static void CreateLayers(InteractableLayer[] layers, Transform container, RectTransform root, List<Image> output,
+        List<KeyValuePair<Image, float>> wiggle)
     {
         if (layers == null) return;
         Vector2 scale = GetScale(root);
@@ -180,6 +229,9 @@ public class InteractableController : MonoBehaviour
             img.sprite = layer.Sprite;
             img.raycastTarget = false;
             output.Add(img);
+
+            if (wiggle != null && layer.IdleWiggleAngle > 0f)
+                wiggle.Add(new KeyValuePair<Image, float>(img, layer.IdleWiggleAngle));
         }
     }
 

@@ -690,9 +690,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   levels:
-  - {fileID: 11400000, guid: 4a8b4e6ef57c06c409b2eb6f77d5f9fc, type: 2}
   - {fileID: 11400000, guid: 01986067224e4701bf49a2a53cb13a50, type: 2}
   - {fileID: 11400000, guid: 19c91ba7ee7e4334a91f116d63dad8e3, type: 2}
+  - {fileID: 11400000, guid: 4a8b4e6ef57c06c409b2eb6f77d5f9fc, type: 2}
   - {fileID: 11400000, guid: 4f304a2325c3b8744be22b86b976bf9e, type: 2}
   - {fileID: 11400000, guid: 417570143d724ff6a24ee48bacc2e952, type: 2}
   - {fileID: 11400000, guid: 3cfbd5186e442f44c804e04e3e1acdbe, type: 2}
@@ -1011,6 +1011,7 @@ GameObject:
   - component: {fileID: 260534129}
   - component: {fileID: 260534128}
   - component: {fileID: 260534130}
+  - component: {fileID: 260534131}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1101,6 +1102,31 @@ MonoBehaviour:
   closeEndScale: {x: 0, y: 0, z: 0}
   blockGameInput: 1
   blockHoldAfterClose: 0.25
+--- !u!114 &260534131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260534126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfce41ac6b29a0418636ddf106cdd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StarRewardManager
+  heartManager: {fileID: 1736347940}
+  levelManager: {fileID: 153753067}
+  stars:
+  - {fileID: 1996366915}
+  - {fileID: 1049560285}
+  - {fileID: 689897414}
+  heartsRequired: 010000000200000003000000
+  tutorialAlwaysFullStars: 1
+  startDelay: 0.3
+  delayBetweenStars: 0.35
+  onRewardFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &266827308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8928447270580056575, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
@@ -2308,6 +2334,8 @@ MonoBehaviour:
   hintPresenter: {fileID: 1301881755}
   pairManagerHolder: {fileID: 467630240}
   stateGame: {fileID: 2088011103}
+  zoom: {fileID: 0}
+  challengeNodes: {fileID: 0}
   delayBetweenHints: 0.6
   hideDuringTutorial:
   - {fileID: 1086084359}
@@ -2317,6 +2345,10 @@ MonoBehaviour:
   - {fileID: 164304627}
   - {fileID: 91938350}
   maxHints: 3
+  startDelay: 1
+  zoomScale: 0.5
+  afterTickDelay: 0.5
+  maxWaitFx: 4
 --- !u!4 &786714006
 Transform:
   m_ObjectHideFlags: 0
@@ -2983,6 +3015,7 @@ MonoBehaviour:
   bigRatio: 0.3
   minInnerPercent: 0.08
   maxInnerPercent: 0.22
+  rewardStrokeData: {fileID: 0}
   smallLineMul: 0.7
 --- !u!4 &962908399
 Transform:
@@ -4707,6 +4740,11 @@ MonoBehaviour:
   trailStartPoint: {fileID: 2147000002}
   markDelay: 0.7
   hideOutlineDelay: 0.5
+  zoomManager: {fileID: 0}
+  punchZoomFactor: 1.15
+  punchZoomIn: 0.25
+  punchZoomHold: 1.1
+  punchZoomOut: 0.35
 --- !u!4 &1551937417
 Transform:
   m_ObjectHideFlags: 0
@@ -6631,6 +6669,7 @@ MonoBehaviour:
   levelManager: {fileID: 153753067}
   levelText: {fileID: 1557554889}
   winTutorial: {fileID: 2080376721}
+  winTutorialStars: {fileID: 260534131}
   warningStartSecond: 10
   warningMinVolume: 0.241
   warningMaxVolume: 1
@@ -6678,15 +6717,19 @@ MonoBehaviour:
   coinObject: {fileID: 438813960}
   hintObject: {fileID: 1183744671}
   openGift: {fileID: 2020555153}
-  targetPoint: {fileID: 311617607}
   closedGift: {fileID: 1751553400}
-  flyDuration: 0.6
-  flyEase: 7
+  giftTarget: {fileID: 0}
+  rewardTarget: {fileID: 0}
+  anticipationTime: 0.12
   bounceDuration: 0.4
   bounceStrength: 0.3
   bounceVibrato: 6
   bounceElasticity: 0.5
+  rewardStartScale: 0.5
+  rewardEndScale: 1
+  rewardScaleEase: 27
   revealDuration: 1
+  rewardStart: {fileID: 0}
 --- !u!114 &2088011106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6699,9 +6742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b66645a50a3dd4db88af340e2fc231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProcessReward
+  rewardData: {fileID: 0}
   processPanel: {fileID: 1912886108}
   processBar: {fileID: 1912886111}
-  levelsPerReward: 3
   waitAfterFill: 0.5
 --- !u!114 &2134608765 stripped
 MonoBehaviour:
@@ -7323,14 +7366,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2b43e1cd73859c24b95535ed09d4421b, type: 3}
-    - target: {fileID: 2719253640499405231, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2719253640499405231, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1019738326897614148, guid: 7b97679fffdad4541bab4040e019d153, type: 3}
     - target: {fileID: 2961011448819476638, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4
@@ -7526,10 +7561,6 @@ PrefabInstance:
     - target: {fileID: 7129411260040823656, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8146672904898865553, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8734177843261924110, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_SizeDelta.x
