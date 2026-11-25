@@ -19,6 +19,8 @@ public class ButtonHomeManager : MonoBehaviour
         HexToColor("#500C07"),
     };
 
+    public int LevelCount => levels != null ? levels.Length : 0;
+
     private void Start()
     {
         Refresh();

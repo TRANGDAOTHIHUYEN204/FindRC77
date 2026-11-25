@@ -6,14 +6,21 @@ public class ChangeLevel : MonoBehaviour
     [SerializeField] private MenuHome menuHome;
     [SerializeField] private ButtonHomeManager buttonHomeManager;
 
+    private void Start()
+    {
+        if (buttonHomeManager.LevelCount > 0)
+            numberInput.SetMaxValue(buttonHomeManager.LevelCount);
+    }
+
     public void OnGoClicked()
     {
         if (!numberInput.TryGetNumber(out int number)) return;
 
-        SaveGame.CurrentLevel = Mathf.Max(number - 1, 0);
+        int maxLevel = Mathf.Max(buttonHomeManager.LevelCount, 1);
+        SaveGame.CurrentLevel = Mathf.Clamp(number, 1, maxLevel) - 1;
         SaveGame.TutorialCompleted = true;
 
-        menuHome.RefreshLevelText();     
-        buttonHomeManager.Refresh(); 
+        menuHome.RefreshLevelText();
+        buttonHomeManager.Refresh();
     }
 }
