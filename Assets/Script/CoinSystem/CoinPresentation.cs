@@ -18,12 +18,11 @@ public class CoinPresentation : MonoBehaviour
     [SerializeField] private AudioClip coinSpawnSfx;     
     [SerializeField] private AudioClip coinFlySfx;        
 
-    private int _unpaid;
     private int _session;
 
     private void Awake()
     {
-        if (coinPrefab.gameObject.scene.IsValid())
+        if (coinPrefab != null && coinPrefab.gameObject.scene.IsValid())
             coinPrefab.gameObject.SetActive(false);
     }
 
@@ -34,12 +33,6 @@ public class CoinPresentation : MonoBehaviour
         _session++;
         StopAllCoroutines();
 
-        if (_unpaid > 0)
-        {
-            Wallets.Coin.Add(_unpaid);
-            _unpaid = 0;
-        }
-
         foreach (Transform child in container) Destroy(child.gameObject);
     }
 
@@ -48,15 +41,12 @@ public class CoinPresentation : MonoBehaviour
         int reward = PendingReward.Amount;
         if (reward <= 0) return;
 
-        PendingReward.Clear();
-        _unpaid += reward;
-
         StartCoroutine(PlayBurst(reward, _session));
     }
 
     private IEnumerator PlayBurst(int reward, int session)
     {
-        int count = Mathf.Min(maxVisualCoins, reward); 
+        int count = Mathf.Min(Mathf.Max(1, maxVisualCoins), reward);
         int perCoin = reward / count;
         int remainder = reward % count;
         
@@ -75,7 +65,7 @@ public class CoinPresentation : MonoBehaviour
 
         PlaySfx(coinSpawnSfx);
 
-        yield return new WaitForSeconds(holdTime);
+        yield return new WaitForSecondsRealtime(holdTime);
         
         for (int i = 0; i < count; i++)
         {
@@ -93,14 +83,10 @@ public class CoinPresentation : MonoBehaviour
                 if (c != null) Destroy(c.gameObject);
                 if (session != _session) return;
 
-                if (value > 0)
-                {
-                    _unpaid -= value;
-                    Wallets.Coin.Add(value);
-                }
+                Wallets.Coin.ClaimPending(value);
             });
 
-            yield return new WaitForSeconds(stagger);
+            yield return new WaitForSecondsRealtime(stagger);
         }
     }
 

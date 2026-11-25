@@ -59,7 +59,9 @@ public class RewardWin : ScriptableObject
             return;
         }
 
-        // Other loop: chỉ cho coin (90%-110% giá 1 hint)
-        coin = RollOtherLoopCoin();
+        if (Random.Range(0, 2) == 0)
+            coin = RollOtherLoopCoin();
+        else
+            hint = 1;
     }
 }
