@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_05_Kitchen_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 5
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 5dfa5e75c6344b0bb28f255f9a02f427, type: 3}
+  errorSprite: {fileID: 21300000, guid: 2731a1eec6454713bd0e33fe8bb250c2, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: -244.69, y: 110.39, z: 0}
+    Size: {x: 105.47, y: 91.41}
+    Outline:
+    - {x: -194.59, y: 110.39, z: 0}
+    - {x: -199.55, y: 91.55, z: 0}
+    - {x: -213.45, y: 76.45, z: 0}
+    - {x: -233.54, y: 68.06, z: 0}
+    - {x: -255.84, y: 68.06, z: 0}
+    - {x: -275.92, y: 76.45, z: 0}
+    - {x: -289.82, y: 91.55, z: 0}
+    - {x: -294.79, y: 110.39, z: 0}
+    - {x: -289.82, y: 129.23, z: 0}
+    - {x: -275.92, y: 144.34, z: 0}
+    - {x: -255.84, y: 152.72, z: 0}
+    - {x: -233.54, y: 152.72, z: 0}
+    - {x: -213.45, y: 144.34, z: 0}
+    - {x: -199.55, y: 129.23, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -244.69, y: 110.39, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 50.1
+  - Position: {x: 289.69, y: 252.77, z: 0}
+    Size: {x: 70.31, y: 73.83}
+    Outline:
+    - {x: 323.09, y: 252.77, z: 0}
+    - {x: 319.78, y: 237.56, z: 0}
+    - {x: 310.51, y: 225.36, z: 0}
+    - {x: 297.12, y: 218.58, z: 0}
+    - {x: 282.26, y: 218.58, z: 0}
+    - {x: 268.86, y: 225.36, z: 0}
+    - {x: 259.6, y: 237.56, z: 0}
+    - {x: 256.29, y: 252.77, z: 0}
+    - {x: 259.6, y: 267.99, z: 0}
+    - {x: 268.86, y: 280.19, z: 0}
+    - {x: 282.26, y: 286.96, z: 0}
+    - {x: 297.12, y: 286.96, z: 0}
+    - {x: 310.51, y: 280.19, z: 0}
+    - {x: 319.78, y: 267.99, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 289.69, y: 252.77, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 35.07
+  - Position: {x: -127.62, y: 193.71, z: 0}
+    Size: {x: 96.33, y: 79.45}
+    Outline:
+    - {x: -81.86, y: 193.71, z: 0}
+    - {x: -86.39, y: 177.34, z: 0}
+    - {x: -99.09, y: 164.2, z: 0}
+    - {x: -117.44, y: 156.92, z: 0}
+    - {x: -137.8, y: 156.92, z: 0}
+    - {x: -156.15, y: 164.2, z: 0}
+    - {x: -168.84, y: 177.34, z: 0}
+    - {x: -173.37, y: 193.71, z: 0}
+    - {x: -168.84, y: 210.09, z: 0}
+    - {x: -156.15, y: 223.22, z: 0}
+    - {x: -137.8, y: 230.5, z: 0}
+    - {x: -117.44, y: 230.5, z: 0}
+    - {x: -99.09, y: 223.22, z: 0}
+    - {x: -86.39, y: 210.09, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -127.62, y: 193.71, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 45.76
+  - Position: {x: -422.23, y: -153.28, z: 0}
+    Size: {x: 73.83, y: 59.06}
+    Outline:
+    - {x: -387.16, y: -153.28, z: 0}
+    - {x: -390.63, y: -165.45, z: 0}
+    - {x: -400.36, y: -175.22, z: 0}
+    - {x: -414.42, y: -180.63, z: 0}
+    - {x: -430.03, y: -180.63, z: 0}
+    - {x: -444.09, y: -175.22, z: 0}
+    - {x: -453.82, y: -165.45, z: 0}
+    - {x: -457.29, y: -153.28, z: 0}
+    - {x: -453.82, y: -141.11, z: 0}
+    - {x: -444.09, y: -131.35, z: 0}
+    - {x: -430.03, y: -125.93, z: 0}
+    - {x: -414.42, y: -125.93, z: 0}
+    - {x: -400.36, y: -131.35, z: 0}
+    - {x: -390.63, y: -141.11, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -422.23, y: -153.28, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 35.07
+  - Position: {x: -343.12, y: -169.8, z: 0}
+    Size: {x: 77.34, y: 58.36}
+    Outline:
+    - {x: -306.39, y: -169.8, z: 0}
+    - {x: -310.02, y: -181.83, z: 0}
+    - {x: -320.22, y: -191.48, z: 0}
+    - {x: -334.95, y: -196.83, z: 0}
+    - {x: -351.3, y: -196.83, z: 0}
+    - {x: -366.03, y: -191.48, z: 0}
+    - {x: -376.23, y: -181.83, z: 0}
+    - {x: -379.86, y: -169.8, z: 0}
+    - {x: -376.23, y: -157.78, z: 0}
+    - {x: -366.03, y: -148.13, z: 0}
+    - {x: -351.3, y: -142.78, z: 0}
+    - {x: -334.95, y: -142.78, z: 0}
+    - {x: -320.22, y: -148.13, z: 0}
+    - {x: -310.02, y: -157.78, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -343.12, y: -169.8, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 36.74
+  textWin: "Oven: 1, Me: 0. Ordering pizza."
+  difficulty: 0
+  interactables:
+  - Name: kitchen
+    HotspotPosition: {x: -339.96, y: -127.27}
+    HotspotSize: {x: 394.45, y: 457.03}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: c075c910b3e844709193b9a02f7f16d8, type: 3}
+      Position: {x: -339.96, y: -127.27}
+      Size: {x: 380.39, y: 442.97}
+    - Sprite: {fileID: 21300000, guid: 3325cedf43034d82acf3b77d12bac008, type: 3}
+      Position: {x: 98.09, y: -8.09}
+      Size: {x: 210.23, y: 637.73}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 9d15c495124c457a9a0ffa372515b9e1, type: 3}
+      Position: {x: 86.48, y: -10.55}
+      Size: {x: 237.66, y: 645.47}
+    HiddenPointIndices: 0300000004000000

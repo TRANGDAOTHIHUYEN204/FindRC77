@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_19_Arcade_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 19
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 2ff2595c8a6041c29132ffc7be78d7c1, type: 3}
+  errorSprite: {fileID: 21300000, guid: a4110bec3ad64ee6a4342642b1609f76, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 305.86, y: 202.5, z: 0}
+    Size: {x: 112.5, y: 156.09}
+    Outline:
+    - {x: 359.3, y: 202.5, z: 0}
+    - {x: 354, y: 170.33, z: 0}
+    - {x: 339.18, y: 144.53, z: 0}
+    - {x: 317.75, y: 130.21, z: 0}
+    - {x: 293.97, y: 130.21, z: 0}
+    - {x: 272.54, y: 144.53, z: 0}
+    - {x: 257.71, y: 170.33, z: 0}
+    - {x: 252.42, y: 202.5, z: 0}
+    - {x: 257.71, y: 234.67, z: 0}
+    - {x: 272.54, y: 260.47, z: 0}
+    - {x: 293.97, y: 274.79, z: 0}
+    - {x: 317.75, y: 274.79, z: 0}
+    - {x: 339.18, y: 260.47, z: 0}
+    - {x: 354, y: 234.67, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 305.86, y: 202.5, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 74.14
+  - Position: {x: 221.84, y: 86.13, z: 0}
+    Size: {x: 214.45, y: 197.58}
+    Outline:
+    - {x: 323.7, y: 86.13, z: 0}
+    - {x: 313.61, y: 45.41, z: 0}
+    - {x: 285.35, y: 12.76, z: 0}
+    - {x: 244.5, y: -5.36, z: 0}
+    - {x: 199.17, y: -5.36, z: 0}
+    - {x: 158.32, y: 12.76, z: 0}
+    - {x: 130.06, y: 45.41, z: 0}
+    - {x: 119.97, y: 86.13, z: 0}
+    - {x: 130.06, y: 126.85, z: 0}
+    - {x: 158.32, y: 159.51, z: 0}
+    - {x: 199.17, y: 177.63, z: 0}
+    - {x: 244.5, y: 177.63, z: 0}
+    - {x: 285.35, y: 159.51, z: 0}
+    - {x: 313.61, y: 126.85, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 221.84, y: 86.13, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 101.87
+  - Position: {x: 469.69, y: -24.61, z: 0}
+    Size: {x: 56.25, y: 95.62}
+    Outline:
+    - {x: 496.41, y: -24.61, z: 0}
+    - {x: 493.76, y: -44.32, z: 0}
+    - {x: 486.35, y: -60.12, z: 0}
+    - {x: 475.63, y: -68.89, z: 0}
+    - {x: 463.74, y: -68.89, z: 0}
+    - {x: 453.03, y: -60.12, z: 0}
+    - {x: 445.61, y: -44.32, z: 0}
+    - {x: 442.97, y: -24.61, z: 0}
+    - {x: 445.61, y: -4.9, z: 0}
+    - {x: 453.03, y: 10.9, z: 0}
+    - {x: 463.74, y: 19.67, z: 0}
+    - {x: 475.63, y: 19.67, z: 0}
+    - {x: 486.35, y: 10.9, z: 0}
+    - {x: 493.76, y: -4.9, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 469.69, y: -24.61, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 45.42
+  - Position: {x: -159.26, y: -298.48, z: 0}
+    Size: {x: 131.48, y: 73.83}
+    Outline:
+    - {x: -96.8, y: -298.48, z: 0}
+    - {x: -102.99, y: -313.69, z: 0}
+    - {x: -120.32, y: -325.89, z: 0}
+    - {x: -145.36, y: -332.67, z: 0}
+    - {x: -173.16, y: -332.67, z: 0}
+    - {x: -198.2, y: -325.89, z: 0}
+    - {x: -215.53, y: -313.69, z: 0}
+    - {x: -221.71, y: -298.48, z: 0}
+    - {x: -215.53, y: -283.26, z: 0}
+    - {x: -198.2, y: -271.06, z: 0}
+    - {x: -173.16, y: -264.29, z: 0}
+    - {x: -145.36, y: -264.29, z: 0}
+    - {x: -120.32, y: -271.06, z: 0}
+    - {x: -102.99, y: -283.26, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -159.26, y: -298.48, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 62.46
+  - Position: {x: -262.97, y: -196.17, z: 0}
+    Size: {x: 288.28, y: 234.84}
+    Outline:
+    - {x: -126.04, y: -196.17, z: 0}
+    - {x: -139.6, y: -244.57, z: 0}
+    - {x: -177.59, y: -283.39, z: 0}
+    - {x: -232.5, y: -304.93, z: 0}
+    - {x: -293.44, y: -304.93, z: 0}
+    - {x: -348.35, y: -283.39, z: 0}
+    - {x: -386.34, y: -244.57, z: 0}
+    - {x: -399.9, y: -196.17, z: 0}
+    - {x: -386.34, y: -147.77, z: 0}
+    - {x: -348.35, y: -108.96, z: 0}
+    - {x: -293.44, y: -87.42, z: 0}
+    - {x: -232.5, y: -87.42, z: 0}
+    - {x: -177.59, y: -108.96, z: 0}
+    - {x: -139.6, y: -147.77, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -262.97, y: -196.17, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 105.47
+  textWin: "First try! (It was the 27th try.)"
+  difficulty: 0
+  interactables:
+  - Name: arcade
+    HotspotPosition: {x: -265.78, y: -212.7}
+    HotspotSize: {x: 381.09, y: 308.67}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 3a6d3a2fbbc9439892c9065fbd830cb5, type: 3}
+      Position: {x: -265.78, y: -212.7}
+      Size: {x: 367.03, y: 294.61}
+    - Sprite: {fileID: 21300000, guid: 294f2cde03184a12a98084d460056c86, type: 3}
+      Position: {x: -56.95, y: -47.11}
+      Size: {x: 223.59, y: 592.03}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 4bf7883f28074cccb326cd87b6e46634, type: 3}
+      Position: {x: -72.07, y: -29.88}
+      Size: {x: 255.23, y: 636.33}
+    HiddenPointIndices: 0300000004000000

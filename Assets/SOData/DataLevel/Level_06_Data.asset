@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
   m_Name: Level_06_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  numberLevel: 6
+  numberLevel: 12
   countDifferent: 10
   rawSprite: {fileID: -3685375819479707970, guid: 1e891a3eebd0ca7418072008f76ac3f3, type: 3}
   errorSprite: {fileID: -800460046214747259, guid: 84fd9f182abaaab4fb8019689ead74fb, type: 3}

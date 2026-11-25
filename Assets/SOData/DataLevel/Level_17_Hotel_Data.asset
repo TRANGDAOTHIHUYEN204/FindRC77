@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_17_Hotel_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 17
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 112d08c14e42448fa396459e3cfd2228, type: 3}
+  errorSprite: {fileID: 21300000, guid: a6bca68c530f4c8da588cf6d62581ec5, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 172.62, y: 155.39, z: 0}
+    Size: {x: 89.3, y: 244.69}
+    Outline:
+    - {x: 215.03, y: 155.39, z: 0}
+    - {x: 210.83, y: 104.96, z: 0}
+    - {x: 199.06, y: 64.52, z: 0}
+    - {x: 182.06, y: 42.08, z: 0}
+    - {x: 163.18, y: 42.08, z: 0}
+    - {x: 146.17, y: 64.52, z: 0}
+    - {x: 134.4, y: 104.96, z: 0}
+    - {x: 130.2, y: 155.39, z: 0}
+    - {x: 134.4, y: 205.82, z: 0}
+    - {x: 146.17, y: 246.26, z: 0}
+    - {x: 163.18, y: 268.7, z: 0}
+    - {x: 182.06, y: 268.7, z: 0}
+    - {x: 199.06, y: 246.26, z: 0}
+    - {x: 210.83, y: 205.82, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 172.62, y: 155.39, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 105.47
+  - Position: {x: 332.93, y: 35.16, z: 0}
+    Size: {x: 132.89, y: 90}
+    Outline:
+    - {x: 396.05, y: 35.16, z: 0}
+    - {x: 389.8, y: 16.61, z: 0}
+    - {x: 372.29, y: 1.73, z: 0}
+    - {x: 346.98, y: -6.52, z: 0}
+    - {x: 318.88, y: -6.52, z: 0}
+    - {x: 293.57, y: 1.73, z: 0}
+    - {x: 276.06, y: 16.61, z: 0}
+    - {x: 269.81, y: 35.16, z: 0}
+    - {x: 276.06, y: 53.7, z: 0}
+    - {x: 293.57, y: 68.58, z: 0}
+    - {x: 318.88, y: 76.83, z: 0}
+    - {x: 346.98, y: 76.83, z: 0}
+    - {x: 372.29, y: 68.58, z: 0}
+    - {x: 389.8, y: 53.7, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 332.93, y: 35.16, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 63.12
+  - Position: {x: 385.31, y: -151.17, z: 0}
+    Size: {x: 71.72, y: 109.69}
+    Outline:
+    - {x: 419.38, y: -151.17, z: 0}
+    - {x: 416.01, y: -173.78, z: 0}
+    - {x: 406.55, y: -191.91, z: 0}
+    - {x: 392.89, y: -201.97, z: 0}
+    - {x: 377.73, y: -201.97, z: 0}
+    - {x: 364.07, y: -191.91, z: 0}
+    - {x: 354.62, y: -173.78, z: 0}
+    - {x: 351.25, y: -151.17, z: 0}
+    - {x: 354.62, y: -128.57, z: 0}
+    - {x: 364.07, y: -110.44, z: 0}
+    - {x: 377.73, y: -100.38, z: 0}
+    - {x: 392.89, y: -100.38, z: 0}
+    - {x: 406.55, y: -110.44, z: 0}
+    - {x: 416.01, y: -128.57, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 385.31, y: -151.17, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 52.1
+  - Position: {x: 8.09, y: 219.02, z: 0}
+    Size: {x: 79.45, y: 55.55}
+    Outline:
+    - {x: 45.83, y: 219.02, z: 0}
+    - {x: 42.09, y: 207.58, z: 0}
+    - {x: 31.62, y: 198.39, z: 0}
+    - {x: 16.48, y: 193.3, z: 0}
+    - {x: -0.31, y: 193.3, z: 0}
+    - {x: -15.44, y: 198.39, z: 0}
+    - {x: -25.92, y: 207.58, z: 0}
+    - {x: -29.65, y: 219.02, z: 0}
+    - {x: -25.92, y: 230.47, z: 0}
+    - {x: -15.44, y: 239.65, z: 0}
+    - {x: -0.31, y: 244.75, z: 0}
+    - {x: 16.48, y: 244.75, z: 0}
+    - {x: 31.62, y: 239.65, z: 0}
+    - {x: 42.09, y: 230.47, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 8.09, y: 219.02, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 37.74
+  - Position: {x: -273.16, y: 38.67, z: 0}
+    Size: {x: 267.89, y: 201.09}
+    Outline:
+    - {x: -145.92, y: 38.67, z: 0}
+    - {x: -158.52, y: -2.77, z: 0}
+    - {x: -193.83, y: -36.01, z: 0}
+    - {x: -244.85, y: -54.45, z: 0}
+    - {x: -301.48, y: -54.45, z: 0}
+    - {x: -352.5, y: -36.01, z: 0}
+    - {x: -387.81, y: -2.77, z: 0}
+    - {x: -400.41, y: 38.67, z: 0}
+    - {x: -387.81, y: 80.12, z: 0}
+    - {x: -352.5, y: 113.35, z: 0}
+    - {x: -301.48, y: 131.8, z: 0}
+    - {x: -244.85, y: 131.8, z: 0}
+    - {x: -193.83, y: 113.35, z: 0}
+    - {x: -158.52, y: 80.12, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -273.16, y: 38.67, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 105.47
+  textWin: "Packed light. Very, very light."
+  difficulty: 0
+  interactables:
+  - Name: hotel
+    HotspotPosition: {x: -221.48, y: 74.53}
+    HotspotSize: {x: 648.28, y: 459.84}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: f4ff836043864cb0be89f814c53ca5f1, type: 3}
+      Position: {x: -221.48, y: 74.53}
+      Size: {x: 634.22, y: 445.78}
+    - Sprite: {fileID: 21300000, guid: f7da18f670264bfc8dbd7d5a14c98970, type: 3}
+      Position: {x: 17.93, y: -6.33}
+      Size: {x: 259.45, y: 509.06}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: cf6bca491392431195b92d5b301236e4, type: 3}
+      Position: {x: 68.91, y: -166.29}
+      Size: {x: 317.81, y: 370.55}
+    HiddenPointIndices: 0300000004000000

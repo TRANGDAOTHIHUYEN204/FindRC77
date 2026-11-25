@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_11_Attic_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 11
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 20cc3d2e3a214c3f85fe6638182955dc, type: 3}
+  errorSprite: {fileID: 21300000, guid: 9c3b78d7ee7e4dcf9cd73d749e73a11f, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: -465.12, y: 74.88, z: 0}
+    Size: {x: 58.36, y: 71.02}
+    Outline:
+    - {x: -437.4, y: 74.88, z: 0}
+    - {x: -440.14, y: 60.25, z: 0}
+    - {x: -447.83, y: 48.51, z: 0}
+    - {x: -458.95, y: 42, z: 0}
+    - {x: -471.29, y: 42, z: 0}
+    - {x: -482.4, y: 48.51, z: 0}
+    - {x: -490.09, y: 60.25, z: 0}
+    - {x: -492.84, y: 74.88, z: 0}
+    - {x: -490.09, y: 89.52, z: 0}
+    - {x: -482.4, y: 101.26, z: 0}
+    - {x: -471.29, y: 107.77, z: 0}
+    - {x: -458.95, y: 107.77, z: 0}
+    - {x: -447.83, y: 101.26, z: 0}
+    - {x: -440.14, y: 89.52, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -465.12, y: 74.88, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 33.73
+  - Position: {x: -360.35, y: 125.16, z: 0}
+    Size: {x: 103.36, y: 126.56}
+    Outline:
+    - {x: -311.26, y: 125.16, z: 0}
+    - {x: -316.12, y: 99.07, z: 0}
+    - {x: -329.74, y: 78.15, z: 0}
+    - {x: -349.43, y: 66.55, z: 0}
+    - {x: -371.28, y: 66.55, z: 0}
+    - {x: -390.96, y: 78.15, z: 0}
+    - {x: -404.59, y: 99.07, z: 0}
+    - {x: -409.45, y: 125.16, z: 0}
+    - {x: -404.59, y: 151.24, z: 0}
+    - {x: -390.96, y: 172.16, z: 0}
+    - {x: -371.28, y: 183.77, z: 0}
+    - {x: -349.43, y: 183.77, z: 0}
+    - {x: -329.74, y: 172.16, z: 0}
+    - {x: -316.12, y: 151.24, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -360.35, y: 125.16, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 60.12
+  - Position: {x: 13.36, y: -14.06, z: 0}
+    Size: {x: 126.56, y: 92.81}
+    Outline:
+    - {x: 73.48, y: -14.06, z: 0}
+    - {x: 67.52, y: -33.19, z: 0}
+    - {x: 50.84, y: -48.53, z: 0}
+    - {x: 26.74, y: -57.04, z: 0}
+    - {x: -0.02, y: -57.04, z: 0}
+    - {x: -24.12, y: -48.53, z: 0}
+    - {x: -40.8, y: -33.19, z: 0}
+    - {x: -46.76, y: -14.06, z: 0}
+    - {x: -40.8, y: 5.07, z: 0}
+    - {x: -24.12, y: 20.41, z: 0}
+    - {x: -0.02, y: 28.92, z: 0}
+    - {x: 26.74, y: 28.92, z: 0}
+    - {x: 50.84, y: 20.41, z: 0}
+    - {x: 67.52, y: 5.07, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 13.36, y: -14.06, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 60.12
+  - Position: {x: -329.77, y: -18.28, z: 0}
+    Size: {x: 80.16, y: 49.22}
+    Outline:
+    - {x: -291.69, y: -18.28, z: 0}
+    - {x: -295.46, y: -28.42, z: 0}
+    - {x: -306.03, y: -36.56, z: 0}
+    - {x: -321.29, y: -41.07, z: 0}
+    - {x: -338.24, y: -41.07, z: 0}
+    - {x: -353.5, y: -36.56, z: 0}
+    - {x: -364.07, y: -28.42, z: 0}
+    - {x: -367.84, y: -18.28, z: 0}
+    - {x: -364.07, y: -8.14, z: 0}
+    - {x: -353.5, y: 0, z: 0}
+    - {x: -338.24, y: 4.51, z: 0}
+    - {x: -321.29, y: 4.51, z: 0}
+    - {x: -306.03, y: 0, z: 0}
+    - {x: -295.46, y: -8.14, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -329.77, y: -18.28, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 38.07
+  - Position: {x: -429.61, y: -154.69, z: 0}
+    Size: {x: 113.91, y: 95.62}
+    Outline:
+    - {x: -375.5, y: -154.69, z: 0}
+    - {x: -380.86, y: -174.4, z: 0}
+    - {x: -395.88, y: -190.2, z: 0}
+    - {x: -417.57, y: -198.97, z: 0}
+    - {x: -441.65, y: -198.97, z: 0}
+    - {x: -463.34, y: -190.2, z: 0}
+    - {x: -478.36, y: -174.4, z: 0}
+    - {x: -483.71, y: -154.69, z: 0}
+    - {x: -478.36, y: -134.98, z: 0}
+    - {x: -463.34, y: -119.18, z: 0}
+    - {x: -441.65, y: -110.4, z: 0}
+    - {x: -417.57, y: -110.4, z: 0}
+    - {x: -395.88, y: -119.18, z: 0}
+    - {x: -380.86, y: -134.98, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -429.61, y: -154.69, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 54.11
+  textWin: "Grandpa, why do you keep a clown in a box?!"
+  difficulty: 0
+  interactables:
+  - Name: attic
+    HotspotPosition: {x: -331.52, y: -104.41}
+    HotspotSize: {x: 393.05, y: 308.67}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 0456dbbdbd4d4c7dab5bcaac2737f0fb, type: 3}
+      Position: {x: -331.52, y: -104.41}
+      Size: {x: 378.98, y: 294.61}
+    - Sprite: {fileID: 21300000, guid: d6781740c2214fe0b4421c37c408ffb3, type: 3}
+      Position: {x: 81.56, y: 25.31}
+      Size: {x: 309.38, y: 585}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: f322747360a14357a49ce6b90e9f4f4c, type: 3}
+      Position: {x: 154.34, y: 69.26}
+      Size: {x: 317.11, y: 446.48}
+    HiddenPointIndices: 0300000004000000

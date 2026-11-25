@@ -66,6 +66,13 @@ public class DifferentClickHandler : MonoBehaviour
         if (manager.IsInFoundArea(screenPoint, uiCamera))
             return false;
 
+        // Bấm vào đồ vật tương tác (vd: tủ) → mở ra, không tính là bấm sai.
+        if (pairManagerHolder.Interactables.TryInteract(screenPoint, uiCamera))
+        {
+            Haptics.Light();
+            return false;
+        }
+
         if (levelManager.IsTutorial)
             return false;
 
