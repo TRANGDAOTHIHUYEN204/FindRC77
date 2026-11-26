@@ -3839,6 +3839,7 @@ GameObject:
   - component: {fileID: 1036049885}
   - component: {fileID: 1036049884}
   - component: {fileID: 1036049883}
+  - component: {fileID: 1036049887}
   m_Layer: 5
   m_Name: NotEnoughCoin
   m_TagString: Untagged
@@ -3927,6 +3928,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 508.6, y: 60.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1036049887
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036049882}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1072381349
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,8 +8735,8 @@ MonoBehaviour:
   shopPanel: {fileID: 1245595173}
   notEnoughToast: {fileID: 1036049886}
   coinText: {fileID: 651445230}
-  toastGroup: {fileID: 1245595175}
-  toastDuration: 0.5
+  toastGroup: {fileID: 1036049887}
+  toastDuration: 1
   toastRiseY: 150
   toastStartScale: 0.5
   pack1:

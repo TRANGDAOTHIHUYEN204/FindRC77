@@ -16,9 +16,9 @@ public class ShopCoinManager : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
 
     [Header("Toast không đủ coin")]
-    [SerializeField] private RectTransform notEnoughToast; 
-    [SerializeField] private TextMeshProUGUI coinText;    
-    [SerializeField] private CanvasGroup toastGroup;      
+    [SerializeField] private RectTransform notEnoughToast;
+    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private CanvasGroup toastGroup;
     [SerializeField] private float toastDuration = 0.5f;
     [SerializeField] private float toastRiseY = 150f;
     [SerializeField] private float toastStartScale = 0.5f;
@@ -34,7 +34,12 @@ public class ShopCoinManager : MonoBehaviour
 
     private Sequence _toastSeq;
 
-    public void OpenShop() => OpenPanel(shopPanel);
+    public void OpenShop()
+    {
+        OpenPanel(shopPanel);
+        RefreshCoinText();
+    }
+
     public void CloseShop() => ClosePanel(shopPanel);
 
     public void BuyPack1() => Buy(pack1);
@@ -52,6 +57,7 @@ public class ShopCoinManager : MonoBehaviour
         }
 
         SaveGame.HintBalance += pack.hint;
+        RefreshCoinText();
         PlaySfx(buySuccessSfx);
         Haptics.Light();
     }
@@ -63,25 +69,33 @@ public class ShopCoinManager : MonoBehaviour
         Haptics.Heavy();
     }
 
+    private void RefreshCoinText()
+    {
+        if (coinText != null)
+            coinText.text = Wallets.Coin.Amount.ToString();
+    }
+
     private void ShowNotEnoughToast()
     {
         if (notEnoughToast == null) return;
 
-        _toastSeq?.Kill();
+        // Luôn dùng CanvasGroup của chính toast, tránh gán nhầm ShopPanel trong Inspector
+        toastGroup = notEnoughToast.GetComponent<CanvasGroup>();
+        if (toastGroup == null)
+            toastGroup = notEnoughToast.gameObject.AddComponent<CanvasGroup>();
 
-        if (coinText != null)
-            coinText.text = Wallets.Coin.Amount.ToString();
+        _toastSeq?.Kill();
+        RefreshCoinText();
 
         notEnoughToast.gameObject.SetActive(true);
         notEnoughToast.anchoredPosition = Vector2.zero;
         notEnoughToast.localScale = Vector3.one * toastStartScale;
-        if (toastGroup != null) toastGroup.alpha = 1f;
+        toastGroup.alpha = 1f;
 
         _toastSeq = DOTween.Sequence().SetUpdate(true);
         _toastSeq.Join(notEnoughToast.DOScale(1f, toastDuration).SetEase(Ease.OutBack));
         _toastSeq.Join(notEnoughToast.DOAnchorPosY(toastRiseY, toastDuration).SetEase(Ease.OutQuad));
-        if (toastGroup != null)
-            _toastSeq.Join(toastGroup.DOFade(0f, toastDuration * 0.4f).SetDelay(toastDuration * 0.6f));
+        _toastSeq.Insert(toastDuration * 0.6f, toastGroup.DOFade(0f, toastDuration * 0.4f));
         _toastSeq.OnComplete(() => notEnoughToast.gameObject.SetActive(false));
     }
 
