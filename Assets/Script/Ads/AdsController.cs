@@ -32,6 +32,16 @@ public class AdsController : MonoBehaviour
     public float InterTimer => _interTimer;
     public bool GameplayStarted => _gameplayStarted;
 
+    /// Quảng cáo có thưởng (REWARD_ITEM*): vẫn chạy kể cả khi đã mua gói No Ads.
+    public static bool IsRewardType(AD_TYPE type)
+    {
+        int v = (int)type;
+        return v >= 40 && v < 60;
+    }
+
+    /// Đã mua No Ads → chặn mọi quảng cáo không có thưởng.
+    private static bool IsBlockedByNoAds(AD_TYPE type) => NoAdsOffer.IsOwned && !IsRewardType(type);
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -140,7 +150,7 @@ public class AdsController : MonoBehaviour
 #if ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved || IsBlockedByNoAds(interAd))
             return;
 
         if (_interPending)
@@ -160,7 +170,7 @@ public class AdsController : MonoBehaviour
 #if ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        if (mgr == null || !mgr.Initialized)
             return;
 
         if (mgr.AdsIsReady(rewardAd))
@@ -180,7 +190,7 @@ public class AdsController : MonoBehaviour
 
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved || IsBlockedByNoAds(secondAd))
             return;
 
         if (mgr.AdsIsReady(secondAd))
@@ -217,7 +227,7 @@ public class AdsController : MonoBehaviour
 
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved || IsBlockedByNoAds(secondAd))
             return false;
 
         return mgr.AdsIsReady(secondAd);
@@ -278,7 +288,7 @@ public class AdsController : MonoBehaviour
 #if ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved || IsBlockedByNoAds(interAd))
             return false;
 
         return mgr.AdsIsReady(interAd);
@@ -360,7 +370,9 @@ public class AdsController : MonoBehaviour
 #if ENABLE_RACCOON_ADMOB
         var mgr = RaccoonAdsManager.Instance;
 
-        if (mgr == null || !mgr.Initialized || mgr.IsAdsRemoved)
+        // Quảng cáo có thưởng không bao giờ bị chặn bởi No Ads.
+        if (mgr == null || !mgr.Initialized ||
+            (!IsRewardType(type) && (mgr.IsAdsRemoved || IsBlockedByNoAds(type))))
         {
             Debug.LogWarning("[Ads] SDK unavailable or ads removed.");
             onDone?.Invoke(false);

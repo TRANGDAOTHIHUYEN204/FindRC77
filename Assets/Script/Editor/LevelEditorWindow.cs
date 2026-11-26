@@ -16,7 +16,8 @@ public class LevelEditorWindow : EditorWindow
     private const float DefaultImageW = 1080f;
     private const float DefaultImageH = 720f;
     private const string FrameName = "frameA";
-    private const string LevelFolder = "Assets/SOData";
+    // Phải nằm trong thư mục Resources để LevelCatalog load level theo đường dẫn.
+    private const string LevelFolder = "Assets/SOData/Resources/Levels";
     private const string GamePlayScene = "Assets/Scenes/GamePlay.unity";
     private const float LeftWidth = 210f;
     private const float RightWidth = 330f;
@@ -203,7 +204,7 @@ public class LevelEditorWindow : EditorWindow
             }
 
             EditorGUILayout.Space();
-            if (GUILayout.Button(new GUIContent("Đồng bộ LevelManager", "Gán toàn bộ level (theo thứ tự số level) vào LevelManager trong scene GamePlay")))
+            if (GUILayout.Button(new GUIContent("Đồng bộ LevelCatalog", "Gán toàn bộ level (theo thứ tự số level) vào asset LevelCatalog dùng chung cho Home và GamePlay")))
                 SyncLevelManager();
             using (new EditorGUI.DisabledScope(_level == null || EditorApplication.isPlayingOrWillChangePlaymode))
             {
@@ -216,7 +217,7 @@ public class LevelEditorWindow : EditorWindow
     private void CreateLevel(LevelData source)
     {
         int number = _levels.Count == 0 ? 1 : _levels.Max(l => l.NumberLevel) + 1;
-        if (!AssetDatabase.IsValidFolder(LevelFolder)) AssetDatabase.CreateFolder("Assets", "SOData");
+        EnsureFolder(LevelFolder);
         string path = AssetDatabase.GenerateUniqueAssetPath($"{LevelFolder}/Level_{number:00}_Data.asset");
 
         LevelData level = source != null ? Instantiate(source) : CreateInstance<LevelData>();
@@ -265,6 +266,14 @@ public class LevelEditorWindow : EditorWindow
         return null;
     }
 
+    private static void EnsureFolder(string folder)
+    {
+        if (AssetDatabase.IsValidFolder(folder)) return;
+        string parent = Path.GetDirectoryName(folder)?.Replace('\\', '/');
+        if (!string.IsNullOrEmpty(parent)) EnsureFolder(parent);
+        AssetDatabase.CreateFolder(parent, Path.GetFileName(folder));
+    }
+
     private LevelManager FindLevelManager(bool openSceneIfMissing)
     {
         LevelManager manager = FindObjectsByType<LevelManager>(FindObjectsInactive.Include, FindObjectsSortMode.None).FirstOrDefault();
@@ -276,38 +285,41 @@ public class LevelEditorWindow : EditorWindow
         return FindObjectsByType<LevelManager>(FindObjectsInactive.Include, FindObjectsSortMode.None).FirstOrDefault();
     }
 
+    private static LevelCatalog FindCatalog()
+    {
+        string guid = AssetDatabase.FindAssets("t:LevelCatalog").FirstOrDefault();
+        LevelCatalog catalog = guid == null ? null : AssetDatabase.LoadAssetAtPath<LevelCatalog>(AssetDatabase.GUIDToAssetPath(guid));
+        if (catalog == null) EditorUtility.DisplayDialog("Level Editor", "Không tìm thấy asset LevelCatalog.", "OK");
+        return catalog;
+    }
+
     private void SyncLevelManager()
     {
-        LevelManager manager = FindLevelManager(true);
-        if (manager == null) return;
+        LevelCatalog catalog = FindCatalog();
+        if (catalog == null) return;
 
-        var so = new SerializedObject(manager);
-        SerializedProperty arr = so.FindProperty("levels");
-        arr.arraySize = _levels.Count;
-        for (int i = 0; i < _levels.Count; i++)
-            arr.GetArrayElementAtIndex(i).objectReferenceValue = _levels[i];
-        so.ApplyModifiedProperties();
-        EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
-        ShowNotification(new GUIContent($"Đã gán {_levels.Count} level vào LevelManager (nhớ lưu scene)"));
+        int skipped = catalog.EditorSetLevels(_levels);
+        AssetDatabase.SaveAssets();
+        string msg = $"Đã gán {catalog.Count} level vào {catalog.name}";
+        if (skipped > 0) msg += $" (bỏ qua {skipped} level nằm ngoài Resources)";
+        ShowNotification(new GUIContent(msg));
     }
 
     private void PlayTest()
     {
-        LevelManager manager = FindLevelManager(true);
-        if (manager == null) return;
+        LevelCatalog catalog = FindCatalog();
+        if (catalog == null) return;
 
-        SerializedProperty arr = new SerializedObject(manager).FindProperty("levels");
-        int index = -1;
-        for (int i = 0; i < arr.arraySize; i++)
-            if (arr.GetArrayElementAtIndex(i).objectReferenceValue == _level) { index = i; break; }
-
+        int index = catalog.EditorIndexOf(_level);
         if (index < 0)
         {
-            if (!EditorUtility.DisplayDialog("Level Editor", "Level này chưa có trong LevelManager. Đồng bộ danh sách rồi chơi?", "Đồng bộ", "Hủy")) return;
+            if (!EditorUtility.DisplayDialog("Level Editor", "Level này chưa có trong LevelCatalog. Đồng bộ danh sách rồi chơi?", "Đồng bộ", "Hủy")) return;
             SyncLevelManager();
-            index = _levels.IndexOf(_level);
+            index = catalog.EditorIndexOf(_level);
+            if (index < 0) return;
         }
 
+        if (FindLevelManager(true) == null) return;
         SaveGame.CurrentLevel = index;
         EditorApplication.EnterPlaymode();
     }

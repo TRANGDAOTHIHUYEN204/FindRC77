@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class ButtonHomeManager : MonoBehaviour
 {
-    [SerializeField] private LevelData[] levels;
+    // Dùng chung catalog với GamePlay để index SaveGame.CurrentLevel trỏ đúng level,
+    // và chỉ load level hiện tại thay vì giữ ảnh của mọi level trong RAM.
+    [SerializeField] private LevelCatalog catalog;
     [SerializeField] private Image buttonImage;
     [SerializeField] private Image infoImage;
     [SerializeField] private Sprite[] sprites;
@@ -21,8 +23,10 @@ public class ButtonHomeManager : MonoBehaviour
 
     void Start()
     {
-        int index = Mathf.Min(SaveGame.CurrentLevel, levels.Length - 1);
-        var level = levels[index];
+        if (catalog == null || catalog.Count == 0) return;
+        int index = Mathf.Clamp(SaveGame.CurrentLevel, 0, catalog.Count - 1);
+        LevelData level = catalog[index].Load();
+        if (level == null) return;
         int d = (int)level.Difficulty;
 
         buttonImage.sprite = sprites[d];
