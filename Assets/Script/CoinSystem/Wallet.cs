@@ -47,15 +47,7 @@ public class Wallet
         OnChanged?.Invoke(state.amount);
         return true;
     }
-
-    public void Reset()
-    {
-        var state = LoadState();
-        state.amount = 0;
-        SaveState(state);
-        OnChanged?.Invoke(state.amount);
-    }
-
+    
     public void AddPending(int n)
     {
         if (n <= 0) return;
@@ -114,5 +106,10 @@ public class Wallet
     {
         PlayerPrefs.SetString(_stateKey, JsonUtility.ToJson(state));
         PlayerPrefs.Save();
+    }
+    public void Reset()
+    {
+        SaveState(new WalletState());  
+        OnChanged?.Invoke(0);
     }
 }

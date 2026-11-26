@@ -20,7 +20,11 @@ public class HintPresenter : MonoBehaviour
 
     public event Action<int> OnHintChanged;
 
-    private void Start() => ResetForLevel();
+    private void Start()
+    {
+        GrantStartingHint();   // tặng 1 hint đầu game (chỉ 1 lần duy nhất)
+        ResetForLevel();
+    }
 
     public void ResetForLevel()
     {
@@ -28,12 +32,16 @@ public class HintPresenter : MonoBehaviour
         ClearHint();
         RefreshCount();
     }
-    
-    public void GrantTutorialHint()
+
+    /// <summary>Hint khởi đầu: ai cũng nhận 1 lần, bất kể tutorial.</summary>
+    public void GrantStartingHint()
     {
-        if (SaveGame.TryClaimTutorialHint())
+        if (SaveGame.TryClaimStartingHint())
             RefreshCount();
     }
+
+    /// <summary>Giữ lại để các script cũ gọi không bị lỗi. Dùng chung cờ nên không bị cộng trùng.</summary>
+    public void GrantTutorialHint() => GrantStartingHint();
 
     public void ShowHint()
     {

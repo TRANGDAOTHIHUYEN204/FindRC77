@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
+
 
 public class RewardIntervalWin : MonoBehaviour
 {
@@ -13,7 +15,8 @@ public class RewardIntervalWin : MonoBehaviour
     [SerializeField] private List<GameObject> imageReward;
 
     [SerializeField] private GameObject rewardObject;
-
+    
+    [SerializeField] private float rewardScaleDuration = 0.35f;
     private int countHint;
     private int countCoin;
     private int _claimedLevel = -1;
@@ -23,6 +26,12 @@ public class RewardIntervalWin : MonoBehaviour
     {
         _totalLevels = Mathf.Max(1, totalLevels);
         _claimedLevel = -1;
+    }
+    public void StopAnimation()
+    {
+        starReward.Stop();
+        processReward.StopAnimation();
+        rewardObject.transform.DOKill();
     }
 
     public bool IsGiftLevel(int levelNumber)
@@ -68,7 +77,7 @@ public class RewardIntervalWin : MonoBehaviour
     private void PrepareReward(int levelNumber)
     {
         rewardObject.SetActive(false);
-
+        rewardObject.transform.localScale = Vector3.one * 0.5f;
         if (!IsGiftLevel(levelNumber))
         {
             countCoin = 0;
@@ -89,19 +98,21 @@ public class RewardIntervalWin : MonoBehaviour
 
         giftReward.SetReward(countCoin, countHint);
     }
-
+    
     private void ShowReward(int levelNumber)
     {
         if (!IsGiftLevel(levelNumber)) return;
+
         rewardObject.SetActive(true);
-    }
 
-    public void StopAnimation()
-    {
-        starReward.Stop();
-        processReward.StopAnimation();
+        Transform t = rewardObject.transform;
+        t.DOKill();
+        t.localScale = Vector3.one * 0.5f;
+        t.DOScale(1f, rewardScaleDuration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
     }
-
+    
     private void OnDisable()
     {
         StopAnimation();

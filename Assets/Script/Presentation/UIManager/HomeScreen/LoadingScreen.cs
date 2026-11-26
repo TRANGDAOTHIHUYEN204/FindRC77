@@ -14,7 +14,6 @@ public class LoadingScreen : MonoBehaviour
 #if UNITY_EDITOR
         if (resetAllOnStart)
         {
-            PendingReward.Clear();
             Wallets.Coin.Reset();
             SaveGame.Reset();
             SaveSecondMiniGame.Reset();
