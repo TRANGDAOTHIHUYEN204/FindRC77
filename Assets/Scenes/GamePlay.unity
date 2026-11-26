@@ -11251,7 +11251,7 @@ MonoBehaviour:
   clickHandler: {fileID: 1551937416}
   gamePlay: {fileID: 153753066}
   challengeNodes: {fileID: 582283719}
-  streakManager: {fileID: 0}
+  streakManager: {fileID: 2088011107}
 --- !u!114 &2088011104
 MonoBehaviour:
   m_ObjectHideFlags: 0

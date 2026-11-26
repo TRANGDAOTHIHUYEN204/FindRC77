@@ -19,11 +19,13 @@ public class ProcessStreakReward : MonoBehaviour
     public void SetInstant(int streak)
     {
         if (bar == null) return;
+        if (!HasStreakManager()) return;
         bar.SetProgress(CalcRatio(streak), false);
     }
 
     public void Play(int streak, Action onDone)
     {
+        if (!HasStreakManager()) { onDone?.Invoke(); return; }
         if (bar == null) { onDone?.Invoke(); return; }
 
         float target = CalcRatio(streak);
@@ -63,5 +65,12 @@ public class ProcessStreakReward : MonoBehaviour
             return (i + seg) / (n - 1);
         }
         return 1f;
+    }
+
+    private bool HasStreakManager()
+    {
+        if (streakManager != null) return true;
+        Debug.LogError("[ProcessStreakReward] StreakManager reference is missing.", this);
+        return false;
     }
 }

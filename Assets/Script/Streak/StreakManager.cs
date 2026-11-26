@@ -128,7 +128,7 @@ public class StreakManager : MonoBehaviour
         int coin = rewardData != null ? m.hintAsCoin * rewardData.HintPrice : 0;
         int hint = m.hint;
 
-        if (coin > 0) PendingReward.Add(coin);
+        if (coin > 0) Wallets.Coin.Add(coin);
         if (hint > 0) SaveGame.HintBalance += hint;
 
         OnRewardGranted?.Invoke(m.streak, coin, hint);

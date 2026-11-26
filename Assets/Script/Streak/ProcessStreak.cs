@@ -18,13 +18,22 @@ public class ProcessStreak : MonoBehaviour
         return max <= 0 ? 0f : Mathf.Clamp01(streak / (float)max);
     }
 
+    private bool HasStreakManager()
+    {
+        if (streakManager != null) return true;
+        Debug.LogError("[ProcessStreak] StreakManager reference is missing.", this);
+        return false;
+    }
+
     public void SetInstant(int streak)
     {
+        if (!HasStreakManager()) return;
         if (bar != null) bar.SetProgress(Ratio(streak), false);
     }
 
     public void Play(int streak, Action onDone)
     {
+        if (!HasStreakManager()) { onDone?.Invoke(); return; }
         if (bar == null || !isActiveAndEnabled) { onDone?.Invoke(); return; }
 
         float target = Ratio(streak);

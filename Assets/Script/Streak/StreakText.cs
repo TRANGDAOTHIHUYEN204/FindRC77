@@ -10,6 +10,12 @@ public class StreakText : MonoBehaviour
 
     private void OnEnable()
     {
+        if (streakManager == null)
+        {
+            Debug.LogError("[StreakText] StreakManager reference is missing.", this);
+            return;
+        }
+
         streakManager.OnStreakChanged += OnStreakChanged;
         Refresh();
     }
@@ -24,6 +30,8 @@ public class StreakText : MonoBehaviour
 
     private void Refresh()
     {
+        if (streakManager == null) return;
+
         int current = streakManager.CurrentStreak;
         int max = streakManager.MaxStreak;
 

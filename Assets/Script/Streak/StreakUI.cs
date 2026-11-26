@@ -54,6 +54,12 @@ public class StreakUI : MonoBehaviour
     public void Prepare()
     {
         Stop();
+        if (streakManager == null)
+        {
+            Debug.LogError("[StreakUI] StreakManager reference is missing.", this);
+            return;
+        }
+
         int prev = streakManager.PreviousStreak;
         int cur = streakManager.CurrentStreak;
 
@@ -69,6 +75,13 @@ public class StreakUI : MonoBehaviour
     }
     public void PlayStreak(Action onDone = null)
     {
+        if (streakManager == null)
+        {
+            Debug.LogError("[StreakUI] StreakManager reference is missing.", this);
+            onDone?.Invoke();
+            return;
+        }
+
         int prev = streakManager.PreviousStreak;
         int cur = streakManager.CurrentStreak;
 
