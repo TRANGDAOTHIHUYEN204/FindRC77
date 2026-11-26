@@ -22,7 +22,7 @@ public class HintPresenter : MonoBehaviour
 
     private void Start()
     {
-        GrantStartingHint();   // tặng 1 hint đầu game (chỉ 1 lần duy nhất)
+        GrantStartingHint();  
         ResetForLevel();
     }
 
@@ -32,15 +32,12 @@ public class HintPresenter : MonoBehaviour
         ClearHint();
         RefreshCount();
     }
-
-    /// <summary>Hint khởi đầu: ai cũng nhận 1 lần, bất kể tutorial.</summary>
+    
     public void GrantStartingHint()
     {
         if (SaveGame.TryClaimStartingHint())
             RefreshCount();
     }
-
-    /// <summary>Giữ lại để các script cũ gọi không bị lỗi. Dùng chung cờ nên không bị cộng trùng.</summary>
     public void GrantTutorialHint() => GrantStartingHint();
 
     public void ShowHint()
@@ -59,19 +56,14 @@ public class HintPresenter : MonoBehaviour
     }
 
     public void ShowTutorialHint() => ShowTutorialHint(-1f);
-
-    /// zoomLevel &lt;= 0 → zoom mặc định; tutorial truyền mức zoom nhẹ hơn.
     public void ShowTutorialHint(float zoomLevel)
     {
         _tutorialZoom = zoomLevel;
         ShowInternal(consume: false, tutorial: true);
     }
-
-    /// Tutorial bật cờ này để khi người chơi bấm trúng, chỉ ẩn lớp gợi ý,
-    /// giữ nguyên khung zoom cho tới khi hiệu ứng khoanh tròn / dấu tích chạy xong.
+    
     public bool KeepZoomOnClear { get; set; }
-
-    /// Ẩn gợi ý và zoom về như cũ.
+    
     public void ResetView()
     {
         HintedPair = null;
@@ -170,9 +162,6 @@ public class HintPresenter : MonoBehaviour
         if (consume) ConsumeHint();
         return true;
     }
-
-    /// Hiện gợi ý cho HintedPair. Nếu điểm đó đang bị giấu trong đồ vật còn đóng (tủ, hộp quà...)
-    /// thì khoanh + zoom vào cả đồ vật để người chơi biết phải bấm mở nó trước.
     private void ShowTarget(bool tutorial)
     {
         _hintOnArea = false;
@@ -201,9 +190,7 @@ public class HintPresenter : MonoBehaviour
             _handB = SpawnHand(HintedPair.RootB);
         }
     }
-
-    /// Gọi khi người chơi vừa mở một đồ vật tương tác: nếu hint đang chỉ vào đồ vật đó
-    /// thì chuyển sang khoanh đúng điểm khác bên trong (không tốn thêm lượt hint).
+    
     public void OnInteractableOpened()
     {
         if (!_hintOnArea || HintedPair == null || HintedPair.IsFound || HintedPair.IsLocked) return;

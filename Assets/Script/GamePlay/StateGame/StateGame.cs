@@ -44,7 +44,7 @@ public class StateGame : MonoBehaviour
     [SerializeField] private DifferentClickHandler clickHandler;
     [SerializeField] private GamePlayImage gamePlay;
     [SerializeField] private SpawnChallengeNode challengeNodes;
-
+    [SerializeField] private StreakManager streakManager;
     public bool IsWinning { get; private set; }
 
     private void Awake()
@@ -113,6 +113,7 @@ public class StateGame : MonoBehaviour
     {
         if (State != GameState.Playing || IsWinning) return;
         State = GameState.Lost;
+        if (!levelManager.IsTutorial && streakManager != null) streakManager.OnLose();
         SoundManager.Instance.PlaySfx(loseGameSound);
         SetPanels(false, false, true, false);
         loseText.text = loseTextGame;

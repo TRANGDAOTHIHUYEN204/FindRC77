@@ -21,11 +21,16 @@ public static class SaveGame
     private const string KeyStroke = "save_stroke_unlocked";
     private const string KeyRewardChainDone = "save_reward_chain_done";
     private const string KeyStartingHint = "save_tutorial_hint_claimed"; 
-
+    private const string KeyStreakState = "save_streak_state";
     public static bool TitleUnlocked
     {
         get => PlayerPrefs.GetInt(KeyTitle, 0) == 1;
         set { PlayerPrefs.SetInt(KeyTitle, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+    public static string StreakState
+    {
+        get => PlayerPrefs.GetString(KeyStreakState, "");
+        set { PlayerPrefs.SetString(KeyStreakState, value); PlayerPrefs.Save(); }
     }
 
     public static bool StrokeRewardUnlocked
@@ -120,6 +125,7 @@ public static class SaveGame
         PlayerPrefs.DeleteKey(KeyCatchWin);
         PlayerPrefs.DeleteKey(KeyCatchDouble);
         PlayerPrefs.DeleteKey(KeyCleanWin);
+        PlayerPrefs.DeleteKey(KeyStreakState);
         PlayerPrefs.DeleteKey(KeyCleanDouble);
         PlayerPrefs.DeleteKey(KeyTitle);
         PlayerPrefs.DeleteKey(KeyStroke);

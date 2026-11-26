@@ -22,8 +22,6 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private RectTransform trailStartPoint;
     [SerializeField] private float markDelay = 1f;
     [SerializeField] private float hideOutlineDelay = 0.5f;
-
-    [Header("Zoom nhẹ khi chọn trúng")]
     [SerializeField] private ZoomManager zoomManager;
     [SerializeField] private float punchZoomFactor = 1.15f;
     [SerializeField] private float punchZoomIn = 0.25f;
@@ -78,7 +76,6 @@ public class DifferentClickHandler : MonoBehaviour
         if (manager.IsInFoundArea(screenPoint, uiCamera))
             return false;
 
-        // Bấm vào đồ vật tương tác (vd: tủ) → mở ra, không tính là bấm sai.
         if (pairManagerHolder.Interactables.TryInteract(screenPoint, uiCamera))
         {
             Haptics.Light();

@@ -9,7 +9,7 @@ public class RewardWin : ScriptableObject
     [SerializeField, Min(1)] private int otherLoopLevels = 3;
     [SerializeField, Range(0f, 2f)] private float coinMinPercent = 0.9f;
     [SerializeField, Range(0f, 2f)] private float coinMaxPercent = 1.1f;
-
+    public int HintPrice => hintPrice;
     public int FirstLoopCoin => hintPrice;
     public int FirstLoopHint => firstLoopHint;
 

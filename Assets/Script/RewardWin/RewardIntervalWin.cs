@@ -21,7 +21,12 @@ public class RewardIntervalWin : MonoBehaviour
     private int countCoin;
     private int _claimedLevel = -1;
     private int _totalLevels = int.MaxValue;
-
+    [SerializeField] private StreakUI streakUI;
+    
+    public bool IsGiftLevel(int levelNumber)
+        => levelNumber >= 1
+           && levelNumber <= _totalLevels
+           && rewardData.IsGiftLevel(levelNumber);
     public void Setup(int totalLevels)
     {
         _totalLevels = Mathf.Max(1, totalLevels);
@@ -32,12 +37,8 @@ public class RewardIntervalWin : MonoBehaviour
         starReward.Stop();
         processReward.StopAnimation();
         rewardObject.transform.DOKill();
+        if (streakUI != null) streakUI.Stop();
     }
-
-    public bool IsGiftLevel(int levelNumber)
-        => levelNumber >= 1
-           && levelNumber <= _totalLevels
-           && rewardData.IsGiftLevel(levelNumber);
 
     public void Play(int levelNumber)
     {
@@ -47,6 +48,7 @@ public class RewardIntervalWin : MonoBehaviour
         PrepareReward(levelNumber);
 
         processReward.ResetVisual();
+        if (streakUI != null) streakUI.Prepare();   
 
         starReward.Play(earned =>
         {
@@ -57,6 +59,29 @@ public class RewardIntervalWin : MonoBehaviour
         });
     }
 
+    private void ShowReward(int levelNumber)
+    {
+        if (!IsGiftLevel(levelNumber))
+        {
+            PlayStreak();
+            return;
+        }
+
+        rewardObject.SetActive(true);
+
+        Transform t = rewardObject.transform;
+        t.DOKill();
+        t.localScale = Vector3.one * 0.5f;
+        t.DOScale(1f, rewardScaleDuration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true)
+            .OnComplete(PlayStreak);
+    }
+
+    private void PlayStreak()
+    {
+        if (streakUI != null) streakUI.PlayStreak();
+    }
     private void UpdateLevelText(int levelNumber)
     {
         int centerIndex = textLevel.Count / 2;
@@ -99,19 +124,6 @@ public class RewardIntervalWin : MonoBehaviour
         giftReward.SetReward(countCoin, countHint);
     }
     
-    private void ShowReward(int levelNumber)
-    {
-        if (!IsGiftLevel(levelNumber)) return;
-
-        rewardObject.SetActive(true);
-
-        Transform t = rewardObject.transform;
-        t.DOKill();
-        t.localScale = Vector3.one * 0.5f;
-        t.DOScale(1f, rewardScaleDuration)
-            .SetEase(Ease.OutBack)
-            .SetUpdate(true);
-    }
     
     private void OnDisable()
     {

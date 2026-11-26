@@ -14,7 +14,7 @@ public class MenuHome : MonoBehaviour
     [SerializeField] private TMP_Text midWeekText;
     [SerializeField] private Button endWeekButton;
     [SerializeField] private TMP_Text endWeekText;
-
+    [SerializeField] private GameObject shopPanel;
     [SerializeField] private float adTimeout = 20f;
 
     private bool _isStarting;

@@ -88,8 +88,7 @@ public class LevelManager : MonoBehaviour
         _levelData = data;
         _completed = false;
         OnLevelLoaded?.Invoke(_levelData);
-
-        // Mọi listener đã chuyển sang level mới -> ảnh của level cũ không còn ai dùng.
+        
         if (switched)
             MemoryRelease.UnloadUnusedAssets();
     }

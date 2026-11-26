@@ -21,7 +21,7 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private float beforeBounceDelay = 0.2f;
     [SerializeField] private float bounceDuration = 0.8f;
     [SerializeField] private RewardIntervalWin rewardIntervalWin;
-
+    [SerializeField] private StreakManager streakManager;
     private bool _isPlaying;
     private bool _winStarted;
 
@@ -97,8 +97,9 @@ public class GamePlayImage : MonoBehaviour
         bool isTutorial = levelManager.IsTutorial;
         string textWin = levelManager.TextWin;
         int levelNumber = levelManager.CurrentIndex + 1;
-
+        
         levelManager.MarkWin();
+        if (!isTutorial && streakManager != null) streakManager.OnWin(levelManager.CurrentIndex);
 
         yield return new WaitForSeconds(beforeBounceDelay);
 
