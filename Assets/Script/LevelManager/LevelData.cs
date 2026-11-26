@@ -20,7 +20,9 @@ public class LevelData : ScriptableObject
     [SerializeField] private List<DifferentPointInfo> differentPoints;
     [TextArea(3, 10)] [SerializeField] private string textWin;
     [SerializeField] DifficultyLevel difficulty;
-    
+    [SerializeField] private InteractableInfo[] interactables;
+
+    public InteractableInfo[] Interactables => interactables;
     public int NumberLevel => numberLevel;
     public int CountDifferent => countDifferent;
     public Sprite RawSprite => rawSprite;

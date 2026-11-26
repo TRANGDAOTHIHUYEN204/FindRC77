@@ -55,6 +55,9 @@ public class ZoomManager : MonoBehaviour
     }
 
     public void Unlock() => Locked = false;
+    /// Khoá pinch/drag/scroll của người chơi (vd: lúc tutorial đang chạy hiệu ứng).
+    public void Lock() => Locked = true;
+    public float FocusZoom => focusZoom;
 
     public void ResetZoomSmooth()
     {
@@ -167,7 +170,9 @@ public class ZoomManager : MonoBehaviour
             Mathf.Clamp(Offset.x, -max.x, max.x),
             Mathf.Clamp(Offset.y, -max.y, max.y));
 
-        Vector3 scale = Vector3.one * Zoom;
+        // Không scale trục z: các vòng khoanh (LineRenderer) nằm lệch z so với canvas,
+        // scale z sẽ đẩy chúng ra sau camera và biến mất khi zoom.
+        Vector3 scale = new Vector3(Zoom, Zoom, 1f);
         contentA.localScale = contentB.localScale = scale;
         contentA.anchoredPosition = contentB.anchoredPosition = Offset;
         OnViewChanged?.Invoke();
@@ -187,12 +192,69 @@ public class ZoomManager : MonoBehaviour
         return ok;
     }
 
-    public void FocusOn(RectTransform root, Vector3 worldCenter)
+    /// Zoom thêm một chút quanh điểm vừa bấm (điểm đó đứng yên trên màn hình),
+    /// giữ một lúc rồi trả về đúng khung nhìn cũ. Bỏ qua nếu đang khoá / đang focus (tutorial, hint).
+    public void PunchZoom(Vector2 screenPos, float factor, float inTime, float hold, float outTime)
+    {
+        if (Locked || IsFocusing || factor <= 1f) return;
+        RectTransform frame = GetFrameAt(screenPos);
+        if (frame == null || !ToLocal(frame, screenPos, out Vector2 f)) return;
+
+        float fromZoom = Zoom;
+        Vector2 fromOffset = Offset;
+        float toZoom = Mathf.Clamp(Zoom * factor, minZoom, maxZoom);
+        if (toZoom <= fromZoom + 0.001f) return;
+
+        float k = toZoom / fromZoom;
+        Vector2 toOffset = f - k * (f - fromOffset);
+
+        if (_focusCo != null) StopCoroutine(_focusCo);
+        _focusCo = StartCoroutine(PunchRoutine(fromZoom, fromOffset, toZoom, toOffset, inTime, hold, outTime));
+    }
+
+    private System.Collections.IEnumerator PunchRoutine(float fromZoom, Vector2 fromOffset, float toZoom, Vector2 toOffset,
+        float inTime, float hold, float outTime)
+    {
+        Locked = true;
+        IsFocusing = true;
+
+        for (float t = 0; t < 1f; t += Time.unscaledDeltaTime / Mathf.Max(0.01f, inTime))
+        {
+            float e = 1f - Mathf.Pow(1f - t, 3f);
+            Zoom = Mathf.Lerp(fromZoom, toZoom, e);
+            Offset = Vector2.Lerp(fromOffset, toOffset, e);
+            Apply();
+            yield return null;
+        }
+        Zoom = toZoom; Offset = toOffset; Apply();
+        Vector2 heldOffset = Offset; // đã clamp trong Apply
+
+        if (hold > 0f) yield return new WaitForSecondsRealtime(hold);
+
+        for (float t = 0; t < 1f; t += Time.unscaledDeltaTime / Mathf.Max(0.01f, outTime))
+        {
+            float e = Mathf.SmoothStep(0f, 1f, t);
+            Zoom = Mathf.Lerp(toZoom, fromZoom, e);
+            Offset = Vector2.Lerp(heldOffset, fromOffset, e);
+            Apply();
+            yield return null;
+        }
+        Zoom = fromZoom; Offset = fromOffset; Apply();
+
+        IsFocusing = false;
+        Locked = false;
+        _focusCo = null;
+    }
+
+    public void FocusOn(RectTransform root, Vector3 worldCenter) => FocusOn(root, worldCenter, focusZoom);
+
+    /// zoom: mức zoom muốn tới (vd: tutorial dùng mức nhẹ hơn focusZoom).
+    public void FocusOn(RectTransform root, Vector3 worldCenter, float zoom)
     {
         Locked = true;
         RectTransform content = root.IsChildOf(contentA) ? contentA : contentB;
         Vector2 local = content.InverseTransformPoint(worldCenter);
-        float newZoom = Mathf.Clamp(focusZoom, minZoom, maxZoom);
+        float newZoom = Mathf.Clamp(zoom, minZoom, maxZoom);
         Vector2 newOffset = -local * newZoom;
 
         if (_focusCo != null) StopCoroutine(_focusCo);

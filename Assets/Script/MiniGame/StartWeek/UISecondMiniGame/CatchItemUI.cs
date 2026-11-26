@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CatchItemUI : MonoBehaviour
 {
@@ -100,7 +101,20 @@ public class CatchItemUI : MonoBehaviour
         SetPanel(pausePanel, false);
     }
 
-    private void OnScoreChanged(int total, int delta) => textScore.text = total.ToString();
+    [Header("Punch số điểm trên thanh tiến độ")]
+    [SerializeField] private float scorePunch = 0.35f;
+    [SerializeField] private float scorePunchDuration = 0.3f;
+
+    private void OnScoreChanged(int total, int delta)
+    {
+        textScore.text = total.ToString();
+        if (delta <= 0) return;
+
+        var t = textScore.rectTransform;
+        t.DOKill(true);
+        t.localScale = Vector3.one;
+        t.DOPunchScale(Vector3.one * scorePunch, scorePunchDuration, 6, 0.6f);
+    }
 
     private void OnPhaseChanged(MiniSecondPhase phase)
     {

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed9447068634ad5aa023361299bfdae, type: 3}
+  m_Name: LevelCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::LevelCatalog
+  levels:
+  - assetGuid: 01986067224e4701bf49a2a53cb13a50
+    path: Levels/Level_02_Dressing_Data
+  - assetGuid: 19c91ba7ee7e4334a91f116d63dad8e3
+    path: Levels/Level_03_Birthday_Data
+  - assetGuid: 4a8b4e6ef57c06c409b2eb6f77d5f9fc
+    path: Levels/Level_01_Data
+  - assetGuid: 4f304a2325c3b8744be22b86b976bf9e
+    path: Levels/Level_02_Data
+  - assetGuid: 417570143d724ff6a24ee48bacc2e952
+    path: Levels/Level_05_Kitchen_Data
+  - assetGuid: 3cfbd5186e442f44c804e04e3e1acdbe
+    path: Levels/Level_03_Data
+  - assetGuid: be25f164ddd24bb98433b2d6b20627df
+    path: Levels/Level_07_Laundry_Data
+  - assetGuid: 7bf4a1a0ba4695b44bcc1849a0a84c4f
+    path: Levels/Level_04_Data
+  - assetGuid: eae8312bbfb04e5f932685a20bfd8f0d
+    path: Levels/Level_09_Picnic_Data
+  - assetGuid: c90bb6be25678e64d871402ad08904f4
+    path: Levels/Level_05_Data
+  - assetGuid: a09d3c0554164ba09571a9b59ae08dad
+    path: Levels/Level_11_Attic_Data
+  - assetGuid: 17565592f82a0904897f9d3531a2104c
+    path: Levels/Level_06_Data
+  - assetGuid: df955b022ed04cab9b59c403d77c04b6
+    path: Levels/Level_13_Mailbox_Data
+  - assetGuid: 24ce66ce61084e046abf4e7593ff136f
+    path: Levels/Level_07_Data
+  - assetGuid: 475bbc61b4464399beb366b6e104d058
+    path: Levels/Level_15_Study_Data
+  - assetGuid: d5773de7fc35c0949a4c754a21cfbec9
+    path: Levels/Level_08_Data
+  - assetGuid: aa49ed15e2e740b58f6e0b7ecf471475
+    path: Levels/Level_17_Hotel_Data
+  - assetGuid: 962f75579305d564ca9aa03baa8d4aa3
+    path: Levels/Level_09_Data
+  - assetGuid: d7837ed23537437892f4a36acac06b5b
+    path: Levels/Level_19_Arcade_Data
+  - assetGuid: 853f752b3d27f5f419b599da9dbe592b
+    path: Levels/Level_10_Data
+  - assetGuid: b6c5b1ecb0914694c8de6cc772c31ce6
+    path: Levels/Level_11_Data
+  - assetGuid: 5ae3e62b4947a004f9f39a4da7540fd5
+    path: Levels/Level_12_Data
+  - assetGuid: 7321d8b6c76938e438a0b10f7d3ef853
+    path: Levels/Level_13_Data
+  - assetGuid: fb9f19a9c1559fe4180346ecbff354cf
+    path: Levels/Level_14_Data
+  - assetGuid: e8e9901d08bc257429a9ffd6889654b2
+    path: Levels/Level_15_Data
+  tutorial:
+    assetGuid: f3d9e60e12b02274c993a6abf23f8474
+    path: Levels/TutorialData

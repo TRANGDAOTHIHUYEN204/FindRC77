@@ -1,0 +1,31 @@
+using UnityEngine;
+
+/// Một layer sprite đặt đè lên ảnh level (cả ảnh A và B).
+/// Toạ độ theo không gian thiết kế 1080x720, gốc ở tâm ảnh, trục y hướng lên
+/// (giống DifferentPointInfo).
+[System.Serializable]
+public class InteractableLayer
+{
+    public Sprite Sprite;
+    public Vector2 Position;
+    public Vector2 Size;
+    /// Góc lắc nhẹ (độ) theo nhịp khi đồ vật còn đóng, gợi ý cho người chơi là bấm được. 0 = tắt.
+    /// Chỉ có tác dụng với layer trong ClosedLayers.
+    public float IdleWiggleAngle;
+}
+
+/// Đồ vật bấm vào được (vd: tủ quần áo). Lúc đóng hiện ClosedLayers,
+/// bấm vào HotspotPosition/HotspotSize thì chuyển sang OpenLayers và mở khoá
+/// các điểm khác trong HiddenPointIndices (index trong LevelData.DifferentPoints).
+[System.Serializable]
+public class InteractableInfo
+{
+    public string Name;
+    public Vector2 HotspotPosition;
+    public Vector2 HotspotSize;
+    public InteractableLayer[] ClosedLayers;
+    public InteractableLayer[] OpenLayers;
+    public int[] HiddenPointIndices;
+    /// Âm thanh phát khi bấm mở (cửa kẽo kẹt, nắp hộp, lò nướng...).
+    public AudioClip OpenSound;
+}

@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_13_Mailbox_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 13
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: cb0db873866b49b985f928c13eea7502, type: 3}
+  errorSprite: {fileID: 21300000, guid: 0b7e253ceb754bd0a593023b40b3995a, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: -301.29, y: 260.16, z: 0}
+    Size: {x: 106.17, y: 112.5}
+    Outline:
+    - {x: -250.86, y: 260.16, z: 0}
+    - {x: -255.85, y: 236.97, z: 0}
+    - {x: -269.85, y: 218.38, z: 0}
+    - {x: -290.07, y: 208.06, z: 0}
+    - {x: -312.51, y: 208.06, z: 0}
+    - {x: -332.73, y: 218.38, z: 0}
+    - {x: -346.73, y: 236.97, z: 0}
+    - {x: -351.72, y: 260.16, z: 0}
+    - {x: -346.73, y: 283.34, z: 0}
+    - {x: -332.73, y: 301.94, z: 0}
+    - {x: -312.51, y: 312.25, z: 0}
+    - {x: -290.07, y: 312.25, z: 0}
+    - {x: -269.85, y: 301.94, z: 0}
+    - {x: -255.85, y: 283.34, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -301.29, y: 260.16, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 53.44
+  - Position: {x: -20.04, y: -133.24, z: 0}
+    Size: {x: 215.86, y: 34.45}
+    Outline:
+    - {x: 82.49, y: -133.24, z: 0}
+    - {x: 72.34, y: -140.34, z: 0}
+    - {x: 43.89, y: -146.04, z: 0}
+    - {x: 2.78, y: -149.2, z: 0}
+    - {x: -42.85, y: -149.2, z: 0}
+    - {x: -83.97, y: -146.04, z: 0}
+    - {x: -112.42, y: -140.34, z: 0}
+    - {x: -122.57, y: -133.24, z: 0}
+    - {x: -112.42, y: -126.14, z: 0}
+    - {x: -83.97, y: -120.45, z: 0}
+    - {x: -42.85, y: -117.29, z: 0}
+    - {x: 2.78, y: -117.29, z: 0}
+    - {x: 43.89, y: -120.45, z: 0}
+    - {x: 72.34, y: -126.14, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -20.04, y: -133.24, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 102.53
+  - Position: {x: -142.73, y: -47.81, z: 0}
+    Size: {x: 119.53, y: 168.75}
+    Outline:
+    - {x: -85.96, y: -47.81, z: 0}
+    - {x: -91.58, y: -82.59, z: 0}
+    - {x: -107.33, y: -110.48, z: 0}
+    - {x: -130.1, y: -125.96, z: 0}
+    - {x: -155.37, y: -125.96, z: 0}
+    - {x: -178.13, y: -110.48, z: 0}
+    - {x: -193.89, y: -82.59, z: 0}
+    - {x: -199.51, y: -47.81, z: 0}
+    - {x: -193.89, y: -13.03, z: 0}
+    - {x: -178.13, y: 14.86, z: 0}
+    - {x: -155.37, y: 30.33, z: 0}
+    - {x: -130.1, y: 30.33, z: 0}
+    - {x: -107.33, y: 14.86, z: 0}
+    - {x: -91.58, y: -13.03, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -142.73, y: -47.81, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 80.16
+  - Position: {x: -354.38, y: 3.16, z: 0}
+    Size: {x: 70.31, y: 42.89}
+    Outline:
+    - {x: -320.98, y: 3.16, z: 0}
+    - {x: -324.28, y: -5.68, z: 0}
+    - {x: -333.55, y: -12.76, z: 0}
+    - {x: -346.94, y: -16.7, z: 0}
+    - {x: -361.81, y: -16.7, z: 0}
+    - {x: -375.2, y: -12.76, z: 0}
+    - {x: -384.47, y: -5.68, z: 0}
+    - {x: -387.77, y: 3.16, z: 0}
+    - {x: -384.47, y: 12, z: 0}
+    - {x: -375.2, y: 19.09, z: 0}
+    - {x: -361.81, y: 23.03, z: 0}
+    - {x: -346.94, y: 23.03, z: 0}
+    - {x: -333.55, y: 19.09, z: 0}
+    - {x: -324.28, y: 12, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -354.38, y: 3.16, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 33.4
+  - Position: {x: -386.37, y: 28.12, z: 0}
+    Size: {x: 83.67, y: 66.09}
+    Outline:
+    - {x: -346.62, y: 28.12, z: 0}
+    - {x: -350.56, y: 14.5, z: 0}
+    - {x: -361.59, y: 3.58, z: 0}
+    - {x: -377.52, y: -2.48, z: 0}
+    - {x: -395.21, y: -2.48, z: 0}
+    - {x: -411.15, y: 3.58, z: 0}
+    - {x: -422.18, y: 14.5, z: 0}
+    - {x: -426.11, y: 28.12, z: 0}
+    - {x: -422.18, y: 41.75, z: 0}
+    - {x: -411.15, y: 52.67, z: 0}
+    - {x: -395.21, y: 58.73, z: 0}
+    - {x: -377.52, y: 58.73, z: 0}
+    - {x: -361.59, y: 52.67, z: 0}
+    - {x: -350.56, y: 41.75, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -386.37, y: 28.12, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 39.74
+  textWin: Who sent this?! ...I'm not smiling. You're smiling.
+  difficulty: 0
+  interactables:
+  - Name: mailbox
+    HotspotPosition: {x: -417.3, y: 35.51}
+    HotspotSize: {x: 238.36, y: 273.52}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 6837daa99b40431899555500dd3a6fc6, type: 3}
+      Position: {x: -417.3, y: 35.51}
+      Size: {x: 224.3, y: 259.45}
+    - Sprite: {fileID: 21300000, guid: d0787b20b4ca476c918b4cc7cecc1a49, type: 3}
+      Position: {x: 143.79, y: -24.61}
+      Size: {x: 206.02, y: 592.03}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 1bc5ce1f1d92475596a7573da4eec3ae, type: 3}
+      Position: {x: 142.73, y: -18.28}
+      Size: {x: 225, y: 644.06}
+    HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 34f82df5aa0d5264c9109fc06b322211, type: 3}

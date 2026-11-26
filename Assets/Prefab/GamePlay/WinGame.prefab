@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2944804881123077776}
   - component: {fileID: 7937676133609745950}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
   m_sharedMaterial: {fileID: -1189415696643958039, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
@@ -1137,7 +1137,6 @@ MonoBehaviour:
   - {fileID: 1295625171164434360}
   heartsRequired: 010000000200000003000000
   tutorialAlwaysFullStars: 1
-  showOnEnable: 1
   startDelay: 0.3
   delayBetweenStars: 0.35
   onRewardFinished:
@@ -1760,14 +1759,14 @@ PrefabInstance:
     - target: {fileID: 1736673927564258456, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7942189066231544040, guid: ac6e3b648745c564cb7e822ea2184507, type: 3}
+      objectReference: {fileID: 649223268058989734, guid: a36f60741ddd43644a2a5a35df303d86, type: 3}
     - target: {fileID: 5299299314812037723, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_text
       value: Continue
       objectReference: {fileID: 0}
     - target: {fileID: 5524674995441771686, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_Name
-      value: btnContinue
+      value: btnNext
       objectReference: {fileID: 0}
     - target: {fileID: 9000205345082470191, guid: 4bb94e383b3f2364cacb28e380e4282f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

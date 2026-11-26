@@ -12,6 +12,8 @@ public class DifferentPair : MonoBehaviour
     private ShapeMark _shape;
 
     public bool IsFound { get; private set; }
+    /// Bị giấu sau đồ vật tương tác đang đóng (vd: trong tủ) → chưa bấm được.
+    public bool IsLocked { get; set; }
     public DifferentPoint PointA => pointA;
     public DifferentPoint PointB => pointB;
     public RectTransform RootA => _rootA;
@@ -26,6 +28,7 @@ public class DifferentPair : MonoBehaviour
     public void Init(DifferentPointInfo data, Transform rootA, Transform rootB)
     {
         IsFound = false;
+        IsLocked = false;
         _rootA = rootA as RectTransform;
         _rootB = rootB as RectTransform;
         Canvas.ForceUpdateCanvases();
@@ -55,7 +58,7 @@ public class DifferentPair : MonoBehaviour
         => !IsFound && ContainsPoint(screenPoint, cam);
 
     public bool ContainsPoint(Vector2 screenPoint, Camera cam)
-        => pointA.IsHit(screenPoint, cam) || pointB.IsHit(screenPoint, cam);
+        => !IsLocked && (pointA.IsHit(screenPoint, cam) || pointB.IsHit(screenPoint, cam));
 
     public bool MarkFound()
     {

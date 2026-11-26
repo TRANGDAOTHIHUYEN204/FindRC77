@@ -28,6 +28,8 @@ public class StateGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     private string _levelLabel;
     [SerializeField] private GameObject winTutorial;
+    [Tooltip("Sao trong popup thắng tutorial (luôn hiện đủ 3 sao). Để trống sẽ tự tìm trong winTutorial.")]
+    [SerializeField] private StarRewardManager winTutorialStars;
     [SerializeField] private int warningStartSecond = 10;
     [SerializeField, Range(0f, 1f)] private float warningMinVolume = 0.3f;
     [SerializeField, Range(0f, 1f)] private float warningMaxVolume = 1f;
@@ -90,6 +92,11 @@ public class StateGame : MonoBehaviour
         SetPanels(false, false, false, true);
         if (winTutorialText) winTutorialText.text = textWin;
         Time.timeScale = 0f;
+
+        if (winTutorialStars == null && winTutorial != null)
+            winTutorialStars = winTutorial.GetComponentInChildren<StarRewardManager>(true);
+        if (winTutorialStars != null)
+            winTutorialStars.Play(3); // tutorial luôn được 3 sao
     }
 
     public void WinGame(string textWin)

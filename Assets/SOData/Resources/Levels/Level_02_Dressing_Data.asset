@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_02_Dressing_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 1
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 3524c906d6684d8fb584bd2915c98d38, type: 3}
+  errorSprite: {fileID: 21300000, guid: 7969ad6f0fbc44ddb629fd3364cc82fc, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 1.41, y: -272.81, z: 0}
+    Size: {x: 464.06, y: 140.62}
+    Outline:
+    - {x: 221.84, y: -272.81, z: 0}
+    - {x: 200.01, y: -301.79, z: 0}
+    - {x: 138.84, y: -325.04, z: 0}
+    - {x: 50.46, y: -337.93, z: 0}
+    - {x: -47.64, y: -337.93, z: 0}
+    - {x: -136.03, y: -325.04, z: 0}
+    - {x: -197.19, y: -301.79, z: 0}
+    - {x: -219.02, y: -272.81, z: 0}
+    - {x: -197.19, y: -243.83, z: 0}
+    - {x: -136.03, y: -220.59, z: 0}
+    - {x: -47.64, y: -207.69, z: 0}
+    - {x: 50.46, y: -207.69, z: 0}
+    - {x: 138.84, y: -220.59, z: 0}
+    - {x: 200.01, y: -243.83, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 1.41, y: -272.81, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 105.47
+  - Position: {x: 145.55, y: 263.67, z: 0}
+    Size: {x: 87.89, y: 133.59}
+    Outline:
+    - {x: 187.29, y: 263.67, z: 0}
+    - {x: 183.16, y: 236.14, z: 0}
+    - {x: 171.58, y: 214.06, z: 0}
+    - {x: 154.84, y: 201.81, z: 0}
+    - {x: 136.26, y: 201.81, z: 0}
+    - {x: 119.52, y: 214.06, z: 0}
+    - {x: 107.93, y: 236.14, z: 0}
+    - {x: 103.8, y: 263.67, z: 0}
+    - {x: 107.93, y: 291.2, z: 0}
+    - {x: 119.52, y: 313.28, z: 0}
+    - {x: 136.26, y: 325.54, z: 0}
+    - {x: 154.84, y: 325.54, z: 0}
+    - {x: 171.58, y: 313.28, z: 0}
+    - {x: 183.16, y: 291.2, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 145.55, y: 263.67, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 66.8
+  - Position: {x: 431.72, y: -234.14, z: 0}
+    Size: {x: 172.27, y: 200.39}
+    Outline:
+    - {x: 513.54, y: -234.14, z: 0}
+    - {x: 505.44, y: -275.44, z: 0}
+    - {x: 482.74, y: -308.56, z: 0}
+    - {x: 449.93, y: -326.94, z: 0}
+    - {x: 413.51, y: -326.94, z: 0}
+    - {x: 380.7, y: -308.56, z: 0}
+    - {x: 358, y: -275.44, z: 0}
+    - {x: 349.89, y: -234.14, z: 0}
+    - {x: 358, y: -192.84, z: 0}
+    - {x: 380.7, y: -159.72, z: 0}
+    - {x: 413.51, y: -141.34, z: 0}
+    - {x: 449.93, y: -141.34, z: 0}
+    - {x: 482.74, y: -159.72, z: 0}
+    - {x: 505.44, y: -192.84, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 431.72, y: -234.14, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 94.92
+  - Position: {x: -329.06, y: 18.98, z: 0}
+    Size: {x: 130.08, y: 221.48}
+    Outline:
+    - {x: -267.28, y: 18.98, z: 0}
+    - {x: -273.39, y: -26.66, z: 0}
+    - {x: -290.54, y: -63.27, z: 0}
+    - {x: -315.31, y: -83.58, z: 0}
+    - {x: -342.81, y: -83.58, z: 0}
+    - {x: -367.59, y: -63.27, z: 0}
+    - {x: -384.73, y: -26.66, z: 0}
+    - {x: -390.85, y: 18.98, z: 0}
+    - {x: -384.73, y: 64.63, z: 0}
+    - {x: -367.59, y: 101.24, z: 0}
+    - {x: -342.81, y: 121.55, z: 0}
+    - {x: -315.31, y: 121.55, z: 0}
+    - {x: -290.54, y: 101.24, z: 0}
+    - {x: -273.39, y: 64.63, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -329.06, y: 18.98, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 105.47
+  - Position: {x: -453.52, y: 246.09, z: 0}
+    Size: {x: 108.98, y: 119.53}
+    Outline:
+    - {x: -401.75, y: 246.09, z: 0}
+    - {x: -406.87, y: 221.46, z: 0}
+    - {x: -421.24, y: 201.7, z: 0}
+    - {x: -442, y: 190.74, z: 0}
+    - {x: -465.03, y: 190.74, z: 0}
+    - {x: -485.79, y: 201.7, z: 0}
+    - {x: -500.16, y: 221.46, z: 0}
+    - {x: -505.28, y: 246.09, z: 0}
+    - {x: -500.16, y: 270.73, z: 0}
+    - {x: -485.79, y: 290.48, z: 0}
+    - {x: -465.03, y: 301.45, z: 0}
+    - {x: -442, y: 301.45, z: 0}
+    - {x: -421.24, y: 290.48, z: 0}
+    - {x: -406.87, y: 270.73, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -453.52, y: 246.09, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 63.28
+  textWin: Star pajamas? Nobody saw that. Right?
+  difficulty: 0
+  interactables:
+  - Name: Wardrobe
+    HotspotPosition: {x: -385.31, y: 20.74}
+    HotspotSize: {x: 309.38, y: 636.33}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 5bcaf45026874c33818c951ea0969b41, type: 3}
+      Position: {x: -382.5, y: 33.05}
+      Size: {x: 272.81, y: 572.34}
+      IdleWiggleAngle: 1
+    - Sprite: {fileID: 21300000, guid: 2651f275417e4840bcf2c6e1adb1d9c7, type: 3}
+      Position: {x: -33.4, y: -40.78}
+      Size: {x: 187.73, y: 548.44}
+      IdleWiggleAngle: 0
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 2dc2c9a75c8b454ca718dc649b36e98b, type: 3}
+      Position: {x: -524.53, y: 16.88}
+      Size: {x: 30.94, y: 686.25}
+      IdleWiggleAngle: 0
+    - Sprite: {fileID: 21300000, guid: f08466416db34fdca16650e181ac7293, type: 3}
+      Position: {x: -204.96, y: 16.88}
+      Size: {x: 103.36, y: 686.25}
+      IdleWiggleAngle: 0
+    - Sprite: {fileID: 21300000, guid: ae150fe3e2e54f5fad8d1620e602d24b, type: 3}
+      Position: {x: -33.4, y: -40.78}
+      Size: {x: 196.17, y: 548.44}
+      IdleWiggleAngle: 0
+    HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 614cae800a5d5db48870f90f0e9d3209, type: 3}

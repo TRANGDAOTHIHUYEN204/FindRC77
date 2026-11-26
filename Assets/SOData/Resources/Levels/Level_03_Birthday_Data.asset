@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_03_Birthday_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 2
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 1a53bfc99b4b4c4bac24aa6337dc76d3, type: 3}
+  errorSprite: {fileID: 21300000, guid: 9d4d26523d7244d2b51f738c3a32eb39, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 462.66, y: 182.46, z: 0}
+    Size: {x: 154.69, y: 204.61}
+    Outline:
+    - {x: 536.13, y: 182.46, z: 0}
+    - {x: 528.86, y: 140.29, z: 0}
+    - {x: 508.47, y: 106.48, z: 0}
+    - {x: 479.01, y: 87.71, z: 0}
+    - {x: 446.31, y: 87.71, z: 0}
+    - {x: 416.84, y: 106.48, z: 0}
+    - {x: 396.46, y: 140.29, z: 0}
+    - {x: 389.18, y: 182.46, z: 0}
+    - {x: 396.46, y: 224.63, z: 0}
+    - {x: 416.84, y: 258.45, z: 0}
+    - {x: 446.31, y: 277.21, z: 0}
+    - {x: 479.01, y: 277.21, z: 0}
+    - {x: 508.47, y: 258.45, z: 0}
+    - {x: 528.86, y: 224.63, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 462.66, y: 182.46, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 97.19
+  - Position: {x: 286.17, y: 48.87, z: 0}
+    Size: {x: 112.5, y: 87.89}
+    Outline:
+    - {x: 339.61, y: 48.87, z: 0}
+    - {x: 334.32, y: 30.75, z: 0}
+    - {x: 319.49, y: 16.23, z: 0}
+    - {x: 298.06, y: 8.17, z: 0}
+    - {x: 274.28, y: 8.17, z: 0}
+    - {x: 252.85, y: 16.23, z: 0}
+    - {x: 238.03, y: 30.75, z: 0}
+    - {x: 232.73, y: 48.87, z: 0}
+    - {x: 238.03, y: 66.98, z: 0}
+    - {x: 252.85, y: 81.51, z: 0}
+    - {x: 274.28, y: 89.57, z: 0}
+    - {x: 298.06, y: 89.57, z: 0}
+    - {x: 319.49, y: 81.51, z: 0}
+    - {x: 334.32, y: 66.98, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 286.17, y: 48.87, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 53.44
+  - Position: {x: -485.51, y: 159.96, z: 0}
+    Size: {x: 71.02, y: 82.27}
+    Outline:
+    - {x: -451.78, y: 159.96, z: 0}
+    - {x: -455.12, y: 143.01, z: 0}
+    - {x: -464.48, y: 129.41, z: 0}
+    - {x: -478, y: 121.86, z: 0}
+    - {x: -493.01, y: 121.86, z: 0}
+    - {x: -506.54, y: 129.41, z: 0}
+    - {x: -515.9, y: 143.01, z: 0}
+    - {x: -519.24, y: 159.96, z: 0}
+    - {x: -515.9, y: 176.92, z: 0}
+    - {x: -506.54, y: 190.51, z: 0}
+    - {x: -493.01, y: 198.06, z: 0}
+    - {x: -478, y: 198.06, z: 0}
+    - {x: -464.48, y: 190.51, z: 0}
+    - {x: -455.12, y: 176.92, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -485.51, y: 159.96, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 39.08
+  - Position: {x: -350.86, y: -53.44, z: 0}
+    Size: {x: 102.66, y: 95.62}
+    Outline:
+    - {x: -302.1, y: -53.44, z: 0}
+    - {x: -306.93, y: -73.15, z: 0}
+    - {x: -320.46, y: -88.95, z: 0}
+    - {x: -340.01, y: -97.72, z: 0}
+    - {x: -361.71, y: -97.72, z: 0}
+    - {x: -381.26, y: -88.95, z: 0}
+    - {x: -394.79, y: -73.15, z: 0}
+    - {x: -399.62, y: -53.44, z: 0}
+    - {x: -394.79, y: -33.73, z: 0}
+    - {x: -381.26, y: -17.93, z: 0}
+    - {x: -361.71, y: -9.15, z: 0}
+    - {x: -340.01, y: -9.15, z: 0}
+    - {x: -320.46, y: -17.93, z: 0}
+    - {x: -306.93, y: -33.73, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -350.86, y: -53.44, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 48.76
+  - Position: {x: -271.05, y: -88.95, z: 0}
+    Size: {x: 61.17, y: 45.7}
+    Outline:
+    - {x: -242, y: -88.95, z: 0}
+    - {x: -244.88, y: -98.36, z: 0}
+    - {x: -252.94, y: -105.92, z: 0}
+    - {x: -264.59, y: -110.11, z: 0}
+    - {x: -277.52, y: -110.11, z: 0}
+    - {x: -289.17, y: -105.92, z: 0}
+    - {x: -297.23, y: -98.36, z: 0}
+    - {x: -300.11, y: -88.95, z: 0}
+    - {x: -297.23, y: -79.53, z: 0}
+    - {x: -289.17, y: -71.97, z: 0}
+    - {x: -277.52, y: -67.78, z: 0}
+    - {x: -264.59, y: -67.78, z: 0}
+    - {x: -252.94, y: -71.97, z: 0}
+    - {x: -244.88, y: -79.53, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -271.05, y: -88.95, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 29.06
+  textWin: Grandpa's diary... my 20 stories start today.
+  difficulty: 0
+  interactables:
+  - Name: bday
+    HotspotPosition: {x: -279.84, y: -72.07}
+    HotspotSize: {x: 345.94, y: 231.33}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: b939a578fbd447828db106e259815138, type: 3}
+      Position: {x: -279.84, y: -72.07}
+      Size: {x: 331.88, y: 217.27}
+    - Sprite: {fileID: 21300000, guid: 7e4e76a2d4fa42c88c564a77fb5130d2, type: 3}
+      Position: {x: 90.7, y: 7.03}
+      Size: {x: 192.66, y: 618.75}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 907de7027cbf4b808c035bc19caeb788, type: 3}
+      Position: {x: 92.11, y: 3.52}
+      Size: {x: 189.84, y: 615.94}
+    HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 6cfaa4e43abb37a4f988bf119c5a23d2, type: 3}

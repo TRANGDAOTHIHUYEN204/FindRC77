@@ -158,6 +158,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CircleDifferent
   lineRenderer: {fileID: 8815362384043796694}
   bounceEffect: {fileID: -4415345441609913330}
+  headStarSprite: {fileID: 8558291324124948035, guid: 7a455081cc076ae4c88647b7c9da8134, type: 3}
+  headStarSizeMul: 6.75
+  headStarSpin: 720
+  headStarPeakAt: 0.7
+  headStarPeakScale: 1.1
+  headStarTrails: 1
+  trailLengthMul: 2.2
+  trailWidthMul: 1.6
+  trailColor: {r: 1, g: 0.82, b: 0.25, a: 1}
 --- !u!114 &-4415345441609913330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,3 +181,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BounceEffect
   scaleAmount: 0.2
   duration: 0.35
+  bounces: 3
+  damping: 2.5

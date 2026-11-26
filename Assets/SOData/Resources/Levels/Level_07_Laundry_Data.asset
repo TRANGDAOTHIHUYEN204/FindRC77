@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_07_Laundry_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 7
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: 229b6b040abc4faeab331a31d4171b6c, type: 3}
+  errorSprite: {fileID: 21300000, guid: f565bcbacf874420b92f5b44952b1934, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: 308.67, y: 85.08, z: 0}
+    Size: {x: 85.78, y: 191.25}
+    Outline:
+    - {x: 349.42, y: 85.08, z: 0}
+    - {x: 345.38, y: 45.66, z: 0}
+    - {x: 334.08, y: 14.05, z: 0}
+    - {x: 317.74, y: -3.49, z: 0}
+    - {x: 299.61, y: -3.49, z: 0}
+    - {x: 283.27, y: 14.05, z: 0}
+    - {x: 271.96, y: 45.66, z: 0}
+    - {x: 267.93, y: 85.08, z: 0}
+    - {x: 271.96, y: 124.49, z: 0}
+    - {x: 283.27, y: 156.1, z: 0}
+    - {x: 299.61, y: 173.64, z: 0}
+    - {x: 317.74, y: 173.64, z: 0}
+    - {x: 334.08, y: 156.1, z: 0}
+    - {x: 345.38, y: 124.49, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 308.67, y: 85.08, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 90.84
+  - Position: {x: -198.28, y: -21.09, z: 0}
+    Size: {x: 54.84, y: 95.62}
+    Outline:
+    - {x: -172.23, y: -21.09, z: 0}
+    - {x: -174.81, y: -40.8, z: 0}
+    - {x: -182.04, y: -56.61, z: 0}
+    - {x: -192.48, y: -65.38, z: 0}
+    - {x: -204.08, y: -65.38, z: 0}
+    - {x: -214.52, y: -56.61, z: 0}
+    - {x: -221.75, y: -40.8, z: 0}
+    - {x: -224.33, y: -21.09, z: 0}
+    - {x: -221.75, y: -1.39, z: 0}
+    - {x: -214.52, y: 14.42, z: 0}
+    - {x: -204.08, y: 23.19, z: 0}
+    - {x: -192.48, y: 23.19, z: 0}
+    - {x: -182.04, y: 14.42, z: 0}
+    - {x: -174.81, y: -1.39, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -198.28, y: -21.09, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 45.42
+  - Position: {x: -118.12, y: 212.34, z: 0}
+    Size: {x: 56.25, y: 63.28}
+    Outline:
+    - {x: -91.41, y: 212.34, z: 0}
+    - {x: -94.05, y: 199.3, z: 0}
+    - {x: -101.47, y: 188.84, z: 0}
+    - {x: -112.18, y: 183.04, z: 0}
+    - {x: -124.07, y: 183.04, z: 0}
+    - {x: -134.78, y: 188.84, z: 0}
+    - {x: -142.2, y: 199.3, z: 0}
+    - {x: -144.84, y: 212.34, z: 0}
+    - {x: -142.2, y: 225.39, z: 0}
+    - {x: -134.78, y: 235.84, z: 0}
+    - {x: -124.07, y: 241.65, z: 0}
+    - {x: -112.18, y: 241.65, z: 0}
+    - {x: -101.47, y: 235.84, z: 0}
+    - {x: -94.05, y: 225.39, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -118.12, y: 212.34, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 30.06
+  - Position: {x: -349.8, y: -165.94, z: 0}
+    Size: {x: 69.61, y: 75.94}
+    Outline:
+    - {x: -316.74, y: -165.94, z: 0}
+    - {x: -320.01, y: -181.59, z: 0}
+    - {x: -329.19, y: -194.14, z: 0}
+    - {x: -342.45, y: -201.1, z: 0}
+    - {x: -357.16, y: -201.1, z: 0}
+    - {x: -370.42, y: -194.14, z: 0}
+    - {x: -379.59, y: -181.59, z: 0}
+    - {x: -382.87, y: -165.94, z: 0}
+    - {x: -379.59, y: -150.29, z: 0}
+    - {x: -370.42, y: -137.74, z: 0}
+    - {x: -357.16, y: -130.77, z: 0}
+    - {x: -342.45, y: -130.77, z: 0}
+    - {x: -329.19, y: -137.74, z: 0}
+    - {x: -320.01, y: -150.29, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -349.8, y: -165.94, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 36.07
+  - Position: {x: -289.34, y: -205.66, z: 0}
+    Size: {x: 66.8, y: 56.95}
+    Outline:
+    - {x: -257.61, y: -205.66, z: 0}
+    - {x: -260.75, y: -217.4, z: 0}
+    - {x: -269.55, y: -226.81, z: 0}
+    - {x: -282.28, y: -232.04, z: 0}
+    - {x: -296.4, y: -232.04, z: 0}
+    - {x: -309.12, y: -226.81, z: 0}
+    - {x: -317.92, y: -217.4, z: 0}
+    - {x: -321.06, y: -205.66, z: 0}
+    - {x: -317.92, y: -193.93, z: 0}
+    - {x: -309.12, y: -184.51, z: 0}
+    - {x: -296.4, y: -179.29, z: 0}
+    - {x: -282.28, y: -179.29, z: 0}
+    - {x: -269.55, y: -184.51, z: 0}
+    - {x: -260.75, y: -193.93, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -289.34, y: -205.66, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 31.73
+  textWin: Pink is my color now. Totally on purpose.
+  difficulty: 0
+  interactables:
+  - Name: laundry
+    HotspotPosition: {x: -338.55, y: -91.41}
+    HotspotSize: {x: 395.86, y: 504.84}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 6037066295e7436681322daeebd5e29a, type: 3}
+      Position: {x: -338.55, y: -91.41}
+      Size: {x: 381.8, y: 490.78}
+    - Sprite: {fileID: 21300000, guid: 3d708080578341439814a988d46f1601, type: 3}
+      Position: {x: 95.98, y: -15.47}
+      Size: {x: 194.77, y: 621.56}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 0febb793cbdb4f0f989aa738fc9bc751, type: 3}
+      Position: {x: 101.25, y: 10.55}
+      Size: {x: 195.47, y: 656.72}
+    HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: f7df59be8c16e6b469dcc21fa68ace39, type: 3}

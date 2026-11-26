@@ -58,12 +58,18 @@ public class DifferentPairManager
 
     public Entry GetHintEntry()
     {
+        // Ưu tiên điểm đang bấm được; chỉ hint điểm bị giấu (trong tủ đóng)
+        // khi không còn điểm nào khác → spotlight rơi vào đồ vật cần mở.
         var remaining = new List<Entry>();
+        var locked = new List<Entry>();
         for (int i = 0; i < entries.Count ; i++)
         {
-            if (!entries[i].Pair.IsFound) remaining.Add(entries[i]); 
+            if (entries[i].Pair.IsFound) continue;
+            if (entries[i].Pair.IsLocked) locked.Add(entries[i]);
+            else remaining.Add(entries[i]);
         }
 
+        if (remaining.Count == 0) remaining = locked;
         if (remaining.Count == 0) return null;
         return remaining[Random.Range(0, remaining.Count)];
         

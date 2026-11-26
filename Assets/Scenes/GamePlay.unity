@@ -953,23 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a4b9ecf52e0743b16a912ad822ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  levels:
-  - {fileID: 11400000, guid: 4a8b4e6ef57c06c409b2eb6f77d5f9fc, type: 2}
-  - {fileID: 11400000, guid: 4f304a2325c3b8744be22b86b976bf9e, type: 2}
-  - {fileID: 11400000, guid: 3cfbd5186e442f44c804e04e3e1acdbe, type: 2}
-  - {fileID: 11400000, guid: 7bf4a1a0ba4695b44bcc1849a0a84c4f, type: 2}
-  - {fileID: 11400000, guid: c90bb6be25678e64d871402ad08904f4, type: 2}
-  - {fileID: 11400000, guid: 17565592f82a0904897f9d3531a2104c, type: 2}
-  - {fileID: 11400000, guid: 24ce66ce61084e046abf4e7593ff136f, type: 2}
-  - {fileID: 11400000, guid: d5773de7fc35c0949a4c754a21cfbec9, type: 2}
-  - {fileID: 11400000, guid: 962f75579305d564ca9aa03baa8d4aa3, type: 2}
-  - {fileID: 11400000, guid: 853f752b3d27f5f419b599da9dbe592b, type: 2}
-  - {fileID: 11400000, guid: b6c5b1ecb0914694c8de6cc772c31ce6, type: 2}
-  - {fileID: 11400000, guid: 5ae3e62b4947a004f9f39a4da7540fd5, type: 2}
-  - {fileID: 11400000, guid: 7321d8b6c76938e438a0b10f7d3ef853, type: 2}
-  - {fileID: 11400000, guid: fb9f19a9c1559fe4180346ecbff354cf, type: 2}
-  - {fileID: 11400000, guid: e8e9901d08bc257429a9ffd6889654b2, type: 2}
-  tutorialLevel: {fileID: 11400000, guid: f3d9e60e12b02274c993a6abf23f8474, type: 2}
+  catalog: {fileID: 11400000, guid: 7265d93b4547438e8441f3d182319c2a, type: 2}
 --- !u!4 &153753068
 Transform:
   m_ObjectHideFlags: 0
@@ -1439,6 +1423,7 @@ GameObject:
   - component: {fileID: 260534129}
   - component: {fileID: 260534128}
   - component: {fileID: 260534130}
+  - component: {fileID: 260534131}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1529,6 +1514,31 @@ MonoBehaviour:
   closeEndScale: {x: 0, y: 0, z: 0}
   blockGameInput: 1
   blockHoldAfterClose: 0.25
+--- !u!114 &260534131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260534126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfce41ac6b29a0418636ddf106cdd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StarRewardManager
+  heartManager: {fileID: 1736347940}
+  levelManager: {fileID: 153753067}
+  stars:
+  - {fileID: 1996366915}
+  - {fileID: 1049560285}
+  - {fileID: 689897414}
+  heartsRequired: 010000000200000003000000
+  tutorialAlwaysFullStars: 1
+  startDelay: 0.3
+  delayBetweenStars: 0.35
+  onRewardFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &266827308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8928447270580056575, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
@@ -3585,6 +3595,8 @@ MonoBehaviour:
   hintPresenter: {fileID: 1301881755}
   pairManagerHolder: {fileID: 467630240}
   stateGame: {fileID: 2088011103}
+  zoom: {fileID: 0}
+  challengeNodes: {fileID: 0}
   delayBetweenHints: 0.6
   hideDuringTutorial:
   - {fileID: 1086084359}
@@ -3594,6 +3606,10 @@ MonoBehaviour:
   - {fileID: 164304627}
   - {fileID: 91938350}
   maxHints: 3
+  startDelay: 1
+  zoomScale: 0.5
+  afterTickDelay: 0.5
+  maxWaitFx: 4
 --- !u!4 &786714006
 Transform:
   m_ObjectHideFlags: 0
@@ -6264,6 +6280,8 @@ MonoBehaviour:
   zoom: {fileID: 879632245}
   overlayA: {fileID: 1812316778}
   overlayB: {fileID: 1300552904}
+  areaFitRatio: 0.85
+  areaCircleMul: 1.1
 --- !u!1 &1315598972
 GameObject:
   m_ObjectHideFlags: 0
@@ -7358,6 +7376,11 @@ MonoBehaviour:
   trailStartPoint: {fileID: 2147000002}
   markDelay: 0.7
   hideOutlineDelay: 0.5
+  zoomManager: {fileID: 0}
+  punchZoomFactor: 1.15
+  punchZoomIn: 0.25
+  punchZoomHold: 1.1
+  punchZoomOut: 0.35
 --- !u!4 &1551937417
 Transform:
   m_ObjectHideFlags: 0
@@ -10454,6 +10477,7 @@ MonoBehaviour:
   levelManager: {fileID: 153753067}
   levelText: {fileID: 1557554889}
   winTutorial: {fileID: 2080376721}
+  winTutorialStars: {fileID: 260534131}
   warningStartSecond: 10
   warningMinVolume: 0.241
   warningMaxVolume: 1
@@ -11375,14 +11399,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2b43e1cd73859c24b95535ed09d4421b, type: 3}
-    - target: {fileID: 2719253640499405231, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2719253640499405231, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1019738326897614148, guid: 7b97679fffdad4541bab4040e019d153, type: 3}
     - target: {fileID: 2961011448819476638, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_SizeDelta.x
       value: -349.8
@@ -11598,10 +11614,6 @@ PrefabInstance:
     - target: {fileID: 7129411260040823656, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -34
-      objectReference: {fileID: 0}
-    - target: {fileID: 8146672904898865553, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8734177843261924110, guid: e50b8b5784bde70448b19d987cad0867, type: 3}
       propertyPath: m_SizeDelta.x

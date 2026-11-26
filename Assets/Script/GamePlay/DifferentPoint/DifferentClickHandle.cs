@@ -23,6 +23,14 @@ public class DifferentClickHandler : MonoBehaviour
     [SerializeField] private float markDelay = 1f;
     [SerializeField] private float hideOutlineDelay = 0.5f;
 
+    [Header("Zoom nhẹ khi chọn trúng")]
+    [SerializeField] private ZoomManager zoomManager;
+    [SerializeField] private float punchZoomFactor = 1.15f;
+    [SerializeField] private float punchZoomIn = 0.25f;
+    [Tooltip("Giữ khung zoom trong lúc vòng khoanh đang vẽ (markDelay + thời gian vẽ).")]
+    [SerializeField] private float punchZoomHold = 1.1f;
+    [SerializeField] private float punchZoomOut = 0.35f;
+
     private bool _isLosing = false;
     private bool _isResetting = false;
 
@@ -45,7 +53,11 @@ public class DifferentClickHandler : MonoBehaviour
 
             if (hintPresenter.HintedPair == entry.Pair)
                 hintPresenter.ClearHint();
-            
+
+            if (zoomManager == null) zoomManager = FindFirstObjectByType<ZoomManager>();
+            if (zoomManager != null)
+                zoomManager.PunchZoom(screenPoint, punchZoomFactor, punchZoomIn, punchZoomHold, punchZoomOut);
+
             Vector2? trailLocal = null;
             if (trailStartPoint != null &&
                 trailStartPoint.parent is RectTransform canvasRect &&
@@ -65,6 +77,14 @@ public class DifferentClickHandler : MonoBehaviour
 
         if (manager.IsInFoundArea(screenPoint, uiCamera))
             return false;
+
+        // Bấm vào đồ vật tương tác (vd: tủ) → mở ra, không tính là bấm sai.
+        if (pairManagerHolder.Interactables.TryInteract(screenPoint, uiCamera))
+        {
+            Haptics.Light();
+            hintPresenter.OnInteractableOpened();
+            return false;
+        }
 
         if (levelManager.IsTutorial)
             return false;

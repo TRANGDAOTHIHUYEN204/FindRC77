@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652b132f8aed46f45b4b6492c969690c, type: 3}
+  m_Name: Level_15_Study_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  numberLevel: 15
+  countDifferent: 5
+  rawSprite: {fileID: 21300000, guid: a82ab423968d45a3ab13236697da45bd, type: 3}
+  errorSprite: {fileID: 21300000, guid: 5b4e34fbb324453594720125b45e634f, type: 3}
+  timeLimit: 240
+  markData:
+  - {fileID: 11400000, guid: 5fe50ba28767e7743b1ed0c552910213, type: 2}
+  differentPoints:
+  - Position: {x: -418.01, y: 69.96, z: 0}
+    Size: {x: 130.08, y: 138.52}
+    Outline:
+    - {x: -356.22, y: 69.96, z: 0}
+    - {x: -362.34, y: 41.41, z: 0}
+    - {x: -379.48, y: 18.52, z: 0}
+    - {x: -404.26, y: 5.82, z: 0}
+    - {x: -431.76, y: 5.82, z: 0}
+    - {x: -456.53, y: 18.52, z: 0}
+    - {x: -473.68, y: 41.41, z: 0}
+    - {x: -479.79, y: 69.96, z: 0}
+    - {x: -473.68, y: 98.51, z: 0}
+    - {x: -456.53, y: 121.4, z: 0}
+    - {x: -431.76, y: 134.11, z: 0}
+    - {x: -404.26, y: 134.11, z: 0}
+    - {x: -379.48, y: 121.4, z: 0}
+    - {x: -362.34, y: 98.51, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -418.01, y: 69.96, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 65.79
+  - Position: {x: -222.19, y: 9.14, z: 0}
+    Size: {x: 39.38, y: 63.28}
+    Outline:
+    - {x: -203.48, y: 9.14, z: 0}
+    - {x: -205.34, y: -3.9, z: 0}
+    - {x: -210.53, y: -14.36, z: 0}
+    - {x: -218.03, y: -20.16, z: 0}
+    - {x: -226.35, y: -20.16, z: 0}
+    - {x: -233.85, y: -14.36, z: 0}
+    - {x: -239.04, y: -3.9, z: 0}
+    - {x: -240.89, y: 9.14, z: 0}
+    - {x: -239.04, y: 22.18, z: 0}
+    - {x: -233.85, y: 32.64, z: 0}
+    - {x: -226.35, y: 38.45, z: 0}
+    - {x: -218.03, y: 38.45, z: 0}
+    - {x: -210.53, y: 32.64, z: 0}
+    - {x: -205.34, y: 22.18, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -222.19, y: 9.14, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 30.06
+  - Position: {x: 455.62, y: 309.73, z: 0}
+    Size: {x: 52.03, y: 58.36}
+    Outline:
+    - {x: 480.34, y: 309.73, z: 0}
+    - {x: 477.89, y: 297.7, z: 0}
+    - {x: 471.03, y: 288.05, z: 0}
+    - {x: 461.12, y: 282.7, z: 0}
+    - {x: 450.13, y: 282.7, z: 0}
+    - {x: 440.22, y: 288.05, z: 0}
+    - {x: 433.36, y: 297.7, z: 0}
+    - {x: 430.91, y: 309.73, z: 0}
+    - {x: 433.36, y: 321.75, z: 0}
+    - {x: 440.22, y: 331.4, z: 0}
+    - {x: 450.13, y: 336.75, z: 0}
+    - {x: 461.12, y: 336.75, z: 0}
+    - {x: 471.03, y: 331.4, z: 0}
+    - {x: 477.89, y: 321.75, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: 455.62, y: 309.73, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 27.72
+  - Position: {x: -404.3, y: -126.21, z: 0}
+    Size: {x: 94.22, y: 68.2}
+    Outline:
+    - {x: -359.54, y: -126.21, z: 0}
+    - {x: -363.97, y: -140.27, z: 0}
+    - {x: -376.39, y: -151.54, z: 0}
+    - {x: -394.34, y: -157.8, z: 0}
+    - {x: -414.26, y: -157.8, z: 0}
+    - {x: -432.2, y: -151.54, z: 0}
+    - {x: -444.62, y: -140.27, z: 0}
+    - {x: -449.05, y: -126.21, z: 0}
+    - {x: -444.62, y: -112.15, z: 0}
+    - {x: -432.2, y: -100.88, z: 0}
+    - {x: -414.26, y: -94.63, z: 0}
+    - {x: -394.34, y: -94.63, z: 0}
+    - {x: -376.39, y: -100.88, z: 0}
+    - {x: -363.97, y: -112.15, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -404.3, y: -126.21, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 44.75
+  - Position: {x: -322.03, y: -119.88, z: 0}
+    Size: {x: 67.5, y: 73.83}
+    Outline:
+    - {x: -289.97, y: -119.88, z: 0}
+    - {x: -293.14, y: -135.1, z: 0}
+    - {x: -302.04, y: -147.3, z: 0}
+    - {x: -314.9, y: -154.07, z: 0}
+    - {x: -329.17, y: -154.07, z: 0}
+    - {x: -342.02, y: -147.3, z: 0}
+    - {x: -350.92, y: -135.1, z: 0}
+    - {x: -354.09, y: -119.88, z: 0}
+    - {x: -350.92, y: -104.67, z: 0}
+    - {x: -342.02, y: -92.47, z: 0}
+    - {x: -329.17, y: -85.69, z: 0}
+    - {x: -314.9, y: -85.69, z: 0}
+    - {x: -302.04, y: -92.47, z: 0}
+    - {x: -293.14, y: -104.67, z: 0}
+    HasMarkCenter: 1
+    MarkCenter: {x: -322.03, y: -119.88, z: 0}
+    OverrideMarkRadius: 1
+    MarkRadius: 35.07
+  textWin: Studying... for the comic exam. Totally.
+  difficulty: 0
+  interactables:
+  - Name: study
+    HotspotPosition: {x: -322.03, y: -168.4}
+    HotspotSize: {x: 386.72, y: 229.92}
+    ClosedLayers:
+    - Sprite: {fileID: 21300000, guid: 64a73161ea924abda4f90550fe8b270a, type: 3}
+      Position: {x: -322.03, y: -168.4}
+      Size: {x: 372.66, y: 215.86}
+    - Sprite: {fileID: 21300000, guid: 4b195c6b89f14ca5b3fc1e5b7d7d7529, type: 3}
+      Position: {x: 133.24, y: 5.27}
+      Size: {x: 176.48, y: 648.98}
+    OpenLayers:
+    - Sprite: {fileID: 21300000, guid: 06e6882625a04a69918ea7645dfcfcdb, type: 3}
+      Position: {x: 123.75, y: 5.27}
+      Size: {x: 191.25, y: 648.98}
+    HiddenPointIndices: 0300000004000000
+    OpenSound: {fileID: 8300000, guid: 96a74981530bbb44e87bd2b1e699c6f4, type: 3}
