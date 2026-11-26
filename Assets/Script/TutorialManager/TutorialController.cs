@@ -59,6 +59,7 @@ public class TutorialController : MonoBehaviour
 
         SaveGame.TutorialCompleted = true;
         PlayerPrefs.Save();
+        hintPresenter.GrantTutorialHint();
 
         IsRunning = true;
         SetUIVisible(false);

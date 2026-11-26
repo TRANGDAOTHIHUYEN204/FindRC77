@@ -15,16 +15,15 @@ public class GamePlayImage : MonoBehaviour
     [SerializeField] private StateGame stateGame;
     [SerializeField] private SpawnChallengeNode spawnChallegeNode;
     [SerializeField] private HeartLiveManager heartManager;
-    private bool _isPlaying;
     [SerializeField] private HintPresenter hintPresenter;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private MarkPresenter markPresenter;
-    private LevelData _currentLevel;
     [SerializeField] private float beforeBounceDelay = 0.2f;
     [SerializeField] private float bounceDuration = 0.8f;
-    private bool _winStarted;
-
     [SerializeField] private RewardIntervalWin rewardIntervalWin;
+
+    private bool _isPlaying;
+    private bool _winStarted;
 
     private void Start()
     {
@@ -47,8 +46,8 @@ public class GamePlayImage : MonoBehaviour
     {
         StopAllCoroutines();
         _winStarted = false;
-        _currentLevel = level;
         _isPlaying = false;
+        rewardIntervalWin.Setup(levelManager.CountLevel);
         clickHandler.OnResetBegin();
         markPresenter.ClearMarks();
         clickHandler.OnResetEnd();
@@ -97,13 +96,7 @@ public class GamePlayImage : MonoBehaviour
 
         bool isTutorial = levelManager.IsTutorial;
         string textWin = levelManager.TextWin;
-        int levelNumber = levelManager.CurrentIndex + 1; 
-
-        if (!isTutorial)
-        {
-            int reward = CoinReward.Get(_currentLevel.Difficulty);
-            PendingReward.Add(reward);
-        }
+        int levelNumber = levelManager.CurrentIndex + 1;
 
         levelManager.MarkWin();
 
@@ -127,11 +120,10 @@ public class GamePlayImage : MonoBehaviour
             stateGame.WinTutorial(textWin);
             yield break;
         }
-        stateGame.WinGame(textWin);
-        yield return null;
 
-        bool rewardDone = false;
-        rewardIntervalWin.Play(levelNumber, () => rewardDone = true);
-        yield return new WaitUntil(() => rewardDone);
+        bool isGift = rewardIntervalWin.IsGiftLevel(levelNumber);
+
+        stateGame.WinGame(isGift ? string.Empty : textWin);
+        rewardIntervalWin.Play(levelNumber);
     }
 }

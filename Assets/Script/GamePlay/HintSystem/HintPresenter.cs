@@ -3,17 +3,13 @@ using UnityEngine;
 
 public class HintPresenter : MonoBehaviour
 {
-    private const int AdRewardHints = 2;
-
     [SerializeField] private DifferentPairManagerHolder pairManagerHolder;
     [SerializeField] private StateGame stateGame;
     [SerializeField] private HintSpotlight spotlight;
     [SerializeField] private FactoryGameplay factoryGameplay;
-    [SerializeField, Min(0)] private int hintPerLevel = 1;
 
     private HintHand _handA;
     private HintHand _handB;
-    private int _levelHintsRemaining;
     private bool _adPending;
 
     public DifferentPair HintedPair { get; private set; }
@@ -24,21 +20,32 @@ public class HintPresenter : MonoBehaviour
 
     public event Action<int> OnHintChanged;
 
-    private void Start() => ResetForLevel();
+    private void Start()
+    {
+        GrantStartingHint();   // tặng 1 hint đầu game (chỉ 1 lần duy nhất)
+        ResetForLevel();
+    }
+
     public void ResetForLevel()
     {
-        _levelHintsRemaining = hintPerLevel;
         _adPending = false;
         ClearHint();
         RefreshCount();
     }
 
+    /// <summary>Hint khởi đầu: ai cũng nhận 1 lần, bất kể tutorial.</summary>
+    public void GrantStartingHint()
+    {
+        if (SaveGame.TryClaimStartingHint())
+            RefreshCount();
+    }
+
+    /// <summary>Giữ lại để các script cũ gọi không bị lỗi. Dùng chung cờ nên không bị cộng trùng.</summary>
+    public void GrantTutorialHint() => GrantStartingHint();
+
     public void ShowHint()
     {
-        if (!CanShowHint())
-        {
-            return;
-        }
+        if (!CanShowHint()) return;
 
         RefreshCount();
 
@@ -77,14 +84,14 @@ public class HintPresenter : MonoBehaviour
     private bool _lastTutorial;
     private bool _hintOnArea;
     private Vector2 _areaCenter;
-    
+
     public void AddHint(int amount)
     {
         if (amount <= 0) return;
         SaveGame.HintBalance += amount;
         RefreshCount();
     }
-    
+
     public void ClaimMiniGameReward()
     {
         if (SaveGame.TryClaimFindHiddenReward())
@@ -125,7 +132,7 @@ public class HintPresenter : MonoBehaviour
             {
                 if (this == null) return;
                 _adPending = false;
-                
+
                 if (!ShowInternal(consume: false, tutorial: false))
                     Debug.Log("[Hint] Không hiện được hint sau khi xem ad.");
             },
@@ -206,20 +213,14 @@ public class HintPresenter : MonoBehaviour
     private void ConsumeHint()
     {
         if (SaveGame.HintBalance > 0)
-        {
             SaveGame.HintBalance--;
-        }
-        else if (_levelHintsRemaining > 0)
-        {
-            _levelHintsRemaining--;
-        }
 
         RefreshCount();
     }
 
     private void RefreshCount()
     {
-        CountHint = _levelHintsRemaining + SaveGame.HintBalance;
+        CountHint = SaveGame.HintBalance;
         OnHintChanged?.Invoke(CountHint);
     }
 
