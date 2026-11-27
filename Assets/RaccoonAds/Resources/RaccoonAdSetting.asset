@@ -15,7 +15,7 @@ MonoBehaviour:
   use_test_ad: 0
   AdUnitConfigs:
   - ad_type: 110
-    ad_id_android: ca-app-pub-8190506959251235/6779860792
+    ad_id_android: ca-app-pub-8190506959251235/1487384519
     ad_id_ios: 
     is_multi_ad: 0
     ad_id_android_2: 
@@ -33,7 +33,7 @@ MonoBehaviour:
     has_close: 1
     use_only_portrait: 0
   - ad_type: 10
-    ad_id_android: ca-app-pub-8190506959251235/1386052989
+    ad_id_android: ca-app-pub-8190506959251235/7011173934
     ad_id_ios: 
     is_multi_ad: 0
     ad_id_android_2: 
@@ -51,7 +51,7 @@ MonoBehaviour:
     has_close: 1
     use_only_portrait: 0
   - ad_type: 30
-    ad_id_android: ca-app-pub-8190506959251235/6538132309
+    ad_id_android: ca-app-pub-8190506959251235/1563726930
     ad_id_ios: 
     is_multi_ad: 0
     ad_id_android_2: 
@@ -69,7 +69,7 @@ MonoBehaviour:
     has_close: 1
     use_only_portrait: 0
   - ad_type: 50
-    ad_id_android: ca-app-pub-8190506959251235/6195526533
+    ad_id_android: ca-app-pub-8190506959251235/7015043365
     ad_id_ios: 
     is_multi_ad: 0
     ad_id_android_2: 
@@ -87,7 +87,7 @@ MonoBehaviour:
     has_close: 1
     use_only_portrait: 0
   - ad_type: 11
-    ad_id_android: ca-app-pub-8190506959251235/2451722646
+    ad_id_android: ca-app-pub-8190506959251235/9174302845
     ad_id_ios: 
     is_multi_ad: 0
     ad_id_android_2: 
