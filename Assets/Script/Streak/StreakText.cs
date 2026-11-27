@@ -4,17 +4,13 @@ using UnityEngine;
 public class StreakText : MonoBehaviour
 {
     [SerializeField] private StreakManager streakManager;
-    [SerializeField] private TMP_Text currentText;   // số trong ngọn lửa
-    [SerializeField] private TMP_Text moreWinText;   // "X more win(s)"
-    [SerializeField] private TMP_Text progressText;  // "5/10"
+    [SerializeField] private TMP_Text currentText;
+    [SerializeField] private TMP_Text moreWinText;
+    [SerializeField] private TMP_Text progressText;
 
     private void OnEnable()
     {
-        if (streakManager == null)
-        {
-            Debug.LogError("[StreakText] StreakManager reference is missing.", this);
-            return;
-        }
+        if (streakManager == null) return;
 
         streakManager.OnStreakChanged += OnStreakChanged;
         Refresh();
@@ -35,13 +31,44 @@ public class StreakText : MonoBehaviour
         int current = streakManager.CurrentStreak;
         int max = streakManager.MaxStreak;
 
-        if (currentText != null) currentText.text = current.ToString();
-        if (progressText != null) progressText.text = $"{Mathf.Min(current, max)}/{max}";
+        if (currentText != null)
+            currentText.text = current.ToString();
 
-        if (moreWinText != null && streakManager.TryGetNextMilestone(current, out var next))
+        if (progressText != null)
+            progressText.text = $"{current}/{max}";
+    }
+
+    public void SetProgressText(int streak)
+    {
+        Refresh();
+    }
+
+    public void ShowMoreWin(int streak)
+    {
+        if (moreWinText == null || streakManager == null)
+            return;
+
+        bool atMilestone = streak > 0 && streakManager.IsMilestone(streak);
+        bool hasNext = streakManager.TryGetNextMilestone(streak, out var next);
+
+        if (atMilestone || !hasNext)
         {
-            int remaining = next.streak - current;
-            moreWinText.text = remaining == 1 ? "1 more win" : $"{remaining} more wins";
+            moreWinText.gameObject.SetActive(false);
+            return;
         }
+
+        int remaining = next.streak - streak;
+
+        moreWinText.text = remaining == 1
+            ? "1 more win"
+            : $"{remaining} more wins";
+
+        moreWinText.gameObject.SetActive(true);
+    }
+
+    public void HideMoreWin()
+    {
+        if (moreWinText != null)
+            moreWinText.gameObject.SetActive(false);
     }
 }
