@@ -138,10 +138,10 @@ TextureImporter:
       name: Atlas_256_1
       rect:
         serializedVersion: 2
-        x: 263
-        y: 0
+        x: 259
+        y: 3
         width: 249
-        height: 256
+        height: 250
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
