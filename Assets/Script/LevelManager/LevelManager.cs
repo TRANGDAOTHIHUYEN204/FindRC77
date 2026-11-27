@@ -49,9 +49,14 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        if (!_completed) return;
+
         CommitProgress();
-        if (LastWinWasTutorial) LoadLevel(SaveGame.CurrentLevel);
-        else LoadLevel(_currentIndex + 1);
+
+        if (LastWinWasTutorial)
+            LoadLevel(SaveGame.CurrentLevel);
+        else
+            LoadLevel(_currentIndex + 1);
     }
 
     public void LoadTutorial()
