@@ -3499,6 +3499,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1350537243840532626, guid: cc515e984ef063a468ccbdd87db09449, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
+    - target: {fileID: 1350537243840532626, guid: cc515e984ef063a468ccbdd87db09449, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1189415696643958039, guid: 6592fe2f81723e84c989bbecabf22398, type: 2}
+    - target: {fileID: 1350537243840532626, guid: cc515e984ef063a468ccbdd87db09449, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1754466566619575052, guid: cc515e984ef063a468ccbdd87db09449, type: 3}
       propertyPath: m_Name
       value: WinGame
